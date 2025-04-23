@@ -1,0 +1,5 @@
+USE [ISSDB]
+GO
+
+ALTER TABLE [dbo].[Posts]
+	DROP CONSTRAINT CHK_Post_Visibility
