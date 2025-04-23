@@ -15,7 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using SocialApp.Pages;
 using SocialApp.Repository;
 using SocialApp.Services;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 // To learn more about WinUI, the WinUI project structure,

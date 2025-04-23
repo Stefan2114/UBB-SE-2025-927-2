@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialApp.Enums
+namespace AppCommonClasses.Enums
 {
-    public enum PostVisibility
+    public enum PostTag
     {
-        Private = 1,
-        Friends = 2,
-        Public = 3,
-	    Groups = 4
+        Food = 1,
+        Workout = 2,
+        Misc = 3,
+        Blessed = 4
     }
 }

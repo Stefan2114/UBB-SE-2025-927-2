@@ -12,8 +12,8 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
-using SocialApp.Entities;
 using SocialApp.Repository;
+using AppCommonClasses.Models;
 using SocialApp.Services;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -115,11 +115,11 @@ namespace SocialApp.Pages
             {
                 ValidateInputs();
 
-                var newGroup = new Entities.Group
+                var newGroup = new AppCommonClasses.Models.Group
                 {
                     Name = GroupNameInput.Text.Trim(),
                     Description = string.IsNullOrWhiteSpace(GroupDescriptionInput.Text) ? null : GroupDescriptionInput.Text.Trim(),
-                    AdminId = controller.CurrentUser.Id,
+                    AdminId = this.controller.CurrentUser.Id,
                     Image = image
                 };
 

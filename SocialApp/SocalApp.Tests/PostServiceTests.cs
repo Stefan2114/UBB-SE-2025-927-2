@@ -1,9 +1,10 @@
 using SocialApp;
 using NSubstitute;
-using SocialApp.Repository;
 using SocialApp.Services;
-using SocialApp.Enums;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
+using AppCommonClasses.Enums;
+using AppCommonClasses.Repos;
+
 
 
 namespace SocialApp.Tests

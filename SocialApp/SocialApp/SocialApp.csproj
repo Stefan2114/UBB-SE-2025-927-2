@@ -58,6 +58,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppCommonClasses\AppCommonClasses.csproj" />
+    <ProjectReference Include="..\Server\Server.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Pages\CreateGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

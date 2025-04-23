@@ -1,4 +1,4 @@
-﻿using SocialApp.Entities;
+﻿using AppCommonClasses.Models;
 using System.Collections.Generic;
 
 namespace SocialApp.Services

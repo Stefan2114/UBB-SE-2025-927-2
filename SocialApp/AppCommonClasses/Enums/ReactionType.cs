@@ -1,4 +1,4 @@
-﻿namespace SocialApp.Enums
+﻿namespace AppCommonClasses.Enums
 {
     using System;
     using System.Collections.Generic;

@@ -3,10 +3,9 @@
     using System.Collections.Generic;
     using SocialApp;
     using NSubstitute;
-    using SocialApp.Repository;
     using SocialApp.Services;
-    using SocialApp.Entities;
-   
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Repos;
 
     public class GroupServiceTests
     {

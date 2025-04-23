@@ -1,7 +1,7 @@
-﻿using SocialApp.Entities;
+﻿using AppCommonClasses.Models;
 using System.Collections.Generic;
 
-namespace SocialApp.Repository
+namespace AppCommonClasses.Repos
 {
     public interface ICommentRepository
     {

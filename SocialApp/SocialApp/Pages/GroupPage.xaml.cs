@@ -6,8 +6,9 @@ using Microsoft.UI.Xaml.Navigation;
 using SocialApp.Repository;
 using SocialApp.Services;
 using SocialApp.Components;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
+using AppCommonClasses.Repos;
 
 namespace SocialApp.Pages
 {
@@ -22,7 +23,7 @@ namespace SocialApp.Pages
         private IGroupRepository groupRepository;
         private IGroupService groupService;
         private long GroupId;
-        private Entities.Group group;
+        private AppCommonClasses.Models.Group group;
 
         public GroupPage()
         {

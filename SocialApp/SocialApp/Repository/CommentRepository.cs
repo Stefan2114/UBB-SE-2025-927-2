@@ -1,7 +1,8 @@
-﻿using SocialApp.Entities;
+﻿using AppCommonClasses.Models;
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
+using AppCommonClasses.Repos;
 
 namespace SocialApp.Repository
 {

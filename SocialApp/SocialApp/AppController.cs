@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 using Windows.Storage;

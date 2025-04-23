@@ -12,8 +12,9 @@ namespace SocialApp.Repository
     using System.Threading.Tasks;
     using global::Windows.Networking.Sockets;
     using Microsoft.Data.SqlClient;
-    using SocialApp.Entities;
-    using Group = SocialApp.Entities.Group;
+    using AppCommonClasses.Models;
+    using Group = AppCommonClasses.Models.Group;
+    using AppCommonClasses.Repos;
 
 
     /// <summary>

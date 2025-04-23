@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using Microsoft.Data.SqlClient;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
+    using AppCommonClasses.Repos;
 
     public class ReactionRepository : IReactionRepository
     {

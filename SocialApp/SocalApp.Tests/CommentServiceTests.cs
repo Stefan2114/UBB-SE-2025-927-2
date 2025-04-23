@@ -4,10 +4,10 @@ namespace SocialApp.Tests
     using NSubstitute;
     using SocialApp;
     using NUnit.Framework;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
-    using SocialApp.Repository;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
     using SocialApp.Services;
+    using AppCommonClasses.Repos;
 
     /// <summary>
     /// Contains unit tests for the CommentService class.
@@ -32,7 +32,7 @@ namespace SocialApp.Tests
             long postId = 2;
 
             var user = new User { Id = userId, Username = "TestUser",Email="TestEmail@test.com", PasswordHash = "TestPassword", Image = "TestImage" };
-            var post = new Post { Id = postId, Title = "TestPost", Content = "TestContent", CreatedDate = DateTime.Now, UserId = userId, GroupId = 1, Visibility = Enums.PostVisibility.Public, Tag = Enums.PostTag.Misc };
+            var post = new Post { Id = postId, Title = "TestPost", Content = "TestContent", CreatedDate = DateTime.Now, UserId = userId, GroupId = 1, Visibility = AppCommonClasses.Enums.PostVisibility.Public, Tag = AppCommonClasses.Enums.PostTag.Misc };
 
             userRepository.GetById(userId).Returns(user);
             postRepository.GetPostById(postId).Returns(post);

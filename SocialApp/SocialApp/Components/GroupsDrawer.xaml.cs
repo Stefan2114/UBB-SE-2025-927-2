@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI;
 using System.Collections.Generic;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
 using SocialApp.Services;
 using SocialApp.Repository;
 using SocialApp.Pages;

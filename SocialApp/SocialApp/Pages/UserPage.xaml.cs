@@ -7,9 +7,10 @@ namespace SocialApp.Pages
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
     using SocialApp.Components;
-    using SocialApp.Entities;
+    using AppCommonClasses.Models;
     using SocialApp.Repository;
     using SocialApp.Services;
+    using AppCommonClasses.Repos;
 
     public sealed partial class UserPage : Page
     {
