@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using SocialApp.Entities;
+using AppCommonClasses.Models;
 using SocialApp.Pages;
 using SocialApp.Repository;
 using SocialApp.Services;

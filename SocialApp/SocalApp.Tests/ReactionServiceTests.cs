@@ -4,10 +4,10 @@ namespace SocialApp.Tests
     using System.Collections.Generic;
     using NSubstitute;
     using NUnit.Framework;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
-    using SocialApp.Repository;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
     using SocialApp.Services;
+    using AppCommonClasses.Repos;
 
     /// <summary>
     /// Contains unit tests for the ReactionService class.

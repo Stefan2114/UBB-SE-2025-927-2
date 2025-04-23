@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
     using SocialApp.Repository;
+    using AppCommonClasses.Repos;
 
     public class ReactionService(IReactionRepository reactionRepository) : IReactionService
     {

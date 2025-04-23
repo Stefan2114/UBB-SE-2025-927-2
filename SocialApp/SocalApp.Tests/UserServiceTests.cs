@@ -7,10 +7,10 @@
     using System.Threading.Tasks;
     using NSubstitute;
     using SocalApp;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
-    using SocialApp.Repository;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
     using SocialApp.Services;
+    using AppCommonClasses.Repos;
 
     /// <summary>
     /// Contains unit tests for the UserService class.

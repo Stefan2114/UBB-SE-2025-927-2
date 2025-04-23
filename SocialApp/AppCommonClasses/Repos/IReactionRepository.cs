@@ -1,8 +1,8 @@
-﻿namespace SocialApp.Repository
+﻿namespace AppCommonClasses.Repos
 {
     using System.Collections.Generic;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
 
     /// <summary>
     /// Interface for managing reactions in the repository.

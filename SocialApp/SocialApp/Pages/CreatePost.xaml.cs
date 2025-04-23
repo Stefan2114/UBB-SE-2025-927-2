@@ -2,28 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
-using SocialApp.Components;
-using SocialApp.Entities;
-using SocialApp.Enums;
+using AppCommonClasses.Models;
+using AppCommonClasses.Enums;
 using SocialApp.Repository;
 using SocialApp.Services;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using static System.Net.Mime.MediaTypeNames;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.Storage;
-using Group = SocialApp.Entities.Group;
+using Group = AppCommonClasses.Models.Group;
 using System.Diagnostics;
 
 namespace SocialApp.Pages
@@ -36,7 +25,7 @@ namespace SocialApp.Pages
         private AppController controller;
         private IPostService postService;
         private IGroupService groupService;
-        private List<Entities.Group> userGroups = new List<Entities.Group>();
+        private List<Group> userGroups = new List<Group>();
         private string image = string.Empty;
 
         /// <summary>
@@ -44,12 +33,9 @@ namespace SocialApp.Pages
         /// </summary>
         public CreatePost()
         {
-            this.controller = App.Services.GetService<AppController>() ??
-    throw new InvalidOperationException("AppController service not registered");
-            this.postService = App.Services.GetService<PostService>() ??
-                throw new InvalidOperationException("PostService service not registered");
-            this.groupService = App.Services.GetService<GroupService>() ??
-                throw new InvalidOperationException("GroupService service not registered");
+            this.controller = App.Services.GetService<AppController>();
+            this.postService = App.Services.GetService<PostService>();
+            this.groupService = App.Services.GetService<GroupService>();
 
             this.InitializeComponent();
             this.InitializeServices();
@@ -73,7 +59,7 @@ namespace SocialApp.Pages
             var groupRepository = new GroupRepository();
             this.postService = new PostService(postRepository, userRepository, groupRepository);
             this.groupService = new GroupService(groupRepository, userRepository);
-            this.controller = App.Services.GetService<AppController>() ?? throw new InvalidOperationException("AppController service is not available.");
+            this.controller = App.Services.GetService<AppController>();
         }
 
         private void LoadUserGroups()

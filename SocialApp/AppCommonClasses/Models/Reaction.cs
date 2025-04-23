@@ -1,6 +1,6 @@
-﻿namespace SocialApp.Entities
+﻿namespace AppCommonClasses.Models
 {
-    using SocialApp.Enums;
+    using AppCommonClasses.Enums;
 
     public class Reaction
     {

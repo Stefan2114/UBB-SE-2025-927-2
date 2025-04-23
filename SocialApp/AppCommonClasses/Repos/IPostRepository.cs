@@ -1,8 +1,8 @@
-﻿using SocialApp.Entities;
-using SocialApp.Enums;
+﻿using AppCommonClasses.Models;
+using AppCommonClasses.Enums;
 using System.Collections.Generic;
 
-namespace SocialApp.Repository
+namespace AppCommonClasses.Repos
 {
     public interface IPostRepository
     {

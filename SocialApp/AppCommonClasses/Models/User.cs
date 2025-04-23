@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialApp.Entities
+namespace AppCommonClasses.Models
 {
     public class User
     {

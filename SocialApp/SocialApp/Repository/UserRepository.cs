@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
     using Microsoft.Data.SqlClient;
-    using SocialApp.Entities;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Repos;
 
     public class UserRepository : IUserRepository
     {

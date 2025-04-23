@@ -7,8 +7,9 @@
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.Data.SqlClient;
-    using SocialApp.Entities;
-    using SocialApp.Enums;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
+    using AppCommonClasses.Repos;
 
 
     /// <summary>

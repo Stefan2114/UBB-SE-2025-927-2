@@ -1,7 +1,7 @@
 using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using SocialApp.Enums;
+using AppCommonClasses.Enums;
 using SocialApp.Repository;
 using SocialApp.Services;
 using Microsoft.UI.Xaml.Media.Imaging;
