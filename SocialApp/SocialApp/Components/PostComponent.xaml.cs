@@ -12,6 +12,7 @@ using System.Drawing;
 using Windows.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
+using SocialApp.Proxies;
 
 namespace SocialApp.Components
 {
@@ -60,7 +61,7 @@ namespace SocialApp.Components
             this.InitializeComponent();
             this.DataContext = this;
             this.reactionService = new ReactionService(new ReactionRepository());
-            this.commentService = new CommentService(new CommentRepository(), new PostRepository(), new UserRepository());
+            this.commentService = new CommentService(new CommentRepository(), new PostRepositoryProxy(), new UserRepository());
             this.AppController = App.Services.GetService<AppController>();
         }
 
@@ -78,7 +79,7 @@ namespace SocialApp.Components
             this.tag = tag;
 
             this.reactionService = new ReactionService(new ReactionRepository());
-            this.commentService = new CommentService(new CommentRepository(), new PostRepository(), new UserRepository());
+            this.commentService = new CommentService(new CommentRepository(), new PostRepositoryProxy(), new UserRepository());
             this.AppController = App.Services.GetService<AppController>();
 
             Title.Text = title;

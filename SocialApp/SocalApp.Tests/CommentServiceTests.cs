@@ -1,13 +1,15 @@
+
+
 namespace SocialApp.Tests
 {
-﻿   using System;
+
+    using System;
     using NSubstitute;
-    using SocialApp;
     using NUnit.Framework;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Enums;
     using SocialApp.Services;
     using AppCommonClasses.Repos;
+
 
     /// <summary>
     /// Contains unit tests for the CommentService class.

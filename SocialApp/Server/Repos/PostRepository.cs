@@ -1,4 +1,4 @@
-﻿namespace SocialApp.Repository
+﻿namespace Server.Repos
 {
     using System;
     using System.Collections.Generic;
