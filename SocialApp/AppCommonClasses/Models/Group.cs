@@ -15,8 +15,6 @@ namespace AppCommonClasses.Models
         public required string Name { get; set; }
         public required string Image { get; set; }
         public required string Description { get; set; }
-
-        [ForeignKey("AdminId")]
         public required long AdminId { get; set; }
     }
 }

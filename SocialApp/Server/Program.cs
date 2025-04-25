@@ -1,7 +1,12 @@
 using AppCommonClasses.Repos;
+using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<SocialAppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SocialAppDb")));
 
 // Add services to the container.
 builder.Services.AddScoped<IPostRepository, PostRepository>();

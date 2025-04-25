@@ -12,11 +12,7 @@ namespace AppCommonClasses.Models
     {
         [Key]
         public long Id { get; set; }
-
-        [ForeignKey("UserId")]
         public required long UserId { get; set; }
-
-        [ForeignKey("PostId")]
         public required long PostId { get; set; }
         public required string Content { get; set; }
         public required DateTime CreatedDate { get; set; }

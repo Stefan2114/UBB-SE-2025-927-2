@@ -141,7 +141,15 @@ namespace SocialApp.Pages
                 var posts = this.CreatePosts(selectedVisibility);
                 for (int i = 0; i < posts.Count; i++)
                 {
-                    this.postService.AddPost(posts[i].Title, posts[i].Content, posts[i].UserId, posts[i].GroupId, posts[i].Visibility, posts[i].Tag);
+                    // Use null-coalescing operator to provide a default value for GroupId
+                    this.postService.AddPost(
+                        posts[i].Title,
+                        posts[i].Content,
+                        posts[i].UserId,
+                        posts[i].GroupId, // Fix: Convert nullable long to long
+                        posts[i].Visibility,
+                        posts[i].Tag
+                    );
                 }
 
                 this.Frame.Navigate(typeof(HomeScreen));

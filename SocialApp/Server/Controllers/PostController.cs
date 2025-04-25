@@ -46,7 +46,9 @@ namespace Server.Controllers
         [HttpGet("homefeed/{userId}")]
         public ActionResult<List<Post>> FetHomeFeed(long userId)
         {
+            System.Diagnostics.Debug.WriteLine("Fetching home feed for user: " + userId);
             return this.postRepository.GetPostsHomeFeed(userId);
+
         }
 
         [HttpGet("groupfeed/{userId}")]
