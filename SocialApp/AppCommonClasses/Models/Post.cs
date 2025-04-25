@@ -18,7 +18,7 @@ namespace AppCommonClasses.Models
         public required string Content { get; set; }
         public required DateTime CreatedDate { get; set; }
         public required long UserId { get; set; }
-        public long? GroupId { get; set; }
+        public long GroupId { get; set; }
         public required PostVisibility Visibility { get; set; }
         public required PostTag Tag { get; set; }
 
