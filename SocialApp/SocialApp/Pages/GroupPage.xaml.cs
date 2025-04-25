@@ -9,6 +9,7 @@ using SocialApp.Components;
 using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
 using AppCommonClasses.Repos;
+using SocialApp.Proxies;
 
 namespace SocialApp.Pages
 {
@@ -47,7 +48,7 @@ namespace SocialApp.Pages
             userService = new UserService(userRepository);
             groupRepository = new GroupRepository();
             groupService = new GroupService(groupRepository, userRepository);
-            postRepository = new PostRepository();
+            postRepository = new PostRepositoryProxy();
             postService = new PostService(postRepository, userRepository, groupRepository);
             group = groupService.GetGroupById(GroupId);
 

@@ -11,6 +11,7 @@ namespace SocialApp.Pages
     using SocialApp.Repository;
     using SocialApp.Services;
     using AppCommonClasses.Repos;
+    using SocialApp.Proxies;
 
     public sealed partial class UserPage : Page
     {
@@ -28,7 +29,7 @@ namespace SocialApp.Pages
 
             this.userRepository = new UserRepository();
             this.userService = new UserService(this.userRepository);
-            this.postRepository = new PostRepository();
+            this.postRepository = new PostRepositoryProxy();
             this.groupRepository = new GroupRepository();
             this.postService = new PostService(this.postRepository, this.userRepository, this.groupRepository);
 

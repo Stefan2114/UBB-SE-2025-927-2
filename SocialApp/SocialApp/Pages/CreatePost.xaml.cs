@@ -14,6 +14,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage;
 using Group = AppCommonClasses.Models.Group;
 using System.Diagnostics;
+using SocialApp.Proxies;
 
 namespace SocialApp.Pages
 {
@@ -54,7 +55,7 @@ namespace SocialApp.Pages
 
         private void InitializeServices()
         {
-            var postRepository = new PostRepository();
+            var postRepository = new PostRepositoryProxy();
             var userRepository = new UserRepository();
             var groupRepository = new GroupRepository();
             this.postService = new PostService(postRepository, userRepository, groupRepository);

@@ -7,6 +7,7 @@ using SocialApp.Repository;
 using SocialApp.Services;
 using System.Collections.Generic;
 using System.Linq;
+using SocialApp.Proxies;
 
 namespace SocialApp.Components
 {
@@ -17,7 +18,7 @@ namespace SocialApp.Components
         private List<PostComponent> allPosts;
         private UserRepository userRepository;
         private UserService userService;
-        private PostRepository postRepository;
+        private PostRepositoryProxy postRepository;
         private PostService postService;
         private GroupRepository groupRepository;
 
@@ -29,7 +30,7 @@ namespace SocialApp.Components
 
             userRepository = new UserRepository();
             userService = new UserService(userRepository);
-            postRepository = new PostRepository();
+            postRepository = new PostRepositoryProxy();
             groupRepository = new GroupRepository();
             postService = new PostService(postRepository, userRepository, groupRepository);
             allPosts = new List<PostComponent>();
