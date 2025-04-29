@@ -1,5 +1,4 @@
-﻿using MealPlannerProject.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 public interface IGroceryListService

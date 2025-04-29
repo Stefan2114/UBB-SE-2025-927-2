@@ -1,19 +1,18 @@
 namespace MealPlannerProject.Pages
 {
-    using System;
-    using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
     using MealPlannerProject.Services;
     using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using System;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
 
     public sealed partial class ActivityLevelPage : Page
     {
         [Obsolete]
-        private readonly ActivityLevelViewModel viewModel = new ();
+        private readonly ActivityLevelViewModel viewModel = new();
 
         [Obsolete]
         public ActivityLevelPage()
