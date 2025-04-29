@@ -16,8 +16,7 @@ namespace SocialApp.Components
     {
         private int currentPage = 1;
         private const int itemsPerPage = 5;
-        private List<PostComponent> allItems;
-        private PostService postService;
+        private PostViewModel postViewModel;
 
 
         public GroupsFeed()
@@ -27,11 +26,9 @@ namespace SocialApp.Components
             var userRepository = new UserRepository();
             var postRepository = new PostRepositoryProxy();
             var groupRepository = new GroupRepository();
-            this.postService = new PostService(postRepository, userRepository, groupRepository);
-
-            allItems = new List<PostComponent>();
+            var postService = new PostService(postRepository, userRepository, groupRepository);
+            this.postViewModel = new PostViewModel(postService);
             
-
             LoadItems();
             DisplayCurrentPage();
         }
@@ -39,12 +36,8 @@ namespace SocialApp.Components
         private void LoadItems()
         {
             var controller = App.Services.GetService<AppController>();
-            var posts = postService.GetPostsGroupsFeed(controller.CurrentUser.Id);
-            foreach (var post in posts)
-            {
-                var postComponent = new PostComponent(post.Title, post.Visibility, post.UserId, post.Content, post.CreatedDate, post.Tag, post.Id);
-                allItems.Add(postComponent);
-            }
+            this.postViewModel.PopulatePostsGroupsFeed(controller.CurrentUser.Id);
+
         }
 
         private void DisplayCurrentPage()
@@ -52,6 +45,7 @@ namespace SocialApp.Components
             GroupsStackPanel.Children.Clear();
             int startIndex = (currentPage - 1) * itemsPerPage;
             int endIndex = startIndex + itemsPerPage;
+            var allItems = this.postViewModel.GetCurrentPosts();
             for (int i = startIndex; i < endIndex && i < allItems.Count; i++)
             {
                 GroupsStackPanel.Children.Add(allItems[i]);
@@ -69,7 +63,8 @@ namespace SocialApp.Components
 
         private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentPage * itemsPerPage < allItems.Count)
+            var listCount = this.postViewModel.GetCurrentPosts().Count;
+            if (currentPage * itemsPerPage < listCount)
             {
                 currentPage++;
                 DisplayCurrentPage();
