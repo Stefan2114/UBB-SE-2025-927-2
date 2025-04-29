@@ -1,0 +1,75 @@
+<Page x:Class="MealPlannerProject.Pages.GoalPage"
+      x:Name="GoalPageXAML"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vm="using:MealPlannerProject.ViewModels"
+      Background="#FCE8DC">
+
+    <Page.DataContext>
+        <vm:GoalPageViewModel/>
+    </Page.DataContext>
+
+    <Grid Padding="30">
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding BackCommand}">
+            <BitmapIcon UriSource="Assets/arrow_back.png"
+                        Width="40"
+                        Height="40"
+                        Foreground="#7D8276"/>
+        </Button>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="What's your goal?"
+                       FontSize="70"
+                       FontWeight="Bold"
+                       Foreground="#133224"
+                       TextAlignment="Center"
+                       Margin="0,0,0,10"/>
+            <TextBlock Text="This helps us tailor your meal plan to match your fitness goal"
+                       FontSize="20"
+                       Foreground="#133224"
+                       TextAlignment="Center"
+                       Width="600"
+                       Margin="0,0,0,80"/>
+            <Grid Padding="30">
+                <ListView ItemsSource="{Binding Goals}" SelectionMode="None" Width="500">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding}"
+                                    Width="450" Margin="10"
+                                    FontSize="20" FontWeight="SemiBold"
+                                    Background="{Binding Converter={StaticResource GoalButtonColorConverter}, ConverterParameter={Binding DataContext.SelectedGoal, ElementName=GoalPageXAML}}"
+                                    Command="{Binding DataContext.SelectGoalCommand, ElementName=GoalPageXAML}"
+                                    CommandParameter="{Binding}"
+                                    Opacity="{Binding Converter={StaticResource GoalOpacityConverter}, ConverterParameter={Binding DataContext.SelectedGoal, ElementName=GoalPageXAML}}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackPanel>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,20">
+            <StackPanel Orientation="Horizontal" Spacing="20">
+                <Rectangle Width="200" Height="5" Fill="#133224" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="5" Fill="#133224" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="5" Fill="#C9C0B4" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="5" Fill="#C9C0B4" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="5" Fill="#C9C0B4" RadiusX="2" RadiusY="2"/>
+            </StackPanel>
+        </Grid>
+
+        <Button Content="→"
+                FontSize="40"
+                Width="50" Height="50"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="#133224"
+                Foreground="#FCE8DC"
+                CornerRadius="25"
+                Padding="0, -7, 0, 0"
+                Click="NextButton_Click"/>
+    </Grid>
+</Page>

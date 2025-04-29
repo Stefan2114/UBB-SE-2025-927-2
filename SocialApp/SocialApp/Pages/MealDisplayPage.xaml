@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MealPlannerProject.Pages.MealDisplayPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MealPlannerProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="using:System"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#F7E6DA">
+        <!-- Header -->
+        <Grid Height="80" VerticalAlignment="Top" Background="Transparent" Margin="20">
+            <Button HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Click="GoBack">
+                <FontIcon Glyph="&#xE72B;" FontSize="30" Foreground="#7D8276"/>
+            </Button>
+
+            <Button Grid.Column="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent" 
+                Margin="0,0,20,0">
+                <BitmapIcon UriSource="Assets/user_icon.png"
+                    Width="30"
+                    Height="30"
+                    Foreground="#C76E4E"/>
+            </Button>
+        </Grid>
+
+        <TextBlock Text="{x:Bind ViewModel.MealName, Mode=OneWay}"
+               FontSize="32" 
+               FontWeight="SemiBold" 
+               Foreground="#183D2C"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="50,90,0,0"
+               TextWrapping="NoWrap"/>
+
+        <!-- Main Content -->
+        <Grid Margin="0,80,0,0" Padding="50,30,50,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!-- Left Column -->
+            <StackPanel Grid.Column="0" Padding="0,0,15,0" Margin="0, 40">
+
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,15">
+                    <TextBlock Text="Cooking time:" FontSize="20" FontWeight="Bold" Foreground="#183D2C"/>
+                    <TextBlock Text="{x:Bind ViewModel.CookingTime, Mode=OneWay}" FontSize="20" Foreground="#183D2C"/>
+                </StackPanel>
+
+                <TextBlock Text="Ingredients:" FontSize="20" FontWeight="Bold" Foreground="#183D2C" Margin="0,0,0,10"/>
+                <ListView ItemsSource="{x:Bind ViewModel.MealIngredients}" 
+                         Background="#E3C7B1" 
+                         CornerRadius="15" 
+                         Padding="20"
+                         Height="390"
+                         BorderThickness="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <TextBlock Text="•" Foreground="#183D2C" FontSize="18"/>
+                                <TextBlock Text="{Binding}" Foreground="#183D2C" FontSize="18"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <!-- Middle Column -->
+            <StackPanel Grid.Column="1" Padding="15,0">
+                <TextBlock Text="Directions:" FontSize="20" FontWeight="Bold" Foreground="#183D2C" Margin="0,80,0,10"/>
+                <ListView ItemsSource="{x:Bind ViewModel.CookingDirections}" 
+                         Background="#E3C7B1" 
+                         CornerRadius="15" 
+                         Padding="20"
+                         Height="390"
+                         BorderThickness="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" 
+                                     Foreground="#183D2C" 
+                                     FontSize="18"
+                                     TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <!-- Right Column -->
+            <StackPanel Grid.Column="2" Padding="15,0">
+                <!-- Nutrition Circle -->
+                <Border Background="#E3C7B1" CornerRadius="15" Padding="10" Margin="0,0,0,10">
+                    <StackPanel>
+                        <Grid HorizontalAlignment="Center" Margin="0,10">
+                            <Ellipse Width="130" Height="130" Fill="#F9E5DA" Stroke="#C76E4E" StrokeThickness="15" Margin="10,0"/>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="#183D2C">
+                                    <Run Text="{x:Bind ViewModel.CalorieCount, Mode=OneWay}"/>
+                                    <Run Text="kcal"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,20">
+                            <Border Background="#F9E5DA" Padding="5,5" CornerRadius="10" MinWidth="90">
+                                <StackPanel>
+                                    <TextBlock Text="Protein" FontSize="14" Foreground="#183D2C" FontWeight="SemiBold" TextAlignment="Center"/>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#183D2C">
+                                        <Run Text="{x:Bind ViewModel.ProteinGrams, Mode=OneWay}"/>
+                                        <Run Text="g"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#F9E5DA" Padding="10,5" CornerRadius="10" MinWidth="90">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Carbs" FontSize="14" Foreground="#183D2C" FontWeight="SemiBold" TextAlignment="Center"/>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#183D2C">
+                                        <Run Text="{x:Bind ViewModel.CarbohydrateGrams, Mode=OneWay}"/>
+                                        <Run Text="g"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#F9E5DA" Padding="10,5" CornerRadius="10" MinWidth="90">
+                                <StackPanel>
+                                    <TextBlock Text="Fats" FontSize="14" Foreground="#183D2C" FontWeight="SemiBold" TextAlignment="Center"/>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#183D2C">
+                                        <Run Text="{x:Bind ViewModel.FatGrams, Mode=OneWay}"/>
+                                        <Run Text="g"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Nutrition Breakdown -->
+                <Border Background="#E3C7B1" CornerRadius="15" Padding="20">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Nutrition Breakdown" 
+                                 FontSize="20" 
+                                 FontWeight="Bold" 
+                                 Foreground="#183D2C" 
+                                 HorizontalAlignment="Left"
+                                   Margin="0, 0, 0, 10"/>
+
+                        <StackPanel>
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#183D2C" Margin="0,0,0,5">
+                                <Run Text="Protein: "/>
+                                <Run Text="{x:Bind ViewModel.ProteinGrams, Mode=OneWay}"/>
+                                <Run Text="g"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#183D2C" Margin="0,0,0,5">
+                                <Run Text="Carbs: "/>
+                                <Run Text="{x:Bind ViewModel.CarbohydrateGrams, Mode=OneWay}"/>
+                                <Run Text="g"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#183D2C" Margin="0,0,0,5">
+                                <Run Text="Fats: "/>
+                                <Run Text="{x:Bind ViewModel.FatGrams, Mode=OneWay}"/>
+                                <Run Text="g"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#183D2C" Margin="0,0,0,5">
+                                <Run Text="Fiber: "/>
+                                <Run Text="{x:Bind ViewModel.FiberGrams, Mode=OneWay}"/>
+                                <Run Text="g"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#183D2C" Margin="0,0,0,5">
+                                <Run Text="Sugar: "/>
+                                <Run Text="{x:Bind ViewModel.SugarGrams, Mode=OneWay}"/>
+                                <Run Text="g"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

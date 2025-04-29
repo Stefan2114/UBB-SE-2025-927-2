@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MealPlannerProject.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MealPlannerProject.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MealPlannerProject.ViewModels"
+    xmlns:vm1="using:MealPlannerProject.ViewModels"
+    mc:Ignorable="d"
+    Background="#f9e5da">
+
+    <Page.DataContext>
+        <vm:MainViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="#F9E5DA">
+
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,30,0,0">
+            <TextBlock Text="Today"
+               FontSize="30"
+               FontWeight="Bold"
+               Foreground="#133224"
+               TextAlignment="Center"
+               Margin="60,0,0,0"/>
+
+        </StackPanel>
+
+        <Button Content="Social Media" FontSize="16"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        BorderThickness="0"
+        CornerRadius="17"
+        Padding="20,3,20,6"
+        Margin="0,30,100,0"
+        Background="#C76E4E"
+        Foreground="white"
+        Command="{Binding SocialMedia}"
+/>
+
+        <Button Content="Display Meals" FontSize="16"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            BorderThickness="0"
+            CornerRadius="17"
+            Padding="20,3,20,6"
+            Margin="0,30,250,0"
+            Background="#C76E4E"
+            Foreground="white"
+            Command="{Binding DisplayMeals}"
+        />
+
+        <Button Content="Create Meal" FontSize="16"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            BorderThickness="0"
+            CornerRadius="17"
+            Padding="20,3,20,6"
+            Margin="0,30,400,0"
+            Background="#C76E4E"
+            Foreground="white"
+            Command="{Binding CreateMeal}"
+        />
+
+        <Button Content="Grocery List" FontSize="16"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            BorderThickness="0"
+            CornerRadius="17"
+            Padding="20,3,20,6"
+            Margin="0,30,550,0"
+            Background="#C76E4E"
+            Foreground="white"
+            Command="{Binding GroceryList}"
+        />
+
+
+        <!-- Layout for 5 Squares -->
+        <Grid Margin="50,70,50,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Square 1 (Calories) -->
+            <Border Grid.Row="0" Grid.Column="0" 
+                Background="#5B7769" 
+                CornerRadius="10"
+                Padding="10"
+                Margin="10"
+                Height="250">
+
+                <StackPanel>
+                    <TextBlock Text="Calories" FontSize="30" FontWeight="Bold" Foreground="White" Margin="10,0"/>
+                    <TextBlock Text="Remaining = Goal - Food + Exercise" FontSize="12" Foreground="White" FontWeight="ExtraLight" Margin="10,0"/>
+
+                    <Grid>
+
+                        <Border 
+                            Margin="6,10"
+                            Width="150" Height="150"
+                            CornerRadius="80"
+                            Background="Transparent"
+                            BorderBrush="#E3C7B1"
+                            BorderThickness="10"
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center">
+
+                            <Grid>
+                                <TextBlock 
+                                Text="{Binding CircleText}" 
+                                Foreground="White" 
+                                FontSize="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextAlignment="Center"
+                                Margin="0,0,0,20"/>
+
+                                <TextBlock 
+                                Text="Remaining" 
+                                Foreground="White" 
+                                FontSize="13"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextAlignment="Center"
+                                Margin="0,0,0,-20"/>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Grid HorizontalAlignment="Right" Margin="30,20">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Base Goal" FontSize="15" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="{Binding BaseGoal_Calories}" FontSize="15" Foreground="White" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1">
+                                <TextBlock Text="Food" FontSize="15" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="{Binding Food_Calories}" FontSize="15" Foreground="White" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2">
+                                <TextBlock Text="Exercise" FontSize="15" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="{Binding Exercise_Calories}" FontSize="15" Foreground="White" />
+                            </StackPanel>
+
+                        </Grid>
+
+
+                    </Grid>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- Square 2 (Macros) -->
+            <Border Grid.Row="0" Grid.Column="1" 
+                Background="#C76E4E" 
+                CornerRadius="10"
+                Padding="20"
+                Margin="10"
+                Height="250">
+
+                <StackPanel>
+                    <TextBlock Text="Macros" FontSize="30" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="Total Goal Left" FontSize="13" Foreground="White" TextAlignment="Right"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Row="0"
+                            Padding="0"
+                            Margin="1, 10, 1, 10"
+                            Height="17">
+
+                            <Grid>
+
+                                <StackPanel>
+                                    <TextBlock Text="Protein" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Remaining_Protein}" FontSize="15" Foreground="White" TextAlignment="Right"/>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Goal_Protein}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="30, 0"/>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Total_Protein}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="60,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Padding="0"
+                                Margin="1, 10, 1, 10"
+                                Height="17">
+
+                            <Grid>
+                                <!-- Carbohydrates -->
+                                <StackPanel>
+                                    <TextBlock Text="Carbohydrates" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Remaining_Carbohydrates}" FontSize="15" Foreground="White" TextAlignment="Right"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Goal_Carbohydrates}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="30, 0"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Total_Carbohydrates}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="60,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+
+                        <Border Grid.Row="2"
+                                Padding="0"
+                                Margin="1, 10, 1, 10"
+                                Height="17">
+
+                            <Grid>
+                                <!-- Fiber -->
+                                <StackPanel>
+                                    <TextBlock Text="Fiber" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Remaining_Fiber}" FontSize="15" Foreground="White" TextAlignment="Right"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Goal_Fiber}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="30, 0"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Total_Fiber}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="60,0"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Padding="0"
+                                Margin="1, 10, 1, 10"
+                                Height="17">
+
+                            <Grid>
+                                <!-- Fat -->
+                                <StackPanel>
+                                    <TextBlock Text="Fat" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Remaining_Fat}" FontSize="15" Foreground="White" TextAlignment="Right"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Goal_Fat}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="30, 0"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Total_Fat}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="60,0"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Padding="0"
+                                Margin="1, 10, 1, 10"
+                                Height="20">
+
+                            <Grid>
+
+                                <!-- Sugar -->
+                                <StackPanel>
+                                    <TextBlock Text="Sugar" FontSize="15" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Remaining_Sugar}" FontSize="15" Foreground="White" TextAlignment="Right"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Goal_Sugar}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="30, 0"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Total_Sugar}" FontSize="15" Foreground="White" TextAlignment="Right" Margin="60,0"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- Square 3 (Water) -->
+            <Border Grid.Row="0" Grid.Column="2"
+                Background="#B5885E"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10"
+                Height="250">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <StackPanel>
+
+                        <!-- Title -->
+                        <TextBlock Text="Water" FontSize="30" FontWeight="Bold" Foreground="White"/>
+
+                        <!-- Water Progress -->
+                        <Grid HorizontalAlignment="Left" Margin="10">
+                            <Rectangle Width="90" Height="150" Fill="#367bc9" Stroke="#2B486A" StrokeThickness="4"/>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding WaterIntake, Mode=OneWay}" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Water_Goal}" FontSize="12" Foreground="White" HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                    <!-- Water Amount Options -->
+                    <StackPanel Margin="180, 10, 10, 0" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Content="+" Command="{Binding AddWater300Command}" Width="30" Height="30" Margin="5"/>
+                            <TextBlock Text="300ml" FontSize="16" Foreground="White"/>
+                            <Button Content="-" Command="{Binding RemoveWater300Command}" Width="30" Height="30" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Content="+" Command="{Binding AddWater400Command}" Width="30" Height="30" Margin="5"/>
+                            <TextBlock Text="400ml" FontSize="16" Foreground="White"/>
+                            <Button Content="-" Command="{Binding RemoveWater400Command}" Width="30" Height="30" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Content="+" Command="{Binding AddWater500Command}" Width="30" Height="30" Margin="5"/>
+                            <TextBlock Text="500ml" FontSize="16" Foreground="White"/>
+                            <Button Content="-" Command="{Binding RemoveWater500Command}" Width="30" Height="30" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Button Content="+" Command="{Binding AddWater750Command}" Width="30" Height="30" Margin="5"/>
+                            <TextBlock Text="750ml" FontSize="16" Foreground="White"/>
+                            <Button Content="-" Command="{Binding RemoveWater750Command}" Width="30" Height="30" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+
+
+            </Border>
+
+        </Grid>
+
+        <Grid Margin="50,270,50,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Square 4 (Add) -->
+            <Border Grid.Row="1" Grid.ColumnSpan="1"
+                Background="#E3C7B1"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10, 80, 10, 0"
+                Height="300">
+
+
+                <StackPanel>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <Border Grid.Row="0" Grid.Column="0"
+                                Padding="0"
+                                Margin="0,10,-500,0"
+                                Height="45"
+                                Width="500"
+                                Background="#C76E4E"
+                                CornerRadius="10"
+                                HorizontalAlignment="Left">
+
+                            <StackPanel>
+                                <TextBlock Text="Breakfast" FontSize="20" Foreground="White" Margin="15,6"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="0"
+                                Padding="0"
+                                Margin="0,20,-500,0"
+                                Height="45"
+                                Width="500"
+                                Background="#5B7769"
+                                CornerRadius="10"
+                                HorizontalAlignment="Left">
+                            <StackPanel>
+                                <TextBlock Text="Lunch" FontSize="20" Foreground="White" Margin="15,6"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="2" Grid.Column="0"
+                                Padding="0"
+                                Margin="0,20,-500,0"
+                                Height="45"
+                                Width="500"
+                                Background="#B5885E"
+                                CornerRadius="10"
+                                HorizontalAlignment="Left">
+
+                            <StackPanel>
+                                <TextBlock Text="Dinner" FontSize="20" Foreground="White" Margin="15,6"/>
+                            </StackPanel>
+
+
+
+                        </Border>
+
+                        <Border Grid.Row="3" Grid.Column="0"
+                                Padding="0"
+                                Margin="0,20,-500,0"
+                                Height="45"
+                                Width="500"
+                                Background="#133224"
+                                CornerRadius="10"
+                                HorizontalAlignment="Left">
+                            <StackPanel>
+                                <TextBlock Text="Snack" FontSize="20" Foreground="White" Margin="15,6"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="0" Grid.Column="1"
+                                Padding="0"
+                                Margin="0,10,0,0"
+                                Height="35"
+                                Width="35"
+                                Background="#C76E4E"
+                                CornerRadius="50"
+                                HorizontalAlignment="Right">
+
+                            <Button Command="{Binding AddBreakfast}" Foreground="White" Background="#C76E4E">
+                                <TextBlock Text="+" FontSize="22"  Margin="0, -17"/>
+                            </Button>
+
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="1"
+                                    Padding="0"
+                                    Margin="0,10,0,0"
+                                    Height="35"
+                                    Width="35"
+                                    Background="#C76E4E"
+                                    CornerRadius="50"
+                                    HorizontalAlignment="Right">
+
+                            <Button Command="{Binding AddLunch}" Foreground="White" Background="#C76E4E">
+                                <TextBlock Text="+" FontSize="22"  Margin="0, -17"/>
+                            </Button>
+
+                        </Border>
+
+                        <Border Grid.Row="2" Grid.Column="1"
+                                    Padding="0"
+                                    Margin="0,10,0,0"
+                                    Height="35"
+                                    Width="35"
+                                    Background="#C76E4E"
+                                    CornerRadius="50"
+                                    HorizontalAlignment="Right">
+
+                            <Button Command="{Binding AddDinner}" Foreground="White" Background="#C76E4E">
+                                <TextBlock Text="+" FontSize="22" Margin="0, -17"/>
+                            </Button>
+
+                        </Border>
+
+                        <Border Grid.Row="3" Grid.Column="1"
+                                Padding="0"
+                                Margin="0,10,0,0"
+                                Height="35"
+                                Width="35"
+                                Background="#C76E4E"
+                                CornerRadius="50"
+                                HorizontalAlignment="Right">
+
+                            <Button Command="{Binding AddSnack}" Foreground="White" Background="#C76E4E">
+                                <TextBlock Text="+" FontSize="22"  Margin="0, -17"/>
+                            </Button>
+
+                        </Border>
+
+                    </Grid>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- Square 5 (Meal Entries) -->
+            <Border Grid.Row="1" Grid.Column="2"
+                Background="#9F9F93"
+                CornerRadius="10"
+                Padding="10"
+                Margin="10, 80, 10, 0"
+                Height="300">
+
+                <StackPanel>
+                    <TextBlock Text="Recent meals" FontSize="30" FontWeight="Bold" Foreground="White" Margin="10,0"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <!-- Pentru fiecare reteta (aici prima) -->
+                        <Border Grid.Row="0"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R1}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R1Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R1Diet}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R1Level}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R1Time}" FontSize="15" Foreground="Black" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R1MealType}" FontSize="15" Foreground="White" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R2}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R2Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R2Diet}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R2Level}" FontSize="15" Foreground="Black" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R2Time}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R2MealType}" FontSize="15" Foreground="White" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+
+                        <Border Grid.Row="2"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R3}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R3Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R3Diet}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R3Level}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R3Time}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R3MealType}" FontSize="15" Foreground="Black" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R4}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R4Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R4Diet}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R4Level}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R4Time}" FontSize="15" Foreground="Black" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R4MealType}" FontSize="15" Foreground="White" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R5}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R5Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R5Diet}" FontSize="15" Foreground="Black" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R5Level}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R5Time}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R5MealType}" FontSize="15" Foreground="White" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Padding="0"
+                                Margin="1, 5"
+                                Height="30">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0">
+                                    <TextBlock Text="{Binding R6}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <TextBlock Text="{Binding R6Calories}" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Background="#133224" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R6Diet}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="3" Background="#F9E5DA" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R6Level}" FontSize="15" Foreground="Black" />
+                                </Border>
+                                <Border Grid.Column="4" Background="#C76E4E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R6Time}" FontSize="15" Foreground="White" />
+                                </Border>
+                                <Border Grid.Column="5" Background="#B5885E" CornerRadius="10" Padding="5" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding R6MealType}" FontSize="15" Foreground="White" />
+                                </Border>
+
+                            </Grid>
+
+                        </Border>
+
+
+                    </Grid>
+
+
+                </StackPanel>
+
+            </Border>
+
+
+        </Grid>
+
+
+
+    </Grid>
+</Page>
