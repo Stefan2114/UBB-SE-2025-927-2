@@ -1,8 +1,8 @@
-﻿namespace MealPlannerProject.Converters
+﻿namespace SocialApp.Converters
 {
-    using System;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Data;
+    using System;
 
     public class GoalButtonStyleConverter : IValueConverter
     {
@@ -12,7 +12,7 @@
         {
             string? goal = value as string;
 
-            var resources = this.ResourceProvider ?? new DefaultResourceProvider();
+            var resources = ResourceProvider ?? new DefaultResourceProvider();
 
             return goal switch
             {

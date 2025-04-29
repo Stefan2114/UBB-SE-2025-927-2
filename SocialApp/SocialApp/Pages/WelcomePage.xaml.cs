@@ -13,7 +13,7 @@ namespace SocialApp.Pages
         public WelcomePage()
         {
             this.InitializeComponent();
-            this.DataContext = new MealPlannerProject.ViewModels.WelcomeViewModel();
+            this.DataContext = new SocialApp.ViewModels.WelcomeViewModel();
         }
     }
 }

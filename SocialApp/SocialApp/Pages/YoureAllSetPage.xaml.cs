@@ -2,6 +2,7 @@ namespace SocialApp.Pages
 {
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using SocialApp.ViewModels;
     using System;
     using System.Diagnostics;
 

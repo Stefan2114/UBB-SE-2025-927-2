@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Converters
+﻿namespace SocialApp.Converters
 {
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Data;

@@ -1,6 +1,7 @@
 ﻿namespace SocialApp.ViewModels
 {
     using AppCommonClasses.Models;
+    using SocialApp.Pages;
     using SocialApp.Services;
     using System.ComponentModel;
     using System.Windows.Input;

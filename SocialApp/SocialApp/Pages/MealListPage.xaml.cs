@@ -1,6 +1,6 @@
-using MealPlannerProject.Services;
-using MealPlannerProject.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using SocialApp.Services;
+using SocialApp.ViewModels;
 
 namespace SocialApp.Pages
 {

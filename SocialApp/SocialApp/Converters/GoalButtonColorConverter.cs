@@ -1,10 +1,10 @@
-﻿namespace MealPlannerProject.Converters
+﻿namespace SocialApp.Converters
 {
-    using System;
+    using global::Windows.UI;
     using Microsoft.UI;
     using Microsoft.UI.Xaml.Data;
     using Microsoft.UI.Xaml.Media;
-    using Windows.UI;
+    using System;
 
     public class GoalButtonColorConverter : IValueConverter
     {

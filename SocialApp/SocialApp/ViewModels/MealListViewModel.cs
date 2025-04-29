@@ -1,6 +1,8 @@
 ﻿using AppCommonClasses.Models;
 using CommunityToolkit.Mvvm.Input;
+using SocialApp.Pages;
 using SocialApp.Queries;
+using SocialApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;

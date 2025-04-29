@@ -22,6 +22,9 @@
     <None Remove="Pages\CreatePost.xaml" />
     <None Remove="Windows\GroupsScreen.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Remove="App(OLD).xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -1,9 +1,7 @@
-﻿namespace MealPlannerProject.Converters
+﻿namespace SocialApp.Converters
 {
-    using System;
-    using MealPlannerProject;
-    using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Data;
+    using System;
 
     public class SelectedGoalOpacityConverter : IValueConverter
     {

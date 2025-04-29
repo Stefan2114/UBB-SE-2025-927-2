@@ -1,10 +1,12 @@
 ﻿namespace SocialApp.ViewModels
 {
     using AppCommonClasses.Models;
+    using global::Windows.UI;
     using Microsoft.Data.SqlClient;
     using Microsoft.Extensions.Configuration;
     using Microsoft.UI;
     using Microsoft.UI.Xaml.Media;
+    using SocialApp.Pages;
     using SocialApp.Services;
     using System;
     using System.Collections.ObjectModel;

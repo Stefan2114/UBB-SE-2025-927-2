@@ -1,6 +1,7 @@
 ﻿namespace SocialApp.ViewModels
 {
     using CommunityToolkit.Mvvm.Input;
+    using SocialApp.Pages;
     using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;

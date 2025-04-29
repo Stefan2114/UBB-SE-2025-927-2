@@ -1,7 +1,7 @@
 namespace SocialApp.ViewModels
 {
-    using MealPlannerProject.Services;
     using SocialApp.Interfaces;
+    using SocialApp.Pages;
     using SocialApp.Queries;
     using SocialApp.Services;
     using System;
