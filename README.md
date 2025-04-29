@@ -156,6 +156,44 @@ ProjectName.Services
   private const int MAX_RETRY_COUNT = 3;
   ```
 
+### 17. Test Class Naming
+
+- Use the same name as the class being tested, suffixed with Tests.
+
+- ✅ Example:
+```csharp
+UserService → UserServiceTests
+```
+
+### 18. Test Method Naming
+
+- Use the pattern:
+- MethodName_Scenario_ExpectedOutcome
+
+- ✅ Examples:
+```csharp
+    GetUserById_UserExists_ReturnsUser()
+
+    CreateOrder_InvalidInput_ThrowsException()
+```
+- This improves readability and test discoverability.
+
+### 19. AAA Pattern (Arrange-Act-Assert)
+
+- Structure test methods using the AAA pattern for clarity.
+
+- ✅ Example:
+```csharp
+// Arrange
+var userService = new UserService(mockRepo.Object);
+
+// Act
+var result = userService.GetUserById(1);
+
+// Assert
+Assert.NotNull(result);
+```
+
 ## Conditii folosire Git
 
 - Trebuie respectate deadline-ul (sambata seara)
