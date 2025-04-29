@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     using System.Collections.ObjectModel;
 
@@ -6,16 +6,16 @@
     {
         public SectionModel()
         {
-            this.Title = string.Empty;
+            Title = string.Empty;
         }
 
         public SectionModel(string title)
         {
-            this.Title = title;
+            Title = title;
         }
 
         public string Title { get; set; }
 
-        public ObservableCollection<GroceryIngredient> Items { get; set; } = new ();
+        public ObservableCollection<GroceryIngredient> Items { get; set; } = new();
     }
 }

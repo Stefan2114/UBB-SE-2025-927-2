@@ -1,10 +1,11 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Exceptions;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
     using System.Data.SqlClient;
     using System.Diagnostics;
-    using MealPlannerProject.Exceptions;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Queries;
 
     public class GoalPageService : IGoalPageService
     {
@@ -28,7 +29,7 @@
 
             Debug.WriteLine($"User name: {u_name}");
 
-            int u_id = this.dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
+            int u_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
 
             // Check if the user ID is valid
             if (u_id == 0)
@@ -43,7 +44,7 @@
         new SqlParameter("@g_description", g_description),
             };
 
-            int g_id = this.dataLink.ExecuteScalar<int>("SELECT dbo.GetGoalByDescription(@g_description)", parameters, false);
+            int g_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetGoalByDescription(@g_description)", parameters, false);
 
             // Check if the goal ID is valid
             if (g_id == 0)
@@ -57,7 +58,7 @@
         new SqlParameter("@g_id", g_id),
             };
 
-            this.dataLink.ExecuteNonQuery("UpdateUserGoals", parameters);
+            dataLink.ExecuteNonQuery("UpdateUserGoals", parameters);
         }
 
     }

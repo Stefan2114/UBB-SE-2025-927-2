@@ -3,10 +3,10 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Services;
+    using SocialApp.Interfaces;
 
     public class DietaryPreferencesViewModel : INotifyPropertyChanged
     {

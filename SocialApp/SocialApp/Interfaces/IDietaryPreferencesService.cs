@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Interfaces.Services
+﻿namespace SocialApp.Interfaces
 {
     public interface IDietaryPreferencesService
     {

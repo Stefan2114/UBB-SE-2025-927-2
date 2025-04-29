@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace MealPlannerProject.Models
+namespace AppCommonClasses.Models
 {
     public class GroceryIngredient : ObservableObject
     {

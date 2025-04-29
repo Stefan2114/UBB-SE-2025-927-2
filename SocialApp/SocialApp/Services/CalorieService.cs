@@ -1,5 +1,6 @@
-﻿using MealPlannerProject.Interfaces;
-using MealPlannerProject.Queries;
+﻿using AppCommonClasses.Interfaces;
+using SocialApp.Interfaces;
+using SocialApp.Queries;
 using System.Data.SqlClient;
 
 namespace MealPlannerProject.Services

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Input;
 using System.Data;
 using System.Data.SqlClient;
-using MealPlannerProject.Models;
 using MealPlannerProject.Services;
 using MealPlannerProject.Queries;
 using System.Diagnostics;
@@ -13,6 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 
 using MealPlannerProject.Interfaces;
+using AppCommonClasses.Models;
 
 namespace MealPlannerProject.ViewModels
 {

@@ -1,12 +1,10 @@
 ﻿namespace MealPlannerProject.ViewModels
 {
-    using System.Collections.ObjectModel;
-    using System.Linq;
+    using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using MealPlannerProject.Models;
     using MealPlannerProject.Services;
-    using Windows.System;
+    using System.Collections.ObjectModel;
 
     public class GroceryViewModel : ObservableObject
     {
@@ -18,9 +16,9 @@
             set => userId = value;
         }
 
-        private readonly GroceryListService service = new ();
+        private readonly GroceryListService service = new();
 
-        public ObservableCollection<GroceryIngredient> Ingredients { get; private set; } = new ();
+        public ObservableCollection<GroceryIngredient> Ingredients { get; private set; } = new();
 
         public ObservableCollection<GroceryIngredient> MostFrequentIngredients { get; private set; }
 
@@ -63,7 +61,7 @@
             {
                 new SectionModel { Title = "My List" },
             };
-            this.sections = new ();
+            this.sections = new();
             this.newGroceryIngredientName = "";
 
             this.LoadUserGroceryList();

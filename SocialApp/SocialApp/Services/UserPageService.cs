@@ -1,13 +1,13 @@
-﻿using MealPlannerProject.Queries;
-using MealPlannerProject.Interfaces;
-
+﻿using AppCommonClasses.Interfaces;
+using SocialApp.Interfaces;
+using SocialApp.Queries;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace MealPlannerProject.Services
 {
     public class UserPageService : IUserPageService
-    {   
+    {
         private readonly IDataLink _dataLink;
 
         public UserPageService()

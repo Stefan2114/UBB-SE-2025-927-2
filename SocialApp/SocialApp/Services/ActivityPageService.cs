@@ -3,8 +3,8 @@
     using System.Collections.ObjectModel;
     using System.Data.SqlClient;
     using System.Diagnostics;
-    using MealPlannerProject.Interfaces.Services;
     using MealPlannerProject.Queries;
+    using SocialApp.Interfaces;
 
     internal class ActivityPageService : IActivityPageService
     {

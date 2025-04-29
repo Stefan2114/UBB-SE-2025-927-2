@@ -3,7 +3,7 @@
 
 namespace MealPlannerProject.Pages
 {
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;

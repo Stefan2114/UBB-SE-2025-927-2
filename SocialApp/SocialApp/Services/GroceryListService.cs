@@ -1,18 +1,15 @@
-﻿using MealPlannerProject.Models;
-using MealPlannerProject.Queries;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-
-using MealPlannerProject.Interfaces;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MealPlannerProject.Services
+﻿namespace MealPlannerProject.Services
 {
-    public class GroceryListService: IGroceryListService
+    using AppCommonClasses.Models;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+
+    public class GroceryListService : IGroceryListService
     {
         // No dependency injection for IDataLink, using DataLink directly
         public List<GroceryIngredient> GetIngredientsForUser(int userId)

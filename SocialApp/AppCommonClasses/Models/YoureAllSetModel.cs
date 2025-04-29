@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     public class YoureAllSetModel
     {
@@ -8,8 +8,8 @@
 
         public YoureAllSetModel()
         {
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
         }
     }
 }

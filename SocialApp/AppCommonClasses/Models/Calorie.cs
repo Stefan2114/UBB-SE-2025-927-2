@@ -1,9 +1,8 @@
-﻿namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Windows.System;
 
     [Table("calorie_trackers")]
     public class Calorie

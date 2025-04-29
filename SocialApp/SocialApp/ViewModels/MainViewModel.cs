@@ -5,10 +5,10 @@ namespace MealPlannerProject.ViewModels
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Input;
-    using MealPlannerProject.Interfaces.Services;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Queries;
     using MealPlannerProject.Services;
+    using SocialApp.Interfaces;
 
     public class MainViewModel : INotifyPropertyChanged
     {

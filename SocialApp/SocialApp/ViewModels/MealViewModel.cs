@@ -3,7 +3,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
 
     public class MealViewModel : INotifyPropertyChanged
     {

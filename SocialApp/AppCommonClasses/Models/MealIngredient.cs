@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     public class MealIngredient
     {
@@ -27,15 +25,15 @@ namespace MealPlannerProject.Models
         {
             return new MealIngredient
             {
-                IngredientId = this.IngredientId,
-                IngredientName = this.IngredientName,
-                Quantity = this.Quantity,
-                Protein = this.Protein * this.Quantity,
-                Calories = this.Calories * this.Quantity,
-                Carbs = this.Carbs * this.Quantity,
-                Fats = this.Fats * this.Quantity,
-                Fiber = this.Fiber * this.Quantity,
-                Sugar = this.Sugar * this.Quantity
+                IngredientId = IngredientId,
+                IngredientName = IngredientName,
+                Quantity = Quantity,
+                Protein = Protein * Quantity,
+                Calories = Calories * Quantity,
+                Carbs = Carbs * Quantity,
+                Fats = Fats * Quantity,
+                Fiber = Fiber * Quantity,
+                Sugar = Sugar * Quantity
             };
         }
     }

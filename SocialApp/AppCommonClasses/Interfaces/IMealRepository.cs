@@ -1,6 +1,6 @@
-﻿namespace MealPlannerProject.Repositories
+﻿namespace AppCommonClasses.Interfaces
 {
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using System.Threading.Tasks;
 
     public interface IMealRepository

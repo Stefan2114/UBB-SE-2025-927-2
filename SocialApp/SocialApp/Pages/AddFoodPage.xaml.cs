@@ -1,11 +1,11 @@
 namespace MealPlannerProject.Pages
 {
-    using System;
-    using System.Diagnostics;
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using System;
+    using System.Diagnostics;
 
     public sealed partial class AddFoodPage : Page
     {

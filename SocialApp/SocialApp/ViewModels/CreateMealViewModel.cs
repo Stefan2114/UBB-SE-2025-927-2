@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.Input;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Models;
     using MealPlannerProject.Services;
     using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
     using Windows.Storage;
 
     public class CreateMealViewModel : ViewModelBase

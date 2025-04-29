@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Interfaces
 {
     public interface IGoalPageService
     {

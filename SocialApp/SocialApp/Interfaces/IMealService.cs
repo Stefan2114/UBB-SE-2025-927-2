@@ -1,8 +1,8 @@
-﻿namespace MealPlannerProject.Interfaces.Services
+﻿namespace SocialApp.Interfaces
 {
+    using AppCommonClasses.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using MealPlannerProject.Models;
 
     public interface IMealService
     {

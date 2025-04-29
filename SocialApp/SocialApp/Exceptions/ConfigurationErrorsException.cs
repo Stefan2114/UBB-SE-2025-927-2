@@ -1,4 +1,4 @@
-namespace MealPlannerProject.Exceptions
+namespace SocialApp.Exceptions
 {
     using System;
 

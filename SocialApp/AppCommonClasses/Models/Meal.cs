@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     using System;
 
@@ -40,39 +40,39 @@
 
         public Meal(string name, string ingredients, int calories, string category, string photoLink, string recipe)
         {
-            this.Name = name;
-            this.Ingredients = ingredients;
-            this.Calories = calories;
-            this.Category = category;
-            this.PhotoLink = photoLink;
-            this.Recipe = recipe;
-            this.CreatedAt = DateTime.Now;
+            Name = name;
+            Ingredients = ingredients;
+            Calories = calories;
+            Category = category;
+            PhotoLink = photoLink;
+            Recipe = recipe;
+            CreatedAt = DateTime.Now;
         }
 
         public Meal()
         {
-            this.CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.Now;
         }
     }
 
     public enum MealModel
     {
-         SuccessfulCreationIndicator = 0,
-         FailedOperationCode = -1,
-         BreakfastTypeId = 1,
-         LunchTypeId = 2,
-         DinnerTypeId = 3,
-         SnackTypeId = 4,
-         DessertTypeId = 5,
-         PostWorkoutTypeId = 6,
-         PreWorkoutTypeId = 7,
-         VeganMealTypeId = 8,
-         HighProteinMealTypeId = 9,
-         LowCarbMealTypeId = 10,
-         DefaultMealTypeId = 1,
-         BeginnerSkillId = 1,
-         IntermediateSkillId = 2,
-         AdvancedSkillId = 3,
-         DefaultCookingSkillId = 1,
+        SuccessfulCreationIndicator = 0,
+        FailedOperationCode = -1,
+        BreakfastTypeId = 1,
+        LunchTypeId = 2,
+        DinnerTypeId = 3,
+        SnackTypeId = 4,
+        DessertTypeId = 5,
+        PostWorkoutTypeId = 6,
+        PreWorkoutTypeId = 7,
+        VeganMealTypeId = 8,
+        HighProteinMealTypeId = 9,
+        LowCarbMealTypeId = 10,
+        DefaultMealTypeId = 1,
+        BeginnerSkillId = 1,
+        IntermediateSkillId = 2,
+        AdvancedSkillId = 3,
+        DefaultCookingSkillId = 1,
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Models
+﻿namespace AppCommonClasses.Models
 {
     using System.Collections.ObjectModel;
 
@@ -26,10 +26,10 @@
 
         public MealCreate()
         {
-            this.MealName = string.Empty;
-            this.CookingTime = string.Empty;
-            this.CookingDirections = new ObservableCollection<string>();
-            this.MealIngredients = new ObservableCollection<string>();
+            MealName = string.Empty;
+            CookingTime = string.Empty;
+            CookingDirections = new ObservableCollection<string>();
+            MealIngredients = new ObservableCollection<string>();
         }
     }
 }

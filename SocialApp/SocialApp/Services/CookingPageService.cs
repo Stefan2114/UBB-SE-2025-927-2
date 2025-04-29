@@ -1,18 +1,9 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
     using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Repositories;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Queries;
-    using MealPlannerProject.Repositories;
-    using Windows.ApplicationModel.Appointments.AppointmentsProvider;
 
     public class CookingPageService : ICookingPageService
     {
@@ -20,7 +11,7 @@
 
         public CookingPageService()
         {
-            this.CookingPageRepo = new CookingPageRepository();
+            CookingPageRepo = new CookingPageRepository();
         }
 
         [Obsolete]
@@ -28,10 +19,10 @@
         {
             Debug.WriteLine($"Adding cooking skill {cookingDescription} for user {firstName} {lastName}");
 
-            int userId = this.CookingPageRepo.GetUserIdByName(firstName, lastName);
-            int skillId = this.CookingPageRepo.GetCookingSkillIdByDescription(cookingDescription);
+            int userId = CookingPageRepo.GetUserIdByName(firstName, lastName);
+            int skillId = CookingPageRepo.GetCookingSkillIdByDescription(cookingDescription);
 
-            this.CookingPageRepo.UpdateUserCookingSkill(userId, skillId);
+            CookingPageRepo.UpdateUserCookingSkill(userId, skillId);
         }
     }
 }

@@ -6,6 +6,7 @@
     using CommunityToolkit.Mvvm.Input;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Services;
+    using SocialApp.Services;
 
     internal class GoalPageViewModel
     {

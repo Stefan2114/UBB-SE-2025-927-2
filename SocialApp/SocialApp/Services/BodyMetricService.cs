@@ -1,10 +1,10 @@
 ﻿namespace MealPlannerProject.Services
 {
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
     using System;
     using System.Data.SqlClient;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Queries;
 
     /// <summary>
     /// Service for managing body metrics of users.

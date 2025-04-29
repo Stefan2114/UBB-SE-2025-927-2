@@ -3,10 +3,10 @@
     using System;
     using System.Diagnostics;
     using System.Windows.Input;
-    using MealPlannerProject.Interfaces.Services;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Queries;
     using MealPlannerProject.Services;
+    using SocialApp.Interfaces;
 
     public class BodyMetricsViewModel : ViewModelBase
     {

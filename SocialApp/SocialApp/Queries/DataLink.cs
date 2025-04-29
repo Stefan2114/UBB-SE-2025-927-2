@@ -1,8 +1,8 @@
-namespace MealPlannerProject.Queries
+namespace SocialApp.Queries
 {
-    using MealPlannerProject.Exceptions;
-    using MealPlannerProject.Interfaces;
+    using AppCommonClasses.Interfaces;
     using Microsoft.Extensions.Configuration;
+    using SocialApp.Exceptions;
     using System;
     using System.Data;
     using System.Data.SqlClient;

@@ -1,8 +1,7 @@
-﻿namespace MealPlanner.Models
+﻿namespace AppCommonClasses.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Windows.System;
 
     [Table("daily_meals")]
     public class Macros
@@ -11,7 +10,7 @@
         [ForeignKey("User")]
         public int User_Id { get; set; } // Foreign key from Users table
 
-        [Column ("total_protein")]
+        [Column("total_protein")]
         public float TotalConsumedProtein { get; set; } // Total protein consumed
 
         [Column("total_carbohydrates")]

@@ -8,9 +8,9 @@
     using System.Runtime.ConstrainedExecution;
     using System.Text;
     using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Services;
+    using AppCommonClasses.Interfaces;
     using MealPlannerProject.Queries;
+    using SocialApp.Interfaces;
 
     public class WaterIntakeService : IWaterIntakeService
     {

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Services;
     using Microsoft.Data.SqlClient;

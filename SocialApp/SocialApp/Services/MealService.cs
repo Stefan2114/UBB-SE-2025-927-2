@@ -5,10 +5,10 @@ namespace MealPlannerProject.Services
     using System.Data;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Models;
+    using AppCommonClasses.Models;
     using MealPlannerProject.Queries;
     using MealPlannerProject.Repositories;
+    using SocialApp.Interfaces;
 
     public class MealService : IMealService
     {

@@ -1,16 +1,11 @@
 namespace MealPlannerProject.Pages
 {
-    using System;
-    using MealPlannerProject.Models;
-    using MealPlannerProject.Services;
+    using AppCommonClasses.Models;
     using MealPlannerProject.ViewModels;
-    using Microsoft.UI;
-    using Microsoft.UI.Windowing;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml.Controls.Primitives;
     using Microsoft.UI.Xaml.Media.Imaging;
-    using Windows.Storage;
+    using System;
     using Windows.Storage.Pickers;
     using WinRT.Interop;
 

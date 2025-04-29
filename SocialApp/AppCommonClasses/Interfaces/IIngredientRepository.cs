@@ -1,7 +1,6 @@
-﻿using MealPlannerProject.Models;
-using System.Threading.Tasks;
+﻿using AppCommonClasses.Models;
 
-namespace MealPlannerProject.Interfaces.Repositories
+namespace AppCommonClasses.Interfaces
 {
     public interface IIngredientRepository
     {

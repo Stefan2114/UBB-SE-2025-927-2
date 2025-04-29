@@ -3,9 +3,9 @@ namespace MealPlannerProject.ViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using MealPlannerProject.Interfaces.Services;
     using MealPlannerProject.Pages;
     using MealPlannerProject.Services;
+    using SocialApp.Interfaces;
 
     public class ActivityLevelViewModel : ViewModelBase
     {

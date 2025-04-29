@@ -1,10 +1,9 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using SocialApp.Interfaces;
     using System;
-    using MealPlannerProject.Interfaces.Repositories;
-    using MealPlannerProject.Interfaces.Services;
-    using MealPlannerProject.Models;
-    using MealPlannerProject.Repositories;
 
     public class DietaryPreferencesService : IDietaryPreferencesService
     {
@@ -12,7 +11,7 @@
 
         public DietaryPreferencesService()
         {
-            this.repository = new DietaryPreferencesRepository();
+            repository = new DietaryPreferencesRepository();
         }
 
         [Obsolete]
@@ -33,7 +32,7 @@
                 throw new Exception("Please select allergies!");
             }
 
-            this.repository.AddAllergyAndDietaryPreference(firstName, lastName, dietaryPreference, allergy);
+            repository.AddAllergyAndDietaryPreference(firstName, lastName, dietaryPreference, allergy);
         }
     }
 }
