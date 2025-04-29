@@ -37,10 +37,11 @@ namespace SocialApp.Pages
             {
                 this.viewModel.SelectedImage = file;
                 var bitmapImage = new BitmapImage();
+                /*
                 using (var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
                     await bitmapImage.SetSourceAsync(stream);
-                }
+                }*/
 
                 this.SelectedImage.Source = bitmapImage;
             }

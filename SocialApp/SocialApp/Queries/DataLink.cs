@@ -24,7 +24,7 @@ namespace SocialApp.Queries
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile("appsettingsApp.json", optional: false, reloadOnChange: true)
                     .Build();
                 string? localDataSource = config["LocalDataSource"];
                 string? initialCatalog = config["InitialCatalog"];

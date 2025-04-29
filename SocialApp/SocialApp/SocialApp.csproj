@@ -23,10 +23,13 @@
     <None Remove="Windows\GroupsScreen.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Remove="App(OLD).xaml" />
+    <Page Remove="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="appsettingsApp.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -51,6 +54,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.13.40008" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250310001" />

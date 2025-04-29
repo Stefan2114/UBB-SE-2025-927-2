@@ -4,6 +4,7 @@
 
 namespace SocialApp.ViewModels
 {
+    using SocialApp.Pages;
     using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.Windows.Input;

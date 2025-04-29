@@ -1,18 +1,11 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using SocialApp.Services;
+using SocialApp.ViewModels;
 using System;
 
-using Microsoft.Data.SqlClient;
-using MealPlannerProject;
-using Microsoft.UI.Xaml.Controls;
-using MealPlannerProject.Services;
-using MealPlannerProject.ViewModels;
-using MealPlannerProject.Pages;
-
-
-
-
-
-namespace MealPlannerProject
+namespace SocialApp
 {
     public partial class App : Application
     {
@@ -21,13 +14,16 @@ namespace MealPlannerProject
         public static Window MainWindow { get; private set; }
         public static MealListViewModel MealListViewModel { get; private set; }
 
-
+        public static IServiceProvider Services { get; private set; }
+        public static Window CurrentWindow { get; private set; }
 
         public App()
         {
             this.InitializeComponent();
             this.UnhandledException += OnUnhandledException;
-            
+            var services = new ServiceCollection();
+            services.AddSingleton<AppController>();
+            Services = services.BuildServiceProvider();
         }
 
         private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -59,7 +55,7 @@ namespace MealPlannerProject
 
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(MealPlannerProject.Pages.WelcomePage));
+                    rootFrame.Navigate(typeof(SocialApp.Pages.WelcomePage));
                 }
 
                 // Initialize the shared ViewModel with the required MealService instance  
