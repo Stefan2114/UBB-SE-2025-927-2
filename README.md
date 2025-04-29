@@ -172,9 +172,9 @@ UserService → UserServiceTests
 
 - ✅ Examples:
 ```csharp
-    GetUserById_UserExists_ReturnsUser()
+GetUserById_UserExists_ReturnsUser()
 
-    CreateOrder_InvalidInput_ThrowsException()
+CreateOrder_InvalidInput_ThrowsException()
 ```
 - This improves readability and test discoverability.
 
