@@ -5,7 +5,7 @@
     using NSubstitute;
     using SocialApp.Services;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
 
     public class GroupServiceTests
     {

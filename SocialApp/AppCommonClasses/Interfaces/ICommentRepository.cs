@@ -1,7 +1,7 @@
 ﻿using AppCommonClasses.Models;
 using System.Collections.Generic;
 
-namespace AppCommonClasses.Repos
+namespace AppCommonClasses.Interfaces
 {
     public interface ICommentRepository
     {

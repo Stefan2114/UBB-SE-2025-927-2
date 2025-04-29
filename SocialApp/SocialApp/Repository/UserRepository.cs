@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Microsoft.Data.SqlClient;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
 
     public class UserRepository : IUserRepository
     {

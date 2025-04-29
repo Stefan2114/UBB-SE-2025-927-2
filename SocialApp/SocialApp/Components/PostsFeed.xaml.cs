@@ -8,6 +8,10 @@ using SocialApp.Services;
 using System.Collections.Generic;
 using System.Linq;
 using SocialApp.Proxies;
+using SocialApp.ViewModels;
+using SocialApp.ViewModels;
+using SocialApp.Services;
+using SocialApp.Interfaces;
 
 namespace SocialApp.Components
 {
@@ -15,12 +19,7 @@ namespace SocialApp.Components
     {
         private int currentPage = 1;
         private const int postsPerPage = 5;
-        private List<PostComponent> allPosts;
-        private UserRepository userRepository;
-        private UserService userService;
-        private PostRepositoryProxy postRepository;
-        private PostService postService;
-        private GroupRepository groupRepository;
+        private PostViewModel postViewModel;
 
         public StackPanel PostsStackPanelPublic => PostsStackPanel;
 
@@ -28,20 +27,16 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
 
-            userRepository = new UserRepository();
-            userService = new UserService(userRepository);
-            postRepository = new PostRepositoryProxy();
-            groupRepository = new GroupRepository();
-            postService = new PostService(postRepository, userRepository, groupRepository);
-            allPosts = new List<PostComponent>();
+            var userRepository = new UserRepository();
+            var userService = new UserService(userRepository);
+            var postRepository = new PostRepositoryProxy();
+            var groupRepository = new GroupRepository();
+            var postService = new PostService(postRepository, userRepository, groupRepository);
+            this.postViewModel = new PostViewModel(postService);
+
 
             LoadPosts();
             DisplayCurrentPage();
-        }
-
-        public void AddPost(PostComponent post)
-        {
-            allPosts.Add(post);
         }
 
         private void LoadPosts()
@@ -56,19 +51,17 @@ namespace SocialApp.Components
             {
                 userId = controller.CurrentUser.Id;
             }
-            var posts = postService.GetPostsHomeFeed(userId).ToList();
-            foreach (var post in posts)
-            {
-                var postComponent = new PostComponent(post.Title, post.Visibility, post.UserId, post.Content, post.CreatedDate, post.Tag, post.Id);
-                allPosts.Add(postComponent);
-            }
+            this.postViewModel.PopulatePostsHomeFeed(userId);
+
         }
+
 
         public void DisplayCurrentPage()
         {
             PostsStackPanel.Children.Clear();
             int startIndex = (currentPage - 1) * postsPerPage;
             int endIndex = startIndex + postsPerPage;
+            var allPosts = this.postViewModel.GetCurrentPosts();
             for (int i = startIndex; i < endIndex && i < allPosts.Count; i++)
             {
                 PostsStackPanel.Children.Add(allPosts[i]);
@@ -77,7 +70,17 @@ namespace SocialApp.Components
 
         public void ClearPosts()
         {
-            allPosts = new List<PostComponent>();
+            this.postViewModel.clearPosts();
+        }
+
+        public void PopulatePostsByGroupId(long groupId)
+        {
+            this.postViewModel.PopulatePostsByGroupId(groupId);
+        }
+
+        public void PopulatePostsByUserId(long userId)
+        {
+            this.postViewModel.PopulatePostsByUserId(userId);
         }
 
         private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
@@ -91,6 +94,7 @@ namespace SocialApp.Components
 
         private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
+            var allPosts = this.postViewModel.GetCurrentPosts();
             if (currentPage * postsPerPage < allPosts.Count)
             {
                 currentPage++;

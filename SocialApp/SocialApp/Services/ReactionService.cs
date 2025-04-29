@@ -5,7 +5,8 @@
     using AppCommonClasses.Models;
     using AppCommonClasses.Enums;
     using SocialApp.Repository;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
 
     public class ReactionService(IReactionRepository reactionRepository) : IReactionService
     {

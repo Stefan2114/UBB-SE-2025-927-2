@@ -3,8 +3,9 @@
 
     using System;
     using System.Collections.Generic;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
+    using SocialApp.Interfaces;
     using SocialApp.Repository;
 
     public class GroupService : IGroupService

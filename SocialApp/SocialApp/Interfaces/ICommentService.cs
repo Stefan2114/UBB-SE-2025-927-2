@@ -1,7 +1,7 @@
 ﻿using AppCommonClasses.Models;
 using System.Collections.Generic;
 
-namespace SocialApp.Services
+namespace SocialApp.Interfaces
 {
     public interface ICommentService
     {

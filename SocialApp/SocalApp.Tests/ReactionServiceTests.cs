@@ -7,7 +7,7 @@ namespace SocialApp.Tests
     using AppCommonClasses.Models;
     using AppCommonClasses.Enums;
     using SocialApp.Services;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
 
     /// <summary>
     /// Contains unit tests for the ReactionService class.

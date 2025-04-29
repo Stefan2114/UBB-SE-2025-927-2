@@ -1,4 +1,4 @@
-using AppCommonClasses.Repos;
+using AppCommonClasses.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Repos;

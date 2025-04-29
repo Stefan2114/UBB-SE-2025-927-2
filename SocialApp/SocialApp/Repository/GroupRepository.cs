@@ -14,7 +14,7 @@ namespace SocialApp.Repository
     using Microsoft.Data.SqlClient;
     using AppCommonClasses.Models;
     using Group = AppCommonClasses.Models.Group;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
 
 
     /// <summary>

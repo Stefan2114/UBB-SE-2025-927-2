@@ -15,6 +15,8 @@ using Windows.Storage;
 using Group = AppCommonClasses.Models.Group;
 using System.Diagnostics;
 using SocialApp.Proxies;
+using SocialApp.ViewModels;
+using SocialApp.Interfaces;
 
 namespace SocialApp.Pages
 {
@@ -24,7 +26,7 @@ namespace SocialApp.Pages
     public sealed partial class CreatePost : Page
     {
         private AppController controller;
-        private IPostService postService;
+        private PostViewModel postViewModel;
         private IGroupService groupService;
         private List<Group> userGroups = new List<Group>();
         private string image = string.Empty;
@@ -34,10 +36,6 @@ namespace SocialApp.Pages
         /// </summary>
         public CreatePost()
         {
-            this.controller = App.Services.GetService<AppController>();
-            this.postService = App.Services.GetService<PostService>();
-            this.groupService = App.Services.GetService<GroupService>();
-
             this.InitializeComponent();
             this.InitializeServices();
             this.TitleInput.TextChanged += this.TitleInput_TextChanged;
@@ -55,12 +53,10 @@ namespace SocialApp.Pages
 
         private void InitializeServices()
         {
-            var postRepository = new PostRepositoryProxy();
-            var userRepository = new UserRepository();
-            var groupRepository = new GroupRepository();
-            this.postService = new PostService(postRepository, userRepository, groupRepository);
-            this.groupService = new GroupService(groupRepository, userRepository);
             this.controller = App.Services.GetService<AppController>();
+            var postService = App.Services.GetService<PostService>();
+            this.postViewModel = new PostViewModel(postService);
+            this.groupService = App.Services.GetService<GroupService>();
         }
 
         private void LoadUserGroups()
@@ -142,7 +138,7 @@ namespace SocialApp.Pages
                 for (int i = 0; i < posts.Count; i++)
                 {
                     // Use null-coalescing operator to provide a default value for GroupId
-                    this.postService.AddPost(
+                    this.postViewModel.AddPost(
                         posts[i].Title,
                         posts[i].Content,
                         posts[i].UserId,

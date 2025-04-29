@@ -2,13 +2,13 @@
 using AppCommonClasses.Enums;
 using System.Collections.Generic;
 
-namespace SocialApp.Services
+namespace SocialApp.Interfaces
 {
     public interface IPostService
     {
-        Post AddPost(string title, string? content, long userId, long groupId, PostVisibility postVisibility, PostTag postTag);
+        void AddPost(string title, string? content, long userId, long groupId, PostVisibility postVisibility, PostTag postTag);
         void DeletePost(long id);
-        List<Post> GePostsByUserId(long userId);
+        List<Post> GetPostsByUserId(long userId);
         List<Post> GetAllPosts();
         List<Post> GetPostsByGroupId(long groupId);
         Post GetPostById(long id);

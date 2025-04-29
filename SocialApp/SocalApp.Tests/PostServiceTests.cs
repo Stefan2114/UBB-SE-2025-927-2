@@ -3,7 +3,7 @@ using NSubstitute;
 using SocialApp.Services;
 using AppCommonClasses.Models;
 using AppCommonClasses.Enums;
-using AppCommonClasses.Repos;
+using AppCommonClasses.Interfaces;
 
 
 
@@ -42,17 +42,9 @@ namespace SocialApp.Tests
             groupRepository.GetGroupById(groupId).Returns(group);
 
             // Act
-            var returnedPost = postService.AddPost(title, content, userId, groupId, postVisibility, postTag);
+            postService.AddPost(title, content, userId, groupId, postVisibility, postTag);
 
             // Assert
-            Assert.NotNull(returnedPost);
-            Assert.That(returnedPost.Title, Is.EqualTo(post.Title));
-            Assert.That(returnedPost.Content, Is.EqualTo(post.Content));
-            Assert.That(returnedPost.UserId, Is.EqualTo(post.UserId));
-            Assert.That(returnedPost.GroupId, Is.EqualTo(post.GroupId));
-            Assert.That(returnedPost.Visibility, Is.EqualTo(post.Visibility));
-            Assert.That(returnedPost.Tag, Is.EqualTo(post.Tag));
-
             userRepository.Received(1).GetById(userId);
             groupRepository.Received(1).GetGroupById(groupId);
             postRepository.Received(1).SavePost(Arg.Any<Post>());

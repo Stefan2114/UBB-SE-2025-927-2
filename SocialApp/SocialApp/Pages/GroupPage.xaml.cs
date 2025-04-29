@@ -8,8 +8,9 @@ using SocialApp.Services;
 using SocialApp.Components;
 using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
-using AppCommonClasses.Repos;
 using SocialApp.Proxies;
+using AppCommonClasses.Interfaces;
+using SocialApp.Interfaces;
 
 namespace SocialApp.Pages
 {
@@ -80,12 +81,8 @@ namespace SocialApp.Pages
 
         private void PopulateFeed()
         {
-            PostsFeed.ClearPosts();
-            List<Post> groupPosts = postService.GetPostsByGroupId(GroupId);
-            foreach (Post post in groupPosts)
-            {
-                PostsFeed.AddPost(new PostComponent(post.Title, post.Visibility, post.UserId, post.Content, post.CreatedDate, post.Tag, post.Id));
-            }
+            this.PostsFeed.ClearPosts();
+            this.PostsFeed.PopulatePostsByGroupId(GroupId);
             PostsFeed.Visibility = Visibility.Visible;
             PostsFeed.DisplayCurrentPage();
         }
