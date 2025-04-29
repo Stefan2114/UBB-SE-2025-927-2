@@ -340,6 +340,8 @@ namespace SocialApp.ViewModels
 
             AddSnack = new RelayCommand(GoAddSnack);
 
+            SocialMedia = new RelayCommand(GoSocialMedia);
+
             // Initialize refresh command
             // int number_userId = int.Parse(_userId);
             // RefreshMealsCommand = new RelayCommand(LoadLastMeals);
@@ -403,6 +405,10 @@ namespace SocialApp.ViewModels
             }
         }
 
+        private void GoSocialMedia()
+        {
+            NavigationService.Instance.NavigateTo(typeof(HomeScreen));
+        }
 
         private void GoDisplayMeals()
         {
