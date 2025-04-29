@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
     using System;
     using System.Windows.Input;

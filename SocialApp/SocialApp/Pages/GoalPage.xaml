@@ -1,4 +1,4 @@
-<Page x:Class="MealPlannerProject.Pages.GoalPage"
+<Page x:Class="SocialApp.Pages.GoalPage"
       x:Name="GoalPageXAML"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

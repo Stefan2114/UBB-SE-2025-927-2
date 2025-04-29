@@ -1,9 +1,9 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
     using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using MealPlannerProject.Services;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
 
     public class GroceryViewModel : ObservableObject
@@ -30,47 +30,47 @@
 
         public ObservableCollection<SectionModel> Sections
         {
-            get => this.sections;
-            set => this.SetProperty(ref this.sections, value);
+            get => sections;
+            set => SetProperty(ref sections, value);
         }
 
         public string NewGroceryIngredientName
         {
-            get => this.newGroceryIngredientName;
-            set => this.SetProperty(ref this.newGroceryIngredientName, value);
+            get => newGroceryIngredientName;
+            set => SetProperty(ref newGroceryIngredientName, value);
         }
 
         public RelayCommand<GroceryIngredient> AddGroceryIngredientCommand { get; }
 
         public GroceryViewModel()
         {
-            this.AddGroceryIngredientCommand = new RelayCommand<GroceryIngredient>(this.AddGroceryIngredient);
-            this.MostFrequentIngredients = new ObservableCollection<GroceryIngredient>
+            AddGroceryIngredientCommand = new RelayCommand<GroceryIngredient>(AddGroceryIngredient);
+            MostFrequentIngredients = new ObservableCollection<GroceryIngredient>
             {
                 new GroceryIngredient { Name = "Tomatoes" },
                 new GroceryIngredient { Name = "Onions" },
                 new GroceryIngredient { Name = "Garlic" },
             };
-            this.RecentlyUsedIngredients = new ObservableCollection<GroceryIngredient>
+            RecentlyUsedIngredients = new ObservableCollection<GroceryIngredient>
             {
                 new GroceryIngredient { Name = "Olive Oil" },
                 new GroceryIngredient { Name = "Salt" },
                 new GroceryIngredient { Name = "Pepper" },
             };
-            this.Sections = new ObservableCollection<SectionModel>
+            Sections = new ObservableCollection<SectionModel>
             {
                 new SectionModel { Title = "My List" },
             };
-            this.sections = new();
-            this.newGroceryIngredientName = "";
+            sections = new();
+            newGroceryIngredientName = "";
 
-            this.LoadUserGroceryList();
+            LoadUserGroceryList();
         }
 
         [System.Obsolete]
         public void AddGroceryIngredient(GroceryIngredient? ingredient = null)
         {
-            GroceryIngredient resultIngredient = this.service.AddIngredientToUser(userId, ingredient ?? GroceryIngredient.defaultIngredient, this.newGroceryIngredientName, this.sections);
+            GroceryIngredient resultIngredient = service.AddIngredientToUser(userId, ingredient ?? GroceryIngredient.defaultIngredient, newGroceryIngredientName, sections);
             if (resultIngredient == GroceryIngredient.defaultIngredient)
             {
                 return;
@@ -85,21 +85,21 @@
                 if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                 {
                     var ing = (GroceryIngredient)s;
-                    this.service.UpdateIsChecked(userId, ing.Id, ing.IsChecked);
+                    service.UpdateIsChecked(userId, ing.Id, ing.IsChecked);
                 }
             };
 
-            this.Sections[0].Items.Add(ingredient);
+            Sections[0].Items.Add(ingredient);
 
-            this.NewGroceryIngredientName = string.Empty;
+            NewGroceryIngredientName = string.Empty;
         }
 
 
         private void LoadUserGroceryList()
         {
-            var ingredientsFromDb = this.service.GetIngredientsForUser(userId);
+            var ingredientsFromDb = service.GetIngredientsForUser(userId);
 
-            this.Sections = new ObservableCollection<SectionModel>
+            Sections = new ObservableCollection<SectionModel>
             {
                 new SectionModel
                 {
@@ -108,7 +108,7 @@
                 },
             };
 
-            this.OnPropertyChanged(nameof(this.Sections));
+            OnPropertyChanged(nameof(Sections));
         }
     }
 }

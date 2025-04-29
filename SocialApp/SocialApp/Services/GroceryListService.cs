@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
     using AppCommonClasses.Models;
     using SocialApp.Interfaces;
@@ -41,7 +41,7 @@
                     if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                     {
                         var item = (GroceryIngredient)s;
-                        this.UpdateIsChecked(userId, item.Id, item.IsChecked);
+                        UpdateIsChecked(userId, item.Id, item.IsChecked);
                     }
                 };
             }

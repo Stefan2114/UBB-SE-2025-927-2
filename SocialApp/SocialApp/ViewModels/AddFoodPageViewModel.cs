@@ -1,16 +1,14 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Windows.Input;
     using AppCommonClasses.Models;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
     using Microsoft.Data.SqlClient;
     using Microsoft.Extensions.Configuration;
     using Microsoft.UI;
     using Microsoft.UI.Xaml.Media;
-    using Windows.UI;
+    using SocialApp.Services;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
 
     public class AddFoodPageViewModel : ViewModelBase
     {
@@ -47,39 +45,39 @@
             if (field != value)
             {
                 field = value;
-                this.OnPropertyChanged(propertyName);
+                OnPropertyChanged(propertyName);
             }
         }
 
-        public string TotalProtein { get => this.totalProtein; set => this.SetProperty(ref this.totalProtein, value); }
+        public string TotalProtein { get => totalProtein; set => SetProperty(ref totalProtein, value); }
 
-        public string GoalProtein { get => this.goalProtein; set => this.SetProperty(ref this.goalProtein, value); }
+        public string GoalProtein { get => goalProtein; set => SetProperty(ref goalProtein, value); }
 
-        public string RemainingProtein { get => this.remainingProtein; set => this.SetProperty(ref this.remainingProtein, value); }
+        public string RemainingProtein { get => remainingProtein; set => SetProperty(ref remainingProtein, value); }
 
-        public string TotalCarbohydrates { get => this.totalCarbohydrates; set => this.SetProperty(ref this.totalCarbohydrates, value); }
+        public string TotalCarbohydrates { get => totalCarbohydrates; set => SetProperty(ref totalCarbohydrates, value); }
 
-        public string GoalCarbohydrates { get => this.goalCarbohydrates; set => this.SetProperty(ref this.goalCarbohydrates, value); }
+        public string GoalCarbohydrates { get => goalCarbohydrates; set => SetProperty(ref goalCarbohydrates, value); }
 
-        public string RemainingCarbohydrates { get => this.remainingCarbohydrates; set => this.SetProperty(ref this.remainingCarbohydrates, value); }
+        public string RemainingCarbohydrates { get => remainingCarbohydrates; set => SetProperty(ref remainingCarbohydrates, value); }
 
-        public string TotalFiber { get => this.totalFiber; set => this.SetProperty(ref this.totalFiber, value); }
+        public string TotalFiber { get => totalFiber; set => SetProperty(ref totalFiber, value); }
 
-        public string GoalFiber { get => this.goalFiber; set => this.SetProperty(ref this.goalFiber, value); }
+        public string GoalFiber { get => goalFiber; set => SetProperty(ref goalFiber, value); }
 
-        public string RemainingFiber { get => this.remainingFiber; set => this.SetProperty(ref this.remainingFiber, value); }
+        public string RemainingFiber { get => remainingFiber; set => SetProperty(ref remainingFiber, value); }
 
-        public string TotalFat { get => this.totalFat; set => this.SetProperty(ref this.totalFat, value); }
+        public string TotalFat { get => totalFat; set => SetProperty(ref totalFat, value); }
 
-        public string GoalFat { get => this.goalFat; set => this.SetProperty(ref this.goalFat, value); }
+        public string GoalFat { get => goalFat; set => SetProperty(ref goalFat, value); }
 
-        public string RemainingFat { get => this.remainingFat; set => this.SetProperty(ref this.remainingFat, value); }
+        public string RemainingFat { get => remainingFat; set => SetProperty(ref remainingFat, value); }
 
-        public string TotalSugar { get => this.totalSugar; set => this.SetProperty(ref this.totalSugar, value); }
+        public string TotalSugar { get => totalSugar; set => SetProperty(ref totalSugar, value); }
 
-        public string GoalSugar { get => this.goalSugar; set => this.SetProperty(ref this.goalSugar, value); }
+        public string GoalSugar { get => goalSugar; set => SetProperty(ref goalSugar, value); }
 
-        public string RemainingSugar { get => this.remainingSugar; set => this.SetProperty(ref this.remainingSugar, value); }
+        public string RemainingSugar { get => remainingSugar; set => SetProperty(ref remainingSugar, value); }
 
         private static int userId;
 
@@ -96,38 +94,38 @@
                     .Build();
             string? localDataSource = config["LocalDataSource"];
             string? initialCatalog = config["InitialCatalog"];
-            this.connectionString = $"Data Source={localDataSource};Initial Catalog={initialCatalog};Integrated Security=True; TrustServerCertificate = True";
-            this.BackCommand = new RelayCommand(this.GoBack);
-            this.NextCommand = new RelayCommand(this.GoNext);
-            this.AddToMealCommand = new RelayCommand(this.AddToMeal, this.CanAddToMeal);
-            this.FetchServingUnits();
+            connectionString = $"Data Source={localDataSource};Initial Catalog={initialCatalog};Integrated Security=True; TrustServerCertificate = True";
+            BackCommand = new RelayCommand(GoBack);
+            NextCommand = new RelayCommand(GoNext);
+            AddToMealCommand = new RelayCommand(AddToMeal, CanAddToMeal);
+            FetchServingUnits();
 
             Console.WriteLine("AddFoodPageViewModel initialized");
-            Console.WriteLine($"AddToMealCommand is null: {this.AddToMealCommand == null}");
+            Console.WriteLine($"AddToMealCommand is null: {AddToMealCommand == null}");
 
             int number_userId = userId;
 
             // Initialize MacrosService
-            this.macrosService = new MacrosService();
+            macrosService = new MacrosService();
             // Initialize macros values from database
-            this.TotalProtein = this.macrosService.GetProteinIntake(number_userId).ToString();
-            this.TotalCarbohydrates = this.macrosService.GetCarbohydratesIntake(number_userId).ToString();
-            this.TotalFat = this.macrosService.GetFatIntake(number_userId).ToString();
-            this.TotalFiber = this.macrosService.GetFiberIntake(number_userId).ToString();
-            this.TotalSugar = this.macrosService.GetSugarIntake(number_userId).ToString();
+            TotalProtein = macrosService.GetProteinIntake(number_userId).ToString();
+            TotalCarbohydrates = macrosService.GetCarbohydratesIntake(number_userId).ToString();
+            TotalFat = macrosService.GetFatIntake(number_userId).ToString();
+            TotalFiber = macrosService.GetFiberIntake(number_userId).ToString();
+            TotalSugar = macrosService.GetSugarIntake(number_userId).ToString();
 
             // Initialize values
-            this.GoalProtein = "30";
-            this.GoalCarbohydrates = "200";
-            this.GoalFiber = "30";
-            this.GoalFat = "90";
-            this.GoalSugar = "50";
+            GoalProtein = "30";
+            GoalCarbohydrates = "200";
+            GoalFiber = "30";
+            GoalFat = "90";
+            GoalSugar = "50";
 
-            this.RemainingProtein = (float.Parse(this.GoalProtein) - float.Parse(this.TotalProtein)).ToString();
-            this.RemainingCarbohydrates = (float.Parse(this.GoalCarbohydrates) - float.Parse(this.TotalCarbohydrates)).ToString();
-            this.RemainingFiber = (float.Parse(this.GoalFiber) - float.Parse(this.TotalFiber)).ToString();
-            this.RemainingFat = (float.Parse(this.GoalFat) - float.Parse(this.TotalFat)).ToString();
-            this.RemainingSugar = (float.Parse(this.GoalSugar) - float.Parse(this.TotalSugar)).ToString();
+            RemainingProtein = (float.Parse(GoalProtein) - float.Parse(TotalProtein)).ToString();
+            RemainingCarbohydrates = (float.Parse(GoalCarbohydrates) - float.Parse(TotalCarbohydrates)).ToString();
+            RemainingFiber = (float.Parse(GoalFiber) - float.Parse(TotalFiber)).ToString();
+            RemainingFat = (float.Parse(GoalFat) - float.Parse(TotalFat)).ToString();
+            RemainingSugar = (float.Parse(GoalSugar) - float.Parse(TotalSugar)).ToString();
         }
 
         public ICommand NextCommand { get; }
@@ -149,47 +147,47 @@
 
         public string SearchText
         {
-            get => this.searchText;
+            get => searchText;
             set
             {
-                this.searchText = value;
-                this.OnPropertyChanged();
-                this.PerformSearch();
+                searchText = value;
+                OnPropertyChanged();
+                PerformSearch();
             }
         }
 
         public object? SelectedItem
         {
-            get => this.selectedItem;
+            get => selectedItem;
             set
             {
-                this.selectedItem = value;
-                this.OnPropertyChanged();
-                ((RelayCommand)this.AddToMealCommand)?.RaiseCanExecuteChanged();
-                Console.WriteLine($"SelectedItem changed to: {this.selectedItem}");
+                selectedItem = value;
+                OnPropertyChanged();
+                ((RelayCommand)AddToMealCommand)?.RaiseCanExecuteChanged();
+                Console.WriteLine($"SelectedItem changed to: {selectedItem}");
             }
         }
 
         public bool IsSearchVisible
         {
-            get => this.isSearchVisible;
+            get => isSearchVisible;
             set
             {
-                this.isSearchVisible = value;
-                this.OnPropertyChanged();
+                isSearchVisible = value;
+                OnPropertyChanged();
             }
         }
 
         private void PerformSearch()
         {
-            this.SearchResults.Clear();
-            if (string.IsNullOrWhiteSpace(this.SearchText))
+            SearchResults.Clear();
+            if (string.IsNullOrWhiteSpace(SearchText))
             {
-                this.IsSearchVisible = false;
+                IsSearchVisible = false;
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -197,41 +195,41 @@
                 string mealQuery = "SELECT m_id, m_name FROM meals WHERE m_name LIKE @search + '%'";
                 using (SqlCommand cmd = new SqlCommand(mealQuery, connection))
                 {
-                    cmd.Parameters.AddWithValue("@search", this.SearchText);
+                    cmd.Parameters.AddWithValue("@search", SearchText);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            this.SearchResults.Add(new { Id = reader["m_id"], Name = reader["m_name"], Type = "Meal" });
+                            SearchResults.Add(new { Id = reader["m_id"], Name = reader["m_name"], Type = "Meal" });
                         }
                     }
                 }
 
                 // If no meals found, search Ingredients
-                if (this.SearchResults.Count == 0)
+                if (SearchResults.Count == 0)
                 {
                     string ingredientQuery = "SELECT i_id, i_name FROM ingredients WHERE i_name LIKE @search + '%'";
                     using (SqlCommand cmd = new SqlCommand(ingredientQuery, connection))
                     {
-                        cmd.Parameters.AddWithValue("@search", this.SearchText);
+                        cmd.Parameters.AddWithValue("@search", SearchText);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                this.SearchResults.Add(new { Id = reader["i_id"], Name = reader["i_name"], Type = "Ingredient" });
+                                SearchResults.Add(new { Id = reader["i_id"], Name = reader["i_name"], Type = "Ingredient" });
                             }
                         }
                     }
                 }
             }
 
-            this.IsSearchVisible = this.SearchResults.Count > 0;
+            IsSearchVisible = SearchResults.Count > 0;
         }
 
         private bool CanAddToMeal()
         {
-            bool canAdd = this.SelectedItem != null && this.servingsCount > 0;
-            Console.WriteLine($"CanAddToMeal: {canAdd}, SelectedItem: {this.SelectedItem != null}, ServingsCount: {this.servingsCount}");
+            bool canAdd = SelectedItem != null && servingsCount > 0;
+            Console.WriteLine($"CanAddToMeal: {canAdd}, SelectedItem: {SelectedItem != null}, ServingsCount: {servingsCount}");
             return canAdd;
         }
 
@@ -239,7 +237,7 @@
         {
             Console.WriteLine("AddToMeal method called");
 
-            if (this.SelectedItem == null)
+            if (SelectedItem == null)
             {
                 Console.WriteLine("SelectedItem is null.");
                 return;
@@ -247,15 +245,15 @@
 
             try
             {
-                int selectedId = (int)this.SelectedItem.GetType().GetProperty("Id")?.GetValue(this.SelectedItem);
-                string type = (string)this.SelectedItem.GetType().GetProperty("Type")?.GetValue(this.SelectedItem);
+                int selectedId = (int)SelectedItem.GetType().GetProperty("Id")?.GetValue(SelectedItem);
+                string type = (string)SelectedItem.GetType().GetProperty("Type")?.GetValue(SelectedItem);
 
                 Console.WriteLine($"Selected Item ID: {selectedId}");
                 Console.WriteLine($"Selected Item Type: {type}");
-                Console.WriteLine($"Servings Count: {this.servingsCount}");
-                Console.WriteLine($"Unit Name: {this.SelectedUnit}");
+                Console.WriteLine($"Servings Count: {servingsCount}");
+                Console.WriteLine($"Unit Name: {SelectedUnit}");
 
-                using (SqlConnection connection = new SqlConnection(this.connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     try
                     {
@@ -313,9 +311,9 @@
             }
 
             // Reset selection
-            this.SelectedItem = null;
-            this.SearchText = string.Empty;
-            this.IsSearchVisible = false;
+            SelectedItem = null;
+            SearchText = string.Empty;
+            IsSearchVisible = false;
         }
 
 
@@ -332,51 +330,51 @@
 
         public SolidColorBrush BreakfastColor
         {
-            get => this.breakfastColor;
+            get => breakfastColor;
             set
             {
-                this.breakfastColor = value;
-                this.OnPropertyChanged();
+                breakfastColor = value;
+                OnPropertyChanged();
             }
         }
 
         public SolidColorBrush LunchColor
         {
-            get => this.lunchColor;
+            get => lunchColor;
             set
             {
-                this.lunchColor = value;
-                this.OnPropertyChanged();
+                lunchColor = value;
+                OnPropertyChanged();
             }
         }
 
         public SolidColorBrush DinnerColor
         {
-            get => this.dinnerColor;
+            get => dinnerColor;
             set
             {
-                this.dinnerColor = value;
-                this.OnPropertyChanged();
+                dinnerColor = value;
+                OnPropertyChanged();
             }
         }
 
         public SolidColorBrush SnackColor
         {
-            get => this.snackColor;
+            get => snackColor;
             set
             {
-                this.snackColor = value;
-                this.OnPropertyChanged();
+                snackColor = value;
+                OnPropertyChanged();
             }
         }
 
         public void SetCategoryHighlight(string category)
         {
             // Default colors
-            this.BreakfastColor = new SolidColorBrush(Color.FromArgb(255, 199, 110, 78)); // Reddish brown
-            this.LunchColor = new SolidColorBrush(Color.FromArgb(255, 91, 119, 105)); // Greenish grey
-            this.DinnerColor = new SolidColorBrush(Color.FromArgb(255, 181, 136, 94)); // Light brown
-            this.SnackColor = new SolidColorBrush(Color.FromArgb(255, 19, 50, 36)); // Dark green
+            BreakfastColor = new SolidColorBrush(Color.FromArgb(255, 199, 110, 78)); // Reddish brown
+            LunchColor = new SolidColorBrush(Color.FromArgb(255, 91, 119, 105)); // Greenish grey
+            DinnerColor = new SolidColorBrush(Color.FromArgb(255, 181, 136, 94)); // Light brown
+            SnackColor = new SolidColorBrush(Color.FromArgb(255, 19, 50, 36)); // Dark green
 
             // Highlight selected category
             SolidColorBrush highlightColor = new SolidColorBrush(Color.FromArgb(255, 227, 199, 177)); // Beige
@@ -385,10 +383,10 @@
 
             switch (category)
             {
-                case "Breakfast": this.BreakfastColor = highlightColor; break;
-                case "Lunch": this.LunchColor = highlightColor; break;
-                case "Dinner": this.DinnerColor = highlightColor; break;
-                case "Snack": this.SnackColor = highlightColor; break;
+                case "Breakfast": BreakfastColor = highlightColor; break;
+                case "Lunch": LunchColor = highlightColor; break;
+                case "Dinner": DinnerColor = highlightColor; break;
+                case "Snack": SnackColor = highlightColor; break;
             }
         }
 
@@ -399,7 +397,7 @@
 
         private void FetchServingUnits()
         {
-            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT unit_name FROM serving_units";
@@ -416,7 +414,7 @@
                             });
                         }
 
-                        this.ServingUnits = servingUnits;
+                        ServingUnits = servingUnits;
                     }
                 }
             }
@@ -424,13 +422,13 @@
 
         public string SelectedUnit
         {
-            get => this.selectedUnit;
+            get => selectedUnit;
             set
             {
-                if (this.selectedUnit != value)
+                if (selectedUnit != value)
                 {
-                    this.selectedUnit = value;
-                    this.OnPropertyChanged(nameof(this.SelectedUnit));
+                    selectedUnit = value;
+                    OnPropertyChanged(nameof(SelectedUnit));
                 }
             }
         }
@@ -439,17 +437,17 @@
 
         public string ServingsCount
         {
-            get => $"{this.servingsCount} servings";
+            get => $"{servingsCount} servings";
             set
             {
                 // Extract just the number from the string if it contains "servings"
                 string numericValue = value.Replace("servings", "").Trim();
                 if (int.TryParse(numericValue, out int newValue))
                 {
-                    this.servingsCount = newValue;
-                    this.OnPropertyChanged();
-                    ((RelayCommand)this.AddToMealCommand)?.RaiseCanExecuteChanged();
-                    Console.WriteLine($"ServingsCount updated to: {this.servingsCount}");
+                    servingsCount = newValue;
+                    OnPropertyChanged();
+                    ((RelayCommand)AddToMealCommand)?.RaiseCanExecuteChanged();
+                    Console.WriteLine($"ServingsCount updated to: {servingsCount}");
                 }
                 else
                 {

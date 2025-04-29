@@ -1,14 +1,9 @@
-﻿namespace MealPlannerProject.Repositories
+﻿namespace SocialApp.Repository
 {
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Queries;
     using System;
-    using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Repositories;
-    using MealPlannerProject.Queries;
 
     public class CookingPageRepository : ICookingPageRepository
     {
@@ -17,7 +12,7 @@
         [Obsolete]
         public CookingPageRepository()
         {
-            this.dataLink = DataLink.Instance;
+            dataLink = DataLink.Instance;
         }
 
         public CookingPageRepository(IDataLink dataLink)
@@ -34,7 +29,7 @@
                 new SqlParameter("@u_name", fullName),
             };
 
-            return this.dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
+            return dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
         }
 
         [Obsolete]
@@ -45,7 +40,7 @@
                 new SqlParameter("@cs_description", description),
             };
 
-            return this.dataLink.ExecuteScalar<int>("SELECT dbo.GetCookingSkillByDescription(@cs_description)", parameters, false);
+            return dataLink.ExecuteScalar<int>("SELECT dbo.GetCookingSkillByDescription(@cs_description)", parameters, false);
         }
 
         [Obsolete]
@@ -57,7 +52,7 @@
                 new SqlParameter("@cs_id", cookingSkillId),
             };
 
-            this.dataLink.ExecuteNonQuery("UpdateUserCookingSkill", parameters);
+            dataLink.ExecuteNonQuery("UpdateUserCookingSkill", parameters);
         }
     }
 }

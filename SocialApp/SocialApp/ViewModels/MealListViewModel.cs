@@ -1,22 +1,18 @@
-﻿using System;
+﻿using AppCommonClasses.Models;
+using CommunityToolkit.Mvvm.Input;
+using SocialApp.Queries;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
 using System.Data;
 using System.Data.SqlClient;
-using MealPlannerProject.Services;
-using MealPlannerProject.Queries;
 using System.Diagnostics;
-using MealPlannerProject.Pages;
-using CommunityToolkit.Mvvm.Input;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-using MealPlannerProject.Interfaces;
-using AppCommonClasses.Models;
-
-namespace MealPlannerProject.ViewModels
+namespace SocialApp.ViewModels
 {
-    public class MealListViewModel : ViewModelBase, IMealListViewModel
+    public class MealListViewModel : ViewModelBase
     {
         private readonly NavigationService _navigationService;
         private Meal _selectedMeal;

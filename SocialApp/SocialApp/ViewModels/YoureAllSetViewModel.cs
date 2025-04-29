@@ -1,10 +1,9 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Models;
+    using SocialApp.Services;
     using System.ComponentModel;
     using System.Windows.Input;
-    using AppCommonClasses.Models;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
 
     public class YoureAllSetViewModel
     {
@@ -14,41 +13,41 @@
 
         public YoureAllSetViewModel()
         {
-            this.NextCommand = new RelayCommand(this.GoNext);
-            this.model = new YoureAllSetModel();
+            NextCommand = new RelayCommand(GoNext);
+            model = new YoureAllSetModel();
         }
 
         public string FirstName
         {
-            get => this.model.FirstName;
+            get => model.FirstName;
             set
             {
-                this.model.FirstName = value;
-                this.OnPropertyChanged(nameof(this.model.FirstName));
+                model.FirstName = value;
+                OnPropertyChanged(nameof(model.FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.model.LastName;
+            get => model.LastName;
             set
             {
-                this.model.LastName = value;
-                this.OnPropertyChanged(nameof(this.model.LastName));
+                model.LastName = value;
+                OnPropertyChanged(nameof(model.LastName));
             }
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void GoNext()

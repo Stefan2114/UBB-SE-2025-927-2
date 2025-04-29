@@ -4,7 +4,7 @@ using SocialApp.Queries;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace MealPlannerProject.Services
+namespace SocialApp.Services
 {
     public class UserPageService : IUserPageService
     {

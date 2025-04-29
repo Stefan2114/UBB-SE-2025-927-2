@@ -3,6 +3,7 @@
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using SocialApp.Interfaces;
+    using SocialApp.Repository;
     using System;
 
     public class DietaryPreferencesService : IDietaryPreferencesService

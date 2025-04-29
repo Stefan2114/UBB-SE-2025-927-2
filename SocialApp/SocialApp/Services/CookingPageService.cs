@@ -2,6 +2,7 @@
 {
     using AppCommonClasses.Interfaces;
     using SocialApp.Interfaces;
+    using SocialApp.Repository;
     using System;
     using System.Diagnostics;
 

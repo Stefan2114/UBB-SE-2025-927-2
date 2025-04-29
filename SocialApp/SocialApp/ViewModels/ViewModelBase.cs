@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;

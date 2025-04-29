@@ -1,10 +1,10 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
     using System.Collections.ObjectModel;
     using System.Data.SqlClient;
     using System.Diagnostics;
-    using MealPlannerProject.Queries;
-    using SocialApp.Interfaces;
 
     internal class ActivityPageService : IActivityPageService
     {

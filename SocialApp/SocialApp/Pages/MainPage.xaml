@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="MealPlannerProject.Pages.MainPage"
+    x:Class="SocialApp.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MealPlannerProject.Pages"
+    xmlns:local="using:SocialApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:MealPlannerProject.ViewModels"
-    xmlns:vm1="using:MealPlannerProject.ViewModels"
+    xmlns:vm="using:SocialApp.ViewModels"
+    xmlns:vm1="using:SocialApp.ViewModels"
     mc:Ignorable="d"
     Background="#f9e5da">
 

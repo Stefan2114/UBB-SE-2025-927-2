@@ -1,11 +1,10 @@
-namespace MealPlannerProject.ViewModels
+namespace SocialApp.ViewModels
 {
+    using SocialApp.Interfaces;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
-    using SocialApp.Interfaces;
 
     public class ActivityLevelViewModel : ViewModelBase
     {
@@ -24,11 +23,11 @@ namespace MealPlannerProject.ViewModels
         [System.Obsolete]
         public ActivityLevelViewModel()
         {
-            this.selectedActivity = string.Empty;
-            this.firstName = string.Empty;
-            this.lastName = string.Empty;
-            this.BackCommand = new RelayCommand(this.GoBack);
-            this.NextCommand = new RelayCommand(this.GoNext);
+            selectedActivity = string.Empty;
+            firstName = string.Empty;
+            lastName = string.Empty;
+            BackCommand = new RelayCommand(GoBack);
+            NextCommand = new RelayCommand(GoNext);
         }
 
         private void GoBack()
@@ -38,44 +37,44 @@ namespace MealPlannerProject.ViewModels
 
         public string FirstName
         {
-            get => this.firstName;
+            get => firstName;
             set
             {
-                this.firstName = value;
-                this.OnPropertyChanged(nameof(this.FirstName));
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.lastName;
+            get => lastName;
             set
             {
-                this.lastName = value;
-                this.OnPropertyChanged(nameof(this.LastName));
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
         public string SelectedActivity
         {
-            get => this.selectedActivity;
+            get => selectedActivity;
             set
             {
-                this.selectedActivity = value;
-                this.OnPropertyChanged(nameof(this.SelectedActivity));
+                selectedActivity = value;
+                OnPropertyChanged(nameof(SelectedActivity));
             }
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         [System.Obsolete]
         public void GoNext()
         {
-            this.activityPageService.AddActivity(this.FirstName, this.LastName, this.SelectedActivity);
+            activityPageService.AddActivity(FirstName, LastName, SelectedActivity);
             NavigationService.Instance.NavigateTo(typeof(CookingLevelPage), this);
         }
 
@@ -83,7 +82,7 @@ namespace MealPlannerProject.ViewModels
 
         protected new void OnPropertyChanged(string propertyName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

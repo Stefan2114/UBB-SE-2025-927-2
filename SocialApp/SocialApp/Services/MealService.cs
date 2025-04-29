@@ -1,14 +1,14 @@
-namespace MealPlannerProject.Services
+namespace SocialApp.Services
 {
+    using AppCommonClasses.Models;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
+    using SocialApp.Repository;
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using AppCommonClasses.Models;
-    using MealPlannerProject.Queries;
-    using MealPlannerProject.Repositories;
-    using SocialApp.Interfaces;
 
     public class MealService : IMealService
     {
@@ -18,8 +18,8 @@ namespace MealPlannerProject.Services
         [Obsolete]
         public MealService()
         {
-            this.mealDatabaseRepository = new MealRepository();
-            this.ingredientDatabaseRepository = new IngredientRepository();
+            mealDatabaseRepository = new MealRepository();
+            ingredientDatabaseRepository = new IngredientRepository();
         }
 
         [Obsolete]
@@ -27,15 +27,15 @@ namespace MealPlannerProject.Services
         {
             try
             {
-                int cookingSkillIdentifier = this.ResolveCookingSkillIdentifier(cookingLevelDescription);
-                int mealTypeIdentifier = this.ResolveMealTypeIdentifier(mealToCreate.Category);
+                int cookingSkillIdentifier = ResolveCookingSkillIdentifier(cookingLevelDescription);
+                int mealTypeIdentifier = ResolveMealTypeIdentifier(mealToCreate.Category);
 
-                int createdMealIdentifier = await this.mealDatabaseRepository.CreateMealAsync(
+                int createdMealIdentifier = await mealDatabaseRepository.CreateMealAsync(
                     mealToCreate,
                     cookingSkillIdentifier,
                     mealTypeIdentifier);
 
-                if (createdMealIdentifier > ((int)MealModel.SuccessfulCreationIndicator))
+                if (createdMealIdentifier > (int)MealModel.SuccessfulCreationIndicator)
                 {
                     Debug.WriteLine("Meal created successfully");
                     return true;
@@ -103,7 +103,7 @@ namespace MealPlannerProject.Services
 
         public async Task<Ingredient?> RetrieveIngredientByNameAsync(string ingredientName)
         {
-            return await Task.Run(() => this.ingredientDatabaseRepository.GetIngredientByNameAsync(ingredientName));
+            return await Task.Run(() => ingredientDatabaseRepository.GetIngredientByNameAsync(ingredientName));
         }
 
         [Obsolete]
@@ -111,10 +111,10 @@ namespace MealPlannerProject.Services
         {
             try
             {
-                int cookingSkillIdentifier = this.ResolveCookingSkillIdentifier(mealToCreate.CookingLevel);
-                int mealTypeIdentifier = this.ResolveMealTypeIdentifier(mealToCreate.Category);
+                int cookingSkillIdentifier = ResolveCookingSkillIdentifier(mealToCreate.CookingLevel);
+                int mealTypeIdentifier = ResolveMealTypeIdentifier(mealToCreate.Category);
 
-                return await this.mealDatabaseRepository.CreateMealAsync(
+                return await mealDatabaseRepository.CreateMealAsync(
                     mealToCreate,
                     cookingSkillIdentifier,
                     mealTypeIdentifier);
@@ -130,7 +130,7 @@ namespace MealPlannerProject.Services
         [Obsolete]
         public async Task<bool> AddIngredientToMealAsync(int mealIdentifier, int ingredientIdentifier, float ingredientQuantity)
         {
-            int operationResult = await this.mealDatabaseRepository.AddMealIngredientAsync(
+            int operationResult = await mealDatabaseRepository.AddMealIngredientAsync(
                 mealIdentifier,
                 ingredientIdentifier,
                 ingredientQuantity);

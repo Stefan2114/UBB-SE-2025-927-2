@@ -1,12 +1,10 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
+    using CommunityToolkit.Mvvm.Input;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using CommunityToolkit.Mvvm.Input;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
-    using SocialApp.Services;
 
     internal class GoalPageViewModel
     {
@@ -23,11 +21,11 @@
 
         public string SelectedGoal
         {
-            get => this.selectedGoal;
+            get => selectedGoal;
             set
             {
-                this.selectedGoal = value;
-                this.OnPropertyChanged(nameof(this.SelectedGoal));
+                selectedGoal = value;
+                OnPropertyChanged(nameof(SelectedGoal));
             }
         }
 
@@ -40,14 +38,14 @@
         [System.Obsolete]
         public GoalPageViewModel()
         {
-            this.BackCommand = new RelayCommand(this.GoBack);
-            this.NextCommand = new RelayCommand(this.GoNext);
-            this.SelectGoalCommand = new RelayCommand<string>(this.OnGoalSelected);
+            BackCommand = new RelayCommand(GoBack);
+            NextCommand = new RelayCommand(GoNext);
+            SelectGoalCommand = new RelayCommand<string>(OnGoalSelected);
         }
 
         private void OnGoalSelected(string? goal)
         {
-            this.SelectedGoal = (goal != null) ? goal : string.Empty;
+            SelectedGoal = goal != null ? goal : string.Empty;
         }
 
         private void GoBack()
@@ -62,33 +60,33 @@
 
         public string FirstName
         {
-            get => this.firstName;
+            get => firstName;
             set
             {
-                this.firstName = value;
-                this.OnPropertyChanged(nameof(this.FirstName));
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.lastName;
+            get => lastName;
             set
             {
-                this.lastName = value;
-                this.OnPropertyChanged(nameof(this.LastName));
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         public void GoNext()
         {
-            this.goalPageService.AddGoals(this.FirstName, this.LastName, this.SelectedGoal);
+            goalPageService.AddGoals(FirstName, LastName, SelectedGoal);
             NavigationService.Instance.NavigateTo(typeof(ActivityLevelPage), this);
         }
 
@@ -96,7 +94,7 @@
 
         protected void OnPropertyChanged(string propertyName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

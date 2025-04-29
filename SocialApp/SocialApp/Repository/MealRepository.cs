@@ -1,11 +1,10 @@
-﻿namespace MealPlannerProject.Repositories
+﻿namespace SocialApp.Repository
 {
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using SocialApp.Queries;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Repositories;
-    using MealPlannerProject.Models;
-    using MealPlannerProject.Queries;
 
     public class MealRepository : IMealRepository
     {
@@ -19,7 +18,7 @@
         [System.Obsolete]
         public MealRepository()
         {
-            this.dataLink = DataLink.Instance;
+            dataLink = DataLink.Instance;
         }
 
         [System.Obsolete]
@@ -46,7 +45,7 @@
                     new ("@photo_link", meal.PhotoLink ?? "default.jpg"),
             };
 
-            return await Task.FromResult(this.dataLink.ExecuteScalar<int>(query, parameters, false));
+            return await Task.FromResult(dataLink.ExecuteScalar<int>(query, parameters, false));
         }
 
         [System.Obsolete]
@@ -59,7 +58,7 @@
         new ("@quantity", quantity),
             };
 
-            int result = this.dataLink.ExecuteNonQuery("InsertMealIngredient", parameters);
+            int result = dataLink.ExecuteNonQuery("InsertMealIngredient", parameters);
             return await Task.FromResult(result);
         }
 

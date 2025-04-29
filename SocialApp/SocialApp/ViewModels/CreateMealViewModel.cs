@@ -1,16 +1,16 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
     using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.Input;
     using MealPlannerProject.Services;
     using Microsoft.UI.Xaml.Controls;
     using SocialApp.Interfaces;
-    using Windows.Storage;
+    using SocialApp.Services;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
 
     public class CreateMealViewModel : ViewModelBase
     {
@@ -33,113 +33,113 @@
 
         public CreateMealViewModel()
         {
-            this.mealService = new MealService();
+            mealService = new MealService();
 
             // Initialize collections
-            this.directions = new ObservableCollection<string>();
-            this.ingredients = new ObservableCollection<MealIngredient>();
+            directions = new ObservableCollection<string>();
+            ingredients = new ObservableCollection<MealIngredient>();
 
             // Initialize commands
-            this.GoBackCommand = new RelayCommand(this.OnGoBack);
-            this.AddDirectionCommand = new RelayCommand(this.OnAddDirection);
-            this.AddIngredientCommand = new RelayCommand(this.OnAddIngredient);
-            this.SelectMealTypeCommand = new RelayCommand<string?>(this.OnSelectMealType); // Fixes SA1101
-            this.SelectCookingLevelCommand = new RelayCommand<string?>(this.OnSelectCookingLevel); // Fixes SA1101
+            GoBackCommand = new RelayCommand(OnGoBack);
+            AddDirectionCommand = new RelayCommand(OnAddDirection);
+            AddIngredientCommand = new RelayCommand(OnAddIngredient);
+            SelectMealTypeCommand = new RelayCommand<string?>(OnSelectMealType); // Fixes SA1101
+            SelectCookingLevelCommand = new RelayCommand<string?>(OnSelectCookingLevel); // Fixes SA1101
         }
 
         public string MealName
         {
-            get => this.mealName; // Fixes SA1101
+            get => mealName; // Fixes SA1101
             set
             {
-                if (this.mealName != value) // Fixes SA1101
+                if (mealName != value) // Fixes SA1101
                 {
-                    this.mealName = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    mealName = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public string CookingTime
         {
-            get => this.cookingTime; // Fixes SA1101
+            get => cookingTime; // Fixes SA1101
             set
             {
-                if (this.cookingTime != value) // Fixes SA1101
+                if (cookingTime != value) // Fixes SA1101
                 {
-                    this.cookingTime = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    cookingTime = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public string SelectedMealType
         {
-            get => this.selectedMealType; // Fixes SA1101
+            get => selectedMealType; // Fixes SA1101
             set
             {
-                if (this.selectedMealType != value) // Fixes SA1101
+                if (selectedMealType != value) // Fixes SA1101
                 {
-                    this.selectedMealType = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    selectedMealType = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public string SelectedCookingLevel
         {
-            get => this.selectedCookingLevel; // Fixes SA1101
+            get => selectedCookingLevel; // Fixes SA1101
             set
             {
-                if (this.selectedCookingLevel != value) // Fixes SA1101
+                if (selectedCookingLevel != value) // Fixes SA1101
                 {
-                    this.selectedCookingLevel = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    selectedCookingLevel = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public StorageFile SelectedImage
         {
-            get => this.selectedImage; // Fixes SA1101
+            get => selectedImage; // Fixes SA1101
             set
             {
-                if (this.selectedImage != value) // Fixes SA1101
+                if (selectedImage != value) // Fixes SA1101
                 {
-                    this.selectedImage = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    selectedImage = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public ObservableCollection<string> Directions
         {
-            get => this.directions; // Fixes SA1101
+            get => directions; // Fixes SA1101
             set
             {
-                if (this.directions != value) // Fixes SA1101
+                if (directions != value) // Fixes SA1101
                 {
-                    this.directions = value; // Fixes SA1101
-                    this.OnPropertyChanged(); // Fixes SA1101
+                    directions = value; // Fixes SA1101
+                    OnPropertyChanged(); // Fixes SA1101
                 }
             }
         }
 
         public ObservableCollection<string> IngredientNames
         {
-            get => new(this.ingredients.Select(i => $"{i.IngredientName}: {i.Quantity} servings")); // Fixes SA1101
+            get => new(ingredients.Select(i => $"{i.IngredientName}: {i.Quantity} servings")); // Fixes SA1101
         }
 
         public ObservableCollection<MealIngredient> Ingredients
         {
-            get => this.ingredients; // Fixes SA1101
+            get => ingredients; // Fixes SA1101
             set
             {
-                if (this.ingredients != value) // Fixes SA1101
+                if (ingredients != value) // Fixes SA1101
                 {
-                    this.ingredients = value; // Fixes SA1101
-                    this.OnPropertyChanged(nameof(this.IngredientNames)); // Fixes SA1101
-                    this.CalculateTotalMacros(); // Fixes SA1101
+                    ingredients = value; // Fixes SA1101
+                    OnPropertyChanged(nameof(IngredientNames)); // Fixes SA1101
+                    CalculateTotalMacros(); // Fixes SA1101
                 }
             }
         }
@@ -157,69 +157,69 @@
 
         private void CalculateTotalMacros()
         {
-            var calculatedIngredients = this.ingredients.Select(i => i.CalculateMacros()); // Fixes SA1101
+            var calculatedIngredients = ingredients.Select(i => i.CalculateMacros()); // Fixes SA1101
 
-            this.calories = (int)calculatedIngredients.Sum(i => i.Calories); // Fixes SA1101
-            this.protein = (int)calculatedIngredients.Sum(i => i.Protein); // Fixes SA1101
-            this.carbs = (int)calculatedIngredients.Sum(i => i.Carbs); // Fixes SA1101
-            this.fats = (int)calculatedIngredients.Sum(i => i.Fats); // Fixes SA1101
-            this.fiber = (int)calculatedIngredients.Sum(i => i.Fiber); // Fixes SA1101
-            this.sugar = (int)calculatedIngredients.Sum(i => i.Sugar); // Fixes SA1101
+            calories = (int)calculatedIngredients.Sum(i => i.Calories); // Fixes SA1101
+            protein = (int)calculatedIngredients.Sum(i => i.Protein); // Fixes SA1101
+            carbs = (int)calculatedIngredients.Sum(i => i.Carbs); // Fixes SA1101
+            fats = (int)calculatedIngredients.Sum(i => i.Fats); // Fixes SA1101
+            fiber = (int)calculatedIngredients.Sum(i => i.Fiber); // Fixes SA1101
+            sugar = (int)calculatedIngredients.Sum(i => i.Sugar); // Fixes SA1101
 
-            this.OnPropertyChanged(nameof(this.TotalCalories)); // Fixes SA1101
-            this.OnPropertyChanged(nameof(this.TotalProtein)); // Fixes SA1101
-            this.OnPropertyChanged(nameof(this.TotalCarbs)); // Fixes SA1101
-            this.OnPropertyChanged(nameof(this.TotalFats)); // Fixes SA1101
-            this.OnPropertyChanged(nameof(this.TotalFiber)); // Fixes SA1101
-            this.OnPropertyChanged(nameof(this.TotalSugar)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalCalories)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalProtein)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalCarbs)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalFats)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalFiber)); // Fixes SA1101
+            OnPropertyChanged(nameof(TotalSugar)); // Fixes SA1101
         }
 
-        public int TotalCalories => this.calories; // Fixes SA1101
+        public int TotalCalories => calories; // Fixes SA1101
 
-        public int TotalProtein => this.protein; // Fixes SA1101
+        public int TotalProtein => protein; // Fixes SA1101
 
-        public int TotalCarbs => this.carbs; // Fixes SA1101
+        public int TotalCarbs => carbs; // Fixes SA1101
 
-        public int TotalFats => this.fats; // Fixes SA1101
+        public int TotalFats => fats; // Fixes SA1101
 
-        public int TotalFiber => this.fiber; // Fixes SA1101
+        public int TotalFiber => fiber; // Fixes SA1101
 
-        public int TotalSugar => this.sugar; // Fixes SA1101
+        public int TotalSugar => sugar; // Fixes SA1101
 
         public async Task<bool> CreateMealAsync(Meal meal)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(this.selectedCookingLevel)) // Fixes SA1101
+                if (string.IsNullOrWhiteSpace(selectedCookingLevel)) // Fixes SA1101
                 {
-                    this.selectedCookingLevel = "Beginner"; // Fixes SA1101
+                    selectedCookingLevel = "Beginner"; // Fixes SA1101
                 }
 
                 // Convert cooking time to integer
-                if (!int.TryParse(this.cookingTime, out int cookingTimeMinutes)) // Fixes SA1101
+                if (!int.TryParse(cookingTime, out int cookingTimeMinutes)) // Fixes SA1101
                 {
                     cookingTimeMinutes = 0;
                 }
 
                 // Set all meal properties including calculated macros
-                meal.Name = this.mealName; // Fixes SA1101
+                meal.Name = mealName; // Fixes SA1101
                 meal.PreparationTime = cookingTimeMinutes;
-                meal.CookingLevel = this.selectedCookingLevel; // Fixes SA1101
-                meal.Calories = this.calories; // Fixes SA1101
-                meal.Protein = this.protein; // Fixes SA1101
-                meal.Carbohydrates = this.carbs; // Fixes SA1101
-                meal.Fat = this.fats; // Fixes SA1101
-                meal.Fiber = this.fiber; // Fixes SA1101
-                meal.Sugar = this.sugar; // Fixes SA1101
+                meal.CookingLevel = selectedCookingLevel; // Fixes SA1101
+                meal.Calories = calories; // Fixes SA1101
+                meal.Protein = protein; // Fixes SA1101
+                meal.Carbohydrates = carbs; // Fixes SA1101
+                meal.Fat = fats; // Fixes SA1101
+                meal.Fiber = fiber; // Fixes SA1101
+                meal.Sugar = sugar; // Fixes SA1101
 
                 // Create the meal first
-                int mealId = await this.mealService.CreateMealAsync(meal); // Fixes SA1101
+                int mealId = await mealService.CreateMealAsync(meal); // Fixes SA1101
                 if (mealId > 0)
                 {
                     // Then add the meal-ingredient relationships
-                    foreach (var ingredient in this.ingredients) // Fixes SA1101
+                    foreach (var ingredient in ingredients) // Fixes SA1101
                     {
-                        await this.mealService.AddIngredientToMealAsync(mealId, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
+                        await mealService.AddIngredientToMealAsync(mealId, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
                     }
                     return true;
                 }
@@ -257,7 +257,7 @@
             {
                 if (!string.IsNullOrWhiteSpace(dialog.Text))
                 {
-                    this.Directions.Add($"{this.Directions.Count + 1}. {dialog.Text}"); // Fixes SA1101
+                    Directions.Add($"{Directions.Count + 1}. {dialog.Text}"); // Fixes SA1101
                 }
             }
         }
@@ -287,7 +287,7 @@
                     if (float.TryParse(quantityBox.Text, out float quantity))
                     {
                         // Get ingredient from database
-                        var ingredient = await this.mealService.RetrieveIngredientByNameAsync(ingredientBox.Text); // Fixes SA1101
+                        var ingredient = await mealService.RetrieveIngredientByNameAsync(ingredientBox.Text); // Fixes SA1101
                         if (ingredient != Ingredient.NoIngredient)
                         {
                             var mealIngredient = new MealIngredient
@@ -303,9 +303,9 @@
                                 Sugar = ingredient.Sugar,
                             };
 
-                            this.ingredients.Add(mealIngredient); // Fixes SA1101
-                            this.OnPropertyChanged(nameof(this.IngredientNames)); // Fixes SA1101
-                            this.CalculateTotalMacros(); // Fixes SA1101
+                            ingredients.Add(mealIngredient); // Fixes SA1101
+                            OnPropertyChanged(nameof(IngredientNames)); // Fixes SA1101
+                            CalculateTotalMacros(); // Fixes SA1101
                         }
                         else
                         {
@@ -326,12 +326,12 @@
 
         private void OnSelectMealType(string? mealType) // Fixes CS8622
         {
-            this.SelectedMealType = mealType ?? string.Empty; // Fixes SA1101 and ensures null safety
+            SelectedMealType = mealType ?? string.Empty; // Fixes SA1101 and ensures null safety
         }
 
         private void OnSelectCookingLevel(string? level) // Fixes CS8622
         {
-            this.SelectedCookingLevel = level ?? string.Empty; // Fixes SA1101 and ensures null safety
+            SelectedCookingLevel = level ?? string.Empty; // Fixes SA1101 and ensures null safety
         }
     }
 }

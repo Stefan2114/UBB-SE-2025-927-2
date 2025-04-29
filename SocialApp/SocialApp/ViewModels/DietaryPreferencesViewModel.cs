@@ -1,12 +1,11 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Models;
+    using SocialApp.Interfaces;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using AppCommonClasses.Models;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
-    using SocialApp.Interfaces;
 
     public class DietaryPreferencesViewModel : INotifyPropertyChanged
     {
@@ -24,13 +23,13 @@
 
         public string OtherDiet
         {
-            get => this.otherDiet;
+            get => otherDiet;
             set
             {
-                if (this.otherDiet != value)
+                if (otherDiet != value)
                 {
-                    this.otherDiet = value;
-                    this.OnPropertyChanged(nameof(this.OtherDiet));
+                    otherDiet = value;
+                    OnPropertyChanged(nameof(OtherDiet));
                 }
             }
         }
@@ -39,30 +38,30 @@
 
         public string Allergens
         {
-            get => this.allergens;
+            get => allergens;
             set
             {
-                if (this.allergens != value)
+                if (allergens != value)
                 {
-                    this.allergens = value;
-                    this.OnPropertyChanged(nameof(this.Allergens));
+                    allergens = value;
+                    OnPropertyChanged(nameof(Allergens));
                 }
             }
         }
 
         public DietaryPreferencesViewModel()
         {
-            this.dietaryPreferencesService = new DietaryPreferencesService();
-            this.BackCommand = new RelayCommand(this.BackAction);
-            this.NextCommand = new RelayCommand(this.NextAction);
+            dietaryPreferencesService = new DietaryPreferencesService();
+            BackCommand = new RelayCommand(BackAction);
+            NextCommand = new RelayCommand(NextAction);
 
             // Populate options
-            this.OtherDietOptions = new ObservableCollection<string>
+            OtherDietOptions = new ObservableCollection<string>
         {
             "None", "Mediterranean", "Low-Fat", "Diabetic-Friendly", "Kosher", "Halal",
         };
 
-            this.AllergenOptions = new ObservableCollection<string>
+            AllergenOptions = new ObservableCollection<string>
         {
             "None", "Peanuts", "Tree Nuts", "Dairy", "Eggs", "Gluten", "Shellfish", "Soy", "Fish", "Sesame",
         };
@@ -75,7 +74,7 @@
 
         public void NextAction()
         {
-            this.dietaryPreferencesService.AddAllergyAndDietaryPreference(this.FirstName, this.LastName, this.OtherDiet, this.Allergens);
+            dietaryPreferencesService.AddAllergyAndDietaryPreference(FirstName, LastName, OtherDiet, Allergens);
             NavigationService.Instance.NavigateTo(typeof(YoureAllSetPage), this);
         }
 
@@ -83,7 +82,7 @@
 
         protected void OnPropertyChanged(string propertyName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string firstName;
@@ -91,28 +90,28 @@
 
         public string FirstName
         {
-            get => this.firstName;
+            get => firstName;
             set
             {
-                this.firstName = value;
-                this.OnPropertyChanged(nameof(this.FirstName));
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.lastName;
+            get => lastName;
             set
             {
-                this.lastName = value;
-                this.OnPropertyChanged(nameof(this.LastName));
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.LastName = lastName;
-            this.FirstName = firstName;
+            LastName = lastName;
+            FirstName = firstName;
         }
     }
 }

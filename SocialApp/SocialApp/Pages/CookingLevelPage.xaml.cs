@@ -1,12 +1,11 @@
-namespace MealPlannerProject.Pages
+namespace SocialApp.Pages
 {
-    using System;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-    using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using SocialApp.ViewModels;
+    using System;
+    using System.Diagnostics;
 
     public sealed partial class CookingLevelPage : Page
     {

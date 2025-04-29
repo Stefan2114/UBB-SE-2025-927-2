@@ -1,12 +1,11 @@
-namespace MealPlannerProject.Pages
+namespace SocialApp.Pages
 {
     using AppCommonClasses.Models;
-    using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Media.Imaging;
+    using SocialApp.ViewModels;
     using System;
-    using Windows.Storage.Pickers;
     using WinRT.Interop;
 
     public sealed partial class CreateMealPage : Page

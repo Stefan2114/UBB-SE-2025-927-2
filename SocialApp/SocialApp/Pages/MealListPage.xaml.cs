@@ -2,7 +2,7 @@ using MealPlannerProject.Services;
 using MealPlannerProject.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
-namespace MealPlannerProject.Pages
+namespace SocialApp.Pages
 {
     public sealed partial class MealListPage : Page
     {

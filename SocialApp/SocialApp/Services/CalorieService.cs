@@ -3,7 +3,7 @@ using SocialApp.Interfaces;
 using SocialApp.Queries;
 using System.Data.SqlClient;
 
-namespace MealPlannerProject.Services
+namespace SocialApp.Services
 {
     public class CalorieService : ICalorieService
     {

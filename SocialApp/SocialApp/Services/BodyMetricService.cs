@@ -1,4 +1,4 @@
-﻿namespace MealPlannerProject.Services
+﻿namespace SocialApp.Services
 {
     using AppCommonClasses.Interfaces;
     using SocialApp.Interfaces;
@@ -18,12 +18,12 @@
         /// </summary>
         public BodyMetricService(IDataLink ddataLink)
         {
-            this.dataLink = ddataLink;
+            dataLink = ddataLink;
         }
 
         public BodyMetricService()
         {
-            this.dataLink = DataLink.Instance;
+            dataLink = DataLink.Instance;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@
                 new SqlParameter("@u_name", $"{lastName} {firstName}"),
             };
 
-            int userId = this.dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
+            int userId = dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
 
             parameters = new SqlParameter[]
             {
@@ -51,7 +51,7 @@
                 new SqlParameter("@u_goal", userTargetGoal ?? (object)DBNull.Value),
             };
 
-            this.dataLink.ExecuteNonQuery("UpdateUserBodyMetrics", parameters);
+            dataLink.ExecuteNonQuery("UpdateUserBodyMetrics", parameters);
         }
     }
 }

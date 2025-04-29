@@ -1,13 +1,12 @@
-﻿namespace MealPlannerProject.Repositories
+﻿namespace SocialApp.Repository
 {
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using SocialApp.Queries;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using MealPlannerProject.Interfaces;
-    using MealPlannerProject.Interfaces.Repositories;
-    using MealPlannerProject.Models;
-    using MealPlannerProject.Queries;
 
     public class IngredientRepository : IIngredientRepository
     {
@@ -16,12 +15,12 @@
         // Constructor with Dependency Injection for IDataLink
         public IngredientRepository()
         {
-            this.dataLink = DataLink.Instance;
+            dataLink = DataLink.Instance;
         }
 
         public IngredientRepository(IDataLink dataLink)
         {
-           this.dataLink = dataLink;
+            this.dataLink = dataLink;
         }
 
         // Async method to fetch ingredient details by name
@@ -32,10 +31,10 @@
                                    FROM ingredients 
                                    WHERE i_name = @name;";
 
-            var parameters = new SqlParameter[] { new ("@name", name) };
+            var parameters = new SqlParameter[] { new("@name", name) };
 
             // Execute SQL query asynchronously
-            DataTable result = await Task.Run(() => this.dataLink.ExecuteSqlQuery(query, parameters));
+            DataTable result = await Task.Run(() => dataLink.ExecuteSqlQuery(query, parameters));
 
             if (result.Rows.Count > 0)
             {

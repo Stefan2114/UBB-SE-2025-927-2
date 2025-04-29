@@ -36,7 +36,7 @@
 
         public byte[] Image { get; set; }
 
-        public string ImagePath { get; internal set; }
+        public string ImagePath { get; set; }
 
         public Meal(string name, string ingredients, int calories, string category, string photoLink, string recipe)
         {

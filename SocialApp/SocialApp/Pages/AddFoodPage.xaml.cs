@@ -1,9 +1,9 @@
-namespace MealPlannerProject.Pages
+namespace SocialApp.Pages
 {
     using AppCommonClasses.Models;
-    using MealPlannerProject.ViewModels;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using SocialApp.ViewModels;
     using System;
     using System.Diagnostics;
 

@@ -1,12 +1,12 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
+    using MealPlannerProject.Services;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
+    using SocialApp.Services;
     using System;
     using System.Diagnostics;
     using System.Windows.Input;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Queries;
-    using MealPlannerProject.Services;
-    using SocialApp.Interfaces;
 
     public class BodyMetricsViewModel : ViewModelBase
     {
@@ -30,71 +30,71 @@
 
         public string Weight
         {
-            get => this.weight;
+            get => weight;
             set
             {
-                this.weight = value;
-                this.OnPropertyChanged(nameof(this.Weight));
+                weight = value;
+                OnPropertyChanged(nameof(Weight));
             }
         }
 
         public string Height
         {
-            get => this.height;
+            get => height;
             set
             {
-                this.height = value;
-                this.OnPropertyChanged(nameof(this.Height));
+                height = value;
+                OnPropertyChanged(nameof(Height));
             }
         }
 
         public string TargetWeight
         {
-            get => this.targetWeight;
+            get => targetWeight;
             set
             {
-                this.targetWeight = value;
-                this.OnPropertyChanged(nameof(this.TargetWeight));
+                targetWeight = value;
+                OnPropertyChanged(nameof(TargetWeight));
             }
         }
 
         public string FirstName
         {
-            get => this.firstName;
+            get => firstName;
             set
             {
-                this.firstName = value;
-                this.OnPropertyChanged(nameof(this.FirstName));
+                firstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.lastName;
+            get => lastName;
             set
             {
-                this.lastName = value;
-                this.OnPropertyChanged(nameof(this.LastName));
+                lastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
         public BodyMetricsViewModel(IBodyMetricService bodyMetricService)
         {
             this.bodyMetricService = bodyMetricService ?? throw new ArgumentNullException(nameof(bodyMetricService));
-            this.SubmitBodyMetricsCommand = new RelayCommand(this.GoNext);
+            SubmitBodyMetricsCommand = new RelayCommand(GoNext);
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         public void GoNext()
         {
             try
             {
-                this.bodyMetricService.UpdateUserBodyMetrics(this.FirstName, this.LastName, this.Weight, this.Height, this.TargetWeight);
+                bodyMetricService.UpdateUserBodyMetrics(FirstName, LastName, Weight, Height, TargetWeight);
                 NavigationService.Instance.NavigateTo(typeof(GoalPage), this);
             }
             catch (Exception ex)

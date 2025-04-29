@@ -1,8 +1,8 @@
-namespace MealPlannerProject.Pages
+namespace SocialApp.Pages
 {
+    using Microsoft.UI.Xaml.Controls;
     using System;
     using System.Diagnostics;
-    using Microsoft.UI.Xaml.Controls;
 
     public sealed partial class MainPage : Page
     {

@@ -1,11 +1,10 @@
-﻿namespace MealPlannerProject.ViewModels
+﻿namespace SocialApp.ViewModels
 {
+    using SocialApp.Interfaces;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
-    using MealPlannerProject.Pages;
-    using MealPlannerProject.Services;
-    using SocialApp.Interfaces;
 
     public partial class CookingLevelViewModel : ViewModelBase
     {
@@ -32,60 +31,60 @@
 
         public CookingLevelViewModel()
         {
-            this.NavigateToPreviousPageCommand = new RelayCommand(this.NavigateToPreviousPage);
-            this.NavigateToNextPageCommand = new RelayCommand(this.NavigateToNextPage);
-            this.NextCommand = new RelayCommand(NavigateToNextPage);
-            this.cookingPageService = new CookingPageService();
+            NavigateToPreviousPageCommand = new RelayCommand(NavigateToPreviousPage);
+            NavigateToNextPageCommand = new RelayCommand(NavigateToNextPage);
+            NextCommand = new RelayCommand(NavigateToNextPage);
+            cookingPageService = new CookingPageService();
 
-            this.userFirstName = string.Empty;
-            this.userLastName = string.Empty;
-            this.userSelectedCookingSkill = string.Empty;
+            userFirstName = string.Empty;
+            userLastName = string.Empty;
+            userSelectedCookingSkill = string.Empty;
 
-            this.PropertyChanged = (eventSender, eventArguments) => { };
+            PropertyChanged = (eventSender, eventArguments) => { };
         }
 
         public string FirstName
         {
-            get => this.userFirstName;
+            get => userFirstName;
             set
             {
-                this.userFirstName = value;
-                this.OnPropertyChanged(nameof(this.FirstName));
+                userFirstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
         public string LastName
         {
-            get => this.userLastName;
+            get => userLastName;
             set
             {
-                this.userLastName = value;
-                this.OnPropertyChanged(nameof(this.LastName));
+                userLastName = value;
+                OnPropertyChanged(nameof(LastName));
             }
         }
 
         public string SelectedCookingSkill
         {
-            get => this.userSelectedCookingSkill;
+            get => userSelectedCookingSkill;
             set
             {
-                this.userSelectedCookingSkill = value;
-                this.OnPropertyChanged(nameof(this.SelectedCookingSkill));
+                userSelectedCookingSkill = value;
+                OnPropertyChanged(nameof(SelectedCookingSkill));
             }
         }
 
         public void SetUserInfo(string firstName, string lastName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         public void NavigateToNextPage()
         {
-            this.cookingPageService.AddCookingSkill(
-                this.FirstName,
-                this.LastName,
-                this.SelectedCookingSkill);
+            cookingPageService.AddCookingSkill(
+                FirstName,
+                LastName,
+                SelectedCookingSkill);
 
             NavigationService.Instance.NavigateTo(typeof(DietaryPreferencesPage), this);
         }
@@ -101,7 +100,7 @@
         // Override base class method to use our own PropertyChanged event
         protected new void OnPropertyChanged(string propertyName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
