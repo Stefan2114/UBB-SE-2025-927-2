@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="MealPlannerProject.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MealPlannerProject.Converters" xmlns:local1="using:MealPlannerProject.Converters">
+    <Application.Resources>
+        <local:ActivityLevelButtonStyleConverter x:Key="ActivityLevelButtonStyleConverter"/>
+        <local:CookingLevelButtonStyleConverter x:Key="CookingLevelButtonStyleConverter"/>
+        <local:GoalButtonStyleConverter x:Key="GoalButtonStyleConverter"/>
+        <local:GoalButtonColorConverter x:Key="GoalButtonColorConverter"/>
+        <local:GoalOpacityConverter x:Key="GoalOpacityConverter"/>
+        <local1:SelectedGoalOpacityConverter x:Key="SelectedGoalOpacityConverter"/>
+        <Style x:Key="DietaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FCE8DC"/>
+            <Setter Property="BorderBrush" Value="#133224"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="#133224"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="LoseWeightButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#5B7769"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="GainWeightButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#C76E4E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="MaintainWeightButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#183D2C"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="BodyRecompositionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#E3C7B1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="ImproveHealthButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#B5885E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+
+        <Style x:Key="SedentaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#5B7769"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="LightlyActiveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#C76E4E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="ModeratelyActiveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#183D2C"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="VeryActiveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#E3C7B1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="SuperActiveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#B5885E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+
+        <Style x:Key="BeginnerButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#5B7769"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="CookSometimesButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#C76E4E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="LoveCookingButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#183D2C"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="QuickMealsButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#E3C7B1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="MealPrepButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#B5885E"/>
+            <Setter Property="Foreground" Value="#F9E5DA"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+    </Application.Resources>
+</Application>
