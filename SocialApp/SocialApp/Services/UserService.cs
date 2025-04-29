@@ -5,8 +5,9 @@ namespace SocialApp.Services
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
+    using SocialApp.Interfaces;
     using SocialApp.Repository;
 
     /// <summary>

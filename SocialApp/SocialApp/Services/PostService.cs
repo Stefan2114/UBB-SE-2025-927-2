@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using AppCommonClasses.Models;
-using AppCommonClasses.Enums;
-using SocialApp.Repository;
-using AppCommonClasses.Repos;
-
-namespace SocialApp.Services
+﻿namespace SocialApp.Services
 {
+
+    using System;
+    using System.Collections.Generic;
+    using AppCommonClasses.Models;
+    using AppCommonClasses.Enums;
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
+
     /// <summary>
     /// Service for managing posts.
     /// </summary>
@@ -39,7 +40,7 @@ namespace SocialApp.Services
         /// <param name="postVisibility">The visibility of the post.</param>
         /// <param name="postTag">The tag of the post.</param>
         /// <returns>The created post.</returns>
-        public Post AddPost(string title, string? content, long userId, long groupId, PostVisibility postVisibility, PostTag postTag)
+        public void AddPost(string title, string? content, long userId, long groupId, PostVisibility postVisibility, PostTag postTag)
         {
             if (title == null || title.Length == 0)
             {
@@ -58,7 +59,6 @@ namespace SocialApp.Services
             }
             Post post = new Post() { Title = title, Content = content, UserId = userId, GroupId = groupId, Visibility = postVisibility, Tag = postTag, CreatedDate = DateTime.Now };
             this.postRepository.SavePost(post);
-            return post;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace SocialApp.Services
         /// </summary>
         /// <param name="userId">The ID of the user whose posts to retrieve.</param>
         /// <returns>A list of posts by the specified user.</returns>
-        public List<Post> GePostsByUserId(long userId)
+        public List<Post> GetPostsByUserId(long userId)
         {
             return this.postRepository.GetPostsByUserId(userId);
         }

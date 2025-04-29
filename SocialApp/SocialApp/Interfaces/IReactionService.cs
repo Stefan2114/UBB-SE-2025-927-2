@@ -2,7 +2,7 @@
 using AppCommonClasses.Enums;
 using System.Collections.Generic;
 
-namespace SocialApp.Services
+namespace SocialApp.Interfaces
 {
     public interface IReactionService
     {

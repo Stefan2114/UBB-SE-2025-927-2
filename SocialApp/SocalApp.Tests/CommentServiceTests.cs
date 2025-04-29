@@ -8,7 +8,7 @@ namespace SocialApp.Tests
     using NUnit.Framework;
     using AppCommonClasses.Models;
     using SocialApp.Services;
-    using AppCommonClasses.Repos;
+    using AppCommonClasses.Interfaces;
 
 
     /// <summary>

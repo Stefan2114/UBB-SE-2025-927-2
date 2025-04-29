@@ -8,8 +8,10 @@ namespace SocialApp.Components
     using SocialApp.Repository;
     using SocialApp.Services;
     using System.Collections.Generic;
-    using AppCommonClasses.Repos;
     using SocialApp.Proxies;
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
+
     /// <summary>
     /// Represents a user control for displaying a follower in the social app.
     /// </summary>

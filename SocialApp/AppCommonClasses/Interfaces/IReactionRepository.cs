@@ -1,4 +1,4 @@
-﻿namespace AppCommonClasses.Repos
+﻿namespace AppCommonClasses.Interfaces
 {
     using System.Collections.Generic;
     using AppCommonClasses.Models;

@@ -6,8 +6,9 @@ using SocialApp.Repository;
 using SocialApp.Services;
 using System.Collections.Generic;
 using System.Linq;
-using AppCommonClasses.Repos;
+using AppCommonClasses.Interfaces;
 using SocialApp.Proxies;
+using SocialApp.ViewModels;
 
 namespace SocialApp.Components
 {
@@ -16,19 +17,18 @@ namespace SocialApp.Components
         private int currentPage = 1;
         private const int itemsPerPage = 5;
         private List<PostComponent> allItems;
-        private IUserRepository userRepository;
-        private IPostRepository postRepository;
-        private IPostService postService;
-        private IGroupRepository groupRepository;
+        private PostService postService;
+
 
         public GroupsFeed()
         {
             this.InitializeComponent();
 
-            userRepository = new UserRepository();
-            postRepository = new PostRepositoryProxy();
-            groupRepository = new GroupRepository();
-            postService = new PostService(postRepository, userRepository, groupRepository);
+            var userRepository = new UserRepository();
+            var postRepository = new PostRepositoryProxy();
+            var groupRepository = new GroupRepository();
+            this.postService = new PostService(postRepository, userRepository, groupRepository);
+
             allItems = new List<PostComponent>();
             
 

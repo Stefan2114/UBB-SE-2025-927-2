@@ -3,8 +3,8 @@
 namespace SocialApp.Proxies
 {
     using AppCommonClasses.Enums;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
     using System;
     using System.Collections.Generic;
     using System.Linq;

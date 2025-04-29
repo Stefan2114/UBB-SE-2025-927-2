@@ -1,16 +1,21 @@
-﻿using AppCommonClasses.Models;
-using AppCommonClasses.Repos;
+﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using Microsoft.AspNetCore.Mvc;
+using Server.Interfaces;
 
 namespace Server.Controllers
 {
 
     [ApiController]
     [Route("posts")]
-    public class PostController : ControllerBase
+    public class PostController : ControllerBase, IPostController
     {
         private readonly IPostRepository postRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PostController"/> class.
+        /// </summary>
+        /// <param name="postRepository"></param>
         public PostController(IPostRepository postRepository)
         {
             this.postRepository = postRepository;
@@ -78,8 +83,6 @@ namespace Server.Controllers
             this.postRepository.DeletePostById(postId);
             return Ok();
         }
-
-
 
     }
 }

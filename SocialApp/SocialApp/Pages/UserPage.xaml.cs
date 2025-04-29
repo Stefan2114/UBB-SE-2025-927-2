@@ -10,28 +10,20 @@ namespace SocialApp.Pages
     using AppCommonClasses.Models;
     using SocialApp.Repository;
     using SocialApp.Services;
-    using AppCommonClasses.Repos;
-    using SocialApp.Proxies;
+    using SocialApp.Interfaces;
 
     public sealed partial class UserPage : Page
     {
         private AppController controller;
-        private IUserRepository userRepository;
         private IUserService userService;
-        private IPostRepository postRepository;
-        private IPostService postService;
-        private IGroupRepository groupRepository;
         private User displayedUser; // User to display (may differ from CurrentUser)
 
         public UserPage()
         {
             this.InitializeComponent();
 
-            this.userRepository = new UserRepository();
-            this.userService = new UserService(this.userRepository);
-            this.postRepository = new PostRepositoryProxy();
-            this.groupRepository = new GroupRepository();
-            this.postService = new PostService(this.postRepository, this.userRepository, this.groupRepository);
+            var userRepository = new UserRepository();
+            this.userService = new UserService(userRepository);
 
             // Use null-coalescing operator to handle potential null reference
             this.controller = App.Services.GetService<AppController>() ?? throw new System.InvalidOperationException("AppController service is not registered.");
@@ -141,11 +133,7 @@ namespace SocialApp.Pages
 
             if (this.displayedUser != null)
             {
-                List<Post> userPosts = this.postService.GePostsByUserId(this.displayedUser.Id);
-                foreach (Post post in userPosts)
-                {
-                    this.PostsFeed.AddPost(new PostComponent(post.Title, post.Visibility, post.UserId, post.Content, post.CreatedDate, post.Tag, post.Id));
-                }
+                this.PostsFeed.PopulatePostsByUserId(this.displayedUser.Id);
 
                 this.PostsFeed.DisplayCurrentPage();
             }
