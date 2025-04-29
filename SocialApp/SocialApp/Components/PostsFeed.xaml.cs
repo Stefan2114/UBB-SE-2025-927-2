@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using SocialApp.Proxies;
 using SocialApp.ViewModels;
+using SocialApp.ViewModels;
+using SocialApp.Services;
+using SocialApp.Interfaces;
 
 namespace SocialApp.Components
 {
@@ -48,7 +51,10 @@ namespace SocialApp.Components
             {
                 userId = controller.CurrentUser.Id;
             }
+            this.postViewModel.PopulatePostsHomeFeed(userId);
+
         }
+
 
         public void DisplayCurrentPage()
         {

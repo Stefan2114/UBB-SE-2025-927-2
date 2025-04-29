@@ -7,6 +7,11 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using SocialApp.Interfaces;
+    using global::SocialApp.Components;
+    using global::SocialApp.Interfaces;
+    using global::SocialApp.Services;
+    using Microsoft.Extensions.DependencyInjection;
+    using System;
 
     public class PostViewModel
     {
@@ -113,5 +118,17 @@
         {
             var posts = this.postService.GetPostsGroupsFeed(userId);
         }
-}
+
+        /// <summary>
+        /// Gets the home feed posts for a user.
+        /// </summary>
+        /// <param name="userId">The ID of the user whose home feed to retrieve.</param>
+        /// <returns>A list of posts for the user's home feed.</returns>
+        public void PopulatePostsHomeFeed(long userId)
+        {
+            var posts = this.postService.GetPostsHomeFeed(userId);
+            this.PopulatePosts(posts);
+        }
+    }
+
 }
