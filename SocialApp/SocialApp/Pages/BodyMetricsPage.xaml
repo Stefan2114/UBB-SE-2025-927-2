@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SocialApp.Pages.BodyMetricsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:SocialApp.ViewModels"
+
+    xmlns:local="using:SocialApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+Background="#FCE8DC">
+
+
+    <Page.DataContext>
+        <vm:BodyMetricsViewModel/>
+    </Page.DataContext>
+
+    <Grid Padding="30">
+        <!-- Back Button -->
+        <!-- I don't think we should add it here -->
+
+
+        <!-- Title and Description -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Enter your body metrics"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       Foreground="#1E1E1E"
+                       TextAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+            <TextBlock Text="We collect body metrics to personalize your meal plan and calorie recommendations based on your unique needs"
+                       FontSize="16"
+                       Foreground="#4A4A4A"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       Width="800"
+                       Margin="0,0,0,20"/>
+
+
+
+
+
+            <StackPanel Width="400" Margin="0, 50, 0, 30">
+                <TextBlock Text="Current weight:" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5" 
+                       Foreground="#133224"/>
+
+                <TextBox x:Name="WeightTextBox"
+                     Text="{Binding Weight, Mode=TwoWay}" 
+                     PlaceholderText="Enter your weight" 
+                     FontWeight="Light"
+                     FontSize="14"
+                     PlaceholderForeground="#133224"
+                     Background="#E3C7B1"
+                     CornerRadius="15"
+                     SelectionHighlightColorWhenNotFocused="#133224"
+                     SelectionHighlightColor="#133224"/>
+            </StackPanel>
+
+            <StackPanel Width="400" Margin="0, 0, 0, 30">
+                <TextBlock Text="Current height:" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5" 
+                       Foreground="#133224"/>
+
+                <TextBox x:Name="HeightTextBox"
+                     Text="{Binding Height, Mode=TwoWay}" 
+                     PlaceholderText="Enter your height" 
+                     FontWeight="Light"
+                     FontSize="14"
+                     PlaceholderForeground="#133224"
+                     Background="#E3C7B1"
+                     CornerRadius="15"
+                     SelectionHighlightColorWhenNotFocused="#133224"
+                     SelectionHighlightColor="#133224"/>
+            </StackPanel>
+
+            <StackPanel Width="400" Margin="0, 0, 0, 30">
+                <TextBlock Text="Target weight (optional):" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5" 
+                       Foreground="#133224"/>
+
+                <TextBox x:Name="TargetGoalTextBox"
+                     Text="{Binding TargetWeight, Mode=TwoWay}" 
+                     PlaceholderText="Enter your target weight" 
+                     FontWeight="Light"
+                     FontSize="14"
+                     PlaceholderForeground="#133224"
+                     Background="#E3C7B1"
+                     CornerRadius="15"
+                     SelectionHighlightColorWhenNotFocused="#133224"
+                     SelectionHighlightColor="#133224"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Bottom Navigation Indicator -->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,20">
+            <StackPanel Orientation="Horizontal" Spacing="20">
+                <Rectangle Width="200" Height="4" Fill="Black" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="4" Fill="#C9C0B4"  RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="4" Fill="#C9C0B4"  RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="4" Fill="#C9C0B4" RadiusX="2" RadiusY="2"/>
+                <Rectangle Width="200" Height="4" Fill="#C9C0B4" RadiusX="2" RadiusY="2"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Next Button -->
+        <Button Content="→"
+                FontSize="20"
+                Width="50" Height="50"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Click="NextButton_Click"
+                Background="DarkGreen"
+                Foreground="White"
+                CornerRadius="25"/>
+    </Grid>
+</Page>

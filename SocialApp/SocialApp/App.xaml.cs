@@ -1,48 +1,69 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using SocialApp.Services;
+using SocialApp.ViewModels;
+using System;
 
 namespace SocialApp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     public partial class App : Application
     {
-        public static IServiceProvider Services { get; private set; }
-        public Window? m_window; 
-        public static Window CurrentWindow { get; private set; } 
+        public Window Window { get; set; }
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
+        public static Window MainWindow { get; private set; }
+        public static MealListViewModel MealListViewModel { get; private set; }
+
+        public static IServiceProvider Services { get; private set; }
+        public static Window CurrentWindow { get; private set; }
+
         public App()
         {
             this.InitializeComponent();
+            this.UnhandledException += OnUnhandledException;
             var services = new ServiceCollection();
             services.AddSingleton<AppController>();
             Services = services.BuildServiceProvider();
         }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
         {
-            m_window = new MainWindow(); 
-            CurrentWindow = m_window;
-            Frame rootFrame = new Frame();
-            m_window.Content = rootFrame;
-            rootFrame.Navigate(typeof(HomeScreen));
-            m_window.Activate();
+            // Log the exception details
+            System.Diagnostics.Debug.WriteLine($"Unhandled exception: {e.Message}");
+            if (e.Exception != null)
+            {
+                System.Diagnostics.Debug.WriteLine($"Exception stack trace: {e.Exception.StackTrace}");
+            }
+            e.Handled = true; // Prevent the application from closing
         }
 
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            if (Window == null)
+            {
+                Window = new MainWindow();
+                MainWindow = Window;
+
+                Frame rootFrame = Window.Content as Frame;
+                if (rootFrame == null)
+                {
+                    rootFrame = new Frame();
+                    Window.Content = rootFrame;
+                }
+
+                NavigationService.Instance.Initialize(rootFrame);
+
+                if (rootFrame.Content == null)
+                {
+                    rootFrame.Navigate(typeof(SocialApp.Pages.WelcomePage));
+                }
+
+                // Initialize the shared ViewModel with the required MealService instance  
+                var mealService = new MealService(); // Ensure MealService is properly instantiated  
+                MealListViewModel = new MealListViewModel();
+
+                Window.Activate();
+            }
+        }
     }
 }
