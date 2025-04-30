@@ -1,29 +1,16 @@
-using SocialApp.Services;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using System;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
-    using System;
-    using System.Threading.Tasks;
-    using global::Windows.Storage;
-    using global::Windows.Storage.Pickers;
-    using global::Windows.Storage.Streams;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.UI.Xaml;
-    using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml.Media.Imaging;
-    using Microsoft.UI.Xaml.Navigation;
-    using SocialApp.Services;
+using System;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 
 namespace SocialApp.Pages
 {
-   
+
 
     public sealed partial class LoginRegisterPage : Page
     {
@@ -287,7 +274,7 @@ namespace SocialApp.Pages
             }
         }
 
-        private void CompleteRegistration() 
+        private void CompleteRegistration()
         {
             try
             {

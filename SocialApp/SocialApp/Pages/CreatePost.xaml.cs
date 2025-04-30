@@ -1,22 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using AppCommonClasses.Enums;
+using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using AppCommonClasses.Models;
-using AppCommonClasses.Enums;
-using SocialApp.Repository;
-using SocialApp.Services;
-using Windows.Storage.Pickers;
-using Windows.Storage;
-using Group = AppCommonClasses.Models.Group;
-using System.Diagnostics;
-using SocialApp.Proxies;
-using SocialApp.ViewModels;
 using SocialApp.Interfaces;
+using SocialApp.Services;
+using SocialApp.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Group = AppCommonClasses.Models.Group;
 
 namespace SocialApp.Pages
 {
