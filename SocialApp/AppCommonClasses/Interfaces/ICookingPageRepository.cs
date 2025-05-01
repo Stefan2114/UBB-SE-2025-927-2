@@ -1,11 +1,11 @@
-﻿namespace AppCommonClasses.Interfaces
+﻿using AppCommonClasses.Models;
+
+namespace AppCommonClasses.Interfaces
 {
     public interface ICookingPageRepository
     {
-        int GetUserIdByName(string firstName, string lastName);
-
-        int GetCookingSkillIdByDescription(string description);
-
+        CookingPage GetByUserId(int userId);
         void UpdateUserCookingSkill(int userId, int cookingSkillId);
+        CookingSkill GetCookingSkillByDescription(string description);
     }
 }

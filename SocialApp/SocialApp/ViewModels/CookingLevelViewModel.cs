@@ -1,16 +1,18 @@
-﻿namespace SocialApp.ViewModels
-{
-    using SocialApp.Interfaces;
-    using SocialApp.Pages;
-    using SocialApp.Services;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Windows.Input;
+﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
+using SocialApp.Interfaces;
+using SocialApp.Pages;
+using SocialApp.Proxies;
+using SocialApp.Services;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 
+namespace SocialApp.ViewModels
+{
     public partial class CookingLevelViewModel : ViewModelBase
     {
-        private readonly ICookingPageService cookingPageService;
-
+        private readonly ICookingPageRepository cookingPageRepository;
         private string userFirstName;
         private string userLastName;
         private string userSelectedCookingSkill;
@@ -25,9 +27,7 @@
         };
 
         public ICommand NavigateToPreviousPageCommand { get; }
-
         public ICommand NavigateToNextPageCommand { get; }
-
         public ICommand NextCommand { get; }
 
         public CookingLevelViewModel()
@@ -35,7 +35,7 @@
             NavigateToPreviousPageCommand = new RelayCommand(NavigateToPreviousPage);
             NavigateToNextPageCommand = new RelayCommand(NavigateToNextPage);
             NextCommand = new RelayCommand(NavigateToNextPage);
-            cookingPageService = new CookingPageService();
+            cookingPageRepository = new CookingPageRepositoryProxy();
 
             userFirstName = string.Empty;
             userLastName = string.Empty;
@@ -82,10 +82,11 @@
 
         public void NavigateToNextPage()
         {
-            cookingPageService.AddCookingSkill(
-                FirstName,
-                LastName,
-                SelectedCookingSkill);
+            var cookingSkill = cookingPageRepository.GetCookingSkillByDescription(SelectedCookingSkill);
+            if (cookingSkill != null)
+            {
+                cookingPageRepository.UpdateUserCookingSkill(1, cookingSkill.Id); // TODO: Replace 1 with actual user ID
+            }
 
             NavigationService.Instance.NavigateTo(typeof(DietaryPreferencesPage), this);
         }
@@ -95,10 +96,8 @@
             NavigationService.Instance.GoBack();
         }
 
-        // Override base class event to provide our own implementation
         public new event PropertyChangedEventHandler PropertyChanged;
 
-        // Override base class method to use our own PropertyChanged event
         protected new void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
