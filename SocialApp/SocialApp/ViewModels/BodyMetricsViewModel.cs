@@ -2,7 +2,9 @@
 {
     using SocialApp.Interfaces;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Queries;
+    using SocialApp.Repository;
     using SocialApp.Services;
     using System;
     using System.Diagnostics;
@@ -21,10 +23,13 @@
         private string lastName = string.Empty;
 
         public BodyMetricsViewModel()
-            : this(new BodyMetricService())
         {
-            // Initialize _bodyMetricService with the IDataLink dependency
-            bodyMetricService = new BodyMetricService(DataLink.Instance);
+            // Create both required dependencies
+            var bodyMetricRepository = new BodyMetricRepositoryProxy();
+            var userService = new UserService(new UserRepository());
+
+            // Pass both dependencies to BodyMetricService
+            bodyMetricService = new BodyMetricService(bodyMetricRepository, userService);
             SubmitBodyMetricsCommand = new RelayCommand(GoNext);
         }
 
