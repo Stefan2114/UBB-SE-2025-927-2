@@ -10,17 +10,15 @@
         [Key]
         [ForeignKey("User")]
         public long U_Id { get; set; }
-
         public DateTime Today { get; set; }
 
         [Column("daily_intake")]
-        public float DailyIntake { get; set; }
+        public double DailyIntake { get; set; }  // Change to double
         [Column("calories_consumed")]
-        public float CaloriesConsumed { get; set; }
+        public double CaloriesConsumed { get; set; }  // Change to double
         [Column("calories_burned")]
-        public float CaloriesBurned { get; set; }
+        public double CaloriesBurned { get; set; }  // Change to double
 
         public virtual User? User { get; set; }
-
     }
 }

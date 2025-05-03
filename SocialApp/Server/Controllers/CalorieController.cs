@@ -17,7 +17,7 @@ namespace Server.Controllers
 
         // Assuming the repository returns a Calorie object for the user
         [HttpGet("goal/{userId}")]
-        public ActionResult<float> GetGoal(int userId)
+        public ActionResult<double> GetGoal(long userId)
         {
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
@@ -28,7 +28,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("food/{userId}")]
-        public ActionResult<float> GetFood(int userId)
+        public ActionResult<double> GetFood(long userId)
         {
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
@@ -39,7 +39,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("exercise/{userId}")]
-        public ActionResult<float> GetExercise(int userId)
+        public ActionResult<double> GetExercise(long userId)
         {
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)

@@ -4,8 +4,8 @@ namespace Server.Interfaces
 {
     public interface ICalorieController
     {
-        ActionResult<float> GetGoal(int userId);
-        ActionResult<float> GetFood(int userId);
-        ActionResult<float> GetExercise(int userId);
+        ActionResult<double> GetGoal(long userId);
+        ActionResult<double> GetFood(long userId);
+        ActionResult<double> GetExercise(long userId);
     }
 }
