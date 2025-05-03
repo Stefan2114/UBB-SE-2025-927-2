@@ -1,6 +1,6 @@
 ﻿namespace AppCommonClasses.Models
 {
-    class UserModel
+    public class UserModel
     {
         public int UserId { get; set; }  // Auto-incremented in DB
         public string Name { get; set; }
