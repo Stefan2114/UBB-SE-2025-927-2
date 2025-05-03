@@ -14,6 +14,7 @@ namespace Server.Data
         public DbSet<Post> Posts { get; set; } = default!;
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
+        public DbSet<Calorie> Calories { get; set; } = default!; 
         public DbSet<UserModel> Users { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +27,10 @@ namespace Server.Data
             modelBuilder.Entity<Post>()
                 .Property(post => post.Visibility)
                 .HasConversion<int>();
+
+            modelBuilder.Entity<Calorie>()
+                .HasKey(c => c.U_Id);
+
         }
     }
 }

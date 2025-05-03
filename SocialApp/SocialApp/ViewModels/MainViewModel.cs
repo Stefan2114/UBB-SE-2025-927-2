@@ -1,7 +1,9 @@
 namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Interfaces;
     using SocialApp.Interfaces;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Queries;
     using SocialApp.Services;
     using System;
@@ -9,6 +11,7 @@ namespace SocialApp.ViewModels
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Input;
+    using Server.Data;
 
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -250,7 +253,8 @@ namespace SocialApp.ViewModels
         // ----------------------------------------
 
         private readonly IWaterIntakeService waterService;
-        private readonly CalorieService calorieService;
+        private readonly ICalorieService calorieService;
+        private readonly ICalorieRepository calorieRepository;
         private readonly MacrosService macrosService;
 
         public static int UserId { get; set; }
@@ -261,6 +265,7 @@ namespace SocialApp.ViewModels
         public MainViewModel()
         {
 
+
             int number_userId = UserId;
 
             // Initialize WaterService
@@ -268,7 +273,8 @@ namespace SocialApp.ViewModels
             waterService.AddUserIfNotExists(number_userId); // Ensure user exists in the water tracker table
 
             // Initialize CalorieService
-            calorieService = new CalorieService();
+            calorieRepository = new CalorieRepositoryProxy();
+            calorieService = new CalorieService(calorieRepository);
 
             // Initialize MacrosService
             macrosService = new MacrosService();
