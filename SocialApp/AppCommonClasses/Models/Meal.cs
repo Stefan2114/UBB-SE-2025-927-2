@@ -22,20 +22,20 @@ namespace AppCommonClasses.Models
         public string Ingredients { get; set; }
 
         [Column("calories")]
-        public int Calories { get; set; }
+        public double Calories { get; set; }
 
 
         public string Category { get; set; }
 
-        public int Protein { get; set; }
+        public double Protein { get; set; }
 
-        public int Carbohydrates { get; set; }
+        public double Carbohydrates { get; set; }
 
-        public int Fat { get; set; }
+        public double Fat { get; set; }
 
-        public int Fiber { get; set; }
+        public double Fiber { get; set; }
 
-        public int Sugar { get; set; }
+        public double Sugar { get; set; }
 
         [Column("photo_link")]
         public string PhotoLink { get; set; }
@@ -45,6 +45,7 @@ namespace AppCommonClasses.Models
         [Column("preparation_time")]
         public double PreparationTime { get; set; }
 
+        [Column("servings")]
         public double Servings { get; set; }
 
         public DateTime CreatedAt { get; set; }

@@ -59,29 +59,32 @@ create table grocery_lists(
 	is_checked bit
 )
 
-create table meal_types(
-	mt_id int primary key identity(1,1),
-	m_description varchar(150) not null
-)
 
-create table meals(
-	m_id int primary key identity(1,1),
-	u_id BIGINT foreign key references Users(Id), --can be null
-	m_name varchar(150) not null,
-	recipe varchar(2000) not null,
-	cs_id int foreign key references cooking_skills(cs_id),
-	dp_id int foreign key references dietary_preferences(dp_id),
-	mt_id int foreign key references meal_types(mt_id),
-	preparation_time float,
-	servings float,
-	protein float,
-	calories float,
-	carbohydrates float,
-	fat float,
-	fiber float,
-	sugar float,	
-	photo_link varchar(1000)
-)
+CREATE TABLE meals (
+    m_id INT PRIMARY KEY IDENTITY(1,1),
+    u_id BIGINT FOREIGN KEY REFERENCES Users(Id), -- Can be NULL
+    m_name VARCHAR(150) NOT NULL,
+    recipe VARCHAR(2000) NOT NULL,
+    cs_id INT FOREIGN KEY REFERENCES cooking_skills(cs_id),
+    dp_id INT FOREIGN KEY REFERENCES dietary_preferences(dp_id),
+    mt_id INT FOREIGN KEY REFERENCES meal_types(mt_id),
+    preparation_time FLOAT,
+    servings FLOAT,
+    protein INT,
+    calories INT,
+    carbohydrates INT,
+    fat INT,
+    fiber INT,
+    sugar INT,
+    photo_link VARCHAR(1000),
+);
+ALTER TABLE meals ADD Ingredients VARCHAR(2000);
+ALTER TABLE meals ADD Category VARCHAR(100);
+ALTER TABLE meals ADD CreatedAt DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE meals ADD CookingLevel VARCHAR(100);
+ALTER TABLE meals ADD Image VARBINARY(MAX);
+ALTER TABLE meals ADD ImagePath VARCHAR(1000);
+select * from meals
 
 create table meal_ingredient(
 	m_id int foreign key references meals(m_id),
@@ -1000,3 +1003,6 @@ select * from Posts
 update [dbo].[Posts]
 set GroupId = 0
 where GroupId is null
+
+
+select * from meals
