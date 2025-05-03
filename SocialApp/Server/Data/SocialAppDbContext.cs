@@ -14,6 +14,8 @@ namespace Server.Data
         public DbSet<Post> Posts { get; set; } = default!;
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
+        public DbSet<Meal> Meals { get; set; } = default!;
+        public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

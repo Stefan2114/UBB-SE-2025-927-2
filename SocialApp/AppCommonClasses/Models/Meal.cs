@@ -1,14 +1,29 @@
-﻿namespace AppCommonClasses.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AppCommonClasses.Enums;
+
+namespace AppCommonClasses.Models
 {
-    using System;
 
     public class Meal
     {
+        [Key]
+        [Column("m_id")]
+        public int Id { get; set; }
+
+        [Column("m_name")]
         public string Name { get; set; }
 
         public string Ingredients { get; set; }
 
+        [Column("calories")]
         public int Calories { get; set; }
+
 
         public string Category { get; set; }
 
@@ -22,13 +37,15 @@
 
         public int Sugar { get; set; }
 
+        [Column("photo_link")]
         public string PhotoLink { get; set; }
 
         public string Recipe { get; set; }
 
-        public int PreparationTime { get; set; }
+        [Column("preparation_time")]
+        public double PreparationTime { get; set; }
 
-        public int Servings { get; set; }
+        public double Servings { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -1,5 +1,6 @@
 namespace SocialApp.Services
 {
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using SocialApp.Interfaces;
     using SocialApp.Queries;
@@ -12,7 +13,7 @@ namespace SocialApp.Services
 
     public class MealService : IMealService
     {
-        private readonly MealRepository mealDatabaseRepository;
+        private readonly IMealRepository mealRepoProxy;
         private readonly IngredientRepository ingredientDatabaseRepository;
 
         [Obsolete]

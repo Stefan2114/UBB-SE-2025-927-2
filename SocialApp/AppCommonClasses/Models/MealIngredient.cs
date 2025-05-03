@@ -1,8 +1,20 @@
-﻿namespace AppCommonClasses.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AppCommonClasses.Enums;
+
+
+namespace AppCommonClasses.Models
 {
     public class MealIngredient
     {
+        [Key]
         public int IngredientId { get; set; }
+        public int MealId { get; set; }
 
         public float Quantity { get; set; }
 
