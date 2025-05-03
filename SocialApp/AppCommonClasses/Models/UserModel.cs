@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppCommonClasses.Models
 {
-    [Table("Users")]
     public class UserModel
     {
         [Key]
