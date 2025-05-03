@@ -1,4 +1,5 @@
 -- Meal Planner Tables
+use [SocialApp]
 
 create table goals (
 	g_id int primary key identity (1,1),
@@ -583,14 +584,14 @@ CREATE TABLE Users(
 	PasswordHash varchar(max) NOT NULL,
 	Image varchar(max),
 );
-
+select * from Users
 SELECT name 
 FROM sys.key_constraints 
 WHERE type = 'UQ' AND parent_object_id = OBJECT_ID('Users');
 
 ALTER TABLE Users ADD CONSTRAINT DefaultMail DEFAULT ' ' FOR Email;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__A9D10534D4B667CC;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__C9F2845626437B6F;  --> To be changed
+ALTER TABLE Users DROP CONSTRAINT UQ__Users__A9D10534D038D4AF;  --> To be changed
+ALTER TABLE Users DROP CONSTRAINT UQ__Users__C9F28456C4C726A4;  --> To be changed
 ALTER TABLE Users ADD CONSTRAINT DefaultPassword DEFAULT ' ' FOR PasswordHash; --> To be changed
 
 	ALTER TABLE Users ADD u_height float not null default 0,
