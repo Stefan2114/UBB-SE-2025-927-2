@@ -60,7 +60,7 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
             this.DataContext = this;
-            this.reactionService = new ReactionService(new ReactionRepository());
+            this.reactionService = new ReactionService(new ReactionRepositoryProxy());
             this.commentService = new CommentService(new CommentRepository(), new PostRepositoryProxy(), new UserRepository());
             this.AppController = App.Services.GetService<AppController>();
         }
@@ -78,7 +78,7 @@ namespace SocialApp.Components
             this.PostCreationTime = createdDate;
             this.tag = tag;
 
-            this.reactionService = new ReactionService(new ReactionRepository());
+            this.reactionService = new ReactionService(new ReactionRepositoryProxy());
             this.commentService = new CommentService(new CommentRepository(), new PostRepositoryProxy(), new UserRepository());
             this.AppController = App.Services.GetService<AppController>();
 
