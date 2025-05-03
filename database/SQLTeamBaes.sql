@@ -84,7 +84,72 @@ ALTER TABLE meals ADD CreatedAt DATETIME NOT NULL DEFAULT GETDATE();
 ALTER TABLE meals ADD CookingLevel VARCHAR(100);
 ALTER TABLE meals ADD Image VARBINARY(MAX);
 ALTER TABLE meals ADD ImagePath VARCHAR(1000);
+SELECT COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'meals';
+select * from ingredients
 select * from meals
+delete from meals where recipe = 'No directions provided'
+-- Entry 1
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
+)
+VALUES (
+    1, -- existing user ID
+    'Grilled Chicken Salad',
+    '1. Grill the chicken breast. 2. Toss with fresh greens and vinaigrette.',
+    2, -- existing cooking skill ID
+    3, -- existing dietary preference ID
+    1, -- existing meal type ID (e.g., lunch)
+    25.0,
+    2.0,
+    35,
+    400,
+    20,
+    15,
+    5,
+    6,
+    'https://example.com/images/grilled-chicken-salad.jpg',
+    'Chicken breast, lettuce, tomatoes, olive oil, lemon juice, salt, pepper',
+    'Salad',
+    GETDATE(),
+    'Intermediate',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\grilled-chicken-salad.jpg'
+);
+
+-- Entry 2
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
+)
+VALUES (
+    2, -- existing user ID
+    'Vegan Lentil Soup',
+    '1. Sauté onions and garlic. 2. Add lentils, carrots, and broth. Simmer until cooked.',
+    1, -- beginner skill level
+    2, -- vegan preference
+    2, -- dinner
+    45.0,
+    4.0,
+    18,
+    350,
+    40,
+    8,
+    10,
+    4,
+    'https://example.com/images/vegan-lentil-soup.jpg',
+    'Lentils, carrots, onions, garlic, vegetable broth, spices',
+    'Soup',
+    GETDATE(),
+    'Beginner',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\vegan-lentil-soup.jpg'
+);
+
 
 create table meal_ingredient(
 	m_id int foreign key references meals(m_id),

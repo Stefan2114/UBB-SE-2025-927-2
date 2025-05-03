@@ -19,6 +19,9 @@ namespace AppCommonClasses.Models
         [Column("m_name")]
         public string Name { get; set; }
 
+        [Column("mt_id")]
+        public int Mt_id { get; set; } // MealTypeId
+
         public string Ingredients { get; set; }
 
         [Column("calories")]
