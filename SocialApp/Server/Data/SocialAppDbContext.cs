@@ -12,6 +12,7 @@ namespace Server.Data
         }
 
         public DbSet<Post> Posts { get; set; } = default!;
+        public DbSet<Comment> Comments { get; set; } = default!;
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
 
