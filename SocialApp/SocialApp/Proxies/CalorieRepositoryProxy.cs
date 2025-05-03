@@ -1,15 +1,15 @@
 ﻿namespace SocialApp.Proxies
 {
-    using AppCommonClasses.Models;
-    using AppCommonClasses.Interfaces;
     using System;
     using System.Net.Http;
     using System.Net.Http.Json;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
 
     public class CalorieRepositoryProxy : ICalorieRepository
     {
         private readonly HttpClient httpClient;
-        
+
         public CalorieRepositoryProxy()
         {
             this.httpClient = new HttpClient();

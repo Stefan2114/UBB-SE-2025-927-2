@@ -1,6 +1,6 @@
-﻿using Server.Data;
-using AppCommonClasses.Interfaces;
+﻿using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
+using Server.Data;
 
 public class CalorieRepository : ICalorieRepository
 {
