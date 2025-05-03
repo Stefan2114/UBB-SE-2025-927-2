@@ -1,4 +1,5 @@
 ﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using Microsoft.AspNetCore.Mvc;
 using Server.Interfaces;
 
@@ -47,6 +48,16 @@ namespace Server.Controllers
                 return NotFound();
             }
             return calorie.CaloriesBurned;  // Return the calories burned
+        }
+        [HttpGet("{userId}")]
+        public ActionResult<Calorie> GetCalorie(long userId)
+        {
+            var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
+            if (calorie == null)
+            {
+                return NotFound();
+            }
+            return calorie;  // Return the calories burned
         }
     }
 }
