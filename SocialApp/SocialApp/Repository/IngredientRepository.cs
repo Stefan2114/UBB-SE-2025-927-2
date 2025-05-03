@@ -1,12 +1,12 @@
 ﻿namespace SocialApp.Repository
 {
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
-    using SocialApp.Queries;
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using SocialApp.Queries;
 
     public class IngredientRepository : IIngredientRepository
     {
@@ -42,6 +42,7 @@
                 return new Ingredient(
                     Convert.ToInt32(row["i_id"]),
                     row["i_name"].ToString(),
+                    "Uncategorized",
                     row["calories"] == DBNull.Value ? 0 : Convert.ToSingle(row["calories"]),
                     row["protein"] == DBNull.Value ? 0 : Convert.ToSingle(row["protein"]),
                     row["carbohydrates"] == DBNull.Value ? 0 : Convert.ToSingle(row["carbohydrates"]),

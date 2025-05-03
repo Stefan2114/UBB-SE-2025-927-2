@@ -1,47 +1,35 @@
 ﻿namespace SocialApp.Services
 {
-    using AppCommonClasses.Models;
-    using SocialApp.Interfaces;
-    using SocialApp.Queries;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Data;
-    using System.Data.SqlClient;
     using System.Linq;
+    using System.Threading.Tasks;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using SocialApp.Interfaces;
 
     public class GroceryListService : IGroceryListService
     {
-        // No dependency injection for IDataLink, using DataLink directly
-        public List<GroceryIngredient> GetIngredientsForUser(int userId)
+        private IGroceryListRepository groceryRepository;
+        private IGroceryListRepository gR;
+
+        public GroceryListService(IGroceryListRepository groceryRepository, IGroceryListRepository gR)
         {
-            var ingredients = new List<GroceryIngredient>();
+            this.groceryRepository = groceryRepository;
+            this.gR = gR;
+        }
 
-            SqlParameter[] parameters = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.Int) { Value = userId }
-            };
-
-            // Using DataLink directly for executing queries
-            DataTable table = DataLink.Instance.ExecuteReader("sp_GetUserGroceryList", parameters);
-
-            foreach (DataRow row in table.Rows)
-            {
-                ingredients.Add(new GroceryIngredient
-                {
-                    Id = (int)row["i_id"],
-                    Name = row["i_name"].ToString(),
-                    IsChecked = (bool)row["is_checked"]
-                });
-            }
-
+        public async Task<List<GroceryIngredient>> GetIngredientsForUser(int userId)
+        {
+            var ingredients = await this.groceryRepository.GetIngredientsForUser(userId);
             foreach (var ingredient in ingredients)
             {
                 ingredient.PropertyChanged += (s, e) =>
                 {
                     if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                     {
-                        var item = (GroceryIngredient)s;
-                        UpdateIsChecked(userId, item.Id, item.IsChecked);
+                        var item = s as GroceryIngredient ?? GroceryIngredient.defaultIngredient;
+                        _ = this.UpdateIsChecked(userId, item.Id, item.IsChecked);
                     }
                 };
             }
@@ -49,19 +37,12 @@
             return ingredients;
         }
 
-        public void UpdateIsChecked(int userId, int ingredientId, bool isChecked)
+        public async Task UpdateIsChecked(int userId, int ingredientId, bool isChecked)
         {
-            SqlParameter[] parameters = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.Int) { Value = userId },
-                new SqlParameter("@IngredientId", SqlDbType.Int) { Value = ingredientId },
-                new SqlParameter("@IsChecked", SqlDbType.Bit) { Value = isChecked }
-            };
-
-            DataLink.Instance.ExecuteNonQuery("sp_UpdateGroceryItemChecked", parameters);
+            await this.groceryRepository.UpdateIsChecked(userId, ingredientId, isChecked);
         }
 
-        public GroceryIngredient AddIngredientToUser(int userId, GroceryIngredient ingredient, string newGroceryIngredientName, ObservableCollection<SectionModel> sections)
+        public async Task<GroceryIngredient> AddIngredientToUser(int userId, GroceryIngredient ingredient, string newGroceryIngredientName, ObservableCollection<SectionModel> sections)
         {
             if (ingredient == GroceryIngredient.defaultIngredient)
             {
@@ -82,16 +63,8 @@
                 return GroceryIngredient.defaultIngredient;
             }
 
-            SqlParameter[] parameters = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.Int) { Value = userId },
-                new SqlParameter("@IngredientName", SqlDbType.NVarChar) { Value = ingredient.Name }
-            };
-
-            int newId = DataLink.Instance.ExecuteScalar<int>("sp_AddIngredientToUserList", parameters, true);
-            ingredient.Id = newId;
-
-            return ingredient;
+            // GroceryIngredient r = await this.gR.AddIngredientToUser(userId, ingredient);
+            return await this.groceryRepository.AddIngredientToUser(userId, r);
         }
     }
 }

@@ -1,15 +1,13 @@
 ﻿namespace SocialApp.Repository
 {
-    using System.Collections.Generic;
-    using Microsoft.Data.SqlClient;
-    using AppCommonClasses.Models;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Microsoft.Data.SqlClient;
+    using System.Collections.Generic;
 
     public class UserRepository : IUserRepository
     {
-        private const string ConnectionString = "Data Source=vm;" +
-            "Initial Catalog=team_babes;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+        private const string ConnectionString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
         private readonly SqlConnection connection;
 
 

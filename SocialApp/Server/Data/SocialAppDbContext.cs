@@ -1,6 +1,6 @@
-﻿using Server.DbRelationshipEntities;
-using AppCommonClasses.Models;
+﻿using AppCommonClasses.Models;
 using Microsoft.EntityFrameworkCore;
+using Server.DbRelationshipEntities;
 
 namespace Server.Data
 {
@@ -12,8 +12,14 @@ namespace Server.Data
         }
 
         public DbSet<Post> Posts { get; set; } = default!;
+
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
+
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
+
+        public DbSet<GroceryIngredient> GroceryIngredients { get; set; } = default!;
+
+        public DbSet<Ingredient> Ingredient { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +31,11 @@ namespace Server.Data
             modelBuilder.Entity<Post>()
                 .Property(post => post.Visibility)
                 .HasConversion<int>();
+
+            modelBuilder.Entity<GroceryIngredient>()
+                .HasKey(groceryIngredient => new { groceryIngredient.Id });
+
+            modelBuilder.Entity<Ingredient>().HasKey(ingredient => new { ingredient.Id });
         }
     }
 }

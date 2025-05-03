@@ -14,7 +14,6 @@ namespace SocialApp.Pages
 
         public GroceryListPage() => this.InitializeComponent();
 
-        [System.Obsolete]
         private void AddGroceryIngredient_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;

@@ -1,14 +1,22 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
+    using Microsoft.EntityFrameworkCore;
+    using Server.Data;
+    using Server.Repos;
+    using SocialApp.Interfaces;
+    using SocialApp.Proxies;
     using SocialApp.Services;
-    using System.Collections.ObjectModel;
 
     public class GroceryViewModel : ObservableObject
     {
         private static int userId;
+        private readonly IGroceryListService service;
+        public ObservableCollection<SectionModel> sections;
 
         public static int UserId
         {
@@ -16,61 +24,64 @@
             set => userId = value;
         }
 
-        private readonly GroceryListService service = new();
-
         public ObservableCollection<GroceryIngredient> Ingredients { get; private set; } = new();
 
         public ObservableCollection<GroceryIngredient> MostFrequentIngredients { get; private set; }
 
         public ObservableCollection<GroceryIngredient> RecentlyUsedIngredients { get; private set; }
 
-        private ObservableCollection<SectionModel> sections;
-
-        private string newGroceryIngredientName;
+        public string newGroceryIngredientName;
 
         public ObservableCollection<SectionModel> Sections
         {
-            get => sections;
-            set => SetProperty(ref sections, value);
+            get => this.sections;
+            set => this.SetProperty(ref this.sections, value);
         }
 
         public string NewGroceryIngredientName
         {
-            get => newGroceryIngredientName;
-            set => SetProperty(ref newGroceryIngredientName, value);
+            get => this.newGroceryIngredientName;
+            set => this.SetProperty(ref this.newGroceryIngredientName, value);
         }
 
         public RelayCommand<GroceryIngredient> AddGroceryIngredientCommand { get; }
 
         public GroceryViewModel()
         {
-            AddGroceryIngredientCommand = new RelayCommand<GroceryIngredient>(AddGroceryIngredient);
-            MostFrequentIngredients = new ObservableCollection<GroceryIngredient>
+            var options = new DbContextOptionsBuilder<SocialAppDbContext>()
+    .UseSqlServer("Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;")
+    .Options;
+
+            var dbContext = new SocialAppDbContext(options);
+            var repo = new GroceryListRepository(dbContext);
+
+            this.service = new GroceryListService(new GroceryListRepositoryProxy(), repo);
+            this.AddGroceryIngredientCommand = new RelayCommand<GroceryIngredient>(this.AddGroceryIngredient);
+            this.MostFrequentIngredients = new ObservableCollection<GroceryIngredient>
             {
                 new GroceryIngredient { Name = "Tomatoes" },
                 new GroceryIngredient { Name = "Onions" },
                 new GroceryIngredient { Name = "Garlic" },
             };
-            RecentlyUsedIngredients = new ObservableCollection<GroceryIngredient>
+            this.RecentlyUsedIngredients = new ObservableCollection<GroceryIngredient>
             {
                 new GroceryIngredient { Name = "Olive Oil" },
                 new GroceryIngredient { Name = "Salt" },
                 new GroceryIngredient { Name = "Pepper" },
             };
-            Sections = new ObservableCollection<SectionModel>
+            this.Sections = new ObservableCollection<SectionModel>
             {
                 new SectionModel { Title = "My List" },
             };
-            sections = new();
-            newGroceryIngredientName = "";
+            this.sections = new();
+            this.newGroceryIngredientName = "";
 
-            LoadUserGroceryList();
+            this.LoadUserGroceryList();
         }
 
-        [System.Obsolete]
-        public void AddGroceryIngredient(GroceryIngredient? ingredient = null)
+        public async void AddGroceryIngredient(GroceryIngredient? ingredient = null)
         {
-            GroceryIngredient resultIngredient = service.AddIngredientToUser(userId, ingredient ?? GroceryIngredient.defaultIngredient, newGroceryIngredientName, sections);
+            GroceryIngredient resultIngredient = await this.service.AddIngredientToUser(userId, ingredient ?? GroceryIngredient.defaultIngredient, newGroceryIngredientName, sections);
             if (resultIngredient == GroceryIngredient.defaultIngredient)
             {
                 return;
@@ -85,21 +96,20 @@
                 if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                 {
                     var ing = (GroceryIngredient)s;
-                    service.UpdateIsChecked(userId, ing.Id, ing.IsChecked);
+                    _ = this.service.UpdateIsChecked(userId, ing.Id, ing.IsChecked);
                 }
             };
 
-            Sections[0].Items.Add(ingredient);
+            this.Sections[0].Items.Add(ingredient);
 
-            NewGroceryIngredientName = string.Empty;
+            this.NewGroceryIngredientName = string.Empty;
         }
 
-
-        private void LoadUserGroceryList()
+        private async Task LoadUserGroceryList()
         {
-            var ingredientsFromDb = service.GetIngredientsForUser(userId);
+            var ingredientsFromDb = await this.service.GetIngredientsForUser(userId);
 
-            Sections = new ObservableCollection<SectionModel>
+            this.Sections = new ObservableCollection<SectionModel>
             {
                 new SectionModel
                 {
@@ -108,7 +118,7 @@
                 },
             };
 
-            OnPropertyChanged(nameof(Sections));
+            this.OnPropertyChanged(nameof(this.Sections));
         }
     }
 }
