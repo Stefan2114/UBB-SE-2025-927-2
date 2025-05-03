@@ -1,10 +1,10 @@
-﻿using AppCommonClasses.Interfaces;
-using AppCommonClasses.Models;
-using Microsoft.AspNetCore.Mvc;
-using Server.Interfaces;
-
-namespace Server.Controllers
+﻿namespace Server.Controllers
 {
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Server.Interfaces;
+
     [ApiController]
     [Route("calories")]
     public class CalorieController : ControllerBase, ICalorieController
@@ -23,7 +23,7 @@ namespace Server.Controllers
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
             {
-                return NotFound();  // If no calorie data found for the user
+                return this.NotFound();  // If no calorie data found for the user
             }
             return calorie.DailyIntake;  // Return the daily calorie goal
         }
@@ -34,7 +34,7 @@ namespace Server.Controllers
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
             return calorie.CaloriesConsumed;  // Return the calories consumed
         }
@@ -45,17 +45,18 @@ namespace Server.Controllers
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
             return calorie.CaloriesBurned;  // Return the calories burned
         }
+
         [HttpGet("{userId}")]
         public ActionResult<Calorie> GetCalorie(long userId)
         {
             var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
             if (calorie == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
             return calorie;  // Return the calories burned
         }
