@@ -11,7 +11,7 @@ public class CalorieRepository : ICalorieRepository
         this.dbContext = context;
     }
 
-    public Calorie GetCaloriesByUserId(int userId)
+    public Calorie GetCaloriesByUserId(long userId)
     {
         return this.dbContext.Calories.FirstOrDefault(c => c.U_Id == userId);
     }

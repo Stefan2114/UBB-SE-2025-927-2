@@ -18,19 +18,19 @@
             _calorieRepository = calorieRepository;
         }
 
-        public float GetGoal(int userId)
+        public double GetGoal(long userId)
         {
             var calories = this._calorieRepository.GetCaloriesByUserId(userId);
             return calories?.DailyIntake ?? 0; // Assuming DailyIntake is the "Goal"
         }
 
-        public float GetFood(int userId)
+        public double GetFood(long userId)
         {
             var calories = this._calorieRepository.GetCaloriesByUserId(userId);
             return calories?.CaloriesConsumed ?? 0; // Assuming CaloriesConsumed is the "Food"
         }
 
-        public float GetExercise(int userId)
+        public double GetExercise(long userId)
         {
             var calories = this._calorieRepository.GetCaloriesByUserId(userId);
             return calories?.CaloriesBurned ?? 0; // Assuming CaloriesBurned is the "Exercise"

@@ -28,8 +28,9 @@ namespace Server.Data
                 .HasConversion<int>();
 
             modelBuilder.Entity<Calorie>()
-                .HasKey(c => c.U_Id);
-
+                .HasOne(c => c.User)
+                .WithMany()  // Assuming a one-to-many relationship from User to Calorie
+                .HasForeignKey(c => c.U_Id);
         }
     }
 }

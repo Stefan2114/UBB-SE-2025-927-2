@@ -9,6 +9,6 @@ namespace AppCommonClasses.Interfaces
 {
     public interface ICalorieRepository
     {
-        Calorie GetCaloriesByUserId(int userId);
+        Calorie GetCaloriesByUserId(long userId);
     }
 }
