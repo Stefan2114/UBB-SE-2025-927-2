@@ -1,40 +1,52 @@
-﻿// using Microsoft.Data.SqlClient;
-using SocialApp.Queries;
-using System.Data.SqlClient;
+﻿using SocialApp.Proxies;
+using AppCommonClasses.Models;
+using System.Linq; // Make sure to import the correct namespace for your models
 
 namespace SocialApp.Services
 {
-    class MacrosService
+    public class MacrosService
     {
-        public float GetProteinIntake(int userId)
+        private readonly MacrosRepositoryProxy _macrosRepo;
+
+        // Constructor to initialize the proxy repository
+        public MacrosService()
         {
-            var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
-            return DataLink.Instance.ExecuteScalar<float>("SELECT dbo.get_protein_food(@UserId)", parameters, false);
+            _macrosRepo = new MacrosRepositoryProxy();
         }
 
-        public float GetCarbohydratesIntake(int userId)
+        // Get protein intake using the repository proxy
+        public double GetProteinIntake(int userId)
         {
-            var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
-            return DataLink.Instance.ExecuteScalar<float>("SELECT dbo.get_carbohydrates_food(@UserId)", parameters, false);
+            var macrosList = _macrosRepo.GetMacrosByUserId(userId);
+            return macrosList.Sum(m => m.TotalProtein ?? 0);
         }
 
-        public float GetFatIntake(int userId)
+        // Get carbohydrates intake using the repository proxy
+        public double GetCarbohydratesIntake(int userId)
         {
-            var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
-            return DataLink.Instance.ExecuteScalar<float>("SELECT dbo.get_fat_food(@UserId)", parameters, false);
+            var macrosList = _macrosRepo.GetMacrosByUserId(userId);
+            return macrosList.Sum(m => m.TotalCarbohydrates ?? 0);
         }
 
-        public float GetFiberIntake(int userId)
+        // Get fat intake using the repository proxy
+        public double GetFatIntake(int userId)
         {
-            var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
-            return DataLink.Instance.ExecuteScalar<float>("SELECT dbo.get_fiber_food(@UserId)", parameters, false);
+            var macrosList = _macrosRepo.GetMacrosByUserId(userId);
+            return macrosList.Sum(m => m.TotalFat ?? 0);
         }
 
-        public float GetSugarIntake(int userId)
+        // Get fiber intake using the repository proxy
+        public double GetFiberIntake(int userId)
         {
-            var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
-            return DataLink.Instance.ExecuteScalar<float>("SELECT dbo.get_sugar_food(@UserId)", parameters, false);
+            var macrosList = _macrosRepo.GetMacrosByUserId(userId);
+            return macrosList.Sum(m => m.TotalFiber ?? 0);
         }
 
+        // Get sugar intake using the repository proxy
+        public double GetSugarIntake(int userId)
+        {
+            var macrosList = _macrosRepo.GetMacrosByUserId(userId);
+            return macrosList.Sum(m => m.TotalSugar ?? 0);
+        }
     }
 }

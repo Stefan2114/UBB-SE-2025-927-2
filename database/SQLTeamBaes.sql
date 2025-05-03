@@ -98,6 +98,7 @@ CREATE TABLE serving_units (
     unit_name VARCHAR(50) PRIMARY KEY,  -- Unique key for each unit, 'unit_name' as the primary key
 );
 
+select * from users
 CREATE TABLE daily_meals (
     dm_id INT PRIMARY KEY IDENTITY(1,1),  -- Unique entry for each meal logged
     u_id BIGINT NULL,  -- The user who ate the meal, now optional (can be NULL)
@@ -117,7 +118,7 @@ CREATE TABLE daily_meals (
     total_sugar FLOAT,     -- Total sugar based on servings
     FOREIGN KEY (u_id) REFERENCES Users(Id)  -- User foreign key can be null now
 );
-
+select * from daily_meals
 GO
 CREATE PROCEDURE InsertMealIngredient
     @mealId INT,
@@ -584,23 +585,23 @@ CREATE TABLE Users(
 	Image varchar(max),
 );
 
-SELECT name 
-FROM sys.key_constraints 
-WHERE type = 'UQ' AND parent_object_id = OBJECT_ID('Users');
+	SELECT name 
+	FROM sys.key_constraints 
+	WHERE type = 'UQ' AND parent_object_id = OBJECT_ID('Users');
 
-ALTER TABLE Users ADD CONSTRAINT DefaultMail DEFAULT ' ' FOR Email;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__A9D10534D4B667CC;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__C9F2845626437B6F;  --> To be changed
-ALTER TABLE Users ADD CONSTRAINT DefaultPassword DEFAULT ' ' FOR PasswordHash; --> To be changed
+	ALTER TABLE Users ADD CONSTRAINT DefaultMail DEFAULT ' ' FOR Email;  --> To be changed
+	ALTER TABLE Users DROP CONSTRAINT UQ__Users__A9D10534EB683BFA;  --> To be changed
+	ALTER TABLE Users DROP CONSTRAINT UQ__Users__C9F2845675F5C088;  --> To be changed
+	ALTER TABLE Users ADD CONSTRAINT DefaultPassword DEFAULT ' ' FOR PasswordHash; --> To be changed
 
-	ALTER TABLE Users ADD u_height float not null default 0,
-	u_weight float not null default 0,
-    g_id int foreign key references goals(g_id),
-	cs_id int foreign key references cooking_skills(cs_id),
-	dp_id int foreign key references dietary_preferences(dp_id),
-	a_id int foreign key references allergies(a_id),
-	al_id int foreign key references activity_levels(al_id),
-	target_weight float
+		ALTER TABLE Users ADD u_height float not null default 0,
+		u_weight float not null default 0,
+		g_id int foreign key references goals(g_id),
+		cs_id int foreign key references cooking_skills(cs_id),
+		dp_id int foreign key references dietary_preferences(dp_id),
+		a_id int foreign key references allergies(a_id),
+		al_id int foreign key references activity_levels(al_id),
+		target_weight float
 
 CREATE TABLE Groups(
 	[Id] BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
@@ -681,6 +682,7 @@ ALTER TABLE [dbo].[Users] WITH CHECK CHECK CONSTRAINT ALL
 
 SET IDENTITY_INSERT [dbo].[Users] ON
 
+select * from meals
 
 INSERT INTO [dbo].[Users](Id,UserName, Email, PasswordHash) VALUES
 (0,'admin','admin@gmail.com','admin'),
@@ -774,6 +776,7 @@ INSERT INTO [dbo].[Posts](Id,Title,Content,CreatedDate,UserId,Visibility,GroupId
 
 SET IDENTITY_INSERT [dbo].[Posts] OFF
 
+select * from Groups
 -- reactions
 
 INSERT INTO [dbo].[Reactions] ([UserId], [PostId], [ReactionType])  
@@ -993,9 +996,67 @@ VALUES
 (2, 3),
 (3, 1);
 
-select * from Posts
+select * from Users
 
 
 update [dbo].[Posts]
 set GroupId = 0
 where GroupId is null
+
+-- Sample data for daily_meals
+INSERT INTO daily_meals (u_id, m_id, date_eaten, servings, unit_name, total_calories, total_protein, total_carbohydrates, total_fat, total_fiber, total_sugar)
+VALUES
+-- User 0 (admin), Meal 1 (e.g., Breakfast), 2025-05-01
+(0, 1, '2025-05-01', 1, 'grams', 250, 20, 30, 10, 5, 15),
+-- User 1 (darius), Meal 2 (e.g., Lunch), 2025-05-01
+(1, 2, '2025-05-01', 1.5, 'grams', 500, 35, 50, 15, 7, 25),
+-- User 2 (marius), Meal 3 (e.g., Dinner), 2025-05-02
+(2, 3, '2025-05-02', 2, 'grams', 300, 25, 40, 8, 6, 20),
+-- User 3 (leo), Meal 4 (e.g., Snack), 2025-05-02
+(3, 4, '2025-05-02', 1, 'grams', 150, 5, 10, 2, 1, 5),
+-- User 4 (sorin), Meal 5 (e.g., Post-Workout), 2025-05-03
+(4, 5, '2025-05-03', 2, 'grams', 600, 45, 70, 18, 8, 30),
+-- User 5 (horia), Meal 6 (e.g., Pre-Workout), 2025-05-03
+(5, 6, '2025-05-03', 1, 'grams', 200, 10, 25, 6, 3, 12),
+-- User 6 (calin), Meal 7 (e.g., Dessert), 2025-05-04
+(6, 7, '2025-05-04', 1, 'grams', 350, 10, 40, 12, 4, 28),
+-- User 7 (aetra), Meal 1 (e.g., Breakfast), 2025-05-04
+(7, 1, '2025-05-04', 1, 'grams', 250, 15, 20, 8, 4, 18),
+-- User 8 (a), Meal 2 (e.g., Lunch), 2025-05-05
+(8, 2, '2025-05-05', 1.5, 'grams', 400, 30, 35, 10, 5, 22),
+-- User 9 (ab), Meal 3 (e.g., Dinner), 2025-05-05
+(9, 3, '2025-05-05', 1, 'grams', 180, 7, 12, 4, 2, 8),
+-- User 10 (a a), Meal 4 (e.g., Snack), 2025-05-06
+(10, 4, '2025-05-06', 2, 'grams', 200, 12, 25, 5, 3, 10);
+
+INSERT INTO serving_units (unit_name) 
+VALUES
+('grams');
+
+-- Sample data for meals
+INSERT INTO meals (u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings, protein, calories, carbohydrates, fat, fiber, sugar, photo_link)
+VALUES
+-- User 0 (admin), Meal 1 (e.g., Breakfast), 10 minutes preparation time, 1 serving
+(0, 'Scrambled Eggs', 'Whisk eggs with milk, cook on a pan with butter, season with salt and pepper.', 1, 1, 1, 10, 1, 15, 180, 2, 12, 1, 1, 'https://example.com/scrambled-eggs.jpg'),
+-- User 1 (darius), Meal 2 (e.g., Lunch), 30 minutes preparation time, 2 servings
+(1, 'Chicken Salad', 'Grill chicken, mix with lettuce, cucumbers, tomatoes, and vinaigrette.', 2, 2, 2, 30, 2, 35, 400, 10, 50, 18, 5, 'https://example.com/chicken-salad.jpg'),
+-- User 2 (marius), Meal 3 (e.g., Dinner), 45 minutes preparation time, 3 servings
+(2, 'Grilled Salmon', 'Marinate salmon with olive oil, lemon, and herbs. Grill for 20 minutes.', 3, 1, 3, 45, 3, 50, 500, 4, 10, 35, 2, 'https://example.com/grilled-salmon.jpg'),
+-- User 3 (leo), Meal 4 (e.g., Snack), 5 minutes preparation time, 1 serving
+(3, 'Greek Yogurt with Honey', 'Mix Greek yogurt with honey and top with almonds.', 1, 3, 4, 5, 1, 12, 180, 15, 10, 8, 3, 'https://example.com/greek-yogurt.jpg'),
+-- User 4 (sorin), Meal 5 (e.g., Post-Workout), 15 minutes preparation time, 2 servings
+(4, 'Protein Shake', 'Blend whey protein, banana, milk, and ice for a post-workout shake.', 4, 2, 5, 15, 2, 25, 300, 35, 40, 5, 10, 'https://example.com/protein-shake.jpg'),
+-- User 5 (horia), Meal 6 (e.g., Pre-Workout), 10 minutes preparation time, 1 serving
+(5, 'Oatmeal with Peanut Butter', 'Cook oats and stir in peanut butter, drizzle with honey.', 2, 1, 1, 10, 1, 12, 350, 30, 50, 10, 8, 'https://example.com/oatmeal.jpg'),
+-- User 6 (calin), Meal 7 (e.g., Dessert), 25 minutes preparation time, 4 servings
+(6, 'Chocolate Cake', 'Mix cocoa powder, flour, eggs, sugar, and butter. Bake at 180C for 20 minutes.', 3, 2, 6, 25, 4, 50, 500, 45, 60, 30, 35, 'https://example.com/chocolate-cake.jpg'),
+-- User 7 (aetra), Meal 8 (e.g., Breakfast), 20 minutes preparation time, 1 serving
+(7, 'Avocado Toast', 'Toast bread, mash avocado with lemon and season with salt and pepper.', 1, 1, 1, 20, 1, 10, 300, 20, 30, 18, 2, 'https://example.com/avocado-toast.jpg'),
+-- User 8 (a), Meal 9 (e.g., Lunch), 15 minutes preparation time, 1.5 servings
+(8, 'Pasta with Tomato Sauce', 'Cook pasta, heat tomato sauce, combine and season with garlic.', 2, 3, 2, 15, 1.5, 25, 350, 60, 50, 12, 4, 'https://example.com/pasta-tomato-sauce.jpg'),
+-- User 9 (ab), Meal 10 (e.g., Dinner), 30 minutes preparation time, 2 servings
+(9, 'Steak with Vegetables', 'Grill steak to your liking, sauté vegetables with olive oil.', 4, 1, 3, 30, 2, 40, 600, 10, 12, 45, 5, 'https://example.com/steak-vegetables.jpg'),
+-- User 10 (a a), Meal 11 (e.g., Snack), 10 minutes preparation time, 1 serving
+(10, 'Smoothie', 'Blend mixed berries, spinach, banana, and almond milk.', 2, 3, 4, 10, 1, 10, 250, 30, 45, 5, 6, 'https://example.com/smoothie.jpg');
+
+select * from users

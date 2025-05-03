@@ -22,9 +22,7 @@ namespace SocialApp.Repository
     /// </summary>
     public partial class GroupRepository : IGroupRepository
     {
-        private string loginString = "Data Source=vm;" +
-     "Initial Catalog=team_babes;" +
-     "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private string loginString = "Server=DESKTOP-M2TF6Q6\\SQLEXPRESS;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 
