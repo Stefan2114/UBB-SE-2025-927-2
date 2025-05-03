@@ -7,9 +7,7 @@
 
     public class UserRepository : IUserRepository
     {
-        private const string ConnectionString = "Data Source=vm;" +
-            "Initial Catalog=team_babes;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+        private const string ConnectionString = "Server=DESKTOP-M2TF6Q6\\SQLEXPRESS;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
         private readonly SqlConnection connection;
 
 

@@ -1,9 +1,14 @@
 ﻿namespace AppCommonClasses.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     public class Meal
     {
+        [Key]
+        [Column("dm_id")]
+        public int m_id { get; set; }
         public string Name { get; set; }
 
         public string Ingredients { get; set; }
