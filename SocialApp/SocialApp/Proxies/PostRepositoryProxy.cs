@@ -47,7 +47,6 @@ namespace SocialApp.Proxies
             return this.httpClient.GetFromJsonAsync<List<Post>>($"user/{userId}").Result!;
         }
 
-
         public List<Post> GetPostsGroupsFeed(long userId)
         {
             return this.httpClient.GetFromJsonAsync<List<Post>>($"groupfeed/{userId}").Result!;
