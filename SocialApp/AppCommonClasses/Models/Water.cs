@@ -12,6 +12,6 @@
 
         public float WaterIntake { get; set; } // Amount of water consumed
 
-        required public virtual User User { get; set; } // Navigation property
+         public virtual User User { get; set; } // Navigation property
     }
 }
