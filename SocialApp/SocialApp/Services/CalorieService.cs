@@ -1,52 +1,33 @@
-﻿using AppCommonClasses.Interfaces;
-using SocialApp.Interfaces;
-using SocialApp.Queries;
-using System.Data.SqlClient;
-
-namespace SocialApp.Services
+﻿namespace SocialApp.Services
 {
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
+
     public class CalorieService : ICalorieService
     {
-        private readonly IDataLink _dataLink;
+        private readonly ICalorieRepository calorieRepo;
 
-        public CalorieService()
+        public CalorieService(ICalorieRepository calorieRepository)
         {
-            _dataLink = DataLink.Instance;
+            this.calorieRepo = calorieRepository;
         }
 
-        public CalorieService(IDataLink dataLink)
+        public double GetGoal(long userId)
         {
-            _dataLink = dataLink;
+            var calories = this.calorieRepo.GetCaloriesByUserId(userId);
+            return calories?.DailyIntake ?? 0; // Assuming DailyIntake is the "Goal"
         }
 
-        public float GetGoal(int userId)
+        public double GetFood(long userId)
         {
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@UserId", userId)
-            };
-
-            return _dataLink.ExecuteScalar<float>("SELECT dbo.get_calorie_goal(@UserId)", parameters, false);
+            var calories = this.calorieRepo.GetCaloriesByUserId(userId);
+            return calories?.CaloriesConsumed ?? 0; // Assuming CaloriesConsumed is the "Food"
         }
 
-        public float GetFood(int userId)
+        public double GetExercise(long userId)
         {
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@UserId", userId)
-            };
-
-            return _dataLink.ExecuteScalar<float>("SELECT dbo.get_calorie_food(@UserId)", parameters, false);
-        }
-
-        public float GetExercise(int userId)
-        {
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@UserId", userId)
-            };
-
-            return _dataLink.ExecuteScalar<float>("SELECT dbo.get_calorie_exercise(@UserId)", parameters, false);
+            var calories = this.calorieRepo.GetCaloriesByUserId(userId);
+            return calories?.CaloriesBurned ?? 0; // Assuming CaloriesBurned is the "Exercise"
         }
     }
 }
