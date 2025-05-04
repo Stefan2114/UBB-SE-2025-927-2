@@ -18,7 +18,7 @@ namespace SocialApp.Proxies
         public CookingPageRepositoryProxy()
         {
             this.httpClient = new HttpClient();
-            this.httpClient.BaseAddress = new Uri("https://localhost:7106/cooking/");
+            this.httpClient.BaseAddress = new Uri("https://localhost:5281/cooking/");
         }
 
         public CookingPage GetByUserId(int userId)

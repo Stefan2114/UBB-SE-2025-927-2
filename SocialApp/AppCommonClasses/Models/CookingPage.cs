@@ -9,7 +9,7 @@ namespace AppCommonClasses.Models
         public int Id { get; set; }
         
         [Required]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         
         [Required]
         public int CookingSkillId { get; set; }
