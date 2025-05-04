@@ -2,10 +2,10 @@ namespace SocialApp.Interfaces
 {
     public interface ICalorieService
     {
-        float GetGoal(int userId);
+        double GetGoal(long userId);
 
-        float GetFood(int userId);
+        double GetFood(long userId);
 
-        float GetExercise(int userId);
+        double GetExercise(long userId);
     }
 }
