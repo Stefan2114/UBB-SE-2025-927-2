@@ -19,8 +19,6 @@ namespace Server.Data
         public DbSet<Calorie> Calories { get; set; } = default!; 
         public DbSet<UserModel> Users { get; set; } = default!;
 
-        public DbSet<UserModel> Users { get; set; } = default!;
-
         public DbSet<Goal> Goals { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

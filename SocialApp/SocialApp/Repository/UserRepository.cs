@@ -7,7 +7,9 @@
 
     public class UserRepository : IUserRepository
     {
-        private const string ConnectionString = "Server=DESKTOP-PFD6LKS\\SQLEXPRESS;Database=Social_App_Bun2;Trusted_Connection=True;TrustServerCertificate=True;";
+        private const string ConnectionString = "Data Source=PAUL;" +
+            "Initial Catalog=MealSocialApp;" +
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
         private readonly SqlConnection connection;
 
 
