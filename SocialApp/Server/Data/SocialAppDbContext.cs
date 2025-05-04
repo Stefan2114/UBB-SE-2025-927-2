@@ -11,7 +11,6 @@ namespace Server.Data
         {
         }
 
-        public DbSet<Water> WaterTrackers { get; set; } = default!;
         public DbSet<Post> Posts { get; set; } = default!;
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
