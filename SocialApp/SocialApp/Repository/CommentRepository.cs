@@ -8,7 +8,7 @@ namespace SocialApp.Repository
 {
     public class CommentRepository : ICommentRepository
     {
-        private string loginString = "Data Source=LAPTOP-ANDU\\SQLEXPRESS;" +
+        private string loginString = "Data Source=PAUL;" +
             "Initial Catalog=SocialApp;" +
             "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
