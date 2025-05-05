@@ -65,6 +65,11 @@ namespace Server.Repos
             return this.dbContext.Users.First(u => u.Id == id);
         }
 
+        public UserModel GetByUsername(string username)
+        {
+            return this.dbContext.Users.First(u => u.Name == username);
+        }
+
         public List<UserModel> GetUserFollowers(long id)
         {
             List<UserModel> userFollowers = new List<UserModel>();
