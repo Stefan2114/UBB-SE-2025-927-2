@@ -7,8 +7,7 @@
 
     public class UserRepository : IUserRepository
     {
-
-        private const string ConnectionString = "Data Source=PAUL;" +
+        private const string ConnectionString = "Data Source=BOGDAN;" +
             "Initial Catalog=MealSocialApp;" +
             "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
 

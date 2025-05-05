@@ -10,7 +10,9 @@
     {
 
 
-        private string loginString = "Server=DESKTOP-PFD6LKS\\SQLEXPRESS;Database=Social_App_Bun2;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string loginString = "Data Source=BOGDAN;" +
+     "Initial Catalog=MealSocialApp;" +
+     "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         private SqlConnection connection;
 

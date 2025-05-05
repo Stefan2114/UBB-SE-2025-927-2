@@ -7,13 +7,13 @@ namespace AppCommonClasses.Interfaces
     {
         void DeleteById(long id);
         void Follow(long userId, long whoToFollowId);
-        List<User> GetAll();
-        User GetByEmail(string email);
-        User GetById(long id);
-        List<User> GetUserFollowers(long id);
-        List<User> GetUserFollowing(long id);
-        void Save(User entity);
+        List<UserModel> GetAll();
+        UserModel GetByEmail(string email);
+        UserModel GetById(long id);
+        List<UserModel> GetUserFollowers(long id);
+        List<UserModel> GetUserFollowing(long id);
+        void Save(UserModel entity);
         void Unfollow(long userId, long whoToUnfollowId);
-        void UpdateById(long id, string username, string email, string passwordHash, string? image);
+        void UpdateById(long id, string username, string email);
     }
 }
