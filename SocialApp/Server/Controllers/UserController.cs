@@ -51,7 +51,7 @@ namespace Server.Controllers
         [HttpGet("users/{username}")]
         public ActionResult<User> GetUserByUsername(string username)
         {
-            return this.userRepository.GetByEmail(username);
+            return this.userRepository.GetByUsername(username);
         }
 
         [HttpGet("users/{userId}/followers")]
