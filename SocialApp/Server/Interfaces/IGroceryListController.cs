@@ -5,10 +5,10 @@ namespace Server.Interfaces
 {
     public interface IGroceryListController
     {
-        Task<ActionResult<List<GroceryIngredient>>> GetIngredientsForUser(int userId);
+        Task<ActionResult<List<GroceryIngredient>>> GetIngredientsForUser(long userId);
 
-        Task<IActionResult> UpdateIsChecked(int userId, int ingredientId, [FromBody] bool isChecked);
+        Task<IActionResult> UpdateIsChecked(long userId, int ingredientId, [FromBody] bool isChecked);
 
-        Task<ActionResult<GroceryIngredient>> AddIngredientToUser(int userId, [FromBody] GroceryIngredient request);
+        Task<ActionResult<GroceryIngredient>> AddIngredientToUser(long userId, [FromBody] GroceryIngredient request);
     }
 }

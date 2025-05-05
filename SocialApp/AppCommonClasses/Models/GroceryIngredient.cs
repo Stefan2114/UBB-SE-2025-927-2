@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AppCommonClasses.Models
@@ -9,7 +10,8 @@ namespace AppCommonClasses.Models
     {
         [Key]
         [Column("u_id")]
-        public int Id { get; set; }
+        [JsonIgnore]
+        public long Id { get; set; }
 
         [Column("i_id")]
         public int IngredientId { get; set; }

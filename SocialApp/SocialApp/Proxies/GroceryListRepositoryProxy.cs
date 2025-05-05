@@ -19,7 +19,7 @@ namespace SocialApp.Proxies
             this.httpClient.BaseAddress = new Uri("https://localhost:7106/grocery-list/");
         }
 
-        public async Task<GroceryIngredient> AddIngredientToUser(int userId, GroceryIngredient ingredient)
+        public async Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient)
         {
             ingredient.Id = userId;
             var response = await this.httpClient.PostAsJsonAsync($"{userId}/add", ingredient);
@@ -32,7 +32,7 @@ namespace SocialApp.Proxies
             return result ?? GroceryIngredient.defaultIngredient;
         }
 
-        public async Task<List<GroceryIngredient>> GetIngredientsForUser(int userId)
+        public async Task<List<GroceryIngredient>> GetIngredientsForUser(long userId)
         {
             var response = await this.httpClient.GetAsync($"{userId}");
 
@@ -45,7 +45,7 @@ namespace SocialApp.Proxies
             return ingredients ?? new List<GroceryIngredient>();
         }
 
-        public async Task UpdateIsChecked(int userId, int ingredientId, bool isChecked)
+        public async Task UpdateIsChecked(long userId, int ingredientId, bool isChecked)
         {
             var response = await this.httpClient.PostAsJsonAsync(
                 $"{userId}/ingredient/{ingredientId}/check",

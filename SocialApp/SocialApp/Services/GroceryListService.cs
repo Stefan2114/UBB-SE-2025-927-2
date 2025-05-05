@@ -29,7 +29,7 @@
                     if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                     {
                         var item = s as GroceryIngredient ?? GroceryIngredient.defaultIngredient;
-                        _ = this.UpdateIsChecked(userId, item.Id, item.IsChecked);
+                        _ = this.UpdateIsChecked(userId, item.IngredientId, item.IsChecked);
                     }
                 };
             }
@@ -64,7 +64,7 @@
             }
 
             // GroceryIngredient r = await this.gR.AddIngredientToUser(userId, ingredient);
-            return await this.groceryRepository.AddIngredientToUser(userId, r);
+            return await this.groceryRepository.AddIngredientToUser(userId, ingredient);
         }
     }
 }

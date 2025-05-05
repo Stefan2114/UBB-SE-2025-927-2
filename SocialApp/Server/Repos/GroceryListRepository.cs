@@ -17,13 +17,13 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<List<GroceryIngredient>> GetIngredientsForUser(int userId)
+        public async Task<List<GroceryIngredient>> GetIngredientsForUser(long userId)
         {
             var ingredients = await this.dbContext.GroceryIngredients.Where(i => i.Id == userId).ToListAsync();
             return ingredients;
         }
 
-        public async Task UpdateIsChecked(int userId, int ingredientId, bool isChecked)
+        public async Task UpdateIsChecked(long userId, int ingredientId, bool isChecked)
         {
             GroceryIngredient? toUpdate = await this.dbContext.GroceryIngredients.FirstOrDefaultAsync(item => item.Id == userId && item.IngredientId == ingredientId);
 
@@ -34,7 +34,7 @@
             }
         }
 
-        public async Task<GroceryIngredient> AddIngredientToUser(int userId, GroceryIngredient ingredient)
+        public async Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient)
         {
             Ingredient? result = await this.dbContext.Ingredient.FirstOrDefaultAsync(i => i.Name == ingredient.Name);
 
@@ -44,19 +44,20 @@
                 {
                     Name = ingredient.Name,
                     Category = "Uncategorized",
+                    UserId = userId,
                 };
                 this.dbContext.Ingredient.Add(result);
                 await this.dbContext.SaveChangesAsync();
             }
 
-            bool exists = this.dbContext.Ingredient.Any(gl => gl.UserId == userId && gl.Id == ingredient.Id);
+            bool exists = this.dbContext.Ingredient.Any(gl => gl.UserId == userId && gl.Id == result.Id);
 
             if (!exists)
             {
                 var groceryItem = new GroceryIngredient
                 {
                     Id = userId,
-                    IngredientId = ingredient.IngredientId,
+                    IngredientId = result.Id,
                     IsChecked = false,
                 };
                 this.dbContext.GroceryIngredients.Add(groceryItem);

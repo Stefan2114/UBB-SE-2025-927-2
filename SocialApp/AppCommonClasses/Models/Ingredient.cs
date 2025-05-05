@@ -11,7 +11,7 @@
         public int Id { get; set; }
 
         [Column("u_id")]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
 
         [Column("i_name")]
         public string Name { get; set; }
@@ -20,24 +20,24 @@
         public string Category { get; set; }
 
         [Column("calories")]
-        public float Calories { get; set; }
+        public double Calories { get; set; }
 
         [Column("protein")]
-        public float Protein { get; set; }
+        public double Protein { get; set; }
 
         [Column("carbohydrates")]
-        public float Carbs { get; set; }
+        public double Carbs { get; set; }
 
         [Column("fat")]
-        public float Fats { get; set; }
+        public double Fats { get; set; }
 
         [Column("fiber")]
-        public float Fiber { get; set; }
+        public double Fiber { get; set; }
 
         [Column("sugar")]
-        public float Sugar { get; set; }
+        public double Sugar { get; set; }
 
-        public Ingredient(int id, string name, string category, float calories, float protein, float carbs, float fats, float fiber, float sugar)
+        public Ingredient(int id, string name, string category, double calories, double protein, double carbs, double fats, double fiber, double sugar)
         {
             Id = id;
             Name = name;

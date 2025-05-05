@@ -4,8 +4,8 @@ namespace AppCommonClasses.Interfaces
 {
     public interface IGroceryListRepository
     {
-        Task<List<GroceryIngredient>> GetIngredientsForUser(int userId);
-        Task UpdateIsChecked(int userId, int ingredientId, bool isChecked);
-        Task<GroceryIngredient> AddIngredientToUser(int userId, GroceryIngredient ingredient);
+        Task<List<GroceryIngredient>> GetIngredientsForUser(long userId);
+        Task UpdateIsChecked(long userId, int ingredientId, bool isChecked);
+        Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient);
     }
 }

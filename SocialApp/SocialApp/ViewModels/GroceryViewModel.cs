@@ -96,7 +96,7 @@
                 if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
                 {
                     var ing = (GroceryIngredient)s;
-                    _ = this.service.UpdateIsChecked(userId, ing.Id, ing.IsChecked);
+                    _ = this.service.UpdateIsChecked(userId, ing.IngredientId, ing.IsChecked);
                 }
             };
 

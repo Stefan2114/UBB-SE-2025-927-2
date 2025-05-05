@@ -19,7 +19,7 @@ namespace Server.Data
 
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
         public DbSet<UserModel> Users { get; set; } = default!;
-        public DbSet<Calorie> Calories { get; set; } = default!; 
+        public DbSet<Calorie> Calories { get; set; } = default!;
         public DbSet<Meal> Meals { get; set; } = default!;
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
@@ -41,10 +41,10 @@ namespace Server.Data
                 .HasConversion<int>();
 
             modelBuilder.Entity<GroceryIngredient>()
-                .HasKey(groceryIngredient => new { groceryIngredient.Id });
+                .HasKey(groceryIngredient => new { groceryIngredient.Id, groceryIngredient.IngredientId });
 
             modelBuilder.Entity<Ingredient>().HasKey(ingredient => new { ingredient.Id });
-            
+
             modelBuilder.Entity<Calorie>()
                 .HasOne(c => c.User)
                 .WithMany()  // Assuming a one-to-many relationship from User to Calorie
