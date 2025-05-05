@@ -2,10 +2,13 @@
 {
     public interface IWaterIntakeRepository
     {
-        void AddUserIfNotExists(int userId);
-
-        float GetWaterIntake(int userId);
-
-        void UpdateWaterIntake(int userId, float newIntake);
+        void AddUserIfNotExists(long userId);
+        double GetWaterIntake(long userId);
+        void UpdateWaterIntake(long userId, double newIntake);
+        void RemoveWater300(long userId);
+        void RemoveWater400(long userId);
+        void RemoveWater500(long userId);
+        void RemoveWater750(long userId);
     }
+
 }
