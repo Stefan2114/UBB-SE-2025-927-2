@@ -31,6 +31,7 @@ namespace Server.Controllers
         {
           "name": "Chicken Salad",
           "ingredients": "Chicken, Lettuce, Tomatoes",
+          "mt_id": 3,
           "calories": 350,
           "category": "Salad",
           "protein": 30,
