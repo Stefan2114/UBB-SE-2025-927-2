@@ -167,12 +167,12 @@
 
             MealName = meal.Name;
             CookingTime = $"{meal.PreparationTime} min";
-            CalorieCount = meal.Calories;
-            ProteinGrams = meal.Protein;
-            CarbohydrateGrams = meal.Carbohydrates;
-            FatGrams = meal.Fat;
-            FiberGrams = meal.Fiber;
-            SugarGrams = meal.Sugar;
+            CalorieCount = (int)meal.Calories;
+            ProteinGrams = (int)meal.Protein;
+            CarbohydrateGrams = (int)meal.Carbohydrates;
+            FatGrams = (int)meal.Fat;
+            FiberGrams = (int)meal.Fiber;
+            SugarGrams = (int)meal.Sugar;
 
             if (!string.IsNullOrEmpty(meal.Ingredients))
             {

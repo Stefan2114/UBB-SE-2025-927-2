@@ -1,34 +1,55 @@
-﻿namespace AppCommonClasses.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AppCommonClasses.Enums;
+
+namespace AppCommonClasses.Models
 {
-    using System;
 
     public class Meal
     {
+        [Key]
+        [Column("m_id")]
+        public int Id { get; set; }
+
+        [Column("m_name")]
         public string Name { get; set; }
+
+        [Column("mt_id")]
+        public int Mt_id { get; set; } // MealTypeId
 
         public string Ingredients { get; set; }
 
-        public int Calories { get; set; }
+        [Column("calories")]
+        public double Calories { get; set; }
+
 
         public string Category { get; set; }
 
-        public int Protein { get; set; }
+        public double Protein { get; set; }
 
-        public int Carbohydrates { get; set; }
+        public double Carbohydrates { get; set; }
 
-        public int Fat { get; set; }
+        public double Fat { get; set; }
 
-        public int Fiber { get; set; }
+        public double Fiber { get; set; }
 
-        public int Sugar { get; set; }
+        public double Sugar { get; set; }
 
+        [Column("photo_link")]
         public string PhotoLink { get; set; }
 
         public string Recipe { get; set; }
 
-        public int PreparationTime { get; set; }
+        [Column("preparation_time")]
+        public double PreparationTime { get; set; }
 
-        public int Servings { get; set; }
+        [Column("servings")]
+        public double Servings { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
