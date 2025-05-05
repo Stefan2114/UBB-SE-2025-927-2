@@ -8,6 +8,7 @@
     public class UserRepository : IUserRepository
     {
         private const string ConnectionString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
+
         private readonly SqlConnection connection;
 
 

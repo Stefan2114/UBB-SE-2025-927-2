@@ -8,10 +8,10 @@
     {
         [Key]
         [ForeignKey("User")]
-        public int U_Id { get; set; } // Foreign key from Users table
+        public long U_Id { get; set; } // Foreign key from Users table
 
-        public float WaterIntake { get; set; } // Amount of water consumed
+        public double water_intake { get; set; } // Amount of water consumed
 
-        required public virtual User User { get; set; } // Navigation property
+         public virtual User User { get; set; } // Navigation property
     }
 }

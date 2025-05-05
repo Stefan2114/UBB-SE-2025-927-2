@@ -74,6 +74,9 @@ namespace SocialApp.Pages
                     Name = this.viewModel.MealName,
                     Recipe = this.viewModel.Directions.Count > 0 ? string.Join("\n", viewModel.Directions) : "No directions provided",
                     Category = this.viewModel.SelectedMealType ?? "Other",
+                    Mt_id = this.viewModel.SelectedMealType == "Breakfast" ? 1 :
+                            this.viewModel.SelectedMealType == "Lunch" ? 2 :
+                            this.viewModel.SelectedMealType == "Dinner" ? 3 : 4,
                     CookingLevel = this.viewModel.SelectedCookingLevel ?? "Beginner",
                     PreparationTime = int.TryParse(this.viewModel.CookingTime, out int time) ? time : 0,
                     PhotoLink = this.viewModel.SelectedImage?.Path ?? "default.jpg",
@@ -84,6 +87,9 @@ namespace SocialApp.Pages
                     Fiber = this.viewModel.TotalFiber,
                     Sugar = this.viewModel.TotalSugar,
                     CreatedAt = DateTime.Now,
+                    Ingredients = "",
+                    ImagePath = this.viewModel.SelectedImage?.Path ?? "/images/default.jpg",
+                    Image = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 },
                 };
 
                 bool success = await viewModel.CreateMealAsync(meal);

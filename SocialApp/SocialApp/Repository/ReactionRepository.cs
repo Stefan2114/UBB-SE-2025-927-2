@@ -9,7 +9,6 @@
     public class ReactionRepository : IReactionRepository
     {
 
-
         private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
