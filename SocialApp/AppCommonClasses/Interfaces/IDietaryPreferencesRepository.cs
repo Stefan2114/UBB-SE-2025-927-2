@@ -2,7 +2,9 @@
 {
     public interface IDietaryPreferencesRepository
     {
-        [Obsolete]
-        void AddAllergyAndDietaryPreference(string firstName, string lastName, string dietaryPreference, string allergy);
+        void AddUserDietaryPreferenceIfNotExists(long userId, string dietaryPreference);
+        string GetUserDietaryPreference(long userId);
+        void UpdateUserDietaryPreference(long userId, string newDietaryPreference);
+        void RemoveUserDietaryPreference(long userId);
     }
 }

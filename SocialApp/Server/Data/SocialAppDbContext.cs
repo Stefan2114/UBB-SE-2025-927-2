@@ -21,6 +21,8 @@ namespace Server.Data
 
         public DbSet<Goal> Goals { get; set; } = default!;
 
+        public DbSet<DietaryPreferenceModel> DietaryPreferences { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GroupUser>()

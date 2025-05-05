@@ -10,7 +10,7 @@
     {
 
 
-        private string loginString = "Server=DESKTOP-PFD6LKS\\SQLEXPRESS;Database=Social_App_Bun2;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string loginString = "Server=CATALIN\\SQLEXPRESS;Database=TeamBabesDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 
