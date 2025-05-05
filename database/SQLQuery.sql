@@ -1,4 +1,5 @@
--- Meal Planner Tables
+﻿-- Meal Planner Tables
+use [SocialApp]
 
 create table goals (
 	g_id int primary key identity (1,1),
@@ -24,6 +25,51 @@ create table activity_levels (
 	al_id int primary key identity(1,1),
 	al_description varchar(150) not null
 )
+
+--Rulez de aici
+
+CREATE TABLE Users (
+    Id BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
+    UserName VARCHAR(256) UNIQUE NOT NULL,
+    Email VARCHAR(256) NOT NULL CONSTRAINT DF_Users_Email DEFAULT '',
+    PasswordHash VARCHAR(MAX) NOT NULL CONSTRAINT DF_Users_PasswordHash DEFAULT '',
+    Image VARCHAR(MAX),
+
+    u_height FLOAT NOT NULL DEFAULT 0,
+    u_weight FLOAT NOT NULL DEFAULT 0,
+    target_weight FLOAT,
+
+    g_id INT FOREIGN KEY REFERENCES goals(g_id),
+    cs_id INT FOREIGN KEY REFERENCES cooking_skills(cs_id),
+    dp_id INT FOREIGN KEY REFERENCES dietary_preferences(dp_id),
+    a_id INT FOREIGN KEY REFERENCES allergies(a_id),
+    al_id INT FOREIGN KEY REFERENCES activity_levels(al_id)
+);
+INSERT INTO [dbo].[Users] (
+    UserName, Email, PasswordHash, Image,
+    u_height, u_weight, target_weight,
+    g_id, cs_id, dp_id, a_id, al_id
+)
+VALUES 
+('admin', 'admin@gmail.com', 'admin', 'https://example.com/images/admin.jpg', 180, 75, 70, NULL, NULL, NULL, NULL, NULL),
+('darius', 'darius@gmail.com', 'password123', 'https://example.com/images/darius.jpg', 175, 70, 68, NULL, NULL, NULL, NULL, NULL),
+('marius', 'marius@gmail.com', 'password123', 'https://example.com/images/marius.jpg', 178, 73, 70, NULL, NULL, NULL, NULL, NULL),
+('leo', 'leo@gmail.com', 'password123', 'https://example.com/images/leo.jpg', 182, 80, 75, NULL, NULL, NULL, NULL, NULL),
+('sorin', 'sorin@gmail.com', 'password123', 'https://example.com/images/sorin.jpg', 170, 65, 63, NULL, NULL, NULL, NULL, NULL),
+('horia', 'horia@gmail.com', 'password123', 'https://example.com/images/horia.jpg', 185, 85, 80, NULL, NULL, NULL, NULL, NULL),
+('calin', 'calin@gmail.com', 'password123', 'https://example.com/images/calin.jpg', 176, 72, 70, NULL, NULL, NULL, NULL, NULL);
+
+SET IDENTITY_INSERT [dbo].[Users] ON
+
+INSERT INTO [dbo].[Users] (
+    Id, UserName, Email, PasswordHash, Image,
+    u_height, u_weight, target_weight,
+    g_id, cs_id, dp_id, a_id, al_id
+)
+VALUES 
+(0, 'admin0', 'admin0@gmail.com', 'admin0', 'https://example.com/images/admin.jpg', 180, 75, 70, NULL, NULL, NULL, NULL, NULL);
+
+SET IDENTITY_INSERT [dbo].[Users] OFF
 
 create table calorie_trackers(
 	u_id BIGINT foreign key references Users(Id),
@@ -58,29 +104,97 @@ create table grocery_lists(
 	is_checked bit
 )
 
-create table meal_types(
-	mt_id int primary key identity(1,1),
-	m_description varchar(150) not null
-)
 
-create table meals(
-	m_id int primary key identity(1,1),
-	u_id BIGINT foreign key references Users(Id), --can be null
-	m_name varchar(150) not null,
-	recipe varchar(2000) not null,
-	cs_id int foreign key references cooking_skills(cs_id),
-	dp_id int foreign key references dietary_preferences(dp_id),
-	mt_id int foreign key references meal_types(mt_id),
-	preparation_time float,
-	servings float,
-	protein float,
-	calories float,
-	carbohydrates float,
-	fat float,
-	fiber float,
-	sugar float,	
-	photo_link varchar(1000)
+CREATE TABLE meals (
+    m_id INT PRIMARY KEY IDENTITY(1,1),
+    u_id BIGINT FOREIGN KEY REFERENCES Users(Id), -- Can be NULL
+    m_name VARCHAR(150) NOT NULL,
+    recipe VARCHAR(2000) NOT NULL,
+    cs_id INT FOREIGN KEY REFERENCES cooking_skills(cs_id),
+    dp_id INT FOREIGN KEY REFERENCES dietary_preferences(dp_id),
+    mt_id INT FOREIGN KEY REFERENCES meal_types(mt_id),
+    preparation_time FLOAT,
+    servings FLOAT,
+    protein INT,
+    calories INT,
+    carbohydrates INT,
+    fat INT,
+    fiber INT,
+    sugar INT,
+    photo_link VARCHAR(1000),
+);
+ALTER TABLE meals ADD Ingredients VARCHAR(2000);
+ALTER TABLE meals ADD Category VARCHAR(100);
+ALTER TABLE meals ADD CreatedAt DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE meals ADD CookingLevel VARCHAR(100);
+ALTER TABLE meals ADD Image VARBINARY(MAX);
+ALTER TABLE meals ADD ImagePath VARCHAR(1000);
+SELECT COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'meals';
+select * from ingredients
+select * from meals
+delete from meals where recipe = 'No directions provided'
+-- Entry 1
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
 )
+VALUES (
+    1, -- existing user ID
+    'Grilled Chicken Salad',
+    '1. Grill the chicken breast. 2. Toss with fresh greens and vinaigrette.',
+    2, -- existing cooking skill ID
+    3, -- existing dietary preference ID
+    1, -- existing meal type ID (e.g., lunch)
+    25.0,
+    2.0,
+    35,
+    400,
+    20,
+    15,
+    5,
+    6,
+    'https://example.com/images/grilled-chicken-salad.jpg',
+    'Chicken breast, lettuce, tomatoes, olive oil, lemon juice, salt, pepper',
+    'Salad',
+    GETDATE(),
+    'Intermediate',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\grilled-chicken-salad.jpg'
+);
+
+-- Entry 2
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
+)
+VALUES (
+    2, -- existing user ID
+    'Vegan Lentil Soup',
+    '1. Sauté onions and garlic. 2. Add lentils, carrots, and broth. Simmer until cooked.',
+    1, -- beginner skill level
+    2, -- vegan preference
+    2, -- dinner
+    45.0,
+    4.0,
+    18,
+    350,
+    40,
+    8,
+    10,
+    4,
+    'https://example.com/images/vegan-lentil-soup.jpg',
+    'Lentils, carrots, onions, garlic, vegetable broth, spices',
+    'Soup',
+    GETDATE(),
+    'Beginner',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\vegan-lentil-soup.jpg'
+);
+
 
 create table meal_ingredient(
 	m_id int foreign key references meals(m_id),
@@ -118,6 +232,8 @@ CREATE TABLE daily_meals (
     FOREIGN KEY (u_id) REFERENCES Users(Id)  -- User foreign key can be null now
 );
 
+--De aici proceduri
+
 GO
 CREATE PROCEDURE InsertMealIngredient
     @mealId INT,
@@ -142,6 +258,8 @@ BEGIN
     WHERE g.u_id = @UserId
 END
 
+--De aici
+/*
 GO
 CREATE OR ALTER PROCEDURE sp_AddIngredientToUserList
     @UserId INT,
@@ -168,7 +286,7 @@ BEGIN
 
     SELECT @IngredientId AS i_id;
 END
-
+*/
 -- GETTERS
 
 go
@@ -517,6 +635,10 @@ BEGIN
     ORDER BY dm.date_eaten DESC, dm.dm_id DESC
 END
 
+--Pana aici
+
+select * from goals
+
 insert into goals(g_description) values 
 ('Lose weight'),
 ('Gain weight'),
@@ -566,41 +688,6 @@ INSERT INTO meal_types (m_description) VALUES
 ('Dessert');
 
 -- Social App Tables
-/*
-CREATE TABLE Users(
-	Id BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
-	UserName varchar(256) UNIQUE NOT NULL,
-	Email varchar(256) UNIQUE NOT NULL,
-	PasswordHash varchar(max) NOT NULL,
-	Image varchar(max)
-)
-*/
-
-CREATE TABLE Users(
-	Id BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
-	UserName varchar(256) UNIQUE NOT NULL,
-	Email varchar(256) UNIQUE NOT NULL,
-	PasswordHash varchar(max) NOT NULL,
-	Image varchar(max),
-);
-
-SELECT name 
-FROM sys.key_constraints 
-WHERE type = 'UQ' AND parent_object_id = OBJECT_ID('Users');
-
-ALTER TABLE Users ADD CONSTRAINT DefaultMail DEFAULT ' ' FOR Email;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__A9D10534D4B667CC;  --> To be changed
-ALTER TABLE Users DROP CONSTRAINT UQ__Users__C9F2845626437B6F;  --> To be changed
-ALTER TABLE Users ADD CONSTRAINT DefaultPassword DEFAULT ' ' FOR PasswordHash; --> To be changed
-
-	ALTER TABLE Users ADD u_height float not null default 0,
-	u_weight float not null default 0,
-    g_id int foreign key references goals(g_id),
-	cs_id int foreign key references cooking_skills(cs_id),
-	dp_id int foreign key references dietary_preferences(dp_id),
-	a_id int foreign key references allergies(a_id),
-	al_id int foreign key references activity_levels(al_id),
-	target_weight float
 
 CREATE TABLE Groups(
 	[Id] BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
@@ -618,9 +705,7 @@ CREATE TABLE [dbo].[Posts](
 	[UserId] BIGINT NOT NULL REFERENCES [Users](Id),
 	[Visibility] INT NOT NULL, 
 	[GroupId] BIGINT REFERENCES [Groups](Id) NOT NULL,
-	[Tag] INT NULL,
-
-	CONSTRAINT CHK_Post_Visibility CHECK ((Visibility = 4 AND GroupId IS NOT NULL) OR (Visibility <> 4 AND GroupId IS NULL) )
+	[Tag] INT NULL
 )
 
 CREATE TABLE [dbo].[Reactions](
@@ -661,14 +746,6 @@ ALTER TABLE [dbo].[Reactions] NOCHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[UserFollowers] NOCHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Users] NOCHECK CONSTRAINT ALL
 
-DELETE FROM [dbo].[Comments]
-DELETE FROM [dbo].[Groups]
-DELETE FROM [dbo].[GroupUsers]
-DELETE FROM [dbo].[Posts]
-DELETE FROM [dbo].[Reactions]
-DELETE FROM [dbo].[UserFollowers]
-DELETE FROM [dbo].[Users]
-
 ALTER TABLE [dbo].[Comments] WITH CHECK CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Groups] WITH CHECK CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[GroupUsers] WITH CHECK CHECK CONSTRAINT ALL
@@ -677,21 +754,21 @@ ALTER TABLE [dbo].[Reactions] WITH CHECK CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[UserFollowers] WITH CHECK CHECK CONSTRAINT ALL
 ALTER TABLE [dbo].[Users] WITH CHECK CHECK CONSTRAINT ALL
 
--- users
+-- Groups
+SET IDENTITY_INSERT [dbo].[Groups] ON
 
-SET IDENTITY_INSERT [dbo].[Users] ON
+INSERT INTO [dbo].[Groups] ([Id], [Name], [Image], [Description], [AdminId]) VALUES 
+	(0, 'Admin Group', NULL, 'Admin Group', 0),
+    (1, 'Morning Fitness Club', NULL, 'A group for early risers who love morning workouts.', 1),
+    (2, 'Strength Training Enthusiasts', NULL, 'Focuses on weightlifting and strength-building exercises.', 2),
+    (3, 'Yoga for Relaxation', NULL, 'A group for yoga lovers to practice and discuss techniques.', 3),
+    (4, 'Weekend Hikers', NULL, 'Organizing weekend hiking trips and outdoor adventures.', 4),
+    (5, 'Cardio Lovers', NULL, 'Dedicated to running, cycling, and all things cardio.', 5),
+    (6, 'CrossFit Community', NULL, 'For those passionate about CrossFit and intense workouts.', 6);
+
+SET IDENTITY_INSERT [dbo].[Groups] OFF
 
 
-INSERT INTO [dbo].[Users](Id,UserName, Email, PasswordHash) VALUES
-(0,'admin','admin@gmail.com','admin'),
-(1,'darius','darius@gmail.com','password123'),
-(2,'marius','marius@gmail.com','password123'),
-(3,'leo','leo@gmail.com','password123'),
-(4,'sorin','sorin@gmail.com','password123'),
-(5,'horia','horia@gmail.com','password123'),
-(6,'calin','calin@gmail.com','password123')
-
-SET IDENTITY_INSERT [dbo].[Users] OFF
 
 -- posts (that aren't on groups)
 
@@ -790,8 +867,6 @@ VALUES
 
 SET IDENTITY_INSERT [dbo].[Comments] ON
 
-select * from UserFollowers;
-
 --SELECT * FROM Posts WHERE UserId IN ((SELECT UserId FROM UserFollowers WHERE FollowerId = @UserId AND (PostVisibility = 2 OR PostVisibility = 3)) OR UserId = @UserId OR PostVisibility = 3
 
 INSERT INTO [dbo].[Comments] ([Id], [UserId], [PostId], [Content], [CreatedDate]) VALUES 
@@ -848,26 +923,11 @@ INSERT INTO [dbo].[Comments] ([Id], [UserId], [PostId], [Content], [CreatedDate]
 
 
 SET IDENTITY_INSERT [dbo].[Comments] OFF
-SELECT * FROM Posts
-select * from UserFollowers;
+
 -- Followers
 
 INSERT INTO [dbo].[UserFollowers] ([UserId],[FollowerId]) VALUES
 	(1,2),(1,3),(2,1),(2,3),(2,4),(3,1),(3,5),(3,6),(4,1),(4,2),(4,3),(5,1),(5,2),(5,3),(5,4),(6,1),(6,2),(6,3);
-
--- Groups
-SET IDENTITY_INSERT [dbo].[Groups] ON
-
-INSERT INTO [dbo].[Groups] ([Id], [Name], [Image], [Description], [AdminId]) VALUES 
-	(0, 'Admin Group', NULL, 'Admin Group', 0),
-    (1, 'Morning Fitness Club', NULL, 'A group for early risers who love morning workouts.', 1),
-    (2, 'Strength Training Enthusiasts', NULL, 'Focuses on weightlifting and strength-building exercises.', 2),
-    (3, 'Yoga for Relaxation', NULL, 'A group for yoga lovers to practice and discuss techniques.', 3),
-    (4, 'Weekend Hikers', NULL, 'Organizing weekend hiking trips and outdoor adventures.', 4),
-    (5, 'Cardio Lovers', NULL, 'Dedicated to running, cycling, and all things cardio.', 5),
-    (6, 'CrossFit Community', NULL, 'For those passionate about CrossFit and intense workouts.', 6);
-
-SET IDENTITY_INSERT [dbo].[Groups] OFF
 
 -- Group users
 
@@ -910,17 +970,6 @@ INSERT INTO [dbo].[Posts](Title,Content,CreatedDate,UserId,Visibility,Tag,GroupI
 ('Post 2 Group 6', 'How "vantablack" became the world''s darkest substance - and the artistic controversy surrounding its exclusive rights.', '2025-03-26 08:44:17', 5, 4, 4, 6)
 
 
-select * from Reactions;
-
-
-
-
-ALTER TABLE [dbo].[Posts]
-	DROP CONSTRAINT CHK_Post_Visibility
-
-
-
-
 GO
 CREATE OR ALTER PROCEDURE sp_userFollowers(@userId BIGINT)
 AS
@@ -934,21 +983,6 @@ AS
 	INNER JOIN 
 	[dbo].[Users] ON [dbo].[Users].Id = UserFollowers.Id 
 
--- sp_groupUsers
-
-
-
-
-
-
--- Insert Users
-INSERT INTO [dbo].[Users] ([UserName], [Email], [PasswordHash])
-VALUES 
-('User1', 'user1@example.com', 'hashedpassword1'),
-('User2', 'user2@example.com', 'hashedpassword2'),
-('User3', 'user3@example.com', 'hashedpassword3');
-
--- Insert Groups
 INSERT INTO [dbo].[Groups] ([Name], [AdminId])
 VALUES 
 ('Group1', 1),
@@ -979,23 +1013,8 @@ VALUES
 (2, 2, 'Interesting thoughts.', GETDATE()),
 (3, 3, 'I completely agree!', GETDATE());
 
--- Insert GroupUsers
-INSERT INTO [dbo].[GroupUsers] ([UserId], [GroupId])
-VALUES 
-(1, 1),
-(2, 2),
-(3, 3);
-
--- Insert UserFollowers
-INSERT INTO [dbo].[UserFollowers] ([UserId], [FollowerId])
-VALUES 
-(1, 2),
-(2, 3),
-(3, 1);
-
-select * from Posts
-
-
 update [dbo].[Posts]
 set GroupId = 0
 where GroupId is null
+
+select * from posts
