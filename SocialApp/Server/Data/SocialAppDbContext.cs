@@ -11,11 +11,10 @@ namespace Server.Data
         {
         }
 
-        public DbSet<Reaction> Reactions { get; set; } = default!;
         public DbSet<Post> Posts { get; set; } = default!;
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
-
+        public DbSet<Reaction> Reactions { get; set; } = default!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GroupUser>()
@@ -26,16 +25,6 @@ namespace Server.Data
             modelBuilder.Entity<Post>()
                 .Property(post => post.Visibility)
                 .HasConversion<int>();
-
-            modelBuilder.Entity<Reaction>(entity =>
-            {
-                // Composite primary key on UserId and PostId
-                entity.HasKey(r => new { r.UserId, r.PostId });
-
-                // Enum conversion for ReactionType to int in DB
-                entity.Property(r => r.Type)
-                      .HasConversion<int>();
-            });
         }
     }
 }
