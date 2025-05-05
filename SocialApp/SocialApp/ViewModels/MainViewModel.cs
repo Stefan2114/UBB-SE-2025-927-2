@@ -407,42 +407,42 @@ namespace SocialApp.ViewModels
 
         private void GoSocialMedia()
         {
-            NavigationService.Instance.NavigateTo(typeof(HomeScreen));
+            App.NavigationController.NavigateTo(typeof(HomeScreen));
         }
 
         private void GoDisplayMeals()
         {
-            NavigationService.Instance.NavigateTo(typeof(MealListPage));
+            App.NavigationController.NavigateTo(typeof(MealListPage));
         }
 
         private void GoCreateMeal()
         {
-            NavigationService.Instance.NavigateTo(typeof(CreateMealPage));
+            App.NavigationController.NavigateTo(typeof(CreateMealPage));
         }
 
         private void GoGroceryList()
         {
-            NavigationService.Instance.NavigateTo(typeof(GroceryListPage));
+            App.NavigationController.NavigateTo(typeof(GroceryListPage));
         }
 
         private void GoAddBreakfast()
         {
-            NavigationService.Instance.NavigateTo(typeof(AddFoodPage), "Breakfast");
+            App.NavigationController.NavigateTo(typeof(AddFoodPage), "Breakfast");
         }
 
         private void GoAddLunch()
         {
-            NavigationService.Instance.NavigateTo(typeof(AddFoodPage), "Lunch");
+            App.NavigationController.NavigateTo(typeof(AddFoodPage), "Lunch");
         }
 
         private void GoAddDinner()
         {
-            NavigationService.Instance.NavigateTo(typeof(AddFoodPage), "Dinner");
+            App.NavigationController.NavigateTo(typeof(AddFoodPage), "Dinner");
         }
 
         private void GoAddSnack()
         {
-            NavigationService.Instance.NavigateTo(typeof(AddFoodPage), "Snack");
+            App.NavigationController.NavigateTo(typeof(AddFoodPage), "Snack");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

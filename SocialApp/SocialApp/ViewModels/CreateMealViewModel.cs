@@ -234,7 +234,7 @@
 
         private void OnGoBack()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         private async void OnAddDirection()

@@ -51,7 +51,7 @@
 
         private void GoBack()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         private GoalPageService goalPageService = new GoalPageService();
@@ -88,7 +88,7 @@
         public void GoNext()
         {
             goalPageService.AddGoals(FirstName, LastName, SelectedGoal);
-            NavigationService.Instance.NavigateTo(typeof(ActivityLevelPage), this);
+            App.NavigationController.NavigateTo(typeof(ActivityLevelPage), this);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged; // Mark as nullable to avoid CS8618

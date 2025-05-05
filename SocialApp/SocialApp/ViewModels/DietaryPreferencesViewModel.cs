@@ -70,13 +70,13 @@
 
         private void BackAction()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         public void NextAction()
         {
             dietaryPreferencesService.AddAllergyAndDietaryPreference(FirstName, LastName, OtherDiet, Allergens);
-            NavigationService.Instance.NavigateTo(typeof(YoureAllSetPage), this);
+            App.NavigationController.NavigateTo(typeof(YoureAllSetPage), this);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -39,7 +39,7 @@ namespace SocialApp.Pages
             {
                 GroupId = id;
             }
-            TopBar.SetFrame(this.Frame);
+            App.NavigationController.NavigateTo(typeof(GroupPage));
             TopBar.SetNone();
         }
 

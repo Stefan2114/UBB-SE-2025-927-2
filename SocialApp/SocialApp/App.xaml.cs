@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using SocialApp.Controllers;
+using SocialApp.Interfaces;
 using SocialApp.Services;
 using SocialApp.ViewModels;
 using System;
@@ -16,13 +18,19 @@ namespace SocialApp
 
         public static IServiceProvider Services { get; private set; }
         public static Window CurrentWindow { get; private set; }
+        
+        public static NavigationController NavigationController => NavigationController.Instance;
 
         public App()
         {
             this.InitializeComponent();
             this.UnhandledException += OnUnhandledException;
+            
+            // Configure dependency injection
             var services = new ServiceCollection();
             services.AddSingleton<AppController>();
+            services.AddSingleton<INavigationController>(NavigationController);
+            
             Services = services.BuildServiceProvider();
         }
 
@@ -50,18 +58,18 @@ namespace SocialApp
                     rootFrame = new Frame();
                     Window.Content = rootFrame;
                 }
-
-                NavigationService.Instance.Initialize(rootFrame);
-
+                
+                NavigationController.Initialize(rootFrame);
+                
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(SocialApp.Pages.WelcomePage));
+                    NavigationController.NavigateTo(typeof(SocialApp.Pages.WelcomePage));
                 }
-
+                
                 // Initialize the shared ViewModel with the required MealService instance  
                 var mealService = new MealService(); // Ensure MealService is properly instantiated  
                 MealListViewModel = new MealListViewModel();
-
+                
                 Window.Activate();
             }
         }

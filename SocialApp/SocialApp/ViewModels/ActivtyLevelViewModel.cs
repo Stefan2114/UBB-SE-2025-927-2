@@ -33,7 +33,7 @@ namespace SocialApp.ViewModels
 
         private void GoBack()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         public string FirstName
@@ -76,7 +76,7 @@ namespace SocialApp.ViewModels
         public void GoNext()
         {
             activityPageService.AddActivity(FirstName, LastName, SelectedActivity);
-            NavigationService.Instance.NavigateTo(typeof(CookingLevelPage), this);
+            App.NavigationController.NavigateTo(typeof(CookingLevelPage), this);
         }
 
         public new event PropertyChangedEventHandler? PropertyChanged;

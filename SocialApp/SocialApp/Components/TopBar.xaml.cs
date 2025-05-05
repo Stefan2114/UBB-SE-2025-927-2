@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using SocialApp.Pages;
 using SocialApp.Windows;
 
@@ -9,18 +10,9 @@ namespace SocialApp.Components
 {
     public sealed partial class TopBar : UserControl
     {
-        private Frame frame;
-
         public TopBar()
         {
             this.InitializeComponent();
-        }
-
-        public void SetFrame(Frame frame)
-        {
-            this.frame = frame;
-            SetPhoto();
-            SetNavigationButtons();
         }
 
         private async void SetPhoto()
@@ -42,28 +34,31 @@ namespace SocialApp.Components
 
         private void HomeClick(object sender, RoutedEventArgs e)
         {
-            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
-            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            frame.Navigate(typeof(HomeScreen));
+            HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.Blue);
+            GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            
+            // Use App.NavigationController for navigation
+            App.NavigationController.NavigateTo(typeof(HomeScreen));
         }
 
         private void GroupsClick(object sender, RoutedEventArgs e)
         {
             if (IsLoggedIn())
             {
-                HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
-                CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                frame.Navigate(typeof(GroupsScreen));
-
+                HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+                GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.Blue);
+                CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+                
+                App.NavigationController.NavigateTo(typeof(GroupsScreen));
             }
             else
             {
-                HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                frame.Navigate(typeof(LoginRegisterPage));
+                HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+                GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+                CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+                
+                App.NavigationController.NavigateTo(typeof(LoginRegisterPage));
             }
         }
 
@@ -71,11 +66,11 @@ namespace SocialApp.Components
         {
             if (IsLoggedIn())
             {
-                frame.Navigate(typeof(UserPage));
+                App.NavigationController.NavigateTo(typeof(UserPage));
             }
             else
             {
-                frame.Navigate(typeof(LoginRegisterPage));
+                App.NavigationController.NavigateTo(typeof(LoginRegisterPage));
             }
         }
 
@@ -83,43 +78,46 @@ namespace SocialApp.Components
         {
             if (IsLoggedIn())
             {
-                frame.Navigate(typeof(CreatePost));
+                App.NavigationController.NavigateTo(typeof(CreatePost));
             }
             else
             {
-                frame.Navigate(typeof(LoginRegisterPage));
+                App.NavigationController.NavigateTo(typeof(LoginRegisterPage));
             }
         }
 
         private bool IsLoggedIn()
         {
             var controller = App.Services.GetService<AppController>();
-            return controller.CurrentUser != null;
+            return controller?.CurrentUser != null;
         }
 
         public void SetHome()
         {
-            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
-            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
+            HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.Blue);
+            GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
         }
+        
         public void SetGroups()
         {
-            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
-            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
+            HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.Blue);
+            CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
         }
+        
         public void SetCreate()
         {
-            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
+            HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.Blue);
         }
+        
         public void SetNone()
         {
-            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
+            HomeButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            GroupsButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
+            CreatePostButton.Foreground = new SolidColorBrush(Microsoft.UI.Colors.White);
         }
 
         public Button HomeButtonInstance => HomeButton;

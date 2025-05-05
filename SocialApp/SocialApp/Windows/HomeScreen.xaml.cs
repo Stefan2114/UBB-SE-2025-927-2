@@ -13,7 +13,7 @@ namespace SocialApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            TopBar.SetFrame(this.Frame);
+            App.NavigationController.NavigateTo(typeof(HomeScreen));
             TopBar.SetHome();
         }
     }

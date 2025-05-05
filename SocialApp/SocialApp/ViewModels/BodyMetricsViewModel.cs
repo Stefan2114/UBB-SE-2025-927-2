@@ -95,7 +95,7 @@
             try
             {
                 bodyMetricService.UpdateUserBodyMetrics(FirstName, LastName, Weight, Height, TargetWeight);
-                NavigationService.Instance.NavigateTo(typeof(GoalPage), this);
+                App.NavigationController.NavigateTo(typeof(GoalPage), this);
             }
             catch (Exception ex)
             {

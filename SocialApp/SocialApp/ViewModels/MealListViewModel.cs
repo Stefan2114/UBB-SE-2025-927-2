@@ -16,7 +16,6 @@ namespace SocialApp.ViewModels
 {
     public class MealListViewModel : ViewModelBase
     {
-        private readonly NavigationService _navigationService;
         private Meal _selectedMeal;
         private MealService _mealService;
         public ObservableCollection<Meal> AllMeals { get; }
@@ -60,7 +59,6 @@ namespace SocialApp.ViewModels
         {
             _mealService = mealService;
             Debug.WriteLine("Initializing MealListViewModel...");
-            _navigationService = NavigationService.Instance;
 
             // Initialize commands
             BackCommand = new RelayCommand(NavigateBack);
@@ -246,12 +244,12 @@ namespace SocialApp.ViewModels
             Debug.WriteLine($"Navigating to MealDisplayPage with meal: {SelectedMeal.Name}");
             Debug.WriteLine($"Meal details - Calories: {SelectedMeal.Calories}, Protein: {SelectedMeal.Protein}, Carbs: {SelectedMeal.Carbohydrates}, Fat: {SelectedMeal.Fat}");
 
-            _navigationService.NavigateTo(typeof(MealDisplayPage), mealViewModel);
+            App.NavigationController.NavigateTo(typeof(MealDisplayPage), mealViewModel);
         }
 
         public void NavigateBack()
         {
-            _navigationService.GoBack();
+            App.NavigationController.GoBack();
         }
     }
 }

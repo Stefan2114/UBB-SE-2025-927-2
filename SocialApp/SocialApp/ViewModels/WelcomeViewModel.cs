@@ -23,7 +23,7 @@ namespace SocialApp.ViewModels
 
         private void OnGetStarted()
         {
-            NavigationService.Instance.NavigateTo(typeof(UserPage));
+            App.NavigationController.NavigateTo(typeof(UserPage));
         }
     }
 }

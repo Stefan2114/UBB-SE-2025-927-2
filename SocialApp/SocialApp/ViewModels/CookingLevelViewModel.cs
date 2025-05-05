@@ -87,12 +87,12 @@
                 LastName,
                 SelectedCookingSkill);
 
-            NavigationService.Instance.NavigateTo(typeof(DietaryPreferencesPage), this);
+            App.NavigationController.NavigateTo(typeof(DietaryPreferencesPage), this);
         }
 
         private void NavigateToPreviousPage()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         // Override base class event to provide our own implementation

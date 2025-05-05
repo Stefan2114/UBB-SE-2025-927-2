@@ -136,12 +136,12 @@
 
         private void GoBack()
         {
-            NavigationService.Instance.GoBack();
+            App.NavigationController.GoBack();
         }
 
         private void GoNext()
         {
-            NavigationService.Instance.NavigateTo(typeof(MainPage));
+            App.NavigationController.NavigateTo(typeof(MainPage));
         }
 
         // for SEARCH BAR INGREDIENT / MEAL

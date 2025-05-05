@@ -53,7 +53,7 @@
 
         private void GoNext()
         {
-            NavigationService.Instance.NavigateTo(typeof(MainPage), this);
+            App.NavigationController.NavigateTo(typeof(MainPage), this);
         }
     }
 }

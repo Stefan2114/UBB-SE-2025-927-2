@@ -55,7 +55,7 @@ namespace SocialApp.Pages
         /// <param name="e">The event data that provides information about the navigation.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            TopBar.SetFrame(Frame);
+            App.NavigationController.NavigateTo(typeof(CreateGroup));
         }
 
         /// <summary>

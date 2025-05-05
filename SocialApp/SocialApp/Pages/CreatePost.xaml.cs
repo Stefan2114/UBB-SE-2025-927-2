@@ -42,7 +42,7 @@ namespace SocialApp.Pages
         /// <inheritdoc/>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.TopBar.SetFrame(this.Frame);
+            App.NavigationController.NavigateTo(typeof(CreatePost));
             this.TopBar.SetCreate();
             this.LoadUserGroups();
             this.InitializeVisibilityOptions();

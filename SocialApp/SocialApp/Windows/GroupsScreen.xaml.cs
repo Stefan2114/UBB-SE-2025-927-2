@@ -20,7 +20,7 @@ namespace SocialApp.Windows
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var controller = App.Services.GetService<AppController>();
-            TopBar.SetFrame(this.Frame);
+            App.NavigationController.NavigateTo(typeof(GroupsScreen));
             TopBar.SetGroups();
             GroupsDrawer.NavigationFrame = this.Frame;
         }

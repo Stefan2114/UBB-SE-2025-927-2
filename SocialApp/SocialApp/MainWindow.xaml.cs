@@ -19,10 +19,12 @@ namespace SocialApp
             {
                 this.InitializeComponent();
                 Debug.WriteLine("MainWindow initialized successfully.");
-                NavigationService.Instance.Initialize(MainFrame);
-                Debug.WriteLine("NavigationService initialized with MainFrame.");
-                MainFrame.Navigate(typeof(Pages.UserPage));
-                Debug.WriteLine("Navigated to GoalPage.");
+                
+                App.NavigationController.Initialize(MainFrame);
+                Debug.WriteLine("NavigationController initialized with MainFrame.");
+                
+                App.NavigationController.NavigateTo(typeof(Pages.UserPage));
+                Debug.WriteLine("Navigated to UserPage.");
             }
             catch (Exception ex)
             {
