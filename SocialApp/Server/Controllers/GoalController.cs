@@ -30,10 +30,10 @@ namespace Server.Controllers
         /// <param name="lastName">The last name of the user.</param>
         /// <param name="g_description">The description of the goal.</param>
         /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
-        [HttpPost]
-        public IActionResult AddGoals(string firstName, string lastName, string g_description)
+        [HttpPatch("users/{name}/goal")]
+        public IActionResult AddGoals(string name, string g_description)
         {
-            this.goalRepository.AddGoals(firstName, lastName, g_description);
+            this.goalRepository.AddGoals(name, g_description);
             return this.Ok();
         }
     }

@@ -4,6 +4,7 @@ namespace Server.Repos
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using AppCommonClasses.DTOs;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.EntityFrameworkCore;
@@ -28,35 +29,15 @@ namespace Server.Repos
         /// <summary>
         /// Adds a goal and associates it with a user, creating both if they do not already exist.
         /// </summary>
-        /// <param name="firstName">The first name of the user.</param>
-        /// <param name="lastName">The last name of the user.</param>
+        /// <param name="name">The name of the user.</param>
         /// <param name="g_description">The description of the goal.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public async Task AddGoals(string firstName, string lastName, string g_description)
+        public void AddGoals(string name, string g_description)
         {
-            string name = lastName + " " + firstName;
-
-            Goal? goal = await this.dbContext.Goals.FirstOrDefaultAsync(g => g.Description == g_description);
-
-            if (goal == null)
-            {
-                goal = new Goal(0, g_description);
-                this.dbContext.Goals.Add(goal);
-                await this.dbContext.SaveChangesAsync();
-            }
-
-            UserModel? user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Name == name);
-
-            if (user == null)
-            {
-                user = new UserModel
-                {
-                    Name = name,
-                    GoalId = goal.GoalId,
-                };
-                this.dbContext.Users.Add(user);
-                await this.dbContext.SaveChangesAsync();
-            }
+            Goal goal = this.dbContext.Goals.First(g => g.Description == g_description);
+            UserModel user = this.dbContext.Users.First(u => u.Name == name);
+            user.GoalId = goal.GoalId;
+            this.dbContext.SaveChanges();
         }
     }
 }
