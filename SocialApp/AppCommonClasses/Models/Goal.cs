@@ -7,6 +7,7 @@ namespace AppCommonClasses.Models
     {
         [Column("g_id")]
         public int GoalId { get; set; }
+
         [Column("g_description")]
         public string Description { get; set; }
         public Goal(int goalId, string description)

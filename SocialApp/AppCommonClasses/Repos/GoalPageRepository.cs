@@ -1,6 +1,10 @@
 namespace AppCommonClasses.Repos
 {
-    using AppCommonClasses.Data;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using AppCommonClasses.DTOs;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.EntityFrameworkCore;
@@ -24,13 +28,13 @@ namespace AppCommonClasses.Repos
         /// <summary>
         /// Adds a goal and associates it with a user, creating both if they do not already exist.
         /// </summary>
-        /// <param name="username">The username of the user.</param>
-        /// <param name="goalDescription">The description of the goal.</param>
+        /// <param name="name">The name of the user.</param>
+        /// <param name="g_description">The description of the goal.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public void AddGoals(string username, string goalDescription)
+        public void AddGoals(string name, string g_description)
         {
-            Goal goal = this.dbContext.Goals.First(goal => goal.Description == goalDescription);
-            User user = this.dbContext.Users.First(user => user.Username == username);
+            Goal goal = this.dbContext.Goals.First(g => g.Description == g_description);
+            UserModel user = this.dbContext.Users.First(u => u.Name == name);
             user.GoalId = goal.GoalId;
             this.dbContext.SaveChanges();
         }

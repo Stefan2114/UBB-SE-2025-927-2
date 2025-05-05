@@ -1,5 +1,12 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Interfaces;
+    using Azure.Identity;
+    using CommunityToolkit.Mvvm.Input;
+    using SocialApp.Interfaces;
+    using SocialApp.Pages;
+    using SocialApp.Proxies;
+    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
@@ -19,7 +26,7 @@
                 "Improve overall health",
             };
 
-        private string selectedGoal = string.Empty; // Initialize to avoid CS8618
+        private string selectedGoal = string.Empty;
 
         public string SelectedGoal
         {
@@ -55,7 +62,8 @@
             NavigationService.Instance.GoBack();
         }
 
-        private GoalPageService goalPageService = new GoalPageService(new GoalRepositoryProxy());
+        [System.Obsolete]
+        private readonly GoalPageService goalPageService = new GoalPageService(new GoalRepositoryProxy());
 
         private string username = string.Empty;
 

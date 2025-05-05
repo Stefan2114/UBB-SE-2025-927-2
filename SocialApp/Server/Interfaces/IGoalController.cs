@@ -13,6 +13,6 @@ namespace Server.Interfaces
         /// </summary>
         /// <param name="goal">The goal.</param>  
         /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="IActionResult"/>.</returns>  
-        IActionResult AddGoals(GoalDTO goal);
+        IActionResult AddGoals(string name, string g_description);
     }
 }

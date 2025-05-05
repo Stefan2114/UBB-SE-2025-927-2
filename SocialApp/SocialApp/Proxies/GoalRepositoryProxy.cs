@@ -30,10 +30,9 @@
         /// <param name="lastName">The last name of the user associated with the goal.</param>
         /// <param name="g_description">The description of the goal.</param>
         /// <returns>A task representing the asynchronous operation.</returns>  
-
-        public void AddGoals(string username, string g_description)
+        public void AddGoals(string name, string g_description)
         {
-            var goal = new GoalDTO { Username = username, Description = g_description };
+            var goal = new { Name = name, Description = g_description };
             this.httpClient.PostAsJsonAsync(string.Empty, goal).Wait();
         }
     }
