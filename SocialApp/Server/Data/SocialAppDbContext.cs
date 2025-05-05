@@ -16,8 +16,12 @@ namespace Server.Data
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
 
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
+
+        public DbSet<Group> Groups { get; set; } = default!;
+
         public DbSet<UserModel> Users { get; set; } = default!;
-        public DbSet<Calorie> Calories { get; set; } = default!; 
+
+        public DbSet<Calorie> Calories { get; set; } = default!;
 
         public DbSet<Goal> Goals { get; set; } = default!;
 
@@ -25,6 +29,7 @@ namespace Server.Data
         {
             modelBuilder.Entity<GroupUser>()
                 .HasKey(groupUser => new { groupUser.UserId, groupUser.GroupId });
+
             modelBuilder.Entity<UserFollower>()
                 .HasKey(userFollower => new { userFollower.UserId, userFollower.FollowerId });
 
