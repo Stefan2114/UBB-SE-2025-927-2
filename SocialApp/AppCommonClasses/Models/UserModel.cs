@@ -8,16 +8,16 @@ namespace AppCommonClasses.Models
     public class UserModel
     {
         [Key]
-        [Column("Id")]
-        public long Id { get; set; }  // Auto-incremented in DB
+        [Column("u_id")]
+        public int Id { get; set; }  // am schimbat din grs in DB cu int in loc de BIGINT si deai aam pus aici int in loc de long
 
-        [Column("UserName")]
+        [Column("u_name")]
         public string Name { get; set; }
 
-        //[Column("u_date_of_birth")]
-        //public DateTime? DateOfBirth { get; set; }
+        [Column("dob")]
+        public DateTime? DateOfBirth { get; set; }
 
-        [Column("Email")]
+        [Column("email")]
         public string Email { get; set; }
 
         [Column("u_height")]

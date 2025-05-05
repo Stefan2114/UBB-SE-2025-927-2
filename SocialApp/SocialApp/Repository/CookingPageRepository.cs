@@ -1,8 +1,10 @@
 ﻿namespace SocialApp.Repository
 {
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
     using SocialApp.Queries;
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
 
     public class CookingPageRepository : ICookingPageRepository
@@ -53,6 +55,12 @@
             };
 
             dataLink.ExecuteNonQuery("UpdateUserCookingSkill", parameters);
+        }
+
+        public List<CookingSkill> GetAllCookingSkills()
+        {
+            // Not implemented for the client-side repository
+            throw new NotImplementedException();
         }
     }
 }

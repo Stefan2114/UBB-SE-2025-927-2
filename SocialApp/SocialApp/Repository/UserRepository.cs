@@ -8,9 +8,9 @@
     public class UserRepository : IUserRepository
     {
 
-        private const string ConnectionString = "Data Source=PAUL;" +
-            "Initial Catalog=MealSocialApp;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+        private const string ConnectionString = "Data Source=DESKTOP-KQ6N16D;" +
+            "Initial Catalog=mealPrepDB;" +
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         private readonly SqlConnection connection;
 
