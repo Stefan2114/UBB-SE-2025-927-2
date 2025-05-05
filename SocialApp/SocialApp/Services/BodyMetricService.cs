@@ -26,6 +26,7 @@
             var users = userService.GetAllUsers();
             var user = users.FirstOrDefault(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
 
+
             if (user == null)
             {
                 throw new Exception($"User {username} not found");

@@ -44,7 +44,7 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
 
-            userRepository = new UserRepository();
+            userRepository = new UserRepositoryProxy();
             userService = new UserService(userRepository);
             postRepository = new PostRepositoryProxy();
             groupRepository = new GroupRepository();
@@ -64,8 +64,8 @@ namespace SocialApp.Components
         /// <returns>True if the user is followed; otherwise, false.</returns>
         private bool IsFollowed()
         {
-            List<User> following = userService.GetUserFollowing(controller.CurrentUser.Id);
-            foreach (User user in following)
+            List<UserModel> following = userService.GetUserFollowing(controller.CurrentUser.Id);
+            foreach (UserModel user in following)
             {
                 if (user.Id == this.user.Id) return true;
             }

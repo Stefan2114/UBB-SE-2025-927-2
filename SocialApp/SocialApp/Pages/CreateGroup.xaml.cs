@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using SocialApp.Interfaces;
+using SocialApp.Proxies;
 using SocialApp.Repository;
 using SocialApp.Services;
 using System;
@@ -43,7 +44,7 @@ namespace SocialApp.Pages
         private void InitializeServices()
         {
             var groupRepository = new GroupRepository();
-            var userRepository = new UserRepository();
+            var userRepository = new UserRepositoryProxy();
             groupService = new GroupService(groupRepository, userRepository);
             userService = new UserService(userRepository);
             controller = App.Services.GetService<AppController>();
@@ -173,7 +174,7 @@ namespace SocialApp.Pages
             {
                 // Show filtered results
                 var users = userService.GetUserFollowing(controller.CurrentUser.Id)
-                                        .Where(u => u.Username.Contains(query))
+                                        .Where(u => u.Name.Contains(query))
                                         .ToList();
                 UserSearchResults.ItemsSource = users;
                 UserSearchResults.Visibility = Visibility.Visible;
