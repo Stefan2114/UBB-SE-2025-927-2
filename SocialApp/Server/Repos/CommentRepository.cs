@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SocialApp.Repository
+namespace Server.Repos
 {
     public class CommentRepository : ICommentRepository
     {
