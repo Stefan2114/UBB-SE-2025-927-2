@@ -1,6 +1,5 @@
 ﻿-- Meal Planner Tables
 
-
 create table goals (
 	g_id int primary key identity (1,1),
 	g_description varchar(100) not null
@@ -45,7 +44,6 @@ CREATE TABLE Users (
     a_id INT FOREIGN KEY REFERENCES allergies(a_id),
     al_id INT FOREIGN KEY REFERENCES activity_levels(al_id)
 );
-
 INSERT INTO [dbo].[Users] (
     UserName, Email, PasswordHash, Image,
     u_height, u_weight, target_weight,
@@ -570,6 +568,8 @@ END
 
 --Pana aici
 
+select * from goals
+
 insert into goals(g_description) values 
 ('Lose weight'),
 ('Gain weight'),
@@ -947,3 +947,5 @@ VALUES
 update [dbo].[Posts]
 set GroupId = 0
 where GroupId is null
+
+select * from posts
