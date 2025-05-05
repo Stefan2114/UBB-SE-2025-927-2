@@ -4,6 +4,7 @@ namespace SocialApp.Pages
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using SocialApp.Interfaces;
+    using SocialApp.Proxies;
     using SocialApp.Repository;
     using SocialApp.Services;
     using SocialApp.ViewModels;
@@ -20,7 +21,7 @@ namespace SocialApp.Pages
         public UserPage()
         {
             this.InitializeComponent();
-            var repo = new UserRepository();
+            var repo = new UserRepositoryProxy();
             this.userService = new UserService(repo);
         }
 
@@ -42,6 +43,7 @@ namespace SocialApp.Pages
                 return;
             }
             int userId = this.userPageService.UserHasAnAccount(this.Username);
+
             if (userId != -1)
             {
                 GroceryViewModel.UserId = userId;
