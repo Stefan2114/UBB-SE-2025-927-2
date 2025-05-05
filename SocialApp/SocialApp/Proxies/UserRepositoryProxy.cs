@@ -5,6 +5,7 @@
     using AppCommonClasses.Models;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Json;
@@ -44,6 +45,13 @@
         public UserModel GetById(long id)
         {
             return this.httpClient.GetFromJsonAsync<UserModel>($"{id}").Result!;
+        }
+
+        public UserModel GetByUsername(string username)
+        {
+            Debug.WriteLine($"Getting in proxy user by username: {username}");
+            return this.httpClient.GetFromJsonAsync<UserModel>($"users/{username}").Result!;
+            Debug.WriteLine($"Got in proxy user by username: {username}");
         }
 
         public List<UserModel> GetUserFollowers(long id)

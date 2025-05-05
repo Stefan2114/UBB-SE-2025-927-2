@@ -10,6 +10,7 @@ namespace AppCommonClasses.Interfaces
         List<UserModel> GetAll();
         UserModel GetByEmail(string email);
         UserModel GetById(long id);
+        UserModel GetByUsername(string username);
         List<UserModel> GetUserFollowers(long id);
         List<UserModel> GetUserFollowing(long id);
         void Save(UserModel entity);

@@ -41,6 +41,7 @@ namespace SocialApp.Pages
                 return;
             }
             int userId = this.userPageService.UserHasAnAccount(this.LastName + " " + this.FirstName);
+
             if (userId != -1)
             {
                 GroceryViewModel.UserId = userId;
