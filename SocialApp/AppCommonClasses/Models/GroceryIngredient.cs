@@ -1,12 +1,24 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AppCommonClasses.Models
 {
+    [Table("grocery_lists")]
     public class GroceryIngredient : ObservableObject
     {
-        public int Id { get; set; }
+        [Key]
+        [Column("u_id")]
+        [JsonIgnore]
+        public long Id { get; set; }
 
-        private string _name;
+        [Column("i_id")]
+        public int IngredientId { get; set; }
+
+        private string _name = string.Empty;
+
+        [NotMapped]
         public string Name
         {
             get => _name;
@@ -14,6 +26,7 @@ namespace AppCommonClasses.Models
         }
 
         private bool _isChecked;
+        [Column("is_checked")]
         public bool IsChecked
         {
             get => _isChecked;

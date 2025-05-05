@@ -1,17 +1,13 @@
-﻿using AppCommonClasses.Models;
-using System;
-using System.Collections.Generic;
+﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using Microsoft.Data.SqlClient;
-using AppCommonClasses.Interfaces;
+using System.Collections.Generic;
 
 namespace SocialApp.Repository
 {
     public class CommentRepository : ICommentRepository
     {
-
-        private string loginString = "Data Source=PAUL;" +
-            "Initial Catalog=SocialApp;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 
