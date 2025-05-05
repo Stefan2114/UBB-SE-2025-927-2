@@ -26,7 +26,7 @@
         {
             // Create both required dependencies
             var bodyMetricRepository = new BodyMetricRepositoryProxy();
-            var userService = new UserService(new UserRepository());
+            var userService = new UserService(new UserRepositoryProxy());
 
             // Pass both dependencies to BodyMetricService
             bodyMetricService = new BodyMetricService(bodyMetricRepository, userService);

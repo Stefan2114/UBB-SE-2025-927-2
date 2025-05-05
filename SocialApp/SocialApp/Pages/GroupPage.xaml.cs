@@ -45,7 +45,7 @@ namespace SocialApp.Pages
 
         private void DisplayPage(object sender, RoutedEventArgs e)
         {
-            userRepository = new UserRepository();
+            userRepository = new UserRepositoryProxy();
             userService = new UserService(userRepository);
             groupRepository = new GroupRepository();
             groupService = new GroupService(groupRepository, userRepository);

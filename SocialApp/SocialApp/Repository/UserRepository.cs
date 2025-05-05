@@ -5,7 +5,7 @@
     using AppCommonClasses.Models;
     using AppCommonClasses.Interfaces;
 
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
         private const string ConnectionString = "Data Source=BOGDAN;" +
             "Initial Catalog=MealSocialApp;" +

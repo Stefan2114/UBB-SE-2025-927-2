@@ -24,8 +24,8 @@
 
             // Search for user by name
             var users = userService.GetAllUsers();
-            var user = users.FirstOrDefault(u => u.Username.Equals($"{firstName} {lastName}", StringComparison.OrdinalIgnoreCase) ||
-                                                u.Username.Equals($"{lastName} {firstName}", StringComparison.OrdinalIgnoreCase));
+            var user = users.FirstOrDefault(u => u.Name.Equals($"{firstName} {lastName}", StringComparison.OrdinalIgnoreCase) ||
+                                                u.Name.Equals($"{lastName} {firstName}", StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
             {
