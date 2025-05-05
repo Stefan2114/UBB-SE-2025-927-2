@@ -10,9 +10,10 @@ namespace AppCommonClasses.Models
     [Table("goals")]
     public class Goal
     {
-        [Column("goal_id")]
+        [Column("g_id")]
         public int GoalId { get; set; }
-        [Column("description")]
+
+        [Column("g_description")]
         public string Description { get; set; }
         public Goal(int goalId, string description)
         {

@@ -2,6 +2,6 @@
 {
     public interface IGoalPageService
     {
-        void AddGoals(string firstName, string lastName, string g_description);
+        void AddGoals(string name, string g_description);
     }
 }

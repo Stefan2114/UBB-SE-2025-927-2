@@ -9,14 +9,28 @@
 
     public class GoalPageService : IGoalPageService
     {
-        private readonly IDataLink dataLink;
+        private IGoalPageRepository goalPageRepository;
 
         [System.Obsolete]
-        public GoalPageService(IDataLink? dataLink = null)
+        public GoalPageService(IGoalPageRepository goalRepo)
         {
-            this.dataLink = dataLink ?? DataLink.Instance; // Default to singleton if none provided
+            this.goalPageRepository = goalRepo;
         }
 
+        public void AddGoals(string userName, string g_description)
+        {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(g_description))
+            {
+                throw new System.Exception("User name and goal description cannot be empty");
+            }
+            if (this.goalPageRepository == null)
+            {
+                throw new System.Exception("Goal repository is not initialized");
+            }
+            this.goalPageRepository.AddGoals(userName, g_description);
+        }
+
+        /*
         [System.Obsolete]
         public void AddGoals(string firstName, string lastName, string g_description)
         {
@@ -59,7 +73,7 @@
             };
 
             dataLink.ExecuteNonQuery("UpdateUserGoals", parameters);
-        }
+        }*/
 
     }
 }

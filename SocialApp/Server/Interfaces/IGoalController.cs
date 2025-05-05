@@ -15,6 +15,6 @@ namespace Server.Interfaces
         /// <param name="lastName">The last name of the user.</param>  
         /// <param name="g_description">The description of the goal.</param>  
         /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="IActionResult"/>.</returns>  
-        IActionResult AddGoals(string firstName, string lastName, string g_description);
+        IActionResult AddGoals(string name, string g_description);
     }
 }
