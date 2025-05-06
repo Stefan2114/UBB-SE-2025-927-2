@@ -20,7 +20,7 @@ namespace Server.Repos
         {
             var fullName = $"{lastName} {firstName}";
             var user = dbContext.Users.FirstOrDefault(u => u.Name == fullName);
-            return user != null ? (int)user.Id : 0;
+            return user != null ? user.Id : 0;
         }
 
         public int GetCookingSkillIdByDescription(string description)
@@ -31,11 +31,23 @@ namespace Server.Repos
 
         public void UpdateUserCookingSkill(int userId, int cookingSkillId)
         {
-            var user = dbContext.Users.Find((long)userId);
+            var user = dbContext.Users.Find(userId);
             if (user != null)
             {
+                // Check if the cooking skill exists
+                var cookingSkill = dbContext.CookingSkills.Find(cookingSkillId);
+                if (cookingSkill == null)
+                {
+                    throw new ArgumentException($"Cooking skill with ID {cookingSkillId} does not exist");
+                }
+
+                // Update or assign the cooking skill
                 user.CookingSkillId = cookingSkillId;
                 dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentException($"User with ID {userId} does not exist");
             }
         }
 

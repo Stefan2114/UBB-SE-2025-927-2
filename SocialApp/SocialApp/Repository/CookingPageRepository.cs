@@ -54,6 +54,7 @@
                 new SqlParameter("@cs_id", cookingSkillId),
             };
 
+            // Only update cs_id using the stored procedure
             dataLink.ExecuteNonQuery("UpdateUserCookingSkill", parameters);
         }
 
