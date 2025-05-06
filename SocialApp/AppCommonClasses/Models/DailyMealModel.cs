@@ -38,7 +38,7 @@
 
         // Navigation properties
         [ForeignKey("UserId")]
-        public virtual UserModel? UserModel { get; set; }
+        public virtual User? UserModel { get; set; }
 
         [ForeignKey("MealId")]
         public virtual Meal? Meal { get; set; }

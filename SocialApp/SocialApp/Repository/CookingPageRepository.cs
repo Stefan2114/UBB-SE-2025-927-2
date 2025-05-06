@@ -21,12 +21,11 @@
         }
 
         [Obsolete]
-        public int GetUserIdByName(string firstName, string lastName)
+        public int GetUserIdByName(string username)
         {
-            string fullName = lastName + " " + firstName;
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@u_name", fullName),
+                new SqlParameter("@u_name", username),
             };
 
             return dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);

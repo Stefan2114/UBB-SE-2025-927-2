@@ -32,8 +32,8 @@ namespace SocialApp.Pages
             base.OnNavigatedTo(e);
             if (e.Parameter is UserPage userPage)
             {
-                this.viewModel.SetUserInfo(userPage.FirstName, userPage.LastName);
-                Debug.WriteLine($"Received user name: {userPage.FirstName} {userPage.LastName}");
+                this.viewModel.SetUserInfo(userPage.Username);
+                Debug.WriteLine($"Received user name: {userPage.Username}");
             }
         }
 
@@ -63,7 +63,7 @@ namespace SocialApp.Pages
                 this.viewModel.Height = this.HeightTextBox.Text;
                 this.viewModel.TargetWeight = this.TargetGoalTextBox.Text;
                 this.viewModel.GoNext();
-                Debug.WriteLine($"Navigating to GoalPage with {this.viewModel.LastName} and {this.viewModel.FirstName}");
+                Debug.WriteLine($"Navigating to GoalPage with {this.viewModel.Username}");
             }
             catch (Exception ex)
             {

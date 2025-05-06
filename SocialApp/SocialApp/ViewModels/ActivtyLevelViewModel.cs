@@ -10,8 +10,7 @@ namespace SocialApp.ViewModels
     public class ActivityLevelViewModel : ViewModelBase
     {
         private string selectedActivity;
-        private string firstName;
-        private string lastName;
+        private string username;
 
         private IActivityPageService activityPageService = new ActivityPageService();
 
@@ -25,8 +24,7 @@ namespace SocialApp.ViewModels
         public ActivityLevelViewModel()
         {
             selectedActivity = string.Empty;
-            firstName = string.Empty;
-            lastName = string.Empty;
+            username = string.Empty;
             BackCommand = new RelayCommand(GoBack);
             NextCommand = new RelayCommand(GoNext);
         }
@@ -36,25 +34,16 @@ namespace SocialApp.ViewModels
             NavigationService.Instance.GoBack();
         }
 
-        public string FirstName
+        public string Username
         {
-            get => firstName;
+            get => username;
             set
             {
-                firstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
-        public string LastName
-        {
-            get => lastName;
-            set
-            {
-                lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
 
         public string SelectedActivity
         {
@@ -66,16 +55,15 @@ namespace SocialApp.ViewModels
             }
         }
 
-        public void SetUserInfo(string firstName, string lastName)
+        public void SetUserInfo(string username)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            Username = username;
         }
 
         [System.Obsolete]
         public void GoNext()
         {
-            activityPageService.AddActivity(FirstName, LastName, SelectedActivity);
+            activityPageService.AddActivity(Username, SelectedActivity);
             NavigationService.Instance.NavigateTo(typeof(CookingLevelPage), this);
         }
 

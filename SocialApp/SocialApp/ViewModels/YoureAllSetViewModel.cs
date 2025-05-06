@@ -18,30 +18,21 @@
             model = new YoureAllSetModel();
         }
 
-        public string FirstName
+
+
+        public string Username
         {
-            get => model.FirstName;
+            get => model.Username;
             set
             {
-                model.FirstName = value;
-                OnPropertyChanged(nameof(model.FirstName));
+                model.Username = value;
+                OnPropertyChanged(nameof(model.Username));
             }
         }
 
-        public string LastName
+        public void SetUserInfo(string username)
         {
-            get => model.LastName;
-            set
-            {
-                model.LastName = value;
-                OnPropertyChanged(nameof(model.LastName));
-            }
-        }
-
-        public void SetUserInfo(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
+            Username = username;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

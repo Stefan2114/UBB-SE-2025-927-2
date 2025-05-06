@@ -18,23 +18,21 @@
         }
 
         [System.Obsolete]
-        public void AddGoals(string firstName, string lastName, string g_description)
+        public void AddGoals(string username, string g_description)
         {
-            Debug.WriteLine($"Adding goal {g_description} for user {firstName} {lastName}");
-            string u_name = lastName + " " + firstName;
             var parameters = new SqlParameter[]
             {
-        new SqlParameter("@u_name", u_name),
+        new SqlParameter("@u_name", username),
             };
 
-            Debug.WriteLine($"User name: {u_name}");
+            Debug.WriteLine($"User name: {username}");
 
             int u_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
 
             // Check if the user ID is valid
             if (u_id == 0)
             {
-                throw new DatabaseOperationException($"User {u_name} not found.");
+                throw new DatabaseOperationException($"User {username} not found.");
             }
 
             Debug.WriteLine($"User ID: {u_id}");

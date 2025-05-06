@@ -16,7 +16,7 @@
         }
 
         [Obsolete]
-        public void AddAllergyAndDietaryPreference(string firstName, string lastName, string dietaryPreference, string allergy)
+        public void AddAllergyAndDietaryPreference(string username, string dietaryPreference, string allergy)
         {
             if (dietaryPreference == DietaryPreferenceType.NotSelected.ToString() && allergy == DietaryPreferenceType.NotSelected.ToString())
             {
@@ -33,7 +33,7 @@
                 throw new Exception("Please select allergies!");
             }
 
-            repository.AddAllergyAndDietaryPreference(firstName, lastName, dietaryPreference, allergy);
+            repository.AddAllergyAndDietaryPreference(username, dietaryPreference, allergy);
         }
     }
 }

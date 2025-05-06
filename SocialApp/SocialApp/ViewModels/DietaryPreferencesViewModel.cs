@@ -75,7 +75,7 @@
 
         public void NextAction()
         {
-            dietaryPreferencesService.AddAllergyAndDietaryPreference(FirstName, LastName, OtherDiet, Allergens);
+            dietaryPreferencesService.AddAllergyAndDietaryPreference(Username, OtherDiet, Allergens);
             NavigationService.Instance.NavigateTo(typeof(YoureAllSetPage), this);
         }
 
@@ -86,33 +86,22 @@
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string firstName;
-        private string lastName;
+        private string username;
 
-        public string FirstName
+        public string Username
         {
-            get => firstName;
+            get => username;
             set
             {
-                firstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
-        public string LastName
-        {
-            get => lastName;
-            set
-            {
-                lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
 
-        public void SetUserInfo(string firstName, string lastName)
+        public void SetUserInfo(string username)
         {
-            LastName = lastName;
-            FirstName = firstName;
+            Username = username;
         }
     }
 }

@@ -35,8 +35,8 @@ namespace SocialApp.Pages
 
             if (navigationEventArgs.Parameter is ActivityLevelViewModel activityLevelViewModel)
             {
-                Debug.WriteLine($"Cooking page received user: {activityLevelViewModel.FirstName} {activityLevelViewModel.LastName}");
-                this.cookingLevelViewModel.SetUserInfo(activityLevelViewModel.FirstName, activityLevelViewModel.LastName);
+                Debug.WriteLine($"Cooking page received user: {activityLevelViewModel.Username}");
+                this.cookingLevelViewModel.SetUserInfo(activityLevelViewModel.Username);
             }
         }
 

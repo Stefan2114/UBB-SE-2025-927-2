@@ -20,7 +20,7 @@ namespace SocialApp
 
         public static AppController Instance => instance.Value;
 
-        public User? CurrentUser { get; private set; } = null;
+        public User CurrentUser { get; set; }
 
         public AppController() { }
 
@@ -50,6 +50,7 @@ namespace SocialApp
             Login(email, password);
         }
 
+        //trrbuie scoasa
         public void Logout()
         {
             CurrentUser = null;

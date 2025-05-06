@@ -16,7 +16,7 @@
             this.userService = userService;
         }
 
-        public void UpdateUserBodyMetrics(string firstName, string lastName, string weight, string height, string targetGoal)
+        public void UpdateUserBodyMetrics(string  username, string weight, string height, string targetGoal)
         {
             float userWeight = float.Parse(weight);
             float userHeight = float.Parse(height);
@@ -24,12 +24,11 @@
 
             // Search for user by name
             var users = userService.GetAllUsers();
-            var user = users.FirstOrDefault(u => u.Username.Equals($"{firstName} {lastName}", StringComparison.OrdinalIgnoreCase) ||
-                                                u.Username.Equals($"{lastName} {firstName}", StringComparison.OrdinalIgnoreCase));
+            var user = users.FirstOrDefault(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
             {
-                throw new Exception($"User {firstName} {lastName} not found");
+                throw new Exception($"User {username} not found");
             }
 
             bodyMetricRepository.UpdateUserBodyMetrics(user.Id, userWeight, userHeight, userTargetGoal);
