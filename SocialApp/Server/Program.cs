@@ -11,6 +11,8 @@ builder.Services.AddDbContext<SocialAppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
+
 
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
