@@ -10,5 +10,9 @@ namespace AppCommonClasses.Interfaces
     public interface ICalorieRepository
     {
         Calorie GetCaloriesByUserId(long userId);
+        void SetDailyIntake(long userId, double intake);
+        void SetCaloriesConsumed(long userId, double consumed);
+        void SetCaloriesBurned(long userId, double burned);
+
     }
 }

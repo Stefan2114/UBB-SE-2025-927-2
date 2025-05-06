@@ -9,6 +9,7 @@
     {
         private readonly IBodyMetricRepository bodyMetricRepository;
         private readonly IUserService userService;
+        private readonly ICalorieRepository calorieRespository;
 
         public BodyMetricService(IBodyMetricRepository bodyMetricRepository, IUserService userService)
         {

@@ -13,6 +13,7 @@
     public class BodyMetricsViewModel : ViewModelBase
     {
         private readonly IBodyMetricService bodyMetricService;
+        private readonly ICalorieService calorieService;
 
         public ICommand SubmitBodyMetricsCommand { get; }
 
@@ -27,6 +28,9 @@
             // Create both required dependencies
             var bodyMetricRepository = new BodyMetricRepositoryProxy();
             var userService = new UserService(new UserRepository());
+
+            var calorieRepository = new CalorieRepositoryProxy();
+            this.calorieService = new CalorieService(calorieRepository);
 
             // Pass both dependencies to BodyMetricService
             bodyMetricService = new BodyMetricService(bodyMetricRepository, userService);

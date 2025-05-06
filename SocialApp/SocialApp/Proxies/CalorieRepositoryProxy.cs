@@ -16,12 +16,27 @@
             this.httpClient.BaseAddress = new Uri("https://localhost:7106/");
         }
 
-        // Synchronous call using .Result or .GetAwaiter().GetResult()
         public Calorie GetCaloriesByUserId(long userId)
         {
-            // Get the calorie data from the API synchronously
             return this.httpClient.GetFromJsonAsync<Calorie>($"calories/{userId}").Result!;
+        }
 
+        public void SetDailyIntake(long userId, double intake)
+        {
+            var response = this.httpClient.PutAsJsonAsync($"calories/{userId}/daily-intake", intake).Result;
+            response.EnsureSuccessStatusCode();
+        }
+
+        public void SetCaloriesConsumed(long userId, double consumed)
+        {
+            var response = this.httpClient.PutAsJsonAsync($"calories/{userId}/calories-consumed", consumed).Result;
+            response.EnsureSuccessStatusCode();
+        }
+
+        public void SetCaloriesBurned(long userId, double burned)
+        {
+            var response = this.httpClient.PutAsJsonAsync($"calories/{userId}/calories-burned", burned).Result;
+            response.EnsureSuccessStatusCode();
         }
     }
 }

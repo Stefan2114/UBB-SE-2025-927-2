@@ -7,5 +7,6 @@ namespace SocialApp.Interfaces
         double GetFood(long userId);
 
         double GetExercise(long userId);
+        void SetHardcodedValues(long userId);
     }
 }
