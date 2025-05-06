@@ -26,8 +26,17 @@ namespace Server.Controllers
         [HttpDelete("{userId}")]
         public IActionResult DeleteUser(long userId)
         {
-            this.userRepository.DeleteById(userId);
-            return this.Ok();
+            try
+            {
+                this.userRepository.DeleteById(userId);
+                return this.Ok();
+            }
+            catch
+            {
+                Debug.WriteLine("Error deleting user");
+                return this.BadRequest();
+
+            }
         }
 
         [HttpPost("users/{userId}/followers")]
@@ -46,13 +55,26 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public ActionResult<UserModel> GetUserById(long id)
         {
-            return this.userRepository.GetById(id);
+            try
+            {
+                return this.userRepository.GetById(id);
+            }catch
+            {
+                return this.BadRequest();
+            }
         }
 
         [HttpGet("users/{username}")]
         public ActionResult<UserModel> GetUserByUsername(string username)
         {
-            return this.userRepository.GetByUsername(username);
+            try
+            {
+                return this.userRepository.GetByUsername(username);
+            }
+            catch
+            {
+                return this.BadRequest();
+            }
         }
 
         [HttpGet("users/{userId}/followers")]
@@ -91,8 +113,16 @@ namespace Server.Controllers
             }
             string name = user.Name;
             string email = user.Email;
-            this.userRepository.UpdateById(userId, name, email);
-            return this.Ok(existingUser);
+            try {
+                this.userRepository.UpdateById(userId, name, email);
+                return this.Ok(existingUser);
+            }
+            catch
+            {
+                Debug.WriteLine("Error updating user");
+                return this.BadRequest();
+            }
+            
         }
     }
 }

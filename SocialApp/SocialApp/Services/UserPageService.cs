@@ -59,7 +59,7 @@ namespace SocialApp.Services
                 Name = name,
                 Height = 0,
                 Weight = 0,
-                TargetWeight = null,
+                TargetWeight = 0,
                 GoalId = null,
                 CookingSkillId = null,
                 DietaryPreferenceId = null,
