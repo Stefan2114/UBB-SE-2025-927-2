@@ -36,7 +36,7 @@ namespace SocialApp.Tests
             var user = new User { Id = userId, Username = "TestUser",Email="TestEmail@test.com", PasswordHash = "TestPassword", Image = "TestImage" };
             var post = new Post { Id = postId, Title = "TestPost", Content = "TestContent", CreatedDate = DateTime.Now, UserId = userId, GroupId = 1, Visibility = AppCommonClasses.Enums.PostVisibility.Public, Tag = AppCommonClasses.Enums.PostTag.Misc };
 
-            userRepository.GetById(userId).Returns(user);
+            //userRepository.GetById(userId).Returns(user);
             postRepository.GetPostById(postId).Returns(post);
 
             // Act
@@ -89,7 +89,7 @@ namespace SocialApp.Tests
             long invalidUserId = 999;
             long postId = 2;
 
-            userRepository.GetById(invalidUserId).Returns((User)null);
+            //userRepository.GetById(invalidUserId).Returns((User)null);
 
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(() => commentService.AddComment(content, invalidUserId, postId));
@@ -117,7 +117,7 @@ namespace SocialApp.Tests
             var user = new User { Id = userId, Username = "TestUser", Email = "testemail", PasswordHash = "TestPassword", Image = "TestImage" };
 
 
-            userRepository.GetById(userId).Returns(user);
+            //userRepository.GetById(userId).Returns(user);
             postRepository.GetPostById(invalidPostId).Returns((Post)null);
 
             // Act & Assert

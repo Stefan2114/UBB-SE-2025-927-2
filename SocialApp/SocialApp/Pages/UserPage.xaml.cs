@@ -21,7 +21,7 @@ namespace SocialApp.Pages
 
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-            this.username = this.FirstNameTextBox.Text.Trim();
+            this.username = this.UsernameTextBox.Text.Trim();
 
             if (string.IsNullOrEmpty(this.username))
             {
