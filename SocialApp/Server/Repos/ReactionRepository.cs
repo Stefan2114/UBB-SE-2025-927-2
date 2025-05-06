@@ -71,10 +71,10 @@ namespace Server.Repos
         /// <returns>The reaction for the specified user and post.</returns>
         public Reaction GetReactionByUserAndPost(long userId, long postId)
         {
-            var reactionReturned = from reaction in this.dbContext.Reactions
+            var reactionReturned = (from reaction in this.dbContext.Reactions
                            where reaction.PostId == postId && reaction.UserId == userId
-                           select reaction;
-            return (Reaction)reactionReturned;
+                           select reaction).FirstOrDefault();
+            return reactionReturned;
         }
 
         /// <summary>

@@ -40,6 +40,13 @@ namespace Server.Data
                 .HasOne(c => c.User)
                 .WithMany()  // Assuming a one-to-many relationship from User to Calorie
                 .HasForeignKey(c => c.U_Id);
+
+            modelBuilder.Entity<Reaction>()
+                .HasKey(reaction => new { reaction.UserId, reaction.PostId });
+
+            modelBuilder.Entity<Reaction>()
+                .Property(reaction => reaction.Type)
+                .HasColumnName("ReactionType");
         }
     }
 }
