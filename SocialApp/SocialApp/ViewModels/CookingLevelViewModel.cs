@@ -11,8 +11,7 @@
     {
         private readonly ICookingPageService cookingPageService;
 
-        private string userFirstName;
-        private string userLastName;
+        private string username;
         private string userSelectedCookingSkill;
 
         public ObservableCollection<string> CookingLevels { get; } = new ObservableCollection<string>
@@ -37,29 +36,28 @@
             NextCommand = new RelayCommand(NavigateToNextPage);
             cookingPageService = new CookingPageService();
 
-            userFirstName = string.Empty;
-            userLastName = string.Empty;
+            username = string.Empty;
             userSelectedCookingSkill = string.Empty;
 
             PropertyChanged = (eventSender, eventArguments) => { };
         }
 
-        public string FirstName
+        public string Username
         {
-            get => userFirstName;
+            get => username;
             set
             {
-                userFirstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
         public string LastName
         {
-            get => userLastName;
+            get => username;
             set
             {
-                userLastName = value;
+                username = value;
                 OnPropertyChanged(nameof(LastName));
             }
         }
@@ -74,17 +72,15 @@
             }
         }
 
-        public void SetUserInfo(string firstName, string lastName)
+        public void SetUserInfo(string username)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            Username = username;
         }
 
         public void NavigateToNextPage()
         {
             cookingPageService.AddCookingSkill(
-                FirstName,
-                LastName,
+                Username,
                 SelectedCookingSkill);
 
             NavigationService.Instance.NavigateTo(typeof(DietaryPreferencesPage), this);

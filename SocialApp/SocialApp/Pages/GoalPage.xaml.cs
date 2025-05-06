@@ -33,8 +33,8 @@ namespace SocialApp.Pages
 
             if (e.Parameter is BodyMetricsViewModel metricsViewModel)
             {
-                Debug.WriteLine($"GoalPage received user: {metricsViewModel.FirstName} {metricsViewModel.LastName}");
-                this.goalPageViewModel.SetUserInfo(metricsViewModel.FirstName, metricsViewModel.LastName);
+                Debug.WriteLine($"GoalPage received user: {metricsViewModel.Username}");
+                this.goalPageViewModel.SetUserInfo(metricsViewModel.Username);
             }
         }
 

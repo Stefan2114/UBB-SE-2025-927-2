@@ -1,34 +1,35 @@
 namespace SocialApp.Pages
 {
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
+    using SocialApp.Repository;
+    using SocialApp.Services;
     using SocialApp.ViewModels;
     using System;
 
     public sealed partial class UserPage : Page
     {
-        public string FirstName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        private IUserService userService;
 
-        public string LastName { get; set; } = string.Empty;
 
         private Services.UserPageService userPageService = new Services.UserPageService();
 
         public UserPage()
         {
             this.InitializeComponent();
+            var repo = new UserRepository();
+            this.userService = new UserService(repo);
         }
 
-        public string GetUserFullName()
-        {
-            return $"{this.LastName} {this.FirstName}";
-        }
 
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-            this.FirstName = this.FirstNameTextBox.Text.Trim();
-            this.LastName = this.LastNameTextBox.Text.Trim();
+            this.Username = this.UsernameTextBox.Text.Trim();
 
-            if (string.IsNullOrEmpty(this.FirstName) || string.IsNullOrEmpty(this.LastName))
+            if (string.IsNullOrEmpty(this.Username))
             {
                 var dialog = new ContentDialog
                 {
@@ -40,20 +41,22 @@ namespace SocialApp.Pages
                 _ = dialog.ShowAsync();
                 return;
             }
-            int userId = this.userPageService.UserHasAnAccount(this.LastName + " " + this.FirstName);
+            int userId = this.userPageService.UserHasAnAccount(this.Username);
             if (userId != -1)
             {
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;
+                App.Services.GetService<AppController>().CurrentUser = this.userService.GetById(userId);
                 this.Frame.Navigate(typeof(MainPage));
             }
             else
             {
-                userId = userPageService.InsertNewUser(this.LastName + " " + this.FirstName);
+                userId = userPageService.InsertNewUser(this.Username);
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;
+                App.Services.GetService<AppController>().CurrentUser = this.userService.GetById(userId);
                 this.Frame.Navigate(typeof(BodyMetricsPage), this);
             }
         }

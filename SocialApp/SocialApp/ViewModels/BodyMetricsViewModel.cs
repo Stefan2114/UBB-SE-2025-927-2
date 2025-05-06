@@ -19,8 +19,8 @@
         private string weight = string.Empty;
         private string height = string.Empty;
         private string targetWeight = string.Empty;
-        private string firstName = string.Empty;
-        private string lastName = string.Empty;
+        private string username = string.Empty;
+
 
         public BodyMetricsViewModel()
         {
@@ -63,25 +63,16 @@
             }
         }
 
-        public string FirstName
+        public string Username
         {
-            get => firstName;
+            get => username;
             set
             {
-                firstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
-        public string LastName
-        {
-            get => lastName;
-            set
-            {
-                lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
 
         public BodyMetricsViewModel(IBodyMetricService bodyMetricService)
         {
@@ -89,17 +80,16 @@
             SubmitBodyMetricsCommand = new RelayCommand(GoNext);
         }
 
-        public void SetUserInfo(string firstName, string lastName)
+        public void SetUserInfo(string username)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            Username = username;
         }
 
         public void GoNext()
         {
             try
             {
-                bodyMetricService.UpdateUserBodyMetrics(FirstName, LastName, Weight, Height, TargetWeight);
+                bodyMetricService.UpdateUserBodyMetrics(Username, Weight, Height, TargetWeight);
                 NavigationService.Instance.NavigateTo(typeof(GoalPage), this);
             }
             catch (Exception ex)

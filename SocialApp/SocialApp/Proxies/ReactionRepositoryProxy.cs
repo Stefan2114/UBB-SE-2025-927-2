@@ -33,12 +33,24 @@
 
         public List<Reaction> GetReactionsByPost(long postId)
         {
-            return this.httpClient.GetFromJsonAsync<List<Reaction>>($"reactions/{postId}").Result!;
+            var response = this.httpClient.GetAsync($"reactions/{postId}").Result!;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<List<Reaction>>().Result ?? new List<Reaction>();
+            }
+            return new List<Reaction>();
         }
 
         public Reaction GetReactionByUserAndPost(long userId, long postId)
         {
-            return this.httpClient.GetFromJsonAsync<Reaction>($"reactions/{userId}/{postId}").Result!;
+            var response = this.httpClient.GetAsync($"reactions/{userId}/{postId}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<Reaction>().Result ?? null;
+            }
+
+            return null;
+
         }
 
         public void Save(Reaction reaction)

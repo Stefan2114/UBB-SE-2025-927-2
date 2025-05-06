@@ -24,8 +24,8 @@ namespace SocialApp.Pages
 
             if (e.Parameter is CookingLevelViewModel cookingLevelViewModel)
             {
-                Debug.WriteLine($"Dietary Preferences page received user: {cookingLevelViewModel.FirstName} {cookingLevelViewModel.LastName}");
-                this.dietaryPreferencesViewModel.SetUserInfo(cookingLevelViewModel.FirstName, cookingLevelViewModel.LastName);
+                Debug.WriteLine($"Dietary Preferences page received user: {cookingLevelViewModel.Username}");
+                this.dietaryPreferencesViewModel.SetUserInfo(cookingLevelViewModel.Username);
             }
         }
 

@@ -45,13 +45,13 @@ namespace Server.Repos
                 await this.dbContext.SaveChangesAsync();
             }
 
-            UserModel? user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Name == name);
+            User? user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Username == name);
 
             if (user == null)
             {
-                user = new UserModel
+                user = new User
                 {
-                    Name = name,
+                    Username = name,
                     GoalId = goal.GoalId,
                 };
                 this.dbContext.Users.Add(user);

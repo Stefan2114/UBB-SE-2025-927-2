@@ -20,16 +20,14 @@
         private const bool IsDirectSqlQuery = false;
 
         [System.Obsolete]
-        public void AddActivity(string firstName, string lastName, string activityDescription)
+        public void AddActivity(string username, string activityDescription)
         {
-            Debug.WriteLine($"Adding activity {activityDescription} for user {firstName} {lastName}");
+            Debug.WriteLine($"Adding activity {activityDescription} for user {username}");
 
-            string userFullName = lastName + " " + firstName;
-            Debug.WriteLine($"User name: {userFullName}");
 
             var userLookupParameters = new SqlParameter[]
             {
-               new SqlParameter(UserNameParameter, userFullName),
+               new SqlParameter(UserNameParameter, username),
             };
 
             int userId = DataLink.Instance.ExecuteScalar<int>(
@@ -56,7 +54,7 @@
             };
 
             DataLink.Instance.ExecuteNonQuery(UpdateActivityProcedure, updateParameters);
-            Debug.WriteLine($"Successfully updated activity level to '{activityDescription}' for user {firstName} {lastName}");
+            Debug.WriteLine($"Successfully updated activity level to '{activityDescription}' for user {username}");
         }
 
         public static bool ValidateSelectedActivity(string activity)

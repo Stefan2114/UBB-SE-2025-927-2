@@ -2,6 +2,6 @@
 {
     public interface IDietaryPreferencesService
     {
-        void AddAllergyAndDietaryPreference(string firstName, string lastName, string dietaryPreference, string allergens);
+        void AddAllergyAndDietaryPreference(string username, string dietaryPreference, string allergens);
     }
 }

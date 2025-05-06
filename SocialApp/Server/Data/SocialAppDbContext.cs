@@ -18,7 +18,7 @@ namespace Server.Data
 
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
         public DbSet<Reaction> Reactions { get; set; } = default!;
-        public DbSet<UserModel> Users { get; set; } = default!;
+        public DbSet<User> Users { get; set; } = default!;
         public DbSet<Calorie> Calories { get; set; } = default!; 
         public DbSet<Meal> Meals { get; set; } = default!;
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
