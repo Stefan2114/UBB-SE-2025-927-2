@@ -1,17 +1,19 @@
-﻿namespace SocialApp.Proxies
-{
-    using AppCommonClasses.DTOs;
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Net.Http.Json;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿using AppCommonClasses.DTOs;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
+namespace SocialApp.Proxies
+{
+    /// <summary>
+    /// A proxy that communicates with the user microservice and implements IUserRepository.
+    /// Provides user data handling and relationship management.
+    /// </summary>
     public class UserRepositoryProxy : IUserRepository
     {
         private readonly HttpClient httpClient;
@@ -24,54 +26,114 @@
 
         public void DeleteById(long id)
         {
-            this.httpClient.DeleteAsync($"{id}").Wait();
+            var response = this.httpClient.DeleteAsync($"{id}").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to delete user {id}. Status: {response.StatusCode}");
+            }
         }
 
         public void Follow(long userId, long whoToFollowId)
         {
-            this.httpClient.PostAsJsonAsync($"users/{userId}/follow/{whoToFollowId}", "").Wait();
+            var response = this.httpClient.PostAsJsonAsync($"users/{userId}/follow/{whoToFollowId}", "").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to follow. Status: {response.StatusCode}");
+            }
         }
 
         public List<User> GetAll()
         {
-            return this.httpClient.GetFromJsonAsync<List<User>>("").Result!;
+            var response = this.httpClient.GetAsync("").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<List<User>>().Result ?? new List<User>();
+            }
+
+            Debug.WriteLine($"Failed to get users. Status: {response.StatusCode}");
+            return new List<User>();
         }
 
         public User GetByEmail(string email)
         {
-            return this.httpClient.GetFromJsonAsync<User>($"users/{email}").Result!;
+            var response = this.httpClient.GetAsync($"users/{email}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<User>().Result;
+            }
+
+            Debug.WriteLine($"User not found by email {email}. Status: {response.StatusCode}");
+            return null;
         }
 
         public User GetById(long id)
         {
-            return this.httpClient.GetFromJsonAsync<User>($"{id}").Result!;
+            var response = this.httpClient.GetAsync($"{id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<User>().Result;
+            }
+
+            Debug.WriteLine($"User not found by ID {id}. Status: {response.StatusCode}");
+            return null;
         }
 
         public User GetByUsername(string username)
         {
             Debug.WriteLine($"Getting in proxy user by username: {username}");
-            return this.httpClient.GetFromJsonAsync<User>($"users/{username}").Result!;
-            Debug.WriteLine($"Got in proxy user by username: {username}");
+            var response = this.httpClient.GetAsync($"users/{username}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var user = response.Content.ReadFromJsonAsync<User>().Result;
+                Debug.WriteLine($"Got in proxy user by username: {username}");
+                return user;
+            }
+
+            Debug.WriteLine($"User not found by username {username}. Status: {response.StatusCode}");
+            return null;
         }
 
         public List<User> GetUserFollowers(long id)
         {
-            return this.httpClient.GetFromJsonAsync<List<User>>($"users/{id}/followers").Result!;
+
+            var response = this.httpClient.GetAsync($"users/{id}/followers").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<List<User>>().Result ?? new List<User>();
+            }
+
+            Debug.WriteLine($"Failed to get followers for user {id}. Status: {response.StatusCode}");
+            return new List<User>();
         }
 
         public List<User> GetUserFollowing(long id)
         {
-            return this.httpClient.GetFromJsonAsync<List<User>>($"users/{id}/following").Result!;
+            var response = this.httpClient.GetAsync($"users/{id}/following").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<List<User>>().Result ?? new List<User>();
+            }
+
+            Debug.WriteLine($"Failed to get following for user {id}. Status: {response.StatusCode}");
+            return new List<User>();
         }
 
         public void Save(User entity)
         {
-            this.httpClient.PostAsJsonAsync("", entity).Wait();
+            var response = this.httpClient.PostAsJsonAsync("", entity).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to save user. Status: {response.StatusCode}");
+            }
         }
 
         public void Unfollow(long userId, long whoToUnfollowId)
         {
-            this.httpClient.DeleteAsync($"users/{userId}/unfollow/{whoToUnfollowId}").Wait();
+            var response = this.httpClient.DeleteAsync($"users/{userId}/unfollow/{whoToUnfollowId}").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to unfollow. Status: {response.StatusCode}");
+            }
         }
 
         public void UpdateById(long id, string username, string email, string hashPassword, string image)
@@ -83,7 +145,12 @@
                 HashPassword = hashPassword,
                 Image = image
             };
-            this.httpClient.PutAsJsonAsync($"{id}", user).Wait();
+
+            var response = this.httpClient.PutAsJsonAsync($"{id}", user).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to update user {id}. Status: {response.StatusCode}");
+            }
         }
     }
 }
