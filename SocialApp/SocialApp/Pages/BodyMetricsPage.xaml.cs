@@ -34,6 +34,7 @@ namespace SocialApp.Pages
             {
                 this.viewModel.SetUserInfo(userPage.Username);
                 Debug.WriteLine($"Received user name: {userPage.Username}");
+
             }
         }
 

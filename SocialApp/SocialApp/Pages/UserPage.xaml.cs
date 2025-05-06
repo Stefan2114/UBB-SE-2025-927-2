@@ -15,7 +15,6 @@ namespace SocialApp.Pages
         public string Username { get; set; } = string.Empty;
         private IUserService userService;
 
-
         private Services.UserPageService userPageService = new Services.UserPageService();
 
         public UserPage()
@@ -31,6 +30,7 @@ namespace SocialApp.Pages
             this.Username = this.UsernameTextBox.Text.Trim();
 
             if (string.IsNullOrEmpty(this.Username))
+
             {
                 var dialog = new ContentDialog
                 {
@@ -44,6 +44,7 @@ namespace SocialApp.Pages
             }
             int userId = this.userPageService.UserHasAnAccount(this.Username);
 
+
             if (userId != -1)
             {
                 GroceryViewModel.UserId = userId;
@@ -55,6 +56,7 @@ namespace SocialApp.Pages
             else
             {
                 userId = userPageService.InsertNewUser(this.Username);
+
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;
