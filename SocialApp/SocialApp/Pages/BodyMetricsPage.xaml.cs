@@ -32,8 +32,7 @@ namespace SocialApp.Pages
             base.OnNavigatedTo(e);
             if (e.Parameter is UserPage userPage)
             {
-                this.viewModel.SetUserInfo(userPage.FirstName, userPage.LastName);
-                Debug.WriteLine($"Received user name: {userPage.FirstName} {userPage.LastName}");
+                this.viewModel.SetUserInfo(userPage.username, " ");
             }
         }
 

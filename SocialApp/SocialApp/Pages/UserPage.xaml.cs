@@ -7,9 +7,9 @@ namespace SocialApp.Pages
 
     public sealed partial class UserPage : Page
     {
-        public string FirstName { get; set; } = string.Empty;
+        public string username { get; set; } = string.Empty;
 
-        public string LastName { get; set; } = string.Empty;
+
 
         private Services.UserPageService userPageService = new Services.UserPageService();
 
@@ -18,17 +18,12 @@ namespace SocialApp.Pages
             this.InitializeComponent();
         }
 
-        public string GetUserFullName()
-        {
-            return $"{this.LastName} {this.FirstName}";
-        }
 
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-            this.FirstName = this.FirstNameTextBox.Text.Trim();
-            this.LastName = this.LastNameTextBox.Text.Trim();
+            this.username = this.FirstNameTextBox.Text.Trim();
 
-            if (string.IsNullOrEmpty(this.FirstName) || string.IsNullOrEmpty(this.LastName))
+            if (string.IsNullOrEmpty(this.username))
             {
                 var dialog = new ContentDialog
                 {
@@ -40,7 +35,7 @@ namespace SocialApp.Pages
                 _ = dialog.ShowAsync();
                 return;
             }
-            int userId = this.userPageService.UserHasAnAccount(this.LastName + " " + this.FirstName);
+            int userId = this.userPageService.UserHasAnAccount(this.username);
 
             if (userId != -1)
             {
@@ -51,7 +46,7 @@ namespace SocialApp.Pages
             }
             else
             {
-                userId = userPageService.InsertNewUser(this.LastName + " " + this.FirstName);
+                userId = userPageService.InsertNewUser(this.username);
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;
