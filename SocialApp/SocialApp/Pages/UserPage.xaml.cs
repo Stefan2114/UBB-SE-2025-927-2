@@ -30,7 +30,6 @@ namespace SocialApp.Pages
             this.Username = this.UsernameTextBox.Text.Trim();
 
             if (string.IsNullOrEmpty(this.Username))
-
             {
                 var dialog = new ContentDialog
                 {
