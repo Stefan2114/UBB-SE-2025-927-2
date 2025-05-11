@@ -14,7 +14,7 @@ namespace AppCommonClasses.Interfaces
 
         List<Group> GetGroupsForUser(long userId);
 
-        List<UserModel> GetUsersFromGroup(long id);
+        List<User> GetUsersFromGroup(long id);
 
         void SaveGroup(Group entity);
 

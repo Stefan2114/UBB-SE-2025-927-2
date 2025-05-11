@@ -29,7 +29,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("{id}/users")]
-        public ActionResult<List<UserModel>> GetUsersFromGroup(long id)
+        public ActionResult<List<User>> GetUsersFromGroup(long id)
         {
             return this.groupRepository.GetUsersFromGroup(id);
         }

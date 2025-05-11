@@ -61,7 +61,7 @@ namespace Server.Repos
         /// </summary>
         /// <param name="groupId">The ID of the group.</param>
         /// <returns>A list of users in the group.</returns>
-        public List<UserModel> GetUsersFromGroup(long groupId)
+        public List<User> GetUsersFromGroup(long groupId)
         {
             var usersQuery = from user in dbContext.Users
                              join groupUser in this.dbContext.GroupUsers
