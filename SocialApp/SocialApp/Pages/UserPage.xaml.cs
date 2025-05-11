@@ -4,6 +4,7 @@ namespace SocialApp.Pages
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using SocialApp.Interfaces;
+    using SocialApp.Proxies;
     using SocialApp.Repository;
     using SocialApp.Services;
     using SocialApp.ViewModels;
@@ -14,13 +15,12 @@ namespace SocialApp.Pages
         public string Username { get; set; } = string.Empty;
         private IUserService userService;
 
-
         private Services.UserPageService userPageService = new Services.UserPageService();
 
         public UserPage()
         {
             this.InitializeComponent();
-            var repo = new UserRepository();
+            var repo = new UserRepositoryProxy();
             this.userService = new UserService(repo);
         }
 
@@ -42,6 +42,8 @@ namespace SocialApp.Pages
                 return;
             }
             int userId = this.userPageService.UserHasAnAccount(this.Username);
+
+
             if (userId != -1)
             {
                 GroceryViewModel.UserId = userId;
@@ -53,6 +55,7 @@ namespace SocialApp.Pages
             else
             {
                 userId = userPageService.InsertNewUser(this.Username);
+
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;

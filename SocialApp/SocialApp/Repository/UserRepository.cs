@@ -5,7 +5,7 @@
     using AppCommonClasses.Models;
     using AppCommonClasses.Interfaces;
 
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
 
         private const string ConnectionString = "Data Source=vm;" +
@@ -171,7 +171,7 @@
             this.connection.Close();
         }
 
-        public void UpdateById(long userId, string username, string email, string passwordHash, string image)
+        public void UpdateById(long userId, string username, string email, string hashPassword, string image)
         {
             this.connection.Open();
             using (var command = new SqlCommand(
@@ -181,8 +181,7 @@
                 command.Parameters.AddWithValue("@UserId", userId);
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@PasswordHash", passwordHash);
-                command.Parameters.AddWithValue("@Image", image);
+
                 command.ExecuteNonQuery();
             }
 
@@ -212,5 +211,6 @@
                 Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image"))
             };
         }
+
     }
 }

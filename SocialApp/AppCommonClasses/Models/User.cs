@@ -19,8 +19,8 @@ namespace AppCommonClasses.Models
 
         [Column("Email")]
         public string Email { get; set; }
-        public string PasswordHash { get; set; }
-        public string Image { get; set; }
+        public string? PasswordHash { get; set; }
+        public string? Image { get; set; }
 
         [Column("u_height")]
         public double Height { get; set; }

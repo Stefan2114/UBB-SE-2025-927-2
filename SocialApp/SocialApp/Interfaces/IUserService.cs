@@ -7,15 +7,15 @@ namespace SocialApp.Interfaces
     {
         void FollowUserById(long userId, long whoToFollowId);
 
-        List<User> GetAllUsers();
+        List<UserModel> GetAllUsers();
 
-        User GetById(long id);
+        UserModel GetById(long id);
 
-        List<User> GetUserFollowers(long id);
+        List<UserModel> GetUserFollowers(long id);
 
-        List<User> GetUserFollowing(long id);
+        List<UserModel> GetUserFollowing(long id);
 
-        List<User> SearchUsersById(long userId, string query);
+        List<UserModel> SearchUsersById(long userId, string query);
 
         void UnfollowUserById(long userId, long whoToUnfollowId);
 

@@ -9,7 +9,8 @@ using SocialApp.Repository;
 using SocialApp.Pages;
 using Windows.Networking.Sockets;
 using Microsoft.Extensions.DependencyInjection;
-using System; // For GroupPage
+using System;
+using SocialApp.Proxies; // For GroupPage
 
 namespace SocialApp.Components
 {
@@ -30,7 +31,7 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
             var groupRepository = new GroupRepository();
-            var userRepository = new UserRepository();
+            var userRepository = new UserRepositoryProxy();
             controller = App.Services.GetService<AppController>();
             groupService = new GroupService(groupRepository, userRepository);
             CreateGroupButton.Click += CreateGroup_Click; // Handle click event
