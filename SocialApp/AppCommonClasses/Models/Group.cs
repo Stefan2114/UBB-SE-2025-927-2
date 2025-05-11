@@ -12,9 +12,9 @@ namespace AppCommonClasses.Models
     {
         [Key]
         public long Id { get; set; }
-        public required string Name { get; set; }
-        public required string Image { get; set; }
-        public required string Description { get; set; }
-        public required long AdminId { get; set; }
+        public string Name { get; set; }
+        public string? Image { get; set; }
+        public string Description { get; set; }
+        public long AdminId { get; set; }
     }
 }
