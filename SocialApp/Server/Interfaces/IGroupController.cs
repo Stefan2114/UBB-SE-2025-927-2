@@ -1,21 +1,16 @@
-using AppCommonClasses.DTOs;
+using AppCommonClasses.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Interfaces
 {
-    public interface IGroupControllerService
+    public interface IGroupController
     {
-        Task<IEnumerable<GroupDto>> GetAllGroupsAsync();
-
-        Task<GroupDto?> GetGroupByIdAsync(long id);
-
-        Task<IEnumerable<long>> GetUserIdsFromGroupAsync(long groupId);
-
-        Task<IEnumerable<GroupDto>> GetGroupsForUserAsync(long userId);
-
-        Task<GroupDto> CreateGroupAsync(GroupDto groupDto);
-
-        Task<bool> UpdateGroupAsync(long id, GroupDto groupDto);
-
-        Task<bool> DeleteGroupAsync(long id);
+        ActionResult<List<Group>> GetAllGroups();
+        ActionResult<Group> GetGroupById(long id);
+        ActionResult<List<UserModel>> GetUsersFromGroup(long id);
+        ActionResult<List<Group>> GetGroupsForUser(long userId);
+        IActionResult SaveGroup(Group group);
+        IActionResult UpdateGroup(long id, [FromBody] Group group);
+        IActionResult DeleteGroup(long id);
     }
 }

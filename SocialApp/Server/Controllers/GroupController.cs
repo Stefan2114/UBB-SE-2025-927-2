@@ -1,12 +1,13 @@
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
+using Microsoft.AspNetCore.Mvc;
+using Server.Interfaces;
+
 namespace Server.Controllers
 {
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
-    using Microsoft.AspNetCore.Mvc;
-
     [ApiController]
-    [Route("api/groups")]
-    public class GroupController : ControllerBase
+    [Route("groups")]
+    public class GroupController : ControllerBase, IGroupController
     {
         private readonly IGroupRepository groupRepository;
 
@@ -16,57 +17,48 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<List<Group>> GetAllGroups()
         {
-            var groups = this.groupRepository.GetAllGroups();
-            return this.Ok(groups);
+            return this.groupRepository.GetAllGroups();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(long id)
+        public ActionResult<Group> GetGroupById(long id)
         {
-            var group = this.groupRepository.GetGroupById(id);
-            if (group == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.Ok(group);
+            return this.groupRepository.GetGroupById(id);
         }
 
         [HttpGet("{id}/users")]
-        public IActionResult GetUsersFromGroup(long id)
+        public ActionResult<List<UserModel>> GetUsersFromGroup(long id)
         {
-            var users = this.groupRepository.GetUsersFromGroup(id);
-            return this.Ok(users);
+            return this.groupRepository.GetUsersFromGroup(id);
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetGroupsForUser(long userId)
+        public ActionResult<List<Group>> GetGroupsForUser(long userId)
         {
-            var groups = this.groupRepository.GetGroupsForUser(userId);
-            return this.Ok(groups);
+            return this.groupRepository.GetGroupsForUser(userId);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Group group)
+        public IActionResult SaveGroup([FromBody] Group group)
         {
             this.groupRepository.SaveGroup(group);
-            return this.Ok(group);
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Group group)
+        public IActionResult UpdateGroup(long id, [FromBody] Group group)
         {
             this.groupRepository.UpdateGroup(id, group.Name, group.Image, group.Description, group.AdminId);
-            return this.NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult DeleteGroup(long id)
         {
             this.groupRepository.DeleteGroupById(id);
-            return this.NoContent();
+            return Ok();
         }
     }
 }
