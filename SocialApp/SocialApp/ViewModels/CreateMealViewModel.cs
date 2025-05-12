@@ -1,16 +1,16 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
     using AppCommonClasses.Models;
     using CommunityToolkit.Mvvm.Input;
     using global::Windows.Storage;
     using Microsoft.UI.Xaml.Controls;
     using SocialApp.Interfaces;
     using SocialApp.Services;
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Input;
 
     public class CreateMealViewModel : ViewModelBase
     {
@@ -295,12 +295,12 @@
                                 IngredientId = ingredient.Id,
                                 IngredientName = ingredient.Name,
                                 Quantity = quantity,
-                                Protein = ingredient.Protein,
-                                Calories = ingredient.Calories,
-                                Carbs = ingredient.Carbs,
-                                Fats = ingredient.Fats,
-                                Fiber = ingredient.Fiber,
-                                Sugar = ingredient.Sugar,
+                                Protein = (float)ingredient.Protein,
+                                Calories = (float)ingredient.Calories,
+                                Carbs = (float)ingredient.Carbs,
+                                Fats = (float)ingredient.Fats,
+                                Fiber = (float)ingredient.Fiber,
+                                Sugar = (float)ingredient.Sugar,
                             };
 
                             ingredients.Add(mealIngredient); // Fixes SA1101

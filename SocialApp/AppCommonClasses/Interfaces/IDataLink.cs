@@ -13,5 +13,7 @@ namespace AppCommonClasses.Interfaces
         int ExecuteNonQuery(string storedProcedure, SqlParameter[]? sqlParameters);
         [Obsolete]
         DataTable ExecuteSqlQuery(string query, SqlParameter[]? sqlParameters);
+        [Obsolete]
+        DataTable ExecuteReader(string storedProcedure, SqlParameter[]? sqlParameters = null);
     }
 }

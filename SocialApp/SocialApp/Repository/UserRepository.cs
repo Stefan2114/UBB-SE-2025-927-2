@@ -1,9 +1,9 @@
 ﻿namespace SocialApp.Repository
 {
-    using System.Collections.Generic;
-    using Microsoft.Data.SqlClient;
-    using AppCommonClasses.Models;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Microsoft.Data.SqlClient;
+    using System.Collections.Generic;
 
     public class UserRepository
     {

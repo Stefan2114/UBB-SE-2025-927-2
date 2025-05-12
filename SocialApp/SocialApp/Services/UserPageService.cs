@@ -1,12 +1,8 @@
-﻿using AppCommonClasses.DTOs;
+﻿using System.Diagnostics;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
-using SocialApp.Queries;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace SocialApp.Services
 {
@@ -16,26 +12,27 @@ namespace SocialApp.Services
 
         public UserPageService()
         {
-            this.userRepository =  new UserRepositoryProxy();
+            this.userRepository = new UserRepositoryProxy();
         }
 
         public int UserHasAnAccount(string name)
         {
-            //var parameters = new SqlParameter[]
-            //{
+            // var parameters = new SqlParameter[]
+            // {
             //    new SqlParameter("@u_name", name)
-            //};
+            // };
 
-            //int? userId = _dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
+            // int? userId = _dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
 
-            //return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
-            //get all users and print them in the console
+            // return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
+            // get all users and print them in the console
             var users = this.userRepository.GetAll();
-            foreach (var usera in users)
+            foreach (var user1 in users)
             {
-                Debug.WriteLine($"User: {usera.Name}");
+                Debug.WriteLine($"User: {user1.Username}");
             }
-            UserModel user = this.userRepository.GetByUsername(name);
+
+            User user = this.userRepository.GetByUsername(name);
             if (user != null)
             {
                 return (int)user.Id;
@@ -48,15 +45,15 @@ namespace SocialApp.Services
 
         public int InsertNewUser(string name)
         {
-            //var parameters = new SqlParameter[]
-            //{
+            // var parameters = new SqlParameter[]
+            // {
             //    new SqlParameter("@u_name", name)
-            //};
-            //int userId = _dataLink.ExecuteScalar<int>("SELECT dbo.InsertNewUser(@u_name)", parameters, false);
-            //return userId;
-            UserModel user = new UserModel
+            // };
+            // int userId = _dataLink.ExecuteScalar<int>("SELECT dbo.InsertNewUser(@u_name)", parameters, false);
+            // return userId;
+            User user = new User
             {
-                Name = name,
+                Username = name,
                 Height = 0,
                 Weight = 0,
                 TargetWeight = 0,
@@ -64,7 +61,7 @@ namespace SocialApp.Services
                 CookingSkillId = null,
                 DietaryPreferenceId = null,
                 AllergyId = null,
-                ActivityLevelId = null
+                ActivityLevelId = null,
             };
             this.userRepository.Save(user);
             return (int)user.Id;

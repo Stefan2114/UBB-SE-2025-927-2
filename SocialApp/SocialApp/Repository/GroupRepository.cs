@@ -4,17 +4,12 @@
 
 namespace SocialApp.Repository
 {
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Microsoft.Data.SqlClient;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using global::Windows.Networking.Sockets;
-    using Microsoft.Data.SqlClient;
-    using AppCommonClasses.Models;
     using Group = AppCommonClasses.Models.Group;
-    using AppCommonClasses.Interfaces;
 
 
     /// <summary>
@@ -22,9 +17,7 @@ namespace SocialApp.Repository
     /// </summary>
     public partial class GroupRepository : IGroupRepository
     {
-        private string loginString = "Data Source=LAPTOP-ANDU\\SQLEXPRESS;" +
-     "Initial Catalog=SocialApp;" +
-     "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 

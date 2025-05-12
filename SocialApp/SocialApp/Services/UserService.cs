@@ -3,12 +3,9 @@ namespace SocialApp.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using SocialApp.Interfaces;
-    using SocialApp.Repository;
 
     /// <summary>
     /// Provides user-related services.
@@ -52,7 +49,7 @@ namespace SocialApp.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new UserModel() { Name = username, Email = email});
+            this.userRepository.Save(new User() { Username = username, Email = email });
         }
 
         /// <summary>
@@ -86,14 +83,14 @@ namespace SocialApp.Services
                 throw new Exception("User does not exist");
             }
 
-            this.userRepository.UpdateById(id, username, email);
+            this.userRepository.UpdateById(id, username, email, password, image);
         }
 
         /// <summary>
         /// Gets all users.
         /// </summary>
         /// <returns>A list of users.</returns>
-        public List<UserModel> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return this.userRepository.GetAll();
         }
@@ -103,7 +100,7 @@ namespace SocialApp.Services
         /// </summary>
         /// <param name="id">The user ID.</param>
         /// <returns>The user.</returns>
-        public UserModel GetById(long id)
+        public User GetById(long id)
         {
             return this.userRepository.GetById(id);
         }
@@ -113,7 +110,7 @@ namespace SocialApp.Services
         /// </summary>
         /// <param name="id">The user ID.</param>
         /// <returns>A list of followers.</returns>
-        public List<UserModel> GetUserFollowers(long id)
+        public List<User> GetUserFollowers(long id)
         {
             return this.userRepository.GetUserFollowers(id);
         }
@@ -123,7 +120,7 @@ namespace SocialApp.Services
         /// </summary>
         /// <param name="id">The user ID.</param>
         /// <returns>A list of followed users.</returns>
-        public List<UserModel> GetUserFollowing(long id)
+        public List<User> GetUserFollowing(long id)
         {
             return this.userRepository.GetUserFollowing(id);
         }
@@ -176,10 +173,10 @@ namespace SocialApp.Services
         /// <param name="userId">The user ID.</param>
         /// <param name="query">The search query.</param>
         /// <returns>A list of users matching the query.</returns>
-        public List<UserModel> SearchUsersById(long userId, string query)
+        public List<User> SearchUsersById(long userId, string query)
         {
             var followingUsers = this.GetUserFollowing(userId);
-            return followingUsers.Where(u => u.Name.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+            return followingUsers.Where(u => u.Username.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
         }
     }
 }

@@ -1,16 +1,16 @@
 namespace SocialApp.Components
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml;
+    using System.Collections.Generic;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Repository;
     using SocialApp.Services;
-    using System.Collections.Generic;
-    using SocialApp.Proxies;
-    using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Represents a user control for displaying a follower in the social app.
@@ -64,8 +64,8 @@ namespace SocialApp.Components
         /// <returns>True if the user is followed; otherwise, false.</returns>
         private bool IsFollowed()
         {
-            List<UserModel> following = userService.GetUserFollowing(controller.CurrentUser.Id);
-            foreach (UserModel user in following)
+            List<User> following = userService.GetUserFollowing(controller.CurrentUser.Id);
+            foreach (User user in following)
             {
                 if (user.Id == this.user.Id) return true;
             }

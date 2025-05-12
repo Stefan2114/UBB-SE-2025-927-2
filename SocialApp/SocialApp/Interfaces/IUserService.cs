@@ -1,5 +1,5 @@
-﻿using AppCommonClasses.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AppCommonClasses.Models;
 
 namespace SocialApp.Interfaces
 {
@@ -7,15 +7,15 @@ namespace SocialApp.Interfaces
     {
         void FollowUserById(long userId, long whoToFollowId);
 
-        List<UserModel> GetAllUsers();
+        List<User> GetAllUsers();
 
-        UserModel GetById(long id);
+        User GetById(long id);
 
-        List<UserModel> GetUserFollowers(long id);
+        List<User> GetUserFollowers(long id);
 
-        List<UserModel> GetUserFollowing(long id);
+        List<User> GetUserFollowing(long id);
 
-        List<UserModel> SearchUsersById(long userId, string query);
+        List<User> SearchUsersById(long userId, string query);
 
         void UnfollowUserById(long userId, long whoToUnfollowId);
 

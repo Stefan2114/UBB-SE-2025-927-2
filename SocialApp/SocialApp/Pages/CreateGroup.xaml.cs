@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -8,8 +10,6 @@ using SocialApp.Interfaces;
 using SocialApp.Proxies;
 using SocialApp.Repository;
 using SocialApp.Services;
-using System;
-using System.Linq;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -174,7 +174,7 @@ namespace SocialApp.Pages
             {
                 // Show filtered results
                 var users = userService.GetUserFollowing(controller.CurrentUser.Id)
-                                        .Where(u => u.Name.Contains(query))
+                                        .Where(u => u.Username.Contains(query))
                                         .ToList();
                 UserSearchResults.ItemsSource = users;
                 UserSearchResults.Visibility = Visibility.Visible;
