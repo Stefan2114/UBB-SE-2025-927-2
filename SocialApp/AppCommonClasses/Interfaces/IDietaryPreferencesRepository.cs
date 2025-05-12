@@ -3,6 +3,6 @@
     public interface IDietaryPreferencesRepository
     {
         [Obsolete]
-        void AddAllergyAndDietaryPreference(string firstName, string lastName, string dietaryPreference, string allergy);
+        void AddAllergyAndDietaryPreference(string username, string dietaryPreference, string allergy);
     }
 }

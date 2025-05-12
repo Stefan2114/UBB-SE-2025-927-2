@@ -11,6 +11,7 @@ using Windows.Storage;
 using SocialApp.Repository;
 using SocialApp.Services;
 using Microsoft.UI.Xaml.Media.Imaging;
+using SocialApp.Proxies;
 
 namespace SocialApp
 {
@@ -20,7 +21,7 @@ namespace SocialApp
 
         public static AppController Instance => instance.Value;
 
-        public User? CurrentUser { get; private set; } = null;
+        public User CurrentUser { get; set; }
 
         public AppController() { }
 
@@ -44,12 +45,13 @@ namespace SocialApp
 
         public void Register(string username, string email, string password, string image)
         {
-            UserRepository userRepository = new UserRepository();
+            UserRepositoryProxy userRepository = new UserRepositoryProxy();
             UserService userService = new UserService(userRepository);
             userService.AddUser(username, email, password, image);
             Login(email, password);
         }
 
+        //trrbuie scoasa
         public void Logout()
         {
             CurrentUser = null;

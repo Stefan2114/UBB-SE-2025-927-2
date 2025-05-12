@@ -56,38 +56,27 @@
 
         private GoalPageService goalPageService = new GoalPageService();
 
-        private string firstName = string.Empty;
-        private string lastName = string.Empty;
+        private string username = string.Empty;
 
-        public string FirstName
+       
+        public string Username
         {
-            get => firstName;
+            get => username;
             set
             {
-                firstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
-        public string LastName
+        public void SetUserInfo(string username)
         {
-            get => lastName;
-            set
-            {
-                lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
-
-        public void SetUserInfo(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
+            Username = username;
         }
 
         public void GoNext()
         {
-            goalPageService.AddGoals(FirstName, LastName, SelectedGoal);
+            goalPageService.AddGoals(Username, SelectedGoal);
             NavigationService.Instance.NavigateTo(typeof(ActivityLevelPage), this);
         }
 

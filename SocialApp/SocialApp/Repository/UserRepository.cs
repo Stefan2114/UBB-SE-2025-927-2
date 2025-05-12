@@ -5,9 +5,12 @@
     using Microsoft.Data.SqlClient;
     using System.Collections.Generic;
 
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
-        private const string ConnectionString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
+
+        private const string ConnectionString = "Data Source=vm;" +
+            "Initial Catalog=MealSocialApp;" +
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
 
         private readonly SqlConnection connection;
 
@@ -168,7 +171,7 @@
             this.connection.Close();
         }
 
-        public void UpdateById(long userId, string username, string email, string passwordHash, string image)
+        public void UpdateById(long userId, string username, string email, string hashPassword, string image)
         {
             this.connection.Open();
             using (var command = new SqlCommand(
@@ -178,8 +181,7 @@
                 command.Parameters.AddWithValue("@UserId", userId);
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@PasswordHash", passwordHash);
-                command.Parameters.AddWithValue("@Image", image);
+
                 command.ExecuteNonQuery();
             }
 
@@ -209,5 +211,6 @@
                 Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image"))
             };
         }
+
     }
 }

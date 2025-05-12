@@ -1,15 +1,16 @@
 ﻿namespace SocialApp.Repository
 {
+    using System.Collections.Generic;
     using AppCommonClasses.Enums;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.Data.SqlClient;
-    using System.Collections.Generic;
 
     public class ReactionRepository : IReactionRepository
     {
 
         private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
+
 
         private SqlConnection connection;
 

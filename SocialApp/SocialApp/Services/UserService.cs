@@ -3,12 +3,9 @@ namespace SocialApp.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using SocialApp.Interfaces;
-    using SocialApp.Repository;
 
     /// <summary>
     /// Provides user-related services.
@@ -52,7 +49,7 @@ namespace SocialApp.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new User() { Username = username, Email = email, PasswordHash = password, Image = image });
+            this.userRepository.Save(new User() { Username = username, Email = email });
         }
 
         /// <summary>
@@ -86,7 +83,7 @@ namespace SocialApp.Services
                 throw new Exception("User does not exist");
             }
 
-            this.userRepository.UpdateById(id, username, email, password, image);
+            this.userRepository.UpdateById(id, username, email);
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
-﻿using AppCommonClasses.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AppCommonClasses.Models;
 
 namespace SocialApp.Interfaces
 {

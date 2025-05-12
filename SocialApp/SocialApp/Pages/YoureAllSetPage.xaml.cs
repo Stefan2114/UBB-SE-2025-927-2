@@ -31,8 +31,7 @@ namespace SocialApp.Pages
 
             if (e.Parameter is DietaryPreferencesViewModel dpViewModel)
             {
-                Debug.WriteLine($"GoalPage received user: {dpViewModel.FirstName} {dpViewModel.LastName}");
-                this.youreAllSetViewModel.SetUserInfo(dpViewModel.FirstName, dpViewModel.LastName);
+                this.youreAllSetViewModel.SetUserInfo(dpViewModel.Username);
             }
         }
     }

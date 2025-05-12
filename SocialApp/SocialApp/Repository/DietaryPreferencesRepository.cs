@@ -20,12 +20,12 @@ namespace SocialApp.Repository
         }
 
         [Obsolete]
-        public void AddAllergyAndDietaryPreference(string firstName, string lastName, string dietaryPreference, string allergy)
+        public void AddAllergyAndDietaryPreference(string username, string dietaryPreference, string allergy)
         {
             // this uses the sql update function
             var parameters = new SqlParameter[]
             {
-                new ("@u_name", $"{lastName} {firstName}"),
+                new ("@u_name", username),
             };
             int u_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
             parameters =

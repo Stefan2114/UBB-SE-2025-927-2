@@ -1,16 +1,16 @@
 namespace SocialApp.Components
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml;
+    using System.Collections.Generic;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Repository;
     using SocialApp.Services;
-    using System.Collections.Generic;
-    using SocialApp.Proxies;
-    using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Represents a user control for displaying a follower in the social app.
@@ -44,7 +44,7 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
 
-            userRepository = new UserRepository();
+            userRepository = new UserRepositoryProxy();
             userService = new UserService(userRepository);
             postRepository = new PostRepositoryProxy();
             groupRepository = new GroupRepository();

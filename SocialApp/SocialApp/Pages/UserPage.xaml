@@ -38,19 +38,8 @@
                     HorizontalAlignment="Center"
                     Spacing="20"
                     Width="300">
-            <TextBox x:Name="FirstNameTextBox"
-                     PlaceholderText="First Name"
-                     Height="50"
-                     FontSize="16"
-                     Padding="10,0,10,0"
-                     BorderThickness="2"
-                     BorderBrush="Black"
-                     Foreground="Black"
-                     Background="#C76E4E"
-                     CornerRadius="5"/>
-
-            <TextBox x:Name="LastNameTextBox"
-                     PlaceholderText="Last Name"
+            <TextBox x:Name="UsernameTextBox"
+                     PlaceholderText="Username"
                      Height="50"
                      FontSize="16"
                      Padding="10,0,10,0"
