@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using AppCommonClasses.Interfaces;
-using AppCommonClasses.Models;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
 
@@ -27,11 +26,11 @@ namespace SocialApp.Services
             //return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
             //get all users and print them in the console
             var users = this.userRepository.GetAll();
-            foreach (var _user in users)
+            foreach (var usera in users)
             {
-                Debug.WriteLine($"User: {_user.Username}");
+                Debug.WriteLine($"User: {usera.Name}");
             }
-            User user = this.userRepository.GetByUsername(name);
+            UserModel user = this.userRepository.GetByUsername(name);
             if (user != null)
             {
                 return (int)user.Id;
@@ -50,9 +49,9 @@ namespace SocialApp.Services
             //};
             //int userId = _dataLink.ExecuteScalar<int>("SELECT dbo.InsertNewUser(@u_name)", parameters, false);
             //return userId;
-            User user = new User
+            UserModel user = new UserModel
             {
-                Username = name,
+                Name = name,
                 Height = 0,
                 Weight = 0,
                 TargetWeight = 0,

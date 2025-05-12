@@ -10,11 +10,8 @@ namespace Server.Data
             : base(options)
         {
         }
-
         public DbSet<Water> WaterTrackers { get; set; } = default!;
-
         public DbSet<Post> Posts { get; set; } = default!;
-
         public DbSet<Comment> Comments { get; set; } = default!;
 
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
@@ -24,20 +21,12 @@ namespace Server.Data
         public DbSet<Group> Groups { get; set; } = default!;
 
         public DbSet<Reaction> Reactions { get; set; } = default!;
-
         public DbSet<User> Users { get; set; } = default!;
-
         public DbSet<Calorie> Calories { get; set; } = default!;
-
         public DbSet<Meal> Meals { get; set; } = default!;
-
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
         public DbSet<Goal> Goals { get; set; } = default!;
-
-        public DbSet<GroceryIngredient> GroceryIngredients { get; set; } = default!;
-
-        public DbSet<Ingredient> Ingredient { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,11 +39,6 @@ namespace Server.Data
             modelBuilder.Entity<Post>()
                 .Property(post => post.Visibility)
                 .HasConversion<int>();
-
-            modelBuilder.Entity<GroceryIngredient>()
-                .HasKey(groceryIngredient => new { groceryIngredient.Id, groceryIngredient.IngredientId });
-
-            modelBuilder.Entity<Ingredient>().HasKey(ingredient => new { ingredient.Id });
 
             modelBuilder.Entity<Calorie>()
                 .HasOne(c => c.User)
