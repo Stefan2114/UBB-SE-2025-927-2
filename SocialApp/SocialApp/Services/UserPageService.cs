@@ -1,7 +1,12 @@
-﻿using System.Diagnostics;
+﻿using AppCommonClasses.DTOs;
 using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
+using SocialApp.Queries;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace SocialApp.Services
 {
@@ -11,7 +16,7 @@ namespace SocialApp.Services
 
         public UserPageService()
         {
-            this.userRepository = new UserRepositoryProxy();
+            this.userRepository =  new UserRepositoryProxy();
         }
 
         public int UserHasAnAccount(string name)

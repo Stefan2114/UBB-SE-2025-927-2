@@ -48,7 +48,7 @@ namespace SocialApp.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new UserModel() { Name = username, Email = email });
+            this.userRepository.Save(new UserModel() { Name = username, Email = email});
         }
 
         /// <summary>
