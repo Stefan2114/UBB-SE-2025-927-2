@@ -83,7 +83,7 @@ namespace SocialApp.Services
                 throw new Exception("User does not exist");
             }
 
-            this.userRepository.UpdateById(id, username, email);
+            this.userRepository.UpdateById(id, username, email, password, image);
         }
 
         /// <summary>
