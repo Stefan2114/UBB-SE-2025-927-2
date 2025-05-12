@@ -20,9 +20,13 @@ namespace Server.Data
 
         public DbSet<Group> Groups { get; set; } = default!;
 
+        public DbSet<GroceryIngredient> GroceryIngredients { get; set; } = default!;
+
+        public DbSet<Ingredient> Ingredient { get; set; } = default!;
+
         public DbSet<Reaction> Reactions { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
-        public DbSet<Calorie> Calories { get; set; } = default!; 
+        public DbSet<Calorie> Calories { get; set; } = default!;
         public DbSet<Meal> Meals { get; set; } = default!;
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
@@ -35,6 +39,11 @@ namespace Server.Data
 
             modelBuilder.Entity<UserFollower>()
                 .HasKey(userFollower => new { userFollower.UserId, userFollower.FollowerId });
+
+            modelBuilder.Entity<GroceryIngredient>()
+            .HasKey(groceryIngredient => new { groceryIngredient.Id, groceryIngredient.IngredientId });
+
+            modelBuilder.Entity<Ingredient>().HasKey(ingredient => new { ingredient.Id });
 
             modelBuilder.Entity<Post>()
                 .Property(post => post.Visibility)

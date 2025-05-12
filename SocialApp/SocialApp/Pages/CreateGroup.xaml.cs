@@ -174,7 +174,7 @@ namespace SocialApp.Pages
             {
                 // Show filtered results
                 var users = userService.GetUserFollowing(controller.CurrentUser.Id)
-                                        .Where(u => u.Name.Contains(query))
+                                        .Where(u => u.Username.Contains(query))
                                         .ToList();
                 UserSearchResults.ItemsSource = users;
                 UserSearchResults.Visibility = Visibility.Visible;

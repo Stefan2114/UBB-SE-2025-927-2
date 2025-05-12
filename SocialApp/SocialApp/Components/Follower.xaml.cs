@@ -64,8 +64,8 @@ namespace SocialApp.Components
         /// <returns>True if the user is followed; otherwise, false.</returns>
         private bool IsFollowed()
         {
-            List<UserModel> following = userService.GetUserFollowing(controller.CurrentUser.Id);
-            foreach (UserModel user in following)
+            List<User> following = userService.GetUserFollowing(controller.CurrentUser.Id);
+            foreach (User user in following)
             {
                 if (user.Id == this.user.Id) return true;
             }
