@@ -1,6 +1,0 @@
-@MealSocialServerMVC_HostAddress = http://localhost:5116
-
-GET {{MealSocialServerMVC_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
