@@ -1,8 +1,9 @@
 namespace Server.Interfaces
 {
-    using AppCommonClasses.DTOs;
     using AppCommonClasses.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Server.DTOs;
+
     public interface IUserController
     {
         IActionResult DeleteUser(long userId);

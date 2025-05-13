@@ -1,15 +1,14 @@
-﻿using AppCommonClasses.DTOs;
-using AppCommonClasses.Interfaces;
-using AppCommonClasses.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-
-namespace SocialApp.Proxies
+﻿namespace SocialApp.Proxies
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Net.Http;
+    using System.Net.Http.Json;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Server.DTOs;
+
     /// <summary>
     /// A proxy that communicates with the user microservice and implements IUserRepository.
     /// Provides user data handling and relationship management.

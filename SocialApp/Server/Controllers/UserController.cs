@@ -2,13 +2,11 @@ namespace Server.Controllers
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using AppCommonClasses.DTOs;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Server.DTOs;
     using Server.Interfaces;
-    using Server.Repos;
     /// <summary>
     /// Controller for managing user-related operations.
     /// </summary>
@@ -58,7 +56,8 @@ namespace Server.Controllers
             try
             {
                 return this.userRepository.GetById(id);
-            }catch
+            }
+            catch
             {
                 return this.BadRequest();
             }
@@ -115,7 +114,8 @@ namespace Server.Controllers
             string email = user.Email;
             string password = user.HashPassword;
             string image = user.Image;
-            try {
+            try
+            {
                 this.userRepository.UpdateById(userId, name, email, password, image);
                 return this.Ok(existingUser);
             }
@@ -124,7 +124,7 @@ namespace Server.Controllers
                 Debug.WriteLine("Error updating user");
                 return this.BadRequest();
             }
-            
+
         }
     }
 }

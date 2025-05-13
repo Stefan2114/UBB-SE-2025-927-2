@@ -3,9 +3,8 @@
     using System;
     using System.Net.Http;
     using System.Net.Http.Json;
-    using System.Threading.Tasks;
-    using AppCommonClasses.DTOs;
     using AppCommonClasses.Interfaces;
+    using Server.DTOs;
 
     public class BodyMetricRepositoryProxy : IBodyMetricRepository
     {

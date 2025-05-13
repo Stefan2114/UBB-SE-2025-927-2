@@ -1,5 +1,6 @@
 ﻿using AppCommonClasses.Models;
 using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 
 namespace Server.Interfaces
 {

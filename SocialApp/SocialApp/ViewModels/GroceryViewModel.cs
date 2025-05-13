@@ -2,12 +2,12 @@
 {
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
+    using AppCommonClasses.Data;
     using AppCommonClasses.Models;
+    using AppCommonClasses.Repos;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using Microsoft.EntityFrameworkCore;
-    using Server.Data;
-    using Server.Repos;
     using SocialApp.Interfaces;
     using SocialApp.Proxies;
     using SocialApp.Services;

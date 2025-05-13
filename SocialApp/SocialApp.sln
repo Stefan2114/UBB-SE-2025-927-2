@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealSocialServerMVC", "MealSocialServerMVC\MealSocialServerMVC.csproj", "{CBDB74BC-4FB5-4116-98E9-7772D4149D07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -80,6 +82,18 @@ Global
 		{4E019C68-A1DE-437B-9657-572E7F1657A8}.Release|x64.Build.0 = Release|Any CPU
 		{4E019C68-A1DE-437B-9657-572E7F1657A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E019C68-A1DE-437B-9657-572E7F1657A8}.Release|x86.Build.0 = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|x64.Build.0 = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Debug|x86.Build.0 = Debug|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|ARM64.Build.0 = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|x64.ActiveCfg = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|x64.Build.0 = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|x86.ActiveCfg = Release|Any CPU
+		{CBDB74BC-4FB5-4116-98E9-7772D4149D07}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

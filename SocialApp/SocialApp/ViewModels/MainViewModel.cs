@@ -1,17 +1,16 @@
 namespace SocialApp.ViewModels
 {
+    using System;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Windows.Input;
     using AppCommonClasses.Interfaces;
     using SocialApp.Interfaces;
     using SocialApp.Pages;
     using SocialApp.Proxies;
     using SocialApp.Queries;
     using SocialApp.Services;
-    using System;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Data.SqlClient;
-    using System.Windows.Input;
-    using Server.Data;
 
     public class MainViewModel : INotifyPropertyChanged
     {
