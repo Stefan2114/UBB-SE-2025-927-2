@@ -10,7 +10,7 @@
 
         private const string ConnectionString = "Data Source=DESKTOP-5A6VJDA;" +
             "Initial Catalog=SocialApp" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         private readonly SqlConnection connection;
 
