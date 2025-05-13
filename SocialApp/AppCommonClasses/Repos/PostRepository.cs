@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AppCommonClasses.Models;
+﻿using AppCommonClasses.Data;
 using AppCommonClasses.Enums;
-using Server.Data;
 using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
     /// <summary>
     /// Repository for managing posts in the database.
@@ -16,35 +14,35 @@ namespace Server.Repos
 
         public PostRepository(SocialAppDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         public Post GetPostById(long postId)
         {
-            return this.dbContext.Posts.FirstOrDefault(p => p.Id == postId);
+            return dbContext.Posts.FirstOrDefault(p => p.Id == postId);
         }
 
         public List<Post> GetAllPosts()
         {
-            return this.dbContext.Posts.ToList();
+            return dbContext.Posts.ToList();
         }
 
         public void SavePost(Post entity)
         {
-            this.dbContext.Posts.Add(entity);
-            this.dbContext.SaveChanges();
+            dbContext.Posts.Add(entity);
+            dbContext.SaveChanges();
         }
 
         public bool UpdatePostById(long postId, string title, string content, PostVisibility visibility, PostTag tag)
         {
-            var post = this.dbContext.Posts.Find(postId);
+            var post = dbContext.Posts.Find(postId);
             if (post != null)
             {
                 post.Title = title;
                 post.Content = content;
                 post.Visibility = visibility;
                 post.Tag = tag;
-                this.dbContext.SaveChanges();
+                dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -52,11 +50,11 @@ namespace Server.Repos
 
         public bool DeletePostById(long postId)
         {
-            var post = this.dbContext.Posts.Find(postId);
+            var post = dbContext.Posts.Find(postId);
             if (post != null)
             {
-                this.dbContext.Posts.Remove(post);
-                this.dbContext.SaveChanges();
+                dbContext.Posts.Remove(post);
+                dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -64,10 +62,10 @@ namespace Server.Repos
 
         public List<Post> GetPostsHomeFeed(long userId)
         {
-            var postsQuery = from post in this.dbContext.Posts
+            var postsQuery = from post in dbContext.Posts
                              where post.UserId == userId
                                 || post.Visibility == PostVisibility.Public
-                                || this.dbContext.UserFollowers.Any(userFollower =>
+                                || dbContext.UserFollowers.Any(userFollower =>
                                        userFollower.FollowerId == userId
                                     && userFollower.UserId == post.UserId
                                     && (post.Visibility == PostVisibility.Friends || post.Visibility == PostVisibility.Groups))
@@ -79,8 +77,8 @@ namespace Server.Repos
 
         public List<Post> GetPostsGroupsFeed(long userId)
         {
-            var postsQuery = from post in this.dbContext.Posts
-                             where this.dbContext.GroupUsers.Any(groupUser =>
+            var postsQuery = from post in dbContext.Posts
+                             where dbContext.GroupUsers.Any(groupUser =>
                                    groupUser.UserId == userId && groupUser.GroupId == post.GroupId)
                              orderby post.CreatedDate descending
                              select post;
@@ -90,7 +88,7 @@ namespace Server.Repos
 
         public List<Post> GetPostsByUserId(long userId)
         {
-            return this.dbContext.Posts
+            return dbContext.Posts
                 .Where(p => p.UserId == userId)
                 .OrderByDescending(p => p.CreatedDate)
                 .ToList();
@@ -98,7 +96,7 @@ namespace Server.Repos
 
         public List<Post> GetPostsByGroupId(long groupId)
         {
-            return this.dbContext.Posts
+            return dbContext.Posts
                 .Where(p => p.GroupId == groupId)
                 .OrderByDescending(p => p.CreatedDate)
                 .ToList();

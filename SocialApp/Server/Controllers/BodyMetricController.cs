@@ -1,8 +1,8 @@
 namespace Server.Controllers
 {
-    using AppCommonClasses.DTOs;
     using AppCommonClasses.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using Server.DTOs;
     using Server.Interfaces;
 
     [ApiController]

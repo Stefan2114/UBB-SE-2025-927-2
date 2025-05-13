@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using AppCommonClasses.Data;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
-using Microsoft.EntityFrameworkCore;
-using Server.Data;
 
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
     public class WaterIntakeRepository : IWaterIntakeRepository
     {

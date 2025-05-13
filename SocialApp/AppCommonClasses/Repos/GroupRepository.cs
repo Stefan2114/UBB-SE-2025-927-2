@@ -1,12 +1,12 @@
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
     using System.Collections.Generic;
     using System.Linq;
-    using AppCommonClasses.Models;
+    using AppCommonClasses.Data;
+    using AppCommonClasses.DbRelationshipEntities;
     using AppCommonClasses.Interfaces;
-    using Server.Data;
-    using Server.DbRelationshipEntities;
-    using Group = AppCommonClasses.Models.Group;
+    using AppCommonClasses.Models;
+    using Group = Models.Group;
 
     /// <summary>
     /// Repository for managing groups.
@@ -17,7 +17,7 @@ namespace Server.Repos
 
         public GroupRepository(SocialAppDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Server.Repos
         /// <returns>The group with the specified ID.</returns>
         public Group GetGroupById(long id)
         {
-            return this.dbContext.Groups.First(g => g.Id == id);
+            return dbContext.Groups.First(g => g.Id == id);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Server.Repos
         /// <returns>Returns a list of all groups.</returns>
         public List<Group> GetAllGroups()
         {
-            return this.dbContext.Groups.ToList();
+            return dbContext.Groups.ToList();
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Server.Repos
         /// <returns>A list of groups the user belongs to.</returns>
         public List<Group> GetGroupsForUser(long userId)
         {
-            var groupsQuery = from groups in this.dbContext.Groups
-                              join gud in this.dbContext.GroupUsers
+            var groupsQuery = from groups in dbContext.Groups
+                              join gud in dbContext.GroupUsers
                               on groups.Id equals gud.GroupId
                               where gud.UserId == userId
                               select groups;
@@ -64,7 +64,7 @@ namespace Server.Repos
         public List<User> GetUsersFromGroup(long groupId)
         {
             var usersQuery = from user in dbContext.Users
-                             join groupUser in this.dbContext.GroupUsers
+                             join groupUser in dbContext.GroupUsers
                              on user.Id equals groupUser.UserId
                              where groupUser.GroupId == groupId
                              select user;
@@ -78,16 +78,16 @@ namespace Server.Repos
         /// <param name="entity">The group that needs to be added.</param>
         public void SaveGroup(Group entity)
         {
-            this.dbContext.Groups.Add(entity);
-            this.dbContext.SaveChanges();
+            dbContext.Groups.Add(entity);
+            dbContext.SaveChanges();
 
-            this.dbContext.GroupUsers.Add(new GroupUser
+            dbContext.GroupUsers.Add(new GroupUser
             {
                 GroupId = entity.Id,
                 UserId = entity.AdminId
             });
 
-            this.dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -100,14 +100,14 @@ namespace Server.Repos
         /// <param name="adminId">The new admin ID of the group.</param>
         public void UpdateGroup(long id, string name, string image, string description, long adminId)
         {
-            var group = this.dbContext.Groups.Find(id);
+            var group = dbContext.Groups.Find(id);
             if (group != null)
             {
                 group.Name = name;
                 group.Image = image;
                 group.Description = description;
                 group.AdminId = adminId;
-                this.dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
         }
 
@@ -117,11 +117,11 @@ namespace Server.Repos
         /// <param name="id">The ID of the group to delete.</param>
         public void DeleteGroupById(long id)
         {
-            var group = this.dbContext.Groups.Find(id);
+            var group = dbContext.Groups.Find(id);
             if (group != null)
             {
-                this.dbContext.Groups.Remove(group);
-                this.dbContext.SaveChanges();
+                dbContext.Groups.Remove(group);
+                dbContext.SaveChanges();
             }
         }
     }

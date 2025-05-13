@@ -1,13 +1,9 @@
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
+    using AppCommonClasses.Data;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.EntityFrameworkCore;
-    using Server.Data;
 
     /// <summary>
     /// Repository for managing goal-related operations in the database.
@@ -22,7 +18,7 @@ namespace Server.Repos
         /// <param name="context">The database context to be used.</param>
         public GoalPageRepository(SocialAppDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         /// <summary>
@@ -36,16 +32,16 @@ namespace Server.Repos
         {
             string name = lastName + " " + firstName;
 
-            Goal? goal = await this.dbContext.Goals.FirstOrDefaultAsync(g => g.Description == g_description);
+            Goal? goal = await dbContext.Goals.FirstOrDefaultAsync(g => g.Description == g_description);
 
             if (goal == null)
             {
                 goal = new Goal(0, g_description);
-                this.dbContext.Goals.Add(goal);
-                await this.dbContext.SaveChangesAsync();
+                dbContext.Goals.Add(goal);
+                await dbContext.SaveChangesAsync();
             }
 
-            User? user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Username == name);
+            User? user = await dbContext.Users.FirstOrDefaultAsync(u => u.Username == name);
 
             if (user == null)
             {
@@ -54,8 +50,8 @@ namespace Server.Repos
                     Username = name,
                     GoalId = goal.GoalId,
                 };
-                this.dbContext.Users.Add(user);
-                await this.dbContext.SaveChangesAsync();
+                dbContext.Users.Add(user);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

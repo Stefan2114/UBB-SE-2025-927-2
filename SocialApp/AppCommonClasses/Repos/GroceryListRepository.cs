@@ -1,12 +1,12 @@
-﻿namespace Server.Repos
+﻿namespace AppCommonClasses.Repos
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using AppCommonClasses.Data;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.EntityFrameworkCore;
-    using Server.Data;
 
     public class GroceryListRepository : IGroceryListRepository
     {
@@ -19,24 +19,24 @@
 
         public async Task<List<GroceryIngredient>> GetIngredientsForUser(long userId)
         {
-            var ingredients = await this.dbContext.GroceryIngredients.Where(i => i.Id == userId).ToListAsync();
+            var ingredients = await dbContext.GroceryIngredients.Where(i => i.Id == userId).ToListAsync();
             return ingredients;
         }
 
         public async Task UpdateIsChecked(long userId, int ingredientId, bool isChecked)
         {
-            GroceryIngredient? toUpdate = await this.dbContext.GroceryIngredients.FirstOrDefaultAsync(item => item.Id == userId && item.IngredientId == ingredientId);
+            GroceryIngredient? toUpdate = await dbContext.GroceryIngredients.FirstOrDefaultAsync(item => item.Id == userId && item.IngredientId == ingredientId);
 
             if (toUpdate != null)
             {
                 toUpdate.IsChecked = isChecked;
-                this.dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
         }
 
         public async Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient)
         {
-            Ingredient? result = await this.dbContext.Ingredient.FirstOrDefaultAsync(i => i.Name == ingredient.Name);
+            Ingredient? result = await dbContext.Ingredient.FirstOrDefaultAsync(i => i.Name == ingredient.Name);
 
             if (result == null)
             {
@@ -46,11 +46,11 @@
                     Category = "Uncategorized",
                     UserId = userId,
                 };
-                this.dbContext.Ingredient.Add(result);
-                await this.dbContext.SaveChangesAsync();
+                dbContext.Ingredient.Add(result);
+                await dbContext.SaveChangesAsync();
             }
 
-            bool exists = this.dbContext.Ingredient.Any(gl => gl.UserId == userId && gl.Id == result.Id);
+            bool exists = dbContext.Ingredient.Any(gl => gl.UserId == userId && gl.Id == result.Id);
 
             if (!exists)
             {
@@ -60,8 +60,8 @@
                     IngredientId = result.Id,
                     IsChecked = false,
                 };
-                this.dbContext.GroceryIngredients.Add(groceryItem);
-                this.dbContext.SaveChanges();
+                dbContext.GroceryIngredients.Add(groceryItem);
+                dbContext.SaveChanges();
             }
 
             return ingredient;

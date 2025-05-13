@@ -1,7 +1,7 @@
+using AppCommonClasses.Data;
 using AppCommonClasses.Interfaces;
+using AppCommonClasses.Repos;
 using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Server.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,14 +1,12 @@
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
+    using AppCommonClasses.Data;
+    using AppCommonClasses.DbRelationshipEntities;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.EntityFrameworkCore;
-    using Server.Data;
-    using Server.DbRelationshipEntities;
 
     /// <summary>
     /// Repository for managing user-related operations in the database.
@@ -23,7 +21,7 @@ namespace Server.Repos
         /// <param name="context">The database context to be used.</param>
         public UserRepository(SocialAppDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         /// <summary>
@@ -32,55 +30,55 @@ namespace Server.Repos
         /// <param name="id">The id of the user that has to be deleted</param>
         public void DeleteById(long id)
         {
-            User? user = this.dbContext.Users.FirstOrDefault(u => u.Id == id);
+            User? user = dbContext.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
-                this.dbContext.Users.Remove(user);
-                this.dbContext.SaveChanges();
+                dbContext.Users.Remove(user);
+                dbContext.SaveChanges();
             }
         }
 
         public void Follow(long userId, long whoToFollowId)
         {
-            this.dbContext.UserFollowers.Add(new UserFollower
+            dbContext.UserFollowers.Add(new UserFollower
             {
                 UserId = userId,
                 FollowerId = whoToFollowId,
             });
-            this.dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         public List<User> GetAll()
         {
-            return this.dbContext.Users.ToList();
+            return dbContext.Users.ToList();
         }
 
         public User GetByEmail(string email)
         {
-            return this.dbContext.Users.First(u => u.Email == email);
+            return dbContext.Users.First(u => u.Email == email);
         }
 
         public User GetById(long id)
         {
-            return this.dbContext.Users.First(u => u.Id == id);
+            return dbContext.Users.First(u => u.Id == id);
         }
 
         public User GetByUsername(string username)
         {
-            return this.dbContext.Users.First(u => u.Username == username);
+            return dbContext.Users.First(u => u.Username == username);
         }
 
         public List<User> GetUserFollowers(long id)
 
         {
             List<User> userFollowers = new List<User>();
-            List<UserFollower> followers = this.dbContext.UserFollowers
+            List<UserFollower> followers = dbContext.UserFollowers
                 .Where(uf => uf.UserId == id)
                 .Include(uf => uf.FollowerId)
                 .ToList();
             foreach (UserFollower userFollower in followers)
             {
-                User? user = this.dbContext.Users.FirstOrDefault(u => u.Id == userFollower.FollowerId);
+                User? user = dbContext.Users.FirstOrDefault(u => u.Id == userFollower.FollowerId);
                 if (user != null)
                 {
                     userFollowers.Add(user);
@@ -93,13 +91,13 @@ namespace Server.Repos
         public List<User> GetUserFollowing(long id)
         {
             List<User> userFollowing = new List<User>();
-            List<UserFollower> following = this.dbContext.UserFollowers
+            List<UserFollower> following = dbContext.UserFollowers
                 .Where(uf => uf.FollowerId == id)
                 .Include(uf => uf.UserId)
                 .ToList();
             foreach (UserFollower userFollower in following)
             {
-                User? user = this.dbContext.Users.FirstOrDefault(u => u.Id == userFollower.UserId);
+                User? user = dbContext.Users.FirstOrDefault(u => u.Id == userFollower.UserId);
                 if (user != null)
                 {
                     userFollowing.Add(user);
@@ -110,31 +108,31 @@ namespace Server.Repos
 
         public void Save(User entity)
         {
-            this.dbContext.Users.Add(entity);
-            this.dbContext.SaveChanges();
+            dbContext.Users.Add(entity);
+            dbContext.SaveChanges();
         }
 
         public void Unfollow(long userId, long whoToUnfollowId)
         {
-            UserFollower? userFollower = this.dbContext.UserFollowers
+            UserFollower? userFollower = dbContext.UserFollowers
                 .FirstOrDefault(uf => uf.UserId == userId && uf.FollowerId == whoToUnfollowId);
             if (userFollower != null)
             {
-                this.dbContext.UserFollowers.Remove(userFollower);
-                this.dbContext.SaveChanges();
+                dbContext.UserFollowers.Remove(userFollower);
+                dbContext.SaveChanges();
             }
         }
 
         public void UpdateById(long id, string username, string email, string hashPassword, string image)
         {
-            User? user = this.dbContext.Users.FirstOrDefault(u => u.Id == id);
+            User? user = dbContext.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
             {
                 user.Username = username;
                 user.Email = email;
                 user.PasswordHash = hashPassword;
                 user.Image = image;
-                this.dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
         }
     }

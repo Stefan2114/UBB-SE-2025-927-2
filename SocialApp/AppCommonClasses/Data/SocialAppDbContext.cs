@@ -1,17 +1,20 @@
-﻿using AppCommonClasses.Models;
-using Microsoft.EntityFrameworkCore;
-using Server.DbRelationshipEntities;
-
-namespace Server.Data
+﻿namespace AppCommonClasses.Data
 {
+    using AppCommonClasses.DbRelationshipEntities;
+    using AppCommonClasses.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public class SocialAppDbContext : DbContext
     {
         public SocialAppDbContext(DbContextOptions<SocialAppDbContext> options)
             : base(options)
         {
         }
+
         public DbSet<Water> WaterTrackers { get; set; } = default!;
+
         public DbSet<Post> Posts { get; set; } = default!;
+
         public DbSet<Comment> Comments { get; set; } = default!;
 
         public DbSet<UserFollower> UserFollowers { get; set; } = default!;
@@ -25,9 +28,13 @@ namespace Server.Data
         public DbSet<Ingredient> Ingredient { get; set; } = default!;
 
         public DbSet<Reaction> Reactions { get; set; } = default!;
+
         public DbSet<User> Users { get; set; } = default!;
+
         public DbSet<Calorie> Calories { get; set; } = default!;
+
         public DbSet<Meal> Meals { get; set; } = default!;
+
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
         public DbSet<Goal> Goals { get; set; } = default!;
@@ -51,7 +58,7 @@ namespace Server.Data
 
             modelBuilder.Entity<Calorie>()
                 .HasOne(c => c.User)
-                .WithMany()  // Assuming a one-to-many relationship from User to Calorie
+                .WithMany() // Assuming a one-to-many relationship from User to Calorie
                 .HasForeignKey(c => c.U_Id);
 
             modelBuilder.Entity<Reaction>()

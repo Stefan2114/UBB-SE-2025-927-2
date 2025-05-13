@@ -2,14 +2,13 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
+    using AppCommonClasses.Data;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using Server.Data;
 
     /// <summary>
     /// Repository for managing meals.
@@ -20,7 +19,7 @@ namespace Server.Repos
 
         public MealRepository(SocialAppDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         public void AddMealIngredientAsync(int mealId, int ingredientId, float quantity)
@@ -32,19 +31,19 @@ namespace Server.Repos
                 Quantity = quantity,
             };
 
-            this.dbContext.MealIngredients.Add(mealIngredient);
-            this.dbContext.SaveChanges();
+            dbContext.MealIngredients.Add(mealIngredient);
+            dbContext.SaveChanges();
         }
 
         public void CreateMealAsync(Meal meal)
         {
-            this.dbContext.Meals.Add(meal);
-            this.dbContext.SaveChanges();
+            dbContext.Meals.Add(meal);
+            dbContext.SaveChanges();
         }
 
         public List<Meal> GetAllMeals()
         {
-            return this.dbContext.Meals.ToList();
+            return dbContext.Meals.ToList();
         }
     }
 }

@@ -2,16 +2,13 @@
 
 namespace SocialApp.Proxies
 {
-    using AppCommonClasses.Enums;
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net.Http;
     using System.Net.Http.Json;
-    using System.Text;
-    using System.Threading.Tasks;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Server.DTOs;
     public class CommentRepositoryProxy : ICommentRepository
     {
         private readonly HttpClient httpClient;

@@ -1,12 +1,8 @@
-﻿using AppCommonClasses.Models;
+﻿using AppCommonClasses.Data;
 using AppCommonClasses.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AppCommonClasses.Models;
 
-namespace Server.Repos
+namespace AppCommonClasses.Repos
 {
     public class CommentRepository : ICommentRepository
     {
