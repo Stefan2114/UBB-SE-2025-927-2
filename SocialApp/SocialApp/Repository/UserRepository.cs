@@ -8,8 +8,8 @@
     public class UserRepository
     {
 
-        private const string ConnectionString = "Data Source=vm;" +
-            "Initial Catalog=MealSocialApp;" +
+        private const string ConnectionString = "Data Source=DESKTOP-5A6VJDA;" +
+            "Initial Catalog=SocialApp" +
             "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
 
         private readonly SqlConnection connection;
