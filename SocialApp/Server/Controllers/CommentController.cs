@@ -1,6 +1,7 @@
 ﻿using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 using Server.Interfaces;
 
 namespace Server.Controllers

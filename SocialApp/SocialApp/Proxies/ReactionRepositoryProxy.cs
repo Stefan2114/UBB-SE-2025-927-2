@@ -1,15 +1,13 @@
 ﻿namespace SocialApp.Proxies
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Json;
     using AppCommonClasses.Enums;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Net.Http.Json;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Server.DTOs;
 
     public class ReactionRepositoryProxy : IReactionRepository
     {
@@ -55,14 +53,14 @@
 
         public void Save(Reaction reaction)
         {
-            this.httpClient.PostAsJsonAsync("",reaction).Wait();
+            this.httpClient.PostAsJsonAsync("", reaction).Wait();
         }
 
         public void UpdateByUserAndPost(long userId, long postId, ReactionType type)
         {
             var reaction = new ReactionDTO { Type = type };
 
-            this.httpClient.PostAsJsonAsync($"reactions/{userId}/{postId}",reaction).Wait();
+            this.httpClient.PostAsJsonAsync($"reactions/{userId}/{postId}", reaction).Wait();
         }
     }
 }
