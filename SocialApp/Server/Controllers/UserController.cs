@@ -14,11 +14,11 @@ namespace Server.Controllers
     [Route("users")]
     public class UserController : ControllerBase, IUserController
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
-            this.userRepository = userRepository;
+            this.userService = userService;
         }
 
         [HttpDelete("{userId}")]
@@ -26,7 +26,7 @@ namespace Server.Controllers
         {
             try
             {
-                this.userRepository.DeleteById(userId);
+                this.userService.DeleteUser(userId);
                 return this.Ok();
             }
             catch
@@ -40,14 +40,14 @@ namespace Server.Controllers
         [HttpPost("users/{userId}/followers")]
         public IActionResult FollowUser(long userId, long followUserId)
         {
-            this.userRepository.Follow(userId, followUserId);
+            this.userService.FollowUserById(userId, followUserId);
             return this.Ok();
         }
 
         [HttpGet]
         public ActionResult<List<User>> GetAllUsers()
         {
-            return this.userRepository.GetAll();
+            return this.userService.GetAllUsers();
         }
 
         [HttpGet("{id}")]
@@ -55,7 +55,7 @@ namespace Server.Controllers
         {
             try
             {
-                return this.userRepository.GetById(id);
+                return this.userService.GetById(id);
             }
             catch
             {
@@ -68,7 +68,7 @@ namespace Server.Controllers
         {
             try
             {
-                return this.userRepository.GetByUsername(username);
+                return this.userService.GetUserByUsername(username);
             }
             catch
             {
@@ -79,33 +79,33 @@ namespace Server.Controllers
         [HttpGet("users/{userId}/followers")]
         public ActionResult<List<User>> GetUserFollowers(long userId)
         {
-            return this.userRepository.GetUserFollowers(userId);
+            return this.userService.GetUserFollowers(userId);
         }
 
         [HttpGet("users/{userId}/following")]
         public ActionResult<List<User>> GetUserFollowing(long userId)
         {
-            return this.userRepository.GetUserFollowing(userId);
+            return this.userService.GetUserFollowing(userId);
         }
 
         [HttpPost]
         public IActionResult SaveUser(User user)
         {
-            this.userRepository.Save(user);
+            this.userService.Save(user);
             return this.Ok();
         }
 
         [HttpDelete("users/{userId}/followers/{unfollowUserId}")]
         public IActionResult UnfollowUser(long userId, long unfollowUserId)
         {
-            this.userRepository.Unfollow(userId, unfollowUserId);
+            this.userService.UnfollowUserById(userId, unfollowUserId);
             return this.Ok();
         }
 
         [HttpPut("{userId}")]
         public IActionResult UpdateUser(long userId, [FromBody] UserModelDTO user)
         {
-            var existingUser = this.userRepository.GetById(userId);
+            var existingUser = this.userService.GetById(userId);
             if (existingUser == null)
             {
                 return this.NotFound();
@@ -116,7 +116,7 @@ namespace Server.Controllers
             string image = user.Image;
             try
             {
-                this.userRepository.UpdateById(userId, name, email, password, image);
+                this.userService.UpdateUser(userId, name, email, password, image);
                 return this.Ok(existingUser);
             }
             catch
