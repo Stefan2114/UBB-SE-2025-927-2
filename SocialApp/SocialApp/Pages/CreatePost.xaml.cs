@@ -58,7 +58,7 @@ namespace SocialApp.Pages
             this.postViewModel = new PostViewModel(postService);
             //this.groupService = App.Services.GetService<GroupService>();
             // nu exista GroupRepoProxy, va trebui facut direct un GroupServiceProxxy
-            this.groupService = new GroupService(new Repository.GroupRepository(), new UserRepositoryProxy());
+            this.groupService = new GroupService(new Repository.GroupRepository(), new UserServiceProxy());
         }
 
         private void LoadUserGroups()

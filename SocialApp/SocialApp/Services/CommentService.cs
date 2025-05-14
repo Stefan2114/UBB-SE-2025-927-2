@@ -19,7 +19,7 @@ namespace SocialApp.Services
     {
         private readonly ICommentRepository commentRepository;
         private readonly IPostRepository postRepository;
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userServiceProxy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommentService"/> class.
@@ -27,11 +27,11 @@ namespace SocialApp.Services
         /// <param name="cr">The comment repository.</param>
         /// <param name="pr">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public CommentService(ICommentRepository cr, IPostRepository pr, IUserRepository userRepository)
+        public CommentService(ICommentRepository cr, IPostRepository pr, IUserService userRepository)
         {
             this.commentRepository = cr;
             this.postRepository = pr;    // Added null checks
-            this.userRepository = userRepository; // Added null checks
+            this.userServiceProxy = userRepository; // Added null checks
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace SocialApp.Services
                 throw new ArgumentException("Comment content cannot be empty or null.", nameof(content));
             }
 
-            if (this.userRepository.GetById(userId) == null)
+            if (this.userServiceProxy.GetById(userId) == null)
             {
                 throw new InvalidOperationException($"User with ID {userId} does not exist.");
             }

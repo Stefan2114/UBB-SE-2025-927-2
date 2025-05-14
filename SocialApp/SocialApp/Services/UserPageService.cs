@@ -8,11 +8,11 @@ namespace SocialApp.Services
 {
     public class UserPageService : IUserPageService
     {
-        private IUserRepository userRepository;
+        private IUserService userServiceProxy;
 
         public UserPageService()
         {
-            this.userRepository = new UserRepositoryProxy();
+            this.userServiceProxy = new UserServiceProxy();
         }
 
         public int UserHasAnAccount(string name)
@@ -26,13 +26,13 @@ namespace SocialApp.Services
 
             // return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
             // get all users and print them in the console
-            var users = this.userRepository.GetAll();
+            var users = this.userServiceProxy.GetAllUsers();
             foreach (var user1 in users)
             {
                 Debug.WriteLine($"User: {user1.Username}");
             }
 
-            User user = this.userRepository.GetByUsername(name);
+            User user = this.userServiceProxy.GetUserByUsername(name);
             if (user != null)
             {
                 return (int)user.Id;
@@ -63,7 +63,7 @@ namespace SocialApp.Services
                 AllergyId = null,
                 ActivityLevelId = null,
             };
-            this.userRepository.Save(user);
+            this.userServiceProxy.Save(user);
             return (int)user.Id;
         }
     }

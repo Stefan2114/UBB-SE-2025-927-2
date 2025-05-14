@@ -1,4 +1,5 @@
-﻿using SocialApp.Interfaces;
+﻿using AppCommonClasses.Interfaces;
+using SocialApp.Interfaces;
 using SocialApp.Proxies;
 using SocialApp.Services;
 using System;
@@ -19,8 +20,8 @@ namespace SocialApp.ViewModels
 
         public UserPageViewModel(IUserService userService)
         {
-            var userRepository = new UserRepositoryProxy();
-            this.userService = new UserService(userRepository);
+            var userServiceProxy = new UserServiceProxy();
+            this.userService = userServiceProxy;
         }
     }
 }

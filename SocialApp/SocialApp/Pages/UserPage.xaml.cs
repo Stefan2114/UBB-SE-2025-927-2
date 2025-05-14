@@ -1,5 +1,6 @@
 namespace SocialApp.Pages
 {
+    using AppCommonClasses.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
@@ -20,8 +21,8 @@ namespace SocialApp.Pages
         public UserPage()
         {
             this.InitializeComponent();
-            var repo = new UserRepositoryProxy();
-            this.userService = new UserService(repo);
+            var repo = new UserServiceProxy();
+            this.userService = repo;
         }
 
 
