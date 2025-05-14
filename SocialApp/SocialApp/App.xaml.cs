@@ -19,6 +19,7 @@ namespace SocialApp
 
         public App()
         {
+            //ceva sa mearga push
             this.InitializeComponent();
             this.UnhandledException += OnUnhandledException;
             var services = new ServiceCollection();
