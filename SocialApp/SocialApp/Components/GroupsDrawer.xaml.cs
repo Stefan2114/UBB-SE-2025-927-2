@@ -31,7 +31,7 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
             var groupRepository = new GroupRepository();
-            var userRepository = new UserRepositoryProxy();
+            var userRepository = new UserServiceProxy();
             controller = App.Services.GetService<AppController>();
             groupService = new GroupService(groupRepository, userRepository);
             CreateGroupButton.Click += CreateGroup_Click; // Handle click event

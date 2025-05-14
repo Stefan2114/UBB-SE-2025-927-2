@@ -11,12 +11,12 @@
     public class GroupService : IGroupService
     {
         private IGroupRepository groupRepository;
-        private IUserRepository userRepository;
+        private IUserService userRepository;
 
-        public GroupService(IGroupRepository groupRepository, IUserRepository userRepository)
+        public GroupService(IGroupRepository groupRepository, IUserService userProxy)
         {
             this.groupRepository = groupRepository;
-            this.userRepository = userRepository;
+            this.userRepository = userProxy;
         }
 
         public Group AddGroup(string name, string desc, string image, long adminId)

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AppCommonClasses.Models;
 
-namespace SocialApp.Interfaces
+namespace AppCommonClasses.Interfaces
 {
     public interface IUserService
     {
@@ -14,6 +14,10 @@ namespace SocialApp.Interfaces
         List<User> GetUserFollowers(long id);
 
         List<User> GetUserFollowing(long id);
+
+        User GetUserByUsername(string username);
+
+        void Save(User entity);
 
         List<User> SearchUsersById(long userId, string query);
 

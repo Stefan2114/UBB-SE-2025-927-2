@@ -61,7 +61,7 @@ namespace SocialApp.Components
             this.InitializeComponent();
             this.DataContext = this;
             this.reactionService = new ReactionService(new ReactionRepositoryProxy());
-            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostRepositoryProxy(), new UserRepositoryProxy());
+            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostRepositoryProxy(), new UserServiceProxy());
 
             this.AppController = App.Services.GetService<AppController>();
         }
@@ -80,7 +80,7 @@ namespace SocialApp.Components
             this.tag = tag;
 
             this.reactionService = new ReactionService(new ReactionRepositoryProxy());
-            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostRepositoryProxy(), new UserRepositoryProxy());
+            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostRepositoryProxy(), new UserServiceProxy());
 
             this.AppController = App.Services.GetService<AppController>();
 

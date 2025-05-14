@@ -1,7 +1,10 @@
 using AppCommonClasses.Data;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Repos;
+using AppCommonClasses.Services;
 using Microsoft.EntityFrameworkCore;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,7 @@ builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

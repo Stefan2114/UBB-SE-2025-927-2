@@ -33,8 +33,8 @@ namespace SocialApp
 
         public bool Login(string email, string password)
         {
-            UserRepository userRepository = new UserRepository();
-            User user = userRepository.GetByEmail(email);
+            UserServiceProxy userServiceProxy = new UserServiceProxy();
+            User user = userServiceProxy.GetByEmail(email);
             if (user != null && user.PasswordHash == password)
             {
                 CurrentUser = user;
@@ -45,9 +45,8 @@ namespace SocialApp
 
         public void Register(string username, string email, string password, string image)
         {
-            UserRepositoryProxy userRepository = new UserRepositoryProxy();
-            UserService userService = new UserService(userRepository);
-            userService.AddUser(username, email, password, image);
+            UserServiceProxy userServiceProxy = new UserServiceProxy();
+            userServiceProxy.AddUser(username, email, password, image);
             Login(email, password);
         }
 

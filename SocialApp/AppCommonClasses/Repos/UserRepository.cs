@@ -74,7 +74,6 @@ namespace AppCommonClasses.Repos
             List<User> userFollowers = new List<User>();
             List<UserFollower> followers = dbContext.UserFollowers
                 .Where(uf => uf.UserId == id)
-                .Include(uf => uf.FollowerId)
                 .ToList();
             foreach (UserFollower userFollower in followers)
             {
@@ -93,7 +92,6 @@ namespace AppCommonClasses.Repos
             List<User> userFollowing = new List<User>();
             List<UserFollower> following = dbContext.UserFollowers
                 .Where(uf => uf.FollowerId == id)
-                .Include(uf => uf.UserId)
                 .ToList();
             foreach (UserFollower userFollower in following)
             {

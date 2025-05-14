@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Repos;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SocialApp.Services;
@@ -23,6 +25,8 @@ namespace SocialApp
             this.UnhandledException += OnUnhandledException;
             var services = new ServiceCollection();
             services.AddSingleton<AppController>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IPostRepository, PostRepository>();
             Services = services.BuildServiceProvider();
         }
 

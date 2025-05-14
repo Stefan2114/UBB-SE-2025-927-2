@@ -10,20 +10,48 @@
     using Server.DTOs;
 
     /// <summary>
-    /// A proxy that communicates with the user microservice and implements IUserRepository.
+    /// A proxy that communicates with the user microservice and implements IUserService.
     /// Provides user data handling and relationship management.
     /// </summary>
-    public class UserRepositoryProxy : IUserRepository
+    public class UserServiceProxy : IUserService
     {
         private readonly HttpClient httpClient;
 
-        public UserRepositoryProxy()
+        public UserServiceProxy()
         {
             this.httpClient = new HttpClient();
             this.httpClient.BaseAddress = new Uri("https://localhost:7106/users/");
         }
 
-        public void DeleteById(long id)
+        public void AddUser(string username, string email, string password, string image)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("Username cannot be empty", nameof(username));
+            }
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email cannot be empty", nameof(email));
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Password cannot be empty", nameof(password));
+            }
+            var user = new UserModelDTO
+            {
+                Name = username,
+                Email = email,
+                HashPassword = password,
+                Image = image
+            };
+            var response = this.httpClient.PostAsJsonAsync("", user).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"Failed to add user. Status: {response.StatusCode}");
+            }
+        }
+
+        public void DeleteUser(long id)
         {
             var response = this.httpClient.DeleteAsync($"{id}").Result;
             if (!response.IsSuccessStatusCode)
@@ -32,7 +60,7 @@
             }
         }
 
-        public void Follow(long userId, long whoToFollowId)
+        public void FollowUserById(long userId, long whoToFollowId)
         {
             var response = this.httpClient.PostAsJsonAsync($"users/{userId}/follow/{whoToFollowId}", "").Result;
             if (!response.IsSuccessStatusCode)
@@ -41,7 +69,7 @@
             }
         }
 
-        public List<User> GetAll()
+        public List<User> GetAllUsers()
         {
             var response = this.httpClient.GetAsync("").Result;
             if (response.IsSuccessStatusCode)
@@ -77,7 +105,7 @@
             return null;
         }
 
-        public User GetByUsername(string username)
+        public User GetUserByUsername(string username)
         {
             Debug.WriteLine($"Getting in proxy user by username: {username}");
             var response = this.httpClient.GetAsync($"users/{username}").Result;
@@ -126,7 +154,14 @@
             }
         }
 
-        public void Unfollow(long userId, long whoToUnfollowId)
+        public List<User> SearchUsersById(long userId, string query)
+        {
+            // this endpoint doesn't even exist
+            throw new Exception();
+        }
+
+
+        public void UnfollowUserById(long userId, long whoToUnfollowId)
         {
             var response = this.httpClient.DeleteAsync($"users/{userId}/unfollow/{whoToUnfollowId}").Result;
             if (!response.IsSuccessStatusCode)
@@ -135,7 +170,7 @@
             }
         }
 
-        public void UpdateById(long id, string username, string email, string hashPassword, string image)
+        public void UpdateUser(long id, string username, string email, string hashPassword, string image)
         {
             var user = new UserModelDTO
             {

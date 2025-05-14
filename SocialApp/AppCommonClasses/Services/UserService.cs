@@ -1,4 +1,4 @@
-namespace SocialApp.Services
+namespace AppCommonClasses.Services
 {
     using System;
     using System.Collections.Generic;
@@ -95,6 +95,11 @@ namespace SocialApp.Services
             return this.userRepository.GetAll();
         }
 
+        public User GetUserByUsername(string username)
+        {
+            return this.userRepository.GetByUsername(username);
+        }
+
         /// <summary>
         /// Gets a user by ID.
         /// </summary>
@@ -146,6 +151,7 @@ namespace SocialApp.Services
             this.userRepository.Follow(userId, whoToFollowId);
         }
 
+
         /// <summary>
         /// Unfollows a user.
         /// </summary>
@@ -177,6 +183,11 @@ namespace SocialApp.Services
         {
             var followingUsers = this.GetUserFollowing(userId);
             return followingUsers.Where(u => u.Username.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public void Save(User entity)
+        {
+            this.userRepository.Save(entity);
         }
     }
 }
