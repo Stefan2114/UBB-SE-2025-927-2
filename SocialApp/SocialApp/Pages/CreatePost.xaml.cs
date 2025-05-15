@@ -1,6 +1,8 @@
 using AppCommonClasses.Enums;
+using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using AppCommonClasses.Repos;
+using AppCommonClasses.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -54,7 +56,7 @@ namespace SocialApp.Pages
         private void InitializeServices()
         {
             this.controller = App.Services.GetService<AppController>();
-            var postService = App.Services.GetService<PostService>();
+            var postService = App.Services.GetService<IPostService>();
             this.postViewModel = new PostViewModel(postService);
             //this.groupService = App.Services.GetService<GroupService>();
             // nu exista GroupRepoProxy, va trebui facut direct un GroupServiceProxxy

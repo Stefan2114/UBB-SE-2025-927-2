@@ -18,7 +18,7 @@ namespace SocialApp.Services
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository commentRepository;
-        private readonly IPostRepository postRepository;
+        private readonly IPostService postService;
         private readonly IUserService userServiceProxy;
 
         /// <summary>
@@ -27,10 +27,10 @@ namespace SocialApp.Services
         /// <param name="cr">The comment repository.</param>
         /// <param name="pr">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public CommentService(ICommentRepository cr, IPostRepository pr, IUserService userRepository)
+        public CommentService(ICommentRepository cr, IPostService ps, IUserService userRepository)
         {
             this.commentRepository = cr;
-            this.postRepository = pr;    // Added null checks
+            this.postService = ps;    // Added null checks
             this.userServiceProxy = userRepository; // Added null checks
         }
 
@@ -53,7 +53,7 @@ namespace SocialApp.Services
                 throw new InvalidOperationException($"User with ID {userId} does not exist.");
             }
 
-            if (postRepository.GetPostById(postId) == null)
+            if (postService.GetPostById(postId) == null)
             {
                 throw new InvalidOperationException($"Post with ID {postId} does not exist.");
             }

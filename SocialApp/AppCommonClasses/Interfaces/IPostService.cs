@@ -2,7 +2,7 @@
 using AppCommonClasses.Enums;
 using System.Collections.Generic;
 
-namespace SocialApp.Interfaces
+namespace AppCommonClasses.Interfaces
 {
     public interface IPostService
     {
@@ -15,5 +15,6 @@ namespace SocialApp.Interfaces
         List<Post> GetPostsGroupsFeed(long userId);
         List<Post> GetPostsHomeFeed(long userId);
         void UpdatePost(long id, string title, string description, PostVisibility visibility, PostTag tag);
+        void SavePost(Post entity);
     }
 }

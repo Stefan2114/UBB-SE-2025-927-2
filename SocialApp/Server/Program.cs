@@ -28,7 +28,7 @@ builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
