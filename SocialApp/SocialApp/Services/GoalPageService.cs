@@ -4,59 +4,31 @@
     using SocialApp.Exceptions;
     using SocialApp.Interfaces;
     using SocialApp.Queries;
+    using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
 
     public class GoalPageService : IGoalPageService
     {
-        private readonly IDataLink dataLink;
+        private IGoalPageRepository goalPageRepository;
 
         [System.Obsolete]
-        public GoalPageService(IDataLink? dataLink = null)
+        public GoalPageService(IGoalPageRepository goalPageRepository)
         {
-            this.dataLink = dataLink ?? DataLink.Instance; // Default to singleton if none provided
+            this.goalPageRepository = goalPageRepository;
         }
 
-        [System.Obsolete]
         public void AddGoals(string username, string g_description)
         {
-            var parameters = new SqlParameter[]
+            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(g_description))
             {
-        new SqlParameter("@u_name", username),
-            };
-
-            Debug.WriteLine($"User name: {username}");
-
-            int u_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
-
-            // Check if the user ID is valid
-            if (u_id == 0)
-            {
-                throw new DatabaseOperationException($"User {username} not found.");
+                throw new SystemException("Username and goal description cannot be null or empty.");
             }
-
-            Debug.WriteLine($"User ID: {u_id}");
-
-            parameters = new SqlParameter[]
+            if(this.goalPageRepository == null)
             {
-        new SqlParameter("@g_description", g_description),
-            };
-
-            int g_id = dataLink.ExecuteScalar<int>("SELECT dbo.GetGoalByDescription(@g_description)", parameters, false);
-
-            // Check if the goal ID is valid
-            if (g_id == 0)
-            {
-                throw new DatabaseOperationException($"Goal {g_description} not found.");
+                throw new SystemException("GoalPageRepository is not initialized.");
             }
-
-            parameters = new SqlParameter[]
-            {
-        new SqlParameter("@u_id", u_id),
-        new SqlParameter("@g_id", g_id),
-            };
-
-            dataLink.ExecuteNonQuery("UpdateUserGoals", parameters);
+            this.goalPageRepository.AddGoals(username, g_description);
         }
 
     }
