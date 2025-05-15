@@ -19,7 +19,7 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IGroceryListRepository, GroceryListRepository>();
 builder.Services.AddScoped<IMealRepository, MealRepository>();
 builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
-builder.Services.AddSingleton<IGoalPageRepository, GoalPageRepository>();
+builder.Services.AddScoped<IGoalPageRepository, GoalPageRepository>();
 
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
