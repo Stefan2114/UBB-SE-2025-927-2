@@ -43,9 +43,8 @@ namespace SocialApp.Components
             this.InitializeComponent();
 
             userServiceProxy = new UserServiceProxy();
-            postRepository = new PostRepositoryProxy();
             groupRepository = new GroupRepository();
-            postService = new PostService(postRepository, userServiceProxy, groupRepository);
+            postService = new PostServiceProxy();
 
             this.user = user;
             this.controller = App.Services.GetService<AppController>();

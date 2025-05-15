@@ -12,14 +12,14 @@ namespace SocialApp.Proxies
     /// <summary>
     /// Proxy implementation of <see cref="IPostRepository"/> that communicates with a remote Post API.
     /// </summary>
-    public class PostRepositoryProxy : IPostRepository
+    public class PostServiceProxy : IPostService
     {
         private readonly HttpClient httpClient;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostRepositoryProxy"/> class.
+        /// Initializes a new instance of the <see cref="PostServiceProxy"/> class.
         /// </summary>
-        public PostRepositoryProxy()
+        public PostServiceProxy()
         {
             this.httpClient = new HttpClient
             {
@@ -27,16 +27,32 @@ namespace SocialApp.Proxies
             };
         }
 
+        public void AddPost(string title, string? content, long userId, long groupId, PostVisibility postVisibility, PostTag postTag)
+        {
+            Post newPost = new Post
+            {
+                Title = title,
+                Content = content,
+                UserId = userId,
+                GroupId = groupId,
+                Visibility = postVisibility,
+                Tag = postTag,
+                CreatedDate = DateTime.UtcNow
+            };
+            var response = httpClient.PostAsJsonAsync("", newPost).Result;
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Failed to add post: {response.StatusCode}");
+        }
+
         /// <summary>
         /// Deletes a post by its unique identifier.
         /// </summary>
         /// <param name="postId">The ID of the post to delete.</param>
-        public bool DeletePostById(long postId)
+        public void DeletePost(long postId)
         {
             var response = httpClient.DeleteAsync($"{postId}").Result;
             if (!response.IsSuccessStatusCode)
-                return false;
-            return true;
+                throw new Exception($"Failed to delete post {postId}: {response.StatusCode}");
         }
 
         /// <summary>
@@ -170,7 +186,7 @@ namespace SocialApp.Proxies
         /// <param name="content">The new content.</param>
         /// <param name="visibility">The new visibility setting.</param>
         /// <param name="tag">The new tag.</param>
-        public bool UpdatePostById(long postId, string title, string content, PostVisibility visibility, PostTag tag)
+        public void UpdatePost(long postId, string title, string content, PostVisibility visibility, PostTag tag)
         {
             var post = new PostDTO
             {
@@ -182,8 +198,7 @@ namespace SocialApp.Proxies
 
             var response = httpClient.PutAsJsonAsync($"{postId}", post).Result;
             if (!response.IsSuccessStatusCode)
-                return false;
-            return true;
+                throw new Exception($"Failed to update post {postId}: {response.StatusCode}");
         }
 
         /// <summary>
