@@ -28,9 +28,9 @@ namespace SocialApp.Components
             this.InitializeComponent();
 
             var userServiceProxy = new UserServiceProxy();
-            var postRepository = new PostRepositoryProxy();
+            var postRepository = new PostServiceProxy();
             var groupRepository = new GroupRepository();
-            var postService = new PostService(postRepository, userServiceProxy, groupRepository);
+            var postService = new PostServiceProxy();
             this.postViewModel = new PostViewModel(postService);
 
 

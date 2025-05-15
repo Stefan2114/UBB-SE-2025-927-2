@@ -15,14 +15,14 @@ namespace Server.Controllers
     [Route("posts")]
     public class PostController : ControllerBase, IPostController
     {
-        private readonly IPostRepository postRepository;
+        private readonly IPostService postService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostController"/> class.
         /// </summary>
-        public PostController(IPostRepository postRepository)
+        public PostController(IPostService postService)
         {
-            this.postRepository = postRepository;
+            this.postService = postService;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(this.postRepository.GetAllPosts());
+                return Ok(this.postService.GetAllPosts());
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Server.Controllers
         {
             try
             {
-                var post = this.postRepository.GetPostById(id);
+                var post = this.postService.GetPostById(id);
                 if (post == null)
                     return NotFound($"Post with ID {id} not found.");
 
@@ -69,7 +69,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(this.postRepository.GetPostsByUserId(userId));
+                return Ok(this.postService.GetPostsByUserId(userId));
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(this.postRepository.GetPostsByGroupId(groupId));
+                return Ok(this.postService.GetPostsByGroupId(groupId));
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(this.postRepository.GetPostsHomeFeed(userId));
+                return Ok(this.postService.GetPostsHomeFeed(userId));
             }
             catch (Exception ex)
             {
@@ -117,7 +117,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(this.postRepository.GetPostsGroupsFeed(userId));
+                return Ok(this.postService.GetPostsGroupsFeed(userId));
             }
             catch (Exception ex)
             {
@@ -136,7 +136,7 @@ namespace Server.Controllers
                 if (post == null)
                     return BadRequest("Post data cannot be null.");
 
-                this.postRepository.SavePost(post);
+                this.postService.SavePost(post);
                 return Ok();
             }
             catch (Exception ex)
@@ -156,10 +156,7 @@ namespace Server.Controllers
                 if (post == null)
                     return BadRequest("Post update data cannot be null.");
 
-                bool updated = this.postRepository.UpdatePostById(postId, post.Title, post.Content, post.Visibility, post.Tag);
-                if (!updated)
-                    return NotFound($"Post with ID {postId} not found.");
-
+                this.postService.UpdatePost(postId, post.Title, post.Content, post.Visibility, post.Tag);
                 return Ok();
             }
             catch (Exception ex)
@@ -176,10 +173,7 @@ namespace Server.Controllers
         {
             try
             {
-                bool deleted = this.postRepository.DeletePostById(postId);
-                if (!deleted)
-                    return NotFound($"Post with ID {postId} not found.");
-
+                this.postService.DeletePost(postId);
                 return Ok();
             }
             catch (Exception ex)

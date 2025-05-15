@@ -3,6 +3,7 @@ using AppCommonClasses.Repos;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using SocialApp.Proxies;
 using SocialApp.Services;
 using SocialApp.ViewModels;
 using System;
@@ -27,6 +28,7 @@ namespace SocialApp
             services.AddSingleton<AppController>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPostRepository, PostRepository>();
+            services.AddSingleton<IPostService, PostServiceProxy>();
             Services = services.BuildServiceProvider();
         }
 

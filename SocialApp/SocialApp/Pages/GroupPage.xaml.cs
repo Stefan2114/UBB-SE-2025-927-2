@@ -20,7 +20,6 @@ namespace SocialApp.Pages
         private const Visibility visible = Visibility.Visible;
         private IUserService userServiceProxy;
         private IUserService userService;
-        private IPostRepository postRepository;
         private IPostService postService;
         private IGroupRepository groupRepository;
         private IGroupService groupService;
@@ -48,8 +47,7 @@ namespace SocialApp.Pages
             userServiceProxy = new UserServiceProxy();
             groupRepository = new GroupRepository();
             groupService = new GroupService(groupRepository, userServiceProxy);
-            postRepository = new PostRepositoryProxy();
-            postService = new PostService(postRepository, userServiceProxy, groupRepository);
+            postService = new PostServiceProxy();
             group = groupService.GetGroupById(GroupId);
 
             SetVisibilities();
