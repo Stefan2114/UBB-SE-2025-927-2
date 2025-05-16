@@ -36,10 +36,11 @@
             {
                 return response.Content.ReadFromJsonAsync<List<Reaction>>().Result ?? new List<Reaction>();
             }
+
             return new List<Reaction>();
         }
 
-        public Reaction GetReactionByUserAndPost(long userId, long postId)
+        public Reaction? GetReactionByUserAndPost(long userId, long postId)
         {
             var response = this.httpClient.GetAsync($"reactions/{userId}/{postId}").Result;
             if (response.IsSuccessStatusCode)
@@ -48,7 +49,6 @@
             }
 
             return null;
-
         }
 
         public void Save(Reaction reaction)

@@ -12,9 +12,6 @@
 >
 
     <Grid Background="#F9E5DA" VerticalAlignment="Stretch">
-        <Grid.DataContext>
-            <viewmodels:GroceryViewModel/>
-        </Grid.DataContext>
 
         <Button HorizontalAlignment="Right"
         VerticalAlignment="Top"
@@ -119,7 +116,7 @@
             </Grid>
         </Grid>
 
-        <StackPanel Margin="75, 250, 0, 0"
+        <!--StackPanel Margin="75, 250, 0, 0"
             HorizontalAlignment="Left">
 
                 <ItemsRepeater ItemsSource="{x:Bind ViewModel.Sections}">
@@ -137,8 +134,7 @@
                         Background="#E3C7B1"
                         Padding="15"
                         Margin="10"
-                                Height="370
-                                ">
+                                Height="370">
 
                                 <StackPanel>
                                     <TextBlock Text="{x:Bind Title}"
@@ -164,7 +160,48 @@
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
 
-        </StackPanel>
+        </StackPanel-->
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+              VerticalScrollBarVisibility="Auto"
+              Margin="75,250,0,0">
+
+            <ItemsControl HorizontalAlignment="Left" ItemsSource="{x:Bind ViewModel.Sections, Mode=OneWay}">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:SectionModel">
+                        <Border Width="600"
+                        Height="370"
+                        Margin="10"
+                        Padding="15"
+                        CornerRadius="15"
+                        Background="#E3C7B1">
+                            <StackPanel>
+                                <TextBlock Text="{x:Bind Title}"
+                                   Foreground="#183D2C"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Margin="0, 0, 0, 10"/>
+
+                                <ListView ItemsSource="{x:Bind Items}"
+                                  Height="300">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:GroceryIngredient">
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <CheckBox IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
+                                                  Content="{x:Bind Name}"
+                                                  Foreground="#183D2C"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
 
         <StackPanel Background="Transparent" 
             HorizontalAlignment="Right" 

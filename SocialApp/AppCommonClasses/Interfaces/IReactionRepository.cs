@@ -1,8 +1,8 @@
 ﻿namespace AppCommonClasses.Interfaces
 {
     using System.Collections.Generic;
-    using AppCommonClasses.Models;
     using AppCommonClasses.Enums;
+    using AppCommonClasses.Models;
 
     /// <summary>
     /// Interface for managing reactions in the repository.
@@ -35,7 +35,7 @@
         /// <param name="userId">The ID of the user.</param>
         /// <param name="postId">The ID of the post.</param>
         /// <returns>The reaction for the specified user and post.</returns>
-        Reaction GetReactionByUserAndPost(long userId, long postId);
+        Reaction? GetReactionByUserAndPost(long userId, long postId);
 
         /// <summary>
         /// Saves a new reaction to the repository.

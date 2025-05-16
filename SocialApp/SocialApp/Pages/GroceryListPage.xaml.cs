@@ -6,13 +6,19 @@ namespace SocialApp.Pages
     using AppCommonClasses.Models;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Services;
     using SocialApp.ViewModels;
 
     public sealed partial class GroceryListPage : Page
     {
-        public GroceryViewModel ViewModel { get; } = new();
+        public GroceryViewModel ViewModel { get; set; }
 
-        public GroceryListPage() => this.InitializeComponent();
+        public GroceryListPage(GroceryViewModel viewModel)
+        {
+            this.ViewModel = viewModel;
+            this.InitializeComponent();
+            this.DataContext = this.ViewModel;
+        }
 
         private void AddGroceryIngredient_Click(object sender, RoutedEventArgs e)
         {
@@ -25,7 +31,8 @@ namespace SocialApp.Pages
 
         private void NavigateToMealDisplay(object sender, RoutedEventArgs e)
         {
-            this.Frame?.Navigate(typeof(MainPage));
+            // this.Frame?.Navigate(typeof(MainPage));
+            NavigationService.Instance.NavigateTo<MainPage>();
         }
     }
 }
