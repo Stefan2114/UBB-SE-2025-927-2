@@ -1,11 +1,11 @@
 ﻿namespace SocialApp.Services
 {
-    using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
-    using SocialApp.Queries;
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
+    using AppCommonClasses.Interfaces;
+    using SocialApp.Interfaces;
+    using SocialApp.Queries;
 
     public class WaterIntakeService : IWaterIntakeService
     {
@@ -18,7 +18,7 @@
         }
 
         [Obsolete]
-        public void AddUserIfNotExists(int userId)
+        public void AddUserIfNotExists(long userId)
         {
             // if the current user not in the water_tracker table, add it
             var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
@@ -33,14 +33,14 @@
         }
 
         [Obsolete]
-        public float GetWaterIntake(int userId)
+        public float GetWaterIntake(long userId)
         {
             var parameters = new SqlParameter[] { new SqlParameter("@UserId", userId) };
             return dataLink.ExecuteScalar<float>("SELECT dbo.get_water_intake(@UserId)", parameters, false);
         }
 
         [Obsolete]
-        public void UpdateWaterIntake(int userId, float newIntake)
+        public void UpdateWaterIntake(long userId, float newIntake)
         {
             var parameters = new SqlParameter[]
             {
@@ -51,7 +51,7 @@
         }
 
         [Obsolete]
-        public void RemoveWater300(int userId)
+        public void RemoveWater300(long userId)
         {
             const float WATER_DIFFERENCE_300 = 300f;
             float currentIntake = GetWaterIntake(userId);
@@ -60,7 +60,7 @@
         }
 
         [Obsolete]
-        public void RemoveWater400(int userId)
+        public void RemoveWater400(long userId)
         {
             const float WATER_DIFFERENCE_400 = 400f;
             float currentIntake = GetWaterIntake(userId);
@@ -69,7 +69,7 @@
         }
 
         [Obsolete]
-        public void RemoveWater500(int userId)
+        public void RemoveWater500(long userId)
         {
             const float WATER_DIFFERENCE_500 = 500f;
             float currentIntake = GetWaterIntake(userId);
@@ -78,7 +78,7 @@
         }
 
         [Obsolete]
-        public void RemoveWater750(int userId)
+        public void RemoveWater750(long userId)
         {
             const float WATER_DIFFERENCE_750 = 750f;
             float currentIntake = GetWaterIntake(userId);

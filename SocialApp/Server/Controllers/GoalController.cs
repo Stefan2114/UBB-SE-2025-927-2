@@ -1,8 +1,8 @@
 namespace Server.Controllers
 {
     using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Server.DTOs;
     using Server.Interfaces;
 
     /// <summary>
@@ -26,14 +26,13 @@ namespace Server.Controllers
         /// <summary>
         /// Adds a new goal.
         /// </summary>
-        /// <param name="firstName">The first name of the user.</param>
-        /// <param name="lastName">The last name of the user.</param>
+        /// <param name="username">The name of the user.</param>
         /// <param name="g_description">The description of the goal.</param>
         /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpPost]
-        public IActionResult AddGoals(string username, string g_description)
+        public IActionResult AddGoals([FromBody] GoalDTO goal)
         {
-            this.goalRepository.AddGoals(username, g_description);
+            this.goalRepository.AddGoals(goal.Username, goal.Description);
             return this.Ok();
         }
     }

@@ -204,18 +204,11 @@
             }
         }
 
-        public int Login(string username, string password)
+        public long Login(string username, string password)
         {
             User? user = this.GetUserByUsername(username);
 
-            if (user != null && user.Password.Equals(password))
-            {
-                return (int)user.Id;
-            }
-            else
-            {
-                return -1;
-            }
+            return (user != null && user.Password.Equals(password)) ? user.Id : -1;
         }
     }
 }
