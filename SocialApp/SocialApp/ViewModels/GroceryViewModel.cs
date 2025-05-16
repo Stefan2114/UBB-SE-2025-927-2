@@ -8,17 +8,18 @@
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using SocialApp.Interfaces;
     using SocialApp.Proxies;
     using SocialApp.Services;
 
     public class GroceryViewModel : ObservableObject
     {
-        private static int userId;
+        private static long userId;
         private readonly IGroceryListService service;
         public ObservableCollection<SectionModel> sections;
 
-        public static int UserId
+        public static long UserId
         {
             get => userId;
             set => userId = value;
@@ -52,6 +53,7 @@
     .UseSqlServer("Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;")
     .Options;
 
+            UserId = App.Services.GetService<AppController>().CurrentUser.Id;
             var dbContext = new SocialAppDbContext(options);
             var repo = new GroceryListRepository(dbContext);
 

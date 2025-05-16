@@ -1,16 +1,17 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
     using AppCommonClasses.Models;
     using global::Windows.UI;
     using Microsoft.Data.SqlClient;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI;
     using Microsoft.UI.Xaml.Media;
     using SocialApp.Pages;
     using SocialApp.Services;
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Windows.Input;
 
     public class AddFoodPageViewModel : ViewModelBase
     {
@@ -81,9 +82,9 @@
 
         public string RemainingSugar { get => remainingSugar; set => SetProperty(ref remainingSugar, value); }
 
-        private static int userId;
+        private static long userId;
 
-        public static int UserId { get => userId; set => userId = value; }
+        public static long UserId { get => userId; set => userId = value; }
 
         private readonly MacrosService macrosService;
 
@@ -101,11 +102,11 @@
             NextCommand = new RelayCommand(GoNext);
             AddToMealCommand = new RelayCommand(AddToMeal, CanAddToMeal);
             FetchServingUnits();
-
+            UserId = App.Services.GetService<AppController>().CurrentUser.Id;
             Console.WriteLine("AddFoodPageViewModel initialized");
             Console.WriteLine($"AddToMealCommand is null: {AddToMealCommand == null}");
 
-            int number_userId = userId;
+            long number_userId = userId;
 
             // Initialize MacrosService
             macrosService = new MacrosService();

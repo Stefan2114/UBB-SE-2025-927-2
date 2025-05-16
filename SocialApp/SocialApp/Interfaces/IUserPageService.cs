@@ -2,8 +2,8 @@ namespace SocialApp.Interfaces
 {
     public interface IUserPageService
     {
-        int UserHasAnAccount(string name);
+        long UserHasAnAccount(string name);
 
-        int InsertNewUser(string name, string password);
+        long InsertNewUser(string name, string password);
     }
 }

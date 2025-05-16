@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using AppCommonClasses.Interfaces;
+﻿using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
@@ -15,21 +14,14 @@ namespace SocialApp.Services
             this.userServiceProxy = new UserServiceProxy();
         }
 
-        public int UserHasAnAccount(string name)
+        public long UserHasAnAccount(string name)
         {
             User? user = this.userServiceProxy.GetUserByUsername(name);
 
-            if (user != null)
-            {
-                return (int)user.Id;
-            }
-            else
-            {
-                return -1;
-            }
+            return user == null ? -1 : user.Id;
         }
 
-        public int InsertNewUser(string name, string password)
+        public long InsertNewUser(string name, string password)
         {
             User user = new User
             {
@@ -46,13 +38,8 @@ namespace SocialApp.Services
             };
 
             var createdUser = this.userServiceProxy.Save(user);
-            if (createdUser == null)
-            {
-                Debug.WriteLine("Error getting saved user");
-                return -1;
-            }
 
-            return (int)createdUser.Id;
+            return createdUser == null ? -1 : createdUser.Id;
         }
     }
 }

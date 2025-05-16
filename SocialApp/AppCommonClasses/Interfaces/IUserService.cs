@@ -28,6 +28,6 @@ namespace AppCommonClasses.Interfaces
 
         void UpdateUser(long id, string username, string email, string password, string? image);
 
-        int Login(string username, string password);
+        long Login(string username, string password);
     }
 }

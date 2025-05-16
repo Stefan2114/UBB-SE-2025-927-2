@@ -6,7 +6,6 @@ namespace SocialApp.Pages
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using SocialApp.Proxies;
-    using SocialApp.ViewModels;
 
     public sealed partial class UserPage : Page
     {
@@ -44,11 +43,11 @@ namespace SocialApp.Pages
                 return;
             }
 
-            int userId = this.userPageService.UserHasAnAccount(this.Username);
+            long userId = this.userPageService.UserHasAnAccount(this.Username);
 
             if (userId != -1)
             {
-                int id = this.userService.Login(this.Username, this.Password);
+                long id = this.userService.Login(this.Username, this.Password);
                 if (id == -1)
                 {
                     var dialog = new ContentDialog
@@ -62,9 +61,6 @@ namespace SocialApp.Pages
                     return;
                 }
 
-                GroceryViewModel.UserId = userId;
-                AddFoodPageViewModel.UserId = userId;
-                MainViewModel.UserId = userId;
                 App.Services.GetService<AppController>().CurrentUser = this.userService.GetById(userId);
                 this.Frame.Navigate(typeof(MainPage));
             }
@@ -72,9 +68,6 @@ namespace SocialApp.Pages
             {
                 userId = this.userPageService.InsertNewUser(this.Username, this.Password);
 
-                GroceryViewModel.UserId = userId;
-                AddFoodPageViewModel.UserId = userId;
-                MainViewModel.UserId = userId;
                 App.Services.GetService<AppController>().CurrentUser = this.userService.GetById(userId);
                 this.Frame.Navigate(typeof(BodyMetricsPage), this);
             }
