@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppCommonClasses.Models
@@ -19,7 +18,9 @@ namespace AppCommonClasses.Models
 
         [Column("Email")]
         public string Email { get; set; }
-        public string? PasswordHash { get; set; }
+
+        [Column("PasswordHash")]
+        public string Password { get; set; }
         public string? Image { get; set; }
 
         [Column("u_height")]

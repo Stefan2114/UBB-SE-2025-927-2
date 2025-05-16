@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AppCommonClasses.Models;
+﻿using AppCommonClasses.Models;
 
 namespace AppCommonClasses.Interfaces
 {
@@ -15,9 +14,9 @@ namespace AppCommonClasses.Interfaces
 
         List<User> GetUserFollowing(long id);
 
-        User GetUserByUsername(string username);
+        User? GetUserByUsername(string username);
 
-        void Save(User entity);
+        User Save(User entity);
 
         List<User> SearchUsersById(long userId, string query);
 
@@ -28,5 +27,7 @@ namespace AppCommonClasses.Interfaces
         void DeleteUser(long id);
 
         void UpdateUser(long id, string username, string email, string password, string? image);
+
+        int Login(string username, string password);
     }
 }

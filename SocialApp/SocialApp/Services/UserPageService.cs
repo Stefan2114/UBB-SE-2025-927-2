@@ -17,22 +17,8 @@ namespace SocialApp.Services
 
         public int UserHasAnAccount(string name)
         {
-            // var parameters = new SqlParameter[]
-            // {
-            //    new SqlParameter("@u_name", name)
-            // };
+            User? user = this.userServiceProxy.GetUserByUsername(name);
 
-            // int? userId = _dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
-
-            // return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
-            // get all users and print them in the console
-            var users = this.userServiceProxy.GetAllUsers();
-            foreach (var user1 in users)
-            {
-                Debug.WriteLine($"User: {user1.Username}");
-            }
-
-            User user = this.userServiceProxy.GetUserByUsername(name);
             if (user != null)
             {
                 return (int)user.Id;
@@ -43,17 +29,12 @@ namespace SocialApp.Services
             }
         }
 
-        public int InsertNewUser(string name)
+        public int InsertNewUser(string name, string password)
         {
-            // var parameters = new SqlParameter[]
-            // {
-            //    new SqlParameter("@u_name", name)
-            // };
-            // int userId = _dataLink.ExecuteScalar<int>("SELECT dbo.InsertNewUser(@u_name)", parameters, false);
-            // return userId;
             User user = new User
             {
                 Username = name,
+                Password = password,
                 Height = 0,
                 Weight = 0,
                 TargetWeight = 0,
@@ -63,8 +44,15 @@ namespace SocialApp.Services
                 AllergyId = null,
                 ActivityLevelId = null,
             };
-            this.userServiceProxy.Save(user);
-            return (int)user.Id;
+
+            var createdUser = this.userServiceProxy.Save(user);
+            if (createdUser == null)
+            {
+                Debug.WriteLine("Error getting saved user");
+                return -1;
+            }
+
+            return (int)createdUser.Id;
         }
     }
 }

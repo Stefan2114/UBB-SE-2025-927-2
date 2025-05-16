@@ -1,20 +1,20 @@
 namespace SocialApp.Pages
 {
+    using System;
     using AppCommonClasses.Interfaces;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using SocialApp.Interfaces;
     using SocialApp.Proxies;
-    using SocialApp.Repository;
-    using SocialApp.Services;
     using SocialApp.ViewModels;
-    using System;
 
     public sealed partial class UserPage : Page
     {
         public string Username { get; set; } = string.Empty;
-        private IUserService userService;
+
+        public string Password { get; set; } = string.Empty;
+
+        private readonly IUserService userService;
 
         private Services.UserPageService userPageService = new Services.UserPageService();
 
@@ -29,24 +29,39 @@ namespace SocialApp.Pages
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
             this.Username = this.UsernameTextBox.Text.Trim();
+            this.Password = this.PasswordTextBox.Text.Trim();
 
-            if (string.IsNullOrEmpty(this.Username))
+            if (string.IsNullOrEmpty(this.Username) || string.IsNullOrEmpty(this.Password))
             {
                 var dialog = new ContentDialog
                 {
                     Title = "Error",
-                    Content = "Please enter both your first and last name.",
+                    Content = "Please enter both your name and your password.",
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot,
                 };
                 _ = dialog.ShowAsync();
                 return;
             }
-            int userId = this.userPageService.UserHasAnAccount(this.Username);
 
+            int userId = this.userPageService.UserHasAnAccount(this.Username);
 
             if (userId != -1)
             {
+                int id = this.userService.Login(this.Username, this.Password);
+                if (id == -1)
+                {
+                    var dialog = new ContentDialog
+                    {
+                        Title = "Error",
+                        Content = "The password is incorrect",
+                        CloseButtonText = "OK",
+                        XamlRoot = this.XamlRoot,
+                    };
+                    _ = dialog.ShowAsync();
+                    return;
+                }
+
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
                 MainViewModel.UserId = userId;
@@ -55,7 +70,7 @@ namespace SocialApp.Pages
             }
             else
             {
-                userId = userPageService.InsertNewUser(this.Username);
+                userId = this.userPageService.InsertNewUser(this.Username, this.Password);
 
                 GroceryViewModel.UserId = userId;
                 AddFoodPageViewModel.UserId = userId;
