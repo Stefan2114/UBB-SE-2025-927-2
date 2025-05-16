@@ -1,6 +1,7 @@
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 using Server.Interfaces;
 
 namespace Server.Controllers
@@ -17,9 +18,10 @@ namespace Server.Controllers
         }
 
         [HttpPost("{userId}/add")]
-        public async Task<ActionResult<GroceryIngredient>> AddIngredientToUser(long userId, [FromBody] GroceryIngredient request)
+        public async Task<ActionResult<GroceryIngredient>> AddIngredientToUser(long userId, [FromBody] GroceryIngredientDTO request)
         {
-            var result = await this.groceryRepository.AddIngredientToUser(userId, request);
+            GroceryIngredient groceryIngredient = new GroceryIngredient { Id = userId, IsChecked = request.IsChecked, Name = request.Name };
+            var result = await this.groceryRepository.AddIngredientToUser(userId, groceryIngredient);
             return this.Ok(result);
         }
 
@@ -41,21 +43,6 @@ namespace Server.Controllers
                 return this.NotFound();
             }
 
-
-
-            /*
-            foreach (var ingredient in ingredients)
-            {
-                ingredient.PropertyChanged += (s, e) =>
-                {
-                    if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
-                    {
-                        var item = s as GroceryIngredient ?? GroceryIngredient.defaultIngredient;
-                        _ = this.UpdateIsChecked(userId, item.IngredientId, item.IsChecked);
-                    }
-                };
-            }
-            */
             ingredient.IsChecked = isChecked;
             await this.groceryRepository.UpdateIsChecked(userId, ingredientId, isChecked);
 
