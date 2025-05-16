@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -44,9 +45,9 @@ namespace SocialApp.Pages
         private void InitializeServices()
         {
             var groupRepository = new GroupRepository();
-            var userRepository = new UserRepositoryProxy();
-            groupService = new GroupService(groupRepository, userRepository);
-            userService = new UserService(userRepository);
+            var userServiceProxy = new UserServiceProxy();
+            groupService = new GroupService(groupRepository, userServiceProxy);
+            userService = userServiceProxy;
             controller = App.Services.GetService<AppController>();
         }
 

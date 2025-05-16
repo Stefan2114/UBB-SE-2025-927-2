@@ -9,6 +9,6 @@ namespace AppCommonClasses.Interfaces
 {
     public interface IGoalPageRepository
     {
-        public Task AddGoals(string firstName, string lastName, string g_description);
+        void AddGoals(string username, string goalDescription);
     }
 }

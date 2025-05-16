@@ -2,6 +2,7 @@
 {
     using CommunityToolkit.Mvvm.Input;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -54,11 +55,10 @@
             NavigationService.Instance.GoBack();
         }
 
-        private GoalPageService goalPageService = new GoalPageService();
+        private GoalPageService goalPageService = new GoalPageService(new GoalRepositoryProxy());
 
         private string username = string.Empty;
 
-       
         public string Username
         {
             get => username;

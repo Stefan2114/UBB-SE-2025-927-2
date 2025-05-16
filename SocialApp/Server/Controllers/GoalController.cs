@@ -31,9 +31,9 @@ namespace Server.Controllers
         /// <param name="g_description">The description of the goal.</param>
         /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpPost]
-        public IActionResult AddGoals(string firstName, string lastName, string g_description)
+        public IActionResult AddGoals(string username, string g_description)
         {
-            this.goalRepository.AddGoals(firstName, lastName, g_description);
+            this.goalRepository.AddGoals(username, g_description);
             return this.Ok();
         }
     }
