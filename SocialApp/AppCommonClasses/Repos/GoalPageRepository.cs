@@ -1,4 +1,4 @@
-namespace AppCommonClasses.Repos
+/*namespace AppCommonClasses.Repos
 {
     using System;
     using System.Collections.Generic;
@@ -39,4 +39,4 @@ namespace AppCommonClasses.Repos
             this.dbContext.SaveChanges();
         }
     }
-}
+}*/

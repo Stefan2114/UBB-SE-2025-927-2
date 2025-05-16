@@ -8,11 +8,11 @@ namespace Server.Controllers
     [Route("waterintake")]
     public class WaterIntakeController : ControllerBase, IWaterIntakeController
     {
-        private readonly IWaterIntakeRepository waterRepository;
+        private readonly IWaterIntakeService waterService;
 
-        public WaterIntakeController(IWaterIntakeRepository waterRepository)
+        public WaterIntakeController(IWaterIntakeService waterService)
         {
-            this.waterRepository = waterRepository;
+            this.waterService = waterService;
         }
 
         [HttpPost("{userId}")]
@@ -20,7 +20,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.AddUserIfNotExists(userId);
+                this.waterService.AddUserIfNotExists(userId);
                 return Ok();
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace Server.Controllers
         {
             try
             {
-                return Ok(waterRepository.GetWaterIntake(userId));
+                return Ok(waterService.GetWaterIntake(userId));
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.UpdateWaterIntake(userId, newIntake);
+                waterService.UpdateWaterIntake(userId, newIntake);
                 return Ok();
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.RemoveWater300(userId);
+                waterService.RemoveWater300(userId);
                 return Ok();
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.RemoveWater400(userId);
+                waterService.RemoveWater400(userId);
                 return Ok();
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.RemoveWater500(userId);
+                waterService.RemoveWater500(userId);
                 return Ok();
             }
             catch (Exception ex)
@@ -103,7 +103,7 @@ namespace Server.Controllers
         {
             try
             {
-                waterRepository.RemoveWater750(userId);
+                waterService.RemoveWater750(userId);
                 return Ok();
             }
             catch (Exception ex)
