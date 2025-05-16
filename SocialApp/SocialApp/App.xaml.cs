@@ -35,6 +35,7 @@ namespace SocialApp
             services.AddSingleton<IGroceryListService, GroceryListService>();
             services.AddTransient<GroceryViewModel>();
             services.AddTransient<GroceryListPage>();
+            services.AddTransient<MainPage>();
             Services = services.BuildServiceProvider();
         }
 

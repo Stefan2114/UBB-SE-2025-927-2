@@ -6,6 +6,7 @@ namespace SocialApp.Pages
     using AppCommonClasses.Models;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Services;
     using SocialApp.ViewModels;
 
     public sealed partial class GroceryListPage : Page
@@ -30,7 +31,8 @@ namespace SocialApp.Pages
 
         private void NavigateToMealDisplay(object sender, RoutedEventArgs e)
         {
-            this.Frame?.Navigate(typeof(MainPage));
+            // this.Frame?.Navigate(typeof(MainPage));
+            NavigationService.Instance.NavigateTo<MainPage>();
         }
     }
 }
