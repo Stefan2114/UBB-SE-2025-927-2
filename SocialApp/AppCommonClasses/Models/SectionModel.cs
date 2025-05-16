@@ -1,21 +1,28 @@
 ﻿namespace AppCommonClasses.Models
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
 
-    public class SectionModel
+    public class SectionModel : INotifyPropertyChanged
     {
-        public SectionModel()
+        private string title;
+        public string Title
         {
-            Title = string.Empty;
+            get => title;
+            set
+            {
+                if (title != value)
+                {
+                    title = value;
+                    OnPropertyChanged(nameof(Title));
+                }
+            }
         }
 
-        public SectionModel(string title)
-        {
-            Title = title;
-        }
+        public ObservableCollection<GroceryIngredient> Items { get; set; }
 
-        public string Title { get; set; }
-
-        public ObservableCollection<GroceryIngredient> Items { get; set; } = new();
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

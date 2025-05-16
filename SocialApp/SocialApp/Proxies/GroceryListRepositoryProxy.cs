@@ -21,8 +21,13 @@ namespace SocialApp.Proxies
 
         public async Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient)
         {
-            ingredient.Id = userId;
-            var response = await this.httpClient.PostAsJsonAsync($"{userId}/add", ingredient);
+            var request = new
+            {
+                Name = ingredient.Name,
+                IsChecked = ingredient.IsChecked,
+            };
+
+            var response = await this.httpClient.PostAsJsonAsync($"{userId}/add", request);
             if (!response.IsSuccessStatusCode)
             {
                 return GroceryIngredient.defaultIngredient;
@@ -42,6 +47,11 @@ namespace SocialApp.Proxies
             }
 
             var ingredients = await response.Content.ReadFromJsonAsync<List<GroceryIngredient>>();
+            foreach (var ingredient in ingredients)
+            {
+                ingredient.Id = userId;
+            }
+
             return ingredients ?? new List<GroceryIngredient>();
         }
 
@@ -49,7 +59,7 @@ namespace SocialApp.Proxies
         {
             var response = await this.httpClient.PostAsJsonAsync(
                 $"{userId}/ingredient/{ingredientId}/check",
-                new { userId, ingredientId, isChecked });
+                isChecked);
 
             if (!response.IsSuccessStatusCode)
             {

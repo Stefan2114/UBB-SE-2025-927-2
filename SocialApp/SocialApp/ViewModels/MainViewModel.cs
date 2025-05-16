@@ -426,7 +426,7 @@ namespace SocialApp.ViewModels
 
         private void GoGroceryList()
         {
-            NavigationService.Instance.NavigateTo(typeof(GroceryListPage));
+            NavigationService.Instance.NavigateTo<GroceryListPage>();
         }
 
         private void GoAddBreakfast()

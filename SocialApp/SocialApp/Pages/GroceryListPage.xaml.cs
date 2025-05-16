@@ -10,9 +10,14 @@ namespace SocialApp.Pages
 
     public sealed partial class GroceryListPage : Page
     {
-        public GroceryViewModel ViewModel { get; } = new();
+        public GroceryViewModel ViewModel { get; set; }
 
-        public GroceryListPage() => this.InitializeComponent();
+        public GroceryListPage(GroceryViewModel viewModel)
+        {
+            this.ViewModel = viewModel;
+            this.InitializeComponent();
+            this.DataContext = this.ViewModel;
+        }
 
         private void AddGroceryIngredient_Click(object sender, RoutedEventArgs e)
         {

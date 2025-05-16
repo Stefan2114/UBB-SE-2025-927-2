@@ -11,29 +11,15 @@
     public class GroceryListService : IGroceryListService
     {
         private IGroceryListRepository groceryRepository;
-        private IGroceryListRepository gR;
 
-        public GroceryListService(IGroceryListRepository groceryRepository, IGroceryListRepository gR)
+        public GroceryListService(IGroceryListRepository groceryRepository)
         {
             this.groceryRepository = groceryRepository;
-            this.gR = gR;
         }
 
         public async Task<List<GroceryIngredient>> GetIngredientsForUser(long userId)
         {
             var ingredients = await this.groceryRepository.GetIngredientsForUser(userId);
-            foreach (var ingredient in ingredients)
-            {
-                ingredient.PropertyChanged += (s, e) =>
-                {
-                    if (e.PropertyName == nameof(GroceryIngredient.IsChecked))
-                    {
-                        var item = s as GroceryIngredient ?? GroceryIngredient.defaultIngredient;
-                        _ = this.UpdateIsChecked(userId, item.IngredientId, item.IsChecked);
-                    }
-                };
-            }
-
             return ingredients;
         }
 
@@ -63,7 +49,6 @@
                 return GroceryIngredient.defaultIngredient;
             }
 
-            // GroceryIngredient r = await this.gR.AddIngredientToUser(userId, ingredient);
             return await this.groceryRepository.AddIngredientToUser(userId, ingredient);
         }
     }
