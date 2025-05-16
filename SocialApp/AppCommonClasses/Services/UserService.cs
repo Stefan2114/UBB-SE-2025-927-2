@@ -5,7 +5,6 @@ namespace AppCommonClasses.Services
     using System.Linq;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Provides user-related services.
@@ -95,7 +94,7 @@ namespace AppCommonClasses.Services
             return this.userRepository.GetAll();
         }
 
-        public User GetUserByUsername(string username)
+        public User? GetUserByUsername(string username)
         {
             return this.userRepository.GetByUsername(username);
         }
@@ -185,9 +184,24 @@ namespace AppCommonClasses.Services
             return followingUsers.Where(u => u.Username.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
-        public void Save(User entity)
+        public User Save(User entity)
         {
-            this.userRepository.Save(entity);
+            var savedUser = this.userRepository.Save(entity);
+            return savedUser;
+        }
+
+        public int Login(string username, string password)
+        {
+            User? user = this.userRepository.GetByUsername(username);
+
+            if (user != null && user.Password.Equals(password))
+            {
+                return (int)user.Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

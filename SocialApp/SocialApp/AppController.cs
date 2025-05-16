@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
 using AppCommonClasses.Models;
-using Windows.Graphics.Imaging;
-using Windows.Storage.Streams;
-using Windows.Storage;
-using SocialApp.Repository;
-using SocialApp.Services;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SocialApp.Proxies;
+using SocialApp.Repository;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace SocialApp
 {
@@ -21,7 +16,7 @@ namespace SocialApp
 
         public static AppController Instance => instance.Value;
 
-        public User CurrentUser { get; set; }
+        public User? CurrentUser { get; set; }
 
         public AppController() { }
 
@@ -35,11 +30,12 @@ namespace SocialApp
         {
             UserServiceProxy userServiceProxy = new UserServiceProxy();
             User user = userServiceProxy.GetByEmail(email);
-            if (user != null && user.PasswordHash == password)
+            if (user != null && user.Password == password)
             {
-                CurrentUser = user;
+                this.CurrentUser = user;
                 return true;
             }
+
             return false;
         }
 
@@ -47,15 +43,14 @@ namespace SocialApp
         {
             UserServiceProxy userServiceProxy = new UserServiceProxy();
             userServiceProxy.AddUser(username, email, password, image);
-            Login(email, password);
+            this.Login(email, password);
         }
 
         //trrbuie scoasa
         public void Logout()
         {
-            CurrentUser = null;
+            this.CurrentUser = null;
         }
-
 
         public static async Task<string> EncodeImageToBase64Async(StorageFile imageFile)
         {

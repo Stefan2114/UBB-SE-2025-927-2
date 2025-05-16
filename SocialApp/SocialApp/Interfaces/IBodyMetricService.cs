@@ -4,5 +4,4 @@
     {
         void UpdateUserBodyMetrics(string username, string weight, string height, string targetGoal);
     }
-
 }

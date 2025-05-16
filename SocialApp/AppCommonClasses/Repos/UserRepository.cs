@@ -6,7 +6,6 @@ namespace AppCommonClasses.Repos
     using AppCommonClasses.DbRelationshipEntities;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Repository for managing user-related operations in the database.
@@ -63,9 +62,9 @@ namespace AppCommonClasses.Repos
             return dbContext.Users.First(u => u.Id == id);
         }
 
-        public User GetByUsername(string username)
+        public User? GetByUsername(string username)
         {
-            return dbContext.Users.First(u => u.Username == username);
+            return dbContext.Users.FirstOrDefault(u => u.Username == username);
         }
 
         public List<User> GetUserFollowers(long id)
@@ -104,10 +103,11 @@ namespace AppCommonClasses.Repos
             return userFollowing;
         }
 
-        public void Save(User entity)
+        public User Save(User entity)
         {
             dbContext.Users.Add(entity);
             dbContext.SaveChanges();
+            return entity;
         }
 
         public void Unfollow(long userId, long whoToUnfollowId)
@@ -128,7 +128,7 @@ namespace AppCommonClasses.Repos
             {
                 user.Username = username;
                 user.Email = email;
-                user.PasswordHash = hashPassword;
+                user.Password = hashPassword;
                 user.Image = image;
                 dbContext.SaveChanges();
             }

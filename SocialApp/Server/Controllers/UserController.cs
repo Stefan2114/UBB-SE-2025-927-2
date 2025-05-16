@@ -91,8 +91,8 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult SaveUser(User user)
         {
-            this.userService.Save(user);
-            return this.Ok();
+            var savedUser = this.userService.Save(user);
+            return this.Ok(savedUser);
         }
 
         [HttpDelete("users/{userId}/followers/{unfollowUserId}")]

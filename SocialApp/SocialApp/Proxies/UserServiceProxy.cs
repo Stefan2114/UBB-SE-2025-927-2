@@ -29,21 +29,25 @@
             {
                 throw new ArgumentException("Username cannot be empty", nameof(username));
             }
+
             if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("Email cannot be empty", nameof(email));
             }
+
             if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentException("Password cannot be empty", nameof(password));
             }
+
             var user = new UserModelDTO
             {
                 Name = username,
                 Email = email,
                 HashPassword = password,
-                Image = image
+                Image = image,
             };
+
             var response = this.httpClient.PostAsJsonAsync("", user).Result;
             if (!response.IsSuccessStatusCode)
             {
@@ -105,18 +109,19 @@
             return null;
         }
 
-        public User GetUserByUsername(string username)
+        public User? GetUserByUsername(string username)
         {
-            Debug.WriteLine($"Getting in proxy user by username: {username}");
             var response = this.httpClient.GetAsync($"users/{username}").Result;
             if (response.IsSuccessStatusCode)
             {
-                var user = response.Content.ReadFromJsonAsync<User>().Result;
-                Debug.WriteLine($"Got in proxy user by username: {username}");
-                return user;
+                var content = response.Content.ReadAsStringAsync().Result;
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var user = response.Content.ReadFromJsonAsync<User>().Result;
+                    return user;
+                }
             }
 
-            Debug.WriteLine($"User not found by username {username}. Status: {response.StatusCode}");
             return null;
         }
 
@@ -145,12 +150,24 @@
             return new List<User>();
         }
 
-        public void Save(User entity)
+        public User Save(User entity)
         {
-            var response = this.httpClient.PostAsJsonAsync("", entity).Result;
-            if (!response.IsSuccessStatusCode)
+            entity.Email = string.Empty;
+            var response = this.httpClient.PostAsJsonAsync(string.Empty, entity).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var createdUser = response.Content.ReadFromJsonAsync<User>().Result;
+                if (createdUser != null)
+                {
+                    entity.Id = createdUser.Id;
+                }
+
+                return entity;
+            }
+            else
             {
                 Debug.WriteLine($"Failed to save user. Status: {response.StatusCode}");
+                return null;
             }
         }
 
@@ -184,6 +201,20 @@
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine($"Failed to update user {id}. Status: {response.StatusCode}");
+            }
+        }
+
+        public int Login(string username, string password)
+        {
+            User? user = this.GetUserByUsername(username);
+
+            if (user != null && user.Password.Equals(password))
+            {
+                return (int)user.Id;
+            }
+            else
+            {
+                return -1;
             }
         }
     }
