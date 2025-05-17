@@ -21,7 +21,7 @@
 
         public void DeleteByUserAndPost(long userId, long postId)
         {
-            this.httpClient.DeleteAsync($"reactions/{userId}/{postId}").Wait();
+            this.httpClient.DeleteAsync($"{userId}/{postId}").Wait();
         }
 
         public List<Reaction> GetAllReactions()
@@ -31,7 +31,8 @@
 
         public List<Reaction> GetReactionsByPost(long postId)
         {
-            var response = this.httpClient.GetAsync($"reactions/{postId}").Result!;
+            var response = this.httpClient.GetAsync($"post/{postId}").Result!;
+
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadFromJsonAsync<List<Reaction>>().Result ?? new List<Reaction>();
@@ -42,10 +43,16 @@
 
         public Reaction? GetReactionByUserAndPost(long userId, long postId)
         {
-            var response = this.httpClient.GetAsync($"reactions/{userId}/{postId}").Result;
+            var response = this.httpClient.GetAsync($"{userId}/{postId}").Result;
+
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadFromJsonAsync<Reaction>().Result ?? null;
+                var content = response.Content.ReadAsStringAsync().Result;
+                if (!string.IsNullOrWhiteSpace(content))
+                {
+                    var reaction = response.Content.ReadFromJsonAsync<Reaction>().Result;
+                    return reaction;
+                }
             }
 
             return null;
@@ -60,7 +67,7 @@
         {
             var reaction = new ReactionDTO { Type = type };
 
-            this.httpClient.PostAsJsonAsync($"reactions/{userId}/{postId}", reaction).Wait();
+            this.httpClient.PutAsJsonAsync($"{userId}/{postId}", reaction).Wait();
         }
     }
 }
