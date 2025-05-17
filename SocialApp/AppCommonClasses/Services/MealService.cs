@@ -81,14 +81,30 @@
 
         private int ResolveMealTypeIdentifier(string mealCategory)
         {
-            // Your mapping logic here
-            return 0;
+            return mealCategory?.ToLowerInvariant() switch
+            {
+                "breakfast" => 1,
+                "lunch" => 2,
+                "dinner" => 3,
+                "snack" => 4,
+                "dessert" => 5,
+                _ => 0 
+            };
         }
 
         private int ResolveCookingSkillIdentifier(string cookingSkillLevel)
         {
-            // Your mapping logic here
-            return 0;
+            return cookingSkillLevel?.ToLowerInvariant() switch
+            {
+                "beginner" => 1,
+                "easy" => 1,
+                "intermediate" => 2,
+                "medium" => 2,
+                "advanced" => 3,
+                "hard" => 3,
+                _ => 0 
+            };
         }
+
     }
 }

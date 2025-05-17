@@ -36,9 +36,9 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateMeal([FromBody] Meal meal)
         {
-            var result = await mealService.CreateMealAsync(meal);
-            if (result > 0)
-                return Ok(result);
+            var result = await mealService.CreateMealWithCookingLevelAsync(meal,"Default");
+            if (result)
+                return Ok(1);
             return BadRequest();
         }
 

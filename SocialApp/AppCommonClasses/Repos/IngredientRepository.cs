@@ -2,7 +2,6 @@
 {
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using SocialApp.Queries;
     using System;
     using System.Data;
     using System.Data.SqlClient;
@@ -15,7 +14,7 @@
         // Constructor with Dependency Injection for IDataLink
         public IngredientRepository()
         {
-            dataLink = DataLink.Instance;
+            this.dataLink = dataLink;
         }
 
         public IngredientRepository(IDataLink dataLink)
@@ -39,15 +38,21 @@
             if (result.Rows.Count > 0)
             {
                 var row = result.Rows[0];
-                return new Ingredient(
-                    Convert.ToInt32(row["i_id"]),
-                    row["i_name"].ToString(),
-                    row["calories"] == DBNull.Value ? 0 : Convert.ToSingle(row["calories"]),
-                    row["protein"] == DBNull.Value ? 0 : Convert.ToSingle(row["protein"]),
-                    row["carbohydrates"] == DBNull.Value ? 0 : Convert.ToSingle(row["carbohydrates"]),
-                    row["fat"] == DBNull.Value ? 0 : Convert.ToSingle(row["fat"]),
-                    row["fiber"] == DBNull.Value ? 0 : Convert.ToSingle(row["fiber"]),
-                    row["sugar"] == DBNull.Value ? 0 : Convert.ToSingle(row["sugar"]));
+                return new Ingredient
+                {
+                    Id = Convert.ToInt32(row["i_id"]),
+                    UserId = 0, // Assuming UserId is not provided in the query, defaulting to 0
+                    Name = row["i_name"].ToString(),
+                    Category = string.Empty, // Assuming Category is not provided in the query, defaulting to an empty string
+                    Calories = row["calories"] == DBNull.Value ? 0 : Convert.ToDouble(row["calories"]),
+                    Protein = row["protein"] == DBNull.Value ? 0 : Convert.ToDouble(row["protein"]),
+                    Carbs = row["carbohydrates"] == DBNull.Value ? 0 : Convert.ToDouble(row["carbohydrates"]),
+                    Fats = row["fat"] == DBNull.Value ? 0 : Convert.ToDouble(row["fat"]),
+                    Fiber = row["fiber"] == DBNull.Value ? 0 : Convert.ToDouble(row["fiber"]),
+                    Sugar = row["sugar"] == DBNull.Value ? 0 : Convert.ToDouble(row["sugar"])
+                };
+
+
             }
 
             return Ingredient.NoIngredient;

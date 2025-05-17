@@ -1,5 +1,10 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using AppCommonClasses.Services;
@@ -210,13 +215,13 @@
                 meal.Sugar = sugar; // Fixes SA1101
 
                 // Create the meal first
-                int mealId = await mealService.CreateMealAsync(meal); // Fixes SA1101
-                if (mealId > 0)
+                bool mealId = await mealService.CreateMealWithCookingLevelAsync(meal,selectedCookingLevel); // Fixes SA1101
+                if (mealId)
                 {
                     // Then add the meal-ingredient relationships
                     foreach (var ingredient in ingredients) // Fixes SA1101
                     {
-                        await mealService.AddIngredientToMealAsync(mealId, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
+                        await mealService.AddIngredientToMealAsync(meal.Id, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
                     }
                     return true;
                 }
