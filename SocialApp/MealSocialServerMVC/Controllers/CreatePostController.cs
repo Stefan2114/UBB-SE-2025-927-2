@@ -1,4 +1,5 @@
-﻿using AppCommonClasses.Models;
+﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using MealSocialServerMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
@@ -11,14 +12,11 @@ namespace MealSocialServerMVC.Controllers
     [Route("posts")]
     public class CreatePostController : Controller
     {
-        private readonly HttpClient httpClient;
+        private readonly IPostService postService;
 
-        public CreatePostController()
+        public CreatePostController(IPostService postService)
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:7106/posts/")
-            };
+            this.postService = postService;
         }
 
         [Route("create")]
@@ -28,7 +26,7 @@ namespace MealSocialServerMVC.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create(CreatePostViewModel model)
         {
             if (!ModelState.IsValid)
@@ -44,19 +42,17 @@ namespace MealSocialServerMVC.Controllers
                 GroupId = 0,    // hardcoded
                 CreatedDate = DateTime.UtcNow
             };
-
-            var response = await httpClient.PostAsJsonAsync("", newPost);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
+                this.postService.SavePost(newPost);
                 ViewBag.Message = "Post created successfully!";
-                ModelState.Clear();
-                return View(new CreatePostViewModel());
+                return View(model);
             }
-
-            var error = await response.Content.ReadAsStringAsync();
-            ModelState.AddModelError(string.Empty, $"❌ Server error: {error}");
-            return View(model);
+            catch (Exception ex)
+            {
+                ViewBag.Message = $"Error creating post: {ex.Message}";
+                return View(model);
+            }
         }
 
         public IActionResult Success()

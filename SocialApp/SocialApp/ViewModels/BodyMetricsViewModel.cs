@@ -25,12 +25,8 @@
 
         public BodyMetricsViewModel()
         {
-            // Create both required dependencies
-            var bodyMetricRepository = new BodyMetricRepositoryProxy();
-            var userService = new UserServiceProxy();
-
-            // Pass both dependencies to BodyMetricService
-            bodyMetricService = new BodyMetricService(bodyMetricRepository, userService);
+            // Create the service proxy directly
+            bodyMetricService = new BodyMetricServiceProxy();
             SubmitBodyMetricsCommand = new RelayCommand(GoNext);
         }
 
