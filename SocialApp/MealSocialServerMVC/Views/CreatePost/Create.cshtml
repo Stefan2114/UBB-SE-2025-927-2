@@ -21,6 +21,15 @@
         </div>
 }
 
+<!-- Top Navigation -->
+<div style="display: flex; justify-content: space-between; align-items: center; background-color: #2f333a; padding: 15px 30px; color: white; font-family: sans-serif;">
+    <!-- Home Button -->
+    <a href="/posts" style="text-decoration: none; color: #00ADB5; font-size: 1.2em;">Home</a>
+
+    <!-- Groups Button -->
+    <a href="/groups" style="text-decoration: none; color: #00ADB5; font-size: 1.2em;">Groups</a>
+</div>
+
 <form asp-action="Create" method="post" style="background-color: #2f333a; padding: 30px; border-radius: 15px; max-width: 800px; margin: auto; color: white; font-family: sans-serif;">
     <h2 style="color: #00ADB5;">Post Title</h2>
     <input asp-for="Title" placeholder="Enter your post title..." maxlength="50" class="form-control"
@@ -63,7 +72,7 @@
     <span asp-validation-for="Tag" class="text-danger"></span>
 
     <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 12px;">
-        <a asp-action="Index" class="btn btn-secondary" style="border-radius: 6px;">Cancel</a>
+        <a href="/posts" class="btn btn-secondary" style="border-radius: 6px;">Cancel</a>
         <button type="submit" class="btn" style="background-color: #00ADB5; color: white; border-radius: 6px;">Post</button>
     </div>
 </form>
