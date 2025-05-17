@@ -1,5 +1,7 @@
-﻿-- Meal Planner Tables
-use [SocialApp]
+﻿use dbISS
+
+SELECT * FROM gr
+
 
 create table goals (
 	g_id int primary key identity (1,1),
@@ -104,6 +106,10 @@ create table grocery_lists(
 	is_checked bit
 )
 
+CREATE TABLE meal_types ( 
+mt_id INT PRIMARY KEY IDENTITY(1,1),
+description VARCHAR(50) NOT NULL
+);
 
 CREATE TABLE meals (
     m_id INT PRIMARY KEY IDENTITY(1,1),
@@ -709,6 +715,24 @@ CREATE TABLE [dbo].[Posts](
 	[Tag] INT NULL
 )
 
+--ca sa schimbati sa fie del on cascade 
+SELECT name 
+FROM sys.foreign_keys 
+WHERE parent_object_id = OBJECT_ID('dbo.Posts') 
+  AND referenced_object_id = OBJECT_ID('dbo.Groups');
+
+
+  ALTER TABLE dbo.Posts
+DROP CONSTRAINT FK__Posts__GroupId__14270015;
+
+ALTER TABLE dbo.Posts
+ADD CONSTRAINT FK_Posts_Groups_GroupId
+FOREIGN KEY (GroupId) REFERENCES dbo.Groups(Id)
+ON DELETE CASCADE;
+
+
+
+
 select * from Posts
 
 CREATE TABLE [dbo].[Reactions](
@@ -719,6 +743,28 @@ CREATE TABLE [dbo].[Reactions](
 	PRIMARY KEY CLUSTERED ([UserId],[PostId]) 
 )
 
+--in order to alter the del to be on cascade
+
+SELECT 
+    f.name AS ForeignKey
+FROM 
+    sys.foreign_keys AS f
+INNER JOIN 
+    sys.foreign_key_columns AS fc 
+    ON f.OBJECT_ID = fc.constraint_object_id
+WHERE 
+    OBJECT_NAME(f.parent_object_id) = 'Reactions'
+    AND COL_NAME(fc.parent_object_id,fc.parent_column_id) = 'PostId'
+
+
+
+ALTER TABLE Reactions DROP CONSTRAINT FK__Reactions__PostI__17F790F9;
+
+ALTER TABLE Reactions
+ADD CONSTRAINT FK_Reactions_Posts_PostId
+FOREIGN KEY (PostId) REFERENCES Posts(Id)
+ON DELETE CASCADE;
+
 CREATE TABLE [dbo].[Comments](
 	[Id] BIGINT PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	[UserId] BIGINT NOT NULL REFERENCES[Users]([Id]),
@@ -726,12 +772,49 @@ CREATE TABLE [dbo].[Comments](
 	[Content] [nvarchar](250) NOT NULL,
 	[CreatedDate] DATETIME NOT NULL
 )
+--to alter to be del on cascade
+SELECT 
+    f.name AS ForeignKey
+FROM 
+    sys.foreign_keys AS f
+INNER JOIN 
+    sys.foreign_key_columns AS fc 
+    ON f.OBJECT_ID = fc.constraint_object_id
+WHERE 
+    OBJECT_NAME(f.parent_object_id) = 'Comments'
+    AND COL_NAME(fc.parent_object_id,fc.parent_column_id) = 'PostId'
+
+
+	ALTER TABLE Comments DROP CONSTRAINT FK__Comments__PostId__1BC821DD;
+
+
+	ALTER TABLE Comments
+ADD CONSTRAINT FK_Comments_Posts_PostId
+FOREIGN KEY (PostId) REFERENCES Posts(Id)
+ON DELETE CASCADE;
+
+
 
 CREATE TABLE [dbo].[GroupUsers](
 	[UserId] BIGINT NOT NULL REFERENCES[Users]([Id]),
 	[GroupId] BIGINT NOT NULL REFERENCES[Groups]([Id]),
 	PRIMARY KEY CLUSTERED ([UserId],[GroupId]) 
 )
+
+SELECT name 
+FROM sys.foreign_keys 
+WHERE parent_object_id = OBJECT_ID('dbo.GroupUsers') 
+  AND referenced_object_id = OBJECT_ID('dbo.Groups');
+
+
+  ALTER TABLE dbo.GroupUsers
+DROP CONSTRAINT FK__GroupUser__Group__1F98B2C1;
+
+ALTER TABLE dbo.GroupUsers
+ADD CONSTRAINT FK_GroupUsers_Groups_GroupId
+FOREIGN KEY (GroupId) REFERENCES dbo.Groups(Id)
+ON DELETE CASCADE;
+
 
 CREATE TABLE [dbo].[UserFollowers](
 	[UserId] BIGINT NOT NULL REFERENCES[Users]([Id]),
@@ -770,6 +853,12 @@ INSERT INTO [dbo].[Groups] ([Id], [Name], [Image], [Description], [AdminId]) VAL
     (6, 'CrossFit Community', NULL, 'For those passionate about CrossFit and intense workouts.', 6);
 
 SET IDENTITY_INSERT [dbo].[Groups] OFF
+
+UPDATE [dbo].[Groups] 
+SET [Description] = '' 
+WHERE [Description] IS NULL;
+SELECT * FROM Groups
+
 
 
 
