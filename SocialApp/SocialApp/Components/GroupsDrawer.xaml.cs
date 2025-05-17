@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI;
 using System.Collections.Generic;
 using AppCommonClasses.Models;
+using AppCommonClasses.Interfaces;
 using SocialApp.Services;
 using SocialApp.Repository;
 using SocialApp.Pages;
@@ -16,7 +17,7 @@ namespace SocialApp.Components
 {
     public sealed partial class GroupsDrawer : UserControl
     {
-        private GroupService groupService;
+        private IGroupService groupService;
         private Frame navigationFrame; // Frame for navigation
         private AppController controller;
 
@@ -30,10 +31,8 @@ namespace SocialApp.Components
         public GroupsDrawer()
         {
             this.InitializeComponent();
-            var groupRepository = new GroupRepository();
-            var userRepository = new UserServiceProxy();
+            groupService = new GroupServiceProxy();
             controller = App.Services.GetService<AppController>();
-            groupService = new GroupService(groupRepository, userRepository);
             CreateGroupButton.Click += CreateGroup_Click; // Handle click event
             LoadGroups();
         }
