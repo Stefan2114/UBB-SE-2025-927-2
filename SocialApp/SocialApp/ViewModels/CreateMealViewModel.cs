@@ -1,10 +1,11 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
+    using AppCommonClasses.Services;
     using CommunityToolkit.Mvvm.Input;
     using global::Windows.Storage;
     using Microsoft.UI.Xaml.Controls;
-    using SocialApp.Interfaces;
     using SocialApp.Services;
     using System;
     using System.Collections.ObjectModel;
@@ -31,9 +32,9 @@
         private int fiber;
         private int sugar;
 
-        public CreateMealViewModel()
+        public CreateMealViewModel(IMealRepository mealRepository, IIngredientRepository ingredientRepository)
         {
-            mealService = new MealService();
+            mealService = new MealService(mealRepository, ingredientRepository);
 
             // Initialize collections
             directions = new ObservableCollection<string>();
@@ -43,9 +44,10 @@
             GoBackCommand = new RelayCommand(OnGoBack);
             AddDirectionCommand = new RelayCommand(OnAddDirection);
             AddIngredientCommand = new RelayCommand(OnAddIngredient);
-            SelectMealTypeCommand = new RelayCommand<string?>(OnSelectMealType); // Fixes SA1101
-            SelectCookingLevelCommand = new RelayCommand<string?>(OnSelectCookingLevel); // Fixes SA1101
+            SelectMealTypeCommand = new RelayCommand<string?>(OnSelectMealType);
+            SelectCookingLevelCommand = new RelayCommand<string?>(OnSelectCookingLevel);
         }
+
 
         public string MealName
         {
