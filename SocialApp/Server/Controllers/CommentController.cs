@@ -10,11 +10,11 @@ namespace Server.Controllers
     [Route("comments")]
     public class CommentController : ControllerBase, ICommentController
     {
-        private readonly ICommentRepository commentRepository;
+        private readonly ICommentService _commentService;
 
-        public CommentController(ICommentRepository commentRepository)
+        public CommentController(ICommentService commentService)
         {
-            this.commentRepository = commentRepository;
+            _commentService = commentService;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Server.Controllers
         [HttpGet]
         public ActionResult<List<Comment>> GetAllComments()
         {
-            var comments = commentRepository.GetAllComments();
+            var comments = _commentService.GetAllComments();
             return Ok(comments);
         }
 
@@ -33,7 +33,7 @@ namespace Server.Controllers
         [HttpGet("{id:long}")]
         public ActionResult<Comment> GetCommentById(long id)
         {
-            var comment = commentRepository.GetCommentById(id);
+            var comment = _commentService.GetCommentById((int)id);
             if (comment == null)
             {
                 return NotFound($"Comment with ID {id} not found.");
@@ -47,7 +47,7 @@ namespace Server.Controllers
         [HttpGet("post/{postId:long}")]
         public ActionResult<List<Comment>> GetCommentsByPostId(long postId)
         {
-            var comments = commentRepository.GetCommentsByPostId(postId);
+            var comments = _commentService.GetCommentsByPostId(postId);
             return Ok(comments);
         }
 
@@ -62,8 +62,8 @@ namespace Server.Controllers
                 return BadRequest("Comment cannot be null.");
             }
 
-            commentRepository.SaveComment(comment);
-            return CreatedAtAction(nameof(GetCommentById), new { id = comment.Id }, comment);
+            var savedComment = _commentService.AddComment(comment.Content, comment.UserId, comment.PostId);
+            return CreatedAtAction(nameof(GetCommentById), new { id = savedComment.Id }, savedComment);
         }
 
         /// <summary>
@@ -77,15 +77,13 @@ namespace Server.Controllers
                 return BadRequest("Comment data cannot be null.");
             }
 
-            var existingComment = commentRepository.GetCommentById(commentId);
+            var existingComment = _commentService.GetCommentById((int)commentId);
             if (existingComment == null)
             {
                 return NotFound($"Comment with ID {commentId} not found.");
             }
 
-            existingComment.Content = commentDto.Content;
-            commentRepository.UpdateCommentContentById(commentId, commentDto.Content);
-
+            _commentService.UpdateComment(commentId, commentDto.Content);
             return NoContent();
         }
 
@@ -95,13 +93,13 @@ namespace Server.Controllers
         [HttpDelete("{commentId:long}")]
         public IActionResult DeleteComment(long commentId)
         {
-            var existingComment = commentRepository.GetCommentById(commentId);
+            var existingComment = _commentService.GetCommentById((int)commentId);
             if (existingComment == null)
             {
                 return NotFound($"Comment with ID {commentId} not found.");
             }
 
-            commentRepository.DeleteCommentById(commentId);
+            _commentService.DeleteComment(commentId);
             return NoContent();
         }
     }
