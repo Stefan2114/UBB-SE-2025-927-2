@@ -1,3 +1,4 @@
+using AppCommonClasses.Data;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Services;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,21 @@ builder.Services.AddDbContext<SocialAppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SocialAppDb")));
 
 // Add services to the container.
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IGroceryListRepository, GroceryListRepository>();
+builder.Services.AddScoped<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
+builder.Services.AddScoped<IGoalPageRepository, GoalPageRepository>();
+
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
+builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

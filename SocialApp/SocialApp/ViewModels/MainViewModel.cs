@@ -1,17 +1,17 @@
 namespace SocialApp.ViewModels
 {
-    using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
-    using SocialApp.Pages;
-    using SocialApp.Proxies;
-    using SocialApp.Queries;
-    using SocialApp.Services;
     using System;
     using System.ComponentModel;
     using System.Data;
     using System.Data.SqlClient;
     using System.Windows.Input;
-    using Server.Data;
+    using AppCommonClasses.Interfaces;
+    using Microsoft.Extensions.DependencyInjection;
+    using SocialApp.Interfaces;
+    using SocialApp.Pages;
+    using SocialApp.Proxies;
+    using SocialApp.Queries;
+    using SocialApp.Services;
 
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -257,17 +257,15 @@ namespace SocialApp.ViewModels
         private readonly ICalorieRepository calorieRepository;
         private readonly MacrosService macrosService;
 
-        public static int UserId { get; set; }
+        public static long UserId { get; set; }
 
         public ICommand RefreshMealsCommand { get; }
 
         [Obsolete]
         public MainViewModel()
         {
-
-
-            int number_userId = UserId;
-
+            long number_userId = UserId;
+            UserId = App.Services.GetService<AppController>().CurrentUser.Id;
             // Initialize WaterService
             waterService = new WaterIntakeService();
             waterService.AddUserIfNotExists(number_userId); // Ensure user exists in the water tracker table
@@ -355,7 +353,7 @@ namespace SocialApp.ViewModels
         }
 
         [Obsolete]
-        public void LoadLastMeals(int userId)
+        public void LoadLastMeals(long userId)
         {
             try
             {
@@ -428,7 +426,7 @@ namespace SocialApp.ViewModels
 
         private void GoGroceryList()
         {
-            NavigationService.Instance.NavigateTo(typeof(GroceryListPage));
+            NavigationService.Instance.NavigateTo<GroceryListPage>();
         }
 
         private void GoAddBreakfast()
@@ -474,29 +472,28 @@ namespace SocialApp.ViewModels
 
         public void UpdateWaterIntake(float amount)
         {
-            if (!float.TryParse(WaterIntake, out float currentIntake))
+            if (!float.TryParse(this.WaterIntake, out float currentIntake))
             {
                 currentIntake = 0; // Default to zero if parsing fails
             }
 
-            int number_userId = UserId;
+            long number_userId = UserId;
             float newIntake = currentIntake + amount;
-            waterService.UpdateWaterIntake(number_userId, newIntake);
-            WaterIntake = newIntake.ToString();
+            this.waterService.UpdateWaterIntake(number_userId, newIntake);
+            this.WaterIntake = newIntake.ToString();
         }
 
         public void RemoveWaterIntake(float amount)
         {
-            if (!float.TryParse(WaterIntake, out float currentIntake))
+            if (!float.TryParse(this.WaterIntake, out float currentIntake))
             {
                 currentIntake = 0; // Default to zero if parsing fails
             }
 
-            int number_userId = UserId;
+            long number_userId = UserId;
             float newIntake = Math.Max(0, currentIntake - amount); // Ensure we don't go below 0
-            waterService.UpdateWaterIntake(number_userId, newIntake);
-            WaterIntake = newIntake.ToString();
+            this.waterService.UpdateWaterIntake(number_userId, newIntake);
+            this.WaterIntake = newIntake.ToString();
         }
-
     }
 }

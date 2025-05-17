@@ -1,11 +1,11 @@
 namespace SocialApp.Pages
 {
+    using System;
+    using System.Diagnostics;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
     using SocialApp.ViewModels;
-    using System;
-    using System.Diagnostics;
 
     public sealed partial class GoalPage : Page
     {
@@ -33,8 +33,8 @@ namespace SocialApp.Pages
 
             if (e.Parameter is BodyMetricsViewModel metricsViewModel)
             {
-                Debug.WriteLine($"GoalPage received user: {metricsViewModel.FirstName} {metricsViewModel.LastName}");
-                this.goalPageViewModel.SetUserInfo(metricsViewModel.FirstName, metricsViewModel.LastName);
+                Debug.WriteLine($"GoalPage received user: {metricsViewModel.Username}");
+                this.goalPageViewModel.SetUserInfo(metricsViewModel.Username);
             }
         }
 

@@ -36,8 +36,8 @@ namespace SocialApp.Pages
 
             if (e.Parameter is GoalPageViewModel goalPageViewModel)
             {
-                Debug.WriteLine($"GoalPage received user: {goalPageViewModel.FirstName} {goalPageViewModel.LastName}");
-                this.viewModel.SetUserInfo(goalPageViewModel.FirstName, goalPageViewModel.LastName);
+                Debug.WriteLine($"GoalPage received user: {goalPageViewModel.Username}");
+                this.viewModel.SetUserInfo(goalPageViewModel.Username);
             }
         }
 

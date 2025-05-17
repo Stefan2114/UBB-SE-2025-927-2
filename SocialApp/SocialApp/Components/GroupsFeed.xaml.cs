@@ -23,10 +23,10 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
 
-            var userRepository = new UserRepository();
-            var postRepository = new PostRepositoryProxy();
+            var userRepository = new UserServiceProxy();
+            var postRepository = new PostServiceProxy();
             var groupRepository = new GroupRepository();
-            var postService = new PostService(postRepository, userRepository, groupRepository);
+            var postService = new PostServiceProxy();
             this.postViewModel = new PostViewModel(postService);
             
             LoadItems();

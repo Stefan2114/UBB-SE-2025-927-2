@@ -1,47 +1,45 @@
 ﻿using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 using SocialApp.Interfaces;
-using SocialApp.Queries;
-using System.Data;
-using System.Data.SqlClient;
+using SocialApp.Proxies;
 
 namespace SocialApp.Services
 {
     public class UserPageService : IUserPageService
     {
-        private readonly IDataLink _dataLink;
+        private IUserService userServiceProxy;
 
         public UserPageService()
         {
-            _dataLink = DataLink.Instance;
+            this.userServiceProxy = new UserServiceProxy();
         }
 
-        public UserPageService(IDataLink dataLink)
+        public long UserHasAnAccount(string name)
         {
-            _dataLink = dataLink;
+            User? user = this.userServiceProxy.GetUserByUsername(name);
+
+            return user == null ? -1 : user.Id;
         }
 
-        public int UserHasAnAccount(string name)
+        public long InsertNewUser(string name, string password)
         {
-            var parameters = new SqlParameter[]
+            User user = new User
             {
-                new SqlParameter("@u_name", name)
+                Username = name,
+                Password = password,
+                Height = 0,
+                Weight = 0,
+                TargetWeight = 0,
+                GoalId = null,
+                CookingSkillId = null,
+                DietaryPreferenceId = null,
+                AllergyId = null,
+                ActivityLevelId = null,
             };
 
-            int? userId = _dataLink.ExecuteScalar<int>("SELECT dbo.GetUserByName(@u_name)", parameters, false);
+            var createdUser = this.userServiceProxy.Save(user);
 
-            return userId.HasValue && userId.Value > 0 ? userId.Value : -1;
-        }
-
-        public int InsertNewUser(string name)
-        {
-            var parameters = new SqlParameter[]
-            {
-                new SqlParameter("@u_name", name),
-                new SqlParameter("@id", SqlDbType.Int) { Direction = ParameterDirection.Output }
-            };
-
-            _dataLink.ExecuteNonQuery("InsertNewUser", parameters);
-            return (int)parameters[1].Value;
+            return createdUser == null ? -1 : createdUser.Id;
         }
     }
 }

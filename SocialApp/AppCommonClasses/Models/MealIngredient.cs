@@ -1,8 +1,13 @@
-﻿namespace AppCommonClasses.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace AppCommonClasses.Models
 {
     public class MealIngredient
     {
+        [Key]
         public int IngredientId { get; set; }
+        public int MealId { get; set; }
 
         public float Quantity { get; set; }
 

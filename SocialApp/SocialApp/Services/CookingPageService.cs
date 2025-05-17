@@ -16,11 +16,10 @@
         }
 
         [Obsolete]
-        public void AddCookingSkill(string firstName, string lastName, string cookingDescription)
+        public void AddCookingSkill(string username, string cookingDescription)
         {
-            Debug.WriteLine($"Adding cooking skill {cookingDescription} for user {firstName} {lastName}");
 
-            int userId = CookingPageRepo.GetUserIdByName(firstName, lastName);
+            int userId = CookingPageRepo.GetUserIdByName(username);
             int skillId = CookingPageRepo.GetCookingSkillIdByDescription(cookingDescription);
 
             CookingPageRepo.UpdateUserCookingSkill(userId, skillId);

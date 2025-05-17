@@ -195,7 +195,7 @@ namespace SocialApp.ViewModels
                             PhotoLink = row["PhotoLink"].ToString(),
                             PreparationTime = Convert.ToInt32(row["PreparationTime"]),
                             Servings = Convert.ToInt32(row["Servings"]),
-                            ImagePath = row["PhotoLink"].ToString() // Using PhotoLink as ImagePath
+                            //ImagePath = row["PhotoLink"].ToString() // Using PhotoLink as ImagePath
                         };
 
                         AllMeals.Add(meal);

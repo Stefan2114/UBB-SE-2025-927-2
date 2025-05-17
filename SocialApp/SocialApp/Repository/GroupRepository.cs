@@ -6,15 +6,10 @@ namespace SocialApp.Repository
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using global::Windows.Networking.Sockets;
-    using Microsoft.Data.SqlClient;
-    using AppCommonClasses.Models;
-    using Group = AppCommonClasses.Models.Group;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
+    using Microsoft.Data.SqlClient;
+    using Group = AppCommonClasses.Models.Group;
 
 
     /// <summary>
@@ -22,9 +17,7 @@ namespace SocialApp.Repository
     /// </summary>
     public partial class GroupRepository : IGroupRepository
     {
-        private string loginString = "Data Source=LAPTOP-ANDU\\SQLEXPRESS;" +
-     "Initial Catalog=SocialApp;" +
-     "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private string loginString = "Server=DESKTOP-5A6VJDA;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 
@@ -95,7 +88,7 @@ namespace SocialApp.Repository
                     Id = reader.GetInt64(reader.GetOrdinal("Id")),
                     Username = reader.GetString(reader.GetOrdinal("Username")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                    Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
                     Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image")),
                 };
                 ans.Add(user);

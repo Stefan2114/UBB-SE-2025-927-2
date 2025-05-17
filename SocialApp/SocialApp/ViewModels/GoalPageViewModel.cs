@@ -1,11 +1,12 @@
 ﻿namespace SocialApp.ViewModels
 {
-    using CommunityToolkit.Mvvm.Input;
-    using SocialApp.Pages;
-    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
+    using CommunityToolkit.Mvvm.Input;
+    using SocialApp.Pages;
+    using SocialApp.Proxies;
+    using SocialApp.Services;
 
     internal class GoalPageViewModel
     {
@@ -54,40 +55,28 @@
             NavigationService.Instance.GoBack();
         }
 
-        private GoalPageService goalPageService = new GoalPageService();
+        private GoalPageService goalPageService = new GoalPageService(new GoalRepositoryProxy());
 
-        private string firstName = string.Empty;
-        private string lastName = string.Empty;
+        private string username = string.Empty;
 
-        public string FirstName
+        public string Username
         {
-            get => firstName;
+            get => username;
             set
             {
-                firstName = value;
-                OnPropertyChanged(nameof(FirstName));
+                username = value;
+                OnPropertyChanged(nameof(Username));
             }
         }
 
-        public string LastName
+        public void SetUserInfo(string username)
         {
-            get => lastName;
-            set
-            {
-                lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
-
-        public void SetUserInfo(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
+            this.Username = username;
         }
 
         public void GoNext()
         {
-            goalPageService.AddGoals(FirstName, LastName, SelectedGoal);
+            this.goalPageService.AddGoals(this.Username, this.SelectedGoal);
             NavigationService.Instance.NavigateTo(typeof(ActivityLevelPage), this);
         }
 

@@ -1,5 +1,5 @@
 ﻿-- Meal Planner Tables
-
+use [SocialApp]
 
 create table goals (
 	g_id int primary key identity (1,1),
@@ -45,7 +45,6 @@ CREATE TABLE Users (
     a_id INT FOREIGN KEY REFERENCES allergies(a_id),
     al_id INT FOREIGN KEY REFERENCES activity_levels(al_id)
 );
-
 INSERT INTO [dbo].[Users] (
     UserName, Email, PasswordHash, Image,
     u_height, u_weight, target_weight,
@@ -105,29 +104,97 @@ create table grocery_lists(
 	is_checked bit
 )
 
-create table meal_types(
-	mt_id int primary key identity(1,1),
-	m_description varchar(150) not null
-)
 
-create table meals(
-	m_id int primary key identity(1,1),
-	u_id BIGINT foreign key references Users(Id), --can be null
-	m_name varchar(150) not null,
-	recipe varchar(2000) not null,
-	cs_id int foreign key references cooking_skills(cs_id),
-	dp_id int foreign key references dietary_preferences(dp_id),
-	mt_id int foreign key references meal_types(mt_id),
-	preparation_time float,
-	servings float,
-	protein float,
-	calories float,
-	carbohydrates float,
-	fat float,
-	fiber float,
-	sugar float,	
-	photo_link varchar(1000)
+CREATE TABLE meals (
+    m_id INT PRIMARY KEY IDENTITY(1,1),
+    u_id BIGINT FOREIGN KEY REFERENCES Users(Id), -- Can be NULL
+    m_name VARCHAR(150) NOT NULL,
+    recipe VARCHAR(2000) NOT NULL,
+    cs_id INT FOREIGN KEY REFERENCES cooking_skills(cs_id),
+    dp_id INT FOREIGN KEY REFERENCES dietary_preferences(dp_id),
+    mt_id INT FOREIGN KEY REFERENCES meal_types(mt_id),
+    preparation_time FLOAT,
+    servings FLOAT,
+    protein INT,
+    calories INT,
+    carbohydrates INT,
+    fat INT,
+    fiber INT,
+    sugar INT,
+    photo_link VARCHAR(1000),
+);
+ALTER TABLE meals ADD Ingredients VARCHAR(2000);
+ALTER TABLE meals ADD Category VARCHAR(100);
+ALTER TABLE meals ADD CreatedAt DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE meals ADD CookingLevel VARCHAR(100);
+ALTER TABLE meals ADD Image VARBINARY(MAX);
+ALTER TABLE meals ADD ImagePath VARCHAR(1000);
+SELECT COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'meals';
+select * from ingredients
+select * from meals
+delete from meals where recipe = 'No directions provided'
+-- Entry 1
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
 )
+VALUES (
+    1, -- existing user ID
+    'Grilled Chicken Salad',
+    '1. Grill the chicken breast. 2. Toss with fresh greens and vinaigrette.',
+    2, -- existing cooking skill ID
+    3, -- existing dietary preference ID
+    1, -- existing meal type ID (e.g., lunch)
+    25.0,
+    2.0,
+    35,
+    400,
+    20,
+    15,
+    5,
+    6,
+    'https://example.com/images/grilled-chicken-salad.jpg',
+    'Chicken breast, lettuce, tomatoes, olive oil, lemon juice, salt, pepper',
+    'Salad',
+    GETDATE(),
+    'Intermediate',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\grilled-chicken-salad.jpg'
+);
+
+-- Entry 2
+INSERT INTO meals (
+    u_id, m_name, recipe, cs_id, dp_id, mt_id, preparation_time, servings,
+    protein, calories, carbohydrates, fat, fiber, sugar, photo_link,
+    Ingredients, Category, CreatedAt, CookingLevel, Image, ImagePath
+)
+VALUES (
+    2, -- existing user ID
+    'Vegan Lentil Soup',
+    '1. Sauté onions and garlic. 2. Add lentils, carrots, and broth. Simmer until cooked.',
+    1, -- beginner skill level
+    2, -- vegan preference
+    2, -- dinner
+    45.0,
+    4.0,
+    18,
+    350,
+    40,
+    8,
+    10,
+    4,
+    'https://example.com/images/vegan-lentil-soup.jpg',
+    'Lentils, carrots, onions, garlic, vegetable broth, spices',
+    'Soup',
+    GETDATE(),
+    'Beginner',
+    CONVERT(VARBINARY(MAX), 0xFFD8FFE0), -- placeholder binary image
+    'C:\images\vegan-lentil-soup.jpg'
+);
+
 
 create table meal_ingredient(
 	m_id int foreign key references meals(m_id),
@@ -570,6 +637,8 @@ END
 
 --Pana aici
 
+select * from goals
+
 insert into goals(g_description) values 
 ('Lose weight'),
 ('Gain weight'),
@@ -638,6 +707,8 @@ CREATE TABLE [dbo].[Posts](
 	[GroupId] BIGINT REFERENCES [Groups](Id) NOT NULL,
 	[Tag] INT NULL
 )
+
+select * from Posts
 
 CREATE TABLE [dbo].[Reactions](
 	[UserId] BIGINT NOT NULL REFERENCES [Users]([Id]),
@@ -947,3 +1018,5 @@ VALUES
 update [dbo].[Posts]
 set GroupId = 0
 where GroupId is null
+
+select * from posts

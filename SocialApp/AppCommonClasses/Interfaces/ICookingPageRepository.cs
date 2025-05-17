@@ -2,7 +2,7 @@
 {
     public interface ICookingPageRepository
     {
-        int GetUserIdByName(string firstName, string lastName);
+        int GetUserIdByName(string username);
 
         int GetCookingSkillIdByDescription(string description);
 

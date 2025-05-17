@@ -1,16 +1,16 @@
 namespace SocialApp.Components
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml;
+    using System.Collections.Generic;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Repository;
     using SocialApp.Services;
-    using System.Collections.Generic;
-    using SocialApp.Proxies;
-    using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Represents a user control for displaying a follower in the social app.
@@ -23,9 +23,7 @@ namespace SocialApp.Components
 
         private readonly Frame navigationFrame;
 
-        private IUserRepository userRepository;
-
-        private IUserService userService;
+        private IUserService userServiceProxy;
 
         private IPostRepository postRepository;
 
@@ -44,11 +42,9 @@ namespace SocialApp.Components
         {
             this.InitializeComponent();
 
-            userRepository = new UserRepository();
-            userService = new UserService(userRepository);
-            postRepository = new PostRepositoryProxy();
+            userServiceProxy = new UserServiceProxy();
             groupRepository = new GroupRepository();
-            postService = new PostService(postRepository, userRepository, groupRepository);
+            postService = new PostServiceProxy();
 
             this.user = user;
             this.controller = App.Services.GetService<AppController>();
@@ -64,7 +60,7 @@ namespace SocialApp.Components
         /// <returns>True if the user is followed; otherwise, false.</returns>
         private bool IsFollowed()
         {
-            List<User> following = userService.GetUserFollowing(controller.CurrentUser.Id);
+            List<User> following = userServiceProxy.GetUserFollowing(controller.CurrentUser.Id);
             foreach (User user in following)
             {
                 if (user.Id == this.user.Id) return true;
@@ -92,11 +88,11 @@ namespace SocialApp.Components
             Button.Content = Button.Content.ToString() == "Follow" ? "Unfollow" : "Follow";
             if (!IsFollowed())
             {
-                userService.FollowUserById(controller.CurrentUser.Id, user.Id);
+                userServiceProxy.FollowUserById(controller.CurrentUser.Id, user.Id);
             }
             else
             {
-                userService.UnfollowUserById(controller.CurrentUser.Id, user.Id);
+                userServiceProxy.UnfollowUserById(controller.CurrentUser.Id, user.Id);
             }
         }
     }

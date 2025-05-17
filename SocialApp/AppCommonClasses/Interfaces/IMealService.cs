@@ -12,8 +12,6 @@
             
         Task<Ingredient?> RetrieveIngredientByNameAsync(string ingredientName);
 
-        Task<int> CreateMealAsync(Meal mealToCreate);
-
         Task<bool> AddIngredientToMealAsync(int mealIdentifier, int ingredientIdentifier, float ingredientQuantity);
     }
 }

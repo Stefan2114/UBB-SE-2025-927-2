@@ -1,16 +1,15 @@
 ﻿namespace SocialApp.Repository
 {
     using System.Collections.Generic;
-    using Microsoft.Data.SqlClient;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Interfaces;
+    using Microsoft.Data.SqlClient;
 
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
 
-        private const string ConnectionString = "Data Source=PAUL;" +
-            "Initial Catalog=MealSocialApp;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+        private const string ConnectionString = "Data Source=DESKTOP-S99JALT;" +
+            "Initial Catalog=SocialApp" +
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         private readonly SqlConnection connection;
 
@@ -163,7 +162,7 @@
             {
                 command.Parameters.AddWithValue("@Username", user.Username);
                 command.Parameters.AddWithValue("@Email", user.Email);
-                command.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
+                command.Parameters.AddWithValue("@PasswordHash", user.Password);
                 command.Parameters.AddWithValue("@Image", user.Image);
                 command.ExecuteNonQuery();
             }
@@ -171,7 +170,7 @@
             this.connection.Close();
         }
 
-        public void UpdateById(long userId, string username, string email, string passwordHash, string image)
+        public void UpdateById(long userId, string username, string email, string hashPassword, string image)
         {
             this.connection.Open();
             using (var command = new SqlCommand(
@@ -181,8 +180,7 @@
                 command.Parameters.AddWithValue("@UserId", userId);
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@PasswordHash", passwordHash);
-                command.Parameters.AddWithValue("@Image", image);
+
                 command.ExecuteNonQuery();
             }
 
@@ -208,9 +206,10 @@
                 Id = reader.GetInt64(reader.GetOrdinal("Id")),
                 Username = reader.GetString(reader.GetOrdinal("Username")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
-                PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
                 Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image"))
             };
         }
+
     }
 }
