@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Server.Controllers;
 using Server.Interfaces;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SocialAppDbContext>(options =>
@@ -26,6 +24,7 @@ builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<IGroupService, GroupService>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();

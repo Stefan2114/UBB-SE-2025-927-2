@@ -29,6 +29,7 @@ builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<MealSocialServerMVC.Services.GroupApiService>();
 
 var app = builder.Build();
 
