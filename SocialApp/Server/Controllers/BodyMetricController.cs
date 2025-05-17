@@ -1,19 +1,22 @@
+using AppCommonClasses.DTOs;
+using AppCommonClasses.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Diagnostics;
+
 namespace Server.Controllers
 {
-    using AppCommonClasses.Interfaces;
-    using Microsoft.AspNetCore.Mvc;
-    using Server.DTOs;
-    using Server.Interfaces;
-
     [ApiController]
     [Route("bodymetrics")]
-    public class BodyMetricController : ControllerBase, IBodyMetricController
+    public class BodyMetricController : ControllerBase
     {
         private readonly IBodyMetricRepository bodyMetricRepository;
+        private readonly IUserService userService;
 
-        public BodyMetricController(IBodyMetricRepository bodyMetricRepository)
+        public BodyMetricController(IBodyMetricRepository bodyMetricRepository, IUserService userService)
         {
             this.bodyMetricRepository = bodyMetricRepository;
+            this.userService = userService;
         }
 
         [HttpPut("user/{userId}")]
