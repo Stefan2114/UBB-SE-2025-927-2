@@ -1,0 +1,73 @@
+@model MealSocialServerMVC.Models.CaloriesViewModel
+@{
+    ViewData["Title"] = "Calorie Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Calorie Dashboard</h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 text-center">
+                            <!-- Calorie Circle -->
+                            <div class="position-relative d-flex justify-content-center align-items-center mb-3">
+                                <div class="progress rounded-circle" style="height: 150px; width: 150px;">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: @Model.CompletionPercentage%;" 
+                                         aria-valuenow="@Model.CompletionPercentage" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <div class="position-absolute">
+                                    <h3 class="mb-0">@Model.RemainingCalories</h3>
+                                    <small>Remaining</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Goal</h5>
+                                            <p class="card-text display-6">@Model.DailyGoal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Food</h5>
+                                            <p class="card-text display-6">@Model.CaloriesConsumed</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Exercise</h5>
+                                            <p class="card-text display-6">@Model.CaloriesBurned</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

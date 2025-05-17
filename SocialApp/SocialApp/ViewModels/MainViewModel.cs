@@ -6,6 +6,7 @@ namespace SocialApp.ViewModels
     using System.Data.SqlClient;
     using System.Windows.Input;
     using AppCommonClasses.Interfaces;
+    using MealSocialServerMVC.Proxies;
     using Microsoft.Extensions.DependencyInjection;
     using SocialApp.Interfaces;
     using SocialApp.Pages;
@@ -271,8 +272,7 @@ namespace SocialApp.ViewModels
             waterService.AddUserIfNotExists(number_userId); // Ensure user exists in the water tracker table
 
             // Initialize CalorieService
-            calorieRepository = new CalorieRepositoryProxy();
-            calorieService = new CalorieService(calorieRepository);
+            calorieService = new CalorieServiceProxy();
 
             // Initialize MacrosService
             macrosService = new MacrosService();

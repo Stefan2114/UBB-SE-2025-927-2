@@ -1,5 +1,6 @@
 namespace Server.Interfaces
 {
+    using AppCommonClasses.DTOs;
     using Microsoft.AspNetCore.Mvc;
     using Server.DTOs;
 
