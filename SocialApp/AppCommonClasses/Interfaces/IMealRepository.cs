@@ -5,8 +5,8 @@
 
     public interface IMealRepository
     {
-        void CreateMealAsync(Meal meal);
-        void AddMealIngredientAsync(int mealId, int ingredientId, float quantity);
-        List<Meal> GetAllMeals();
+        Task<int> CreateMealAsync(Meal meal, int cookingSkillId, int mealTypeId);
+        Task<int> AddMealIngredientAsync(int mealId, int ingredientId, float quantity);
+        Task<List<Meal>> GetAllMealsAsync(); 
     }
 }

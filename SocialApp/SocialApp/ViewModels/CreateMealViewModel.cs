@@ -5,11 +5,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
+    using AppCommonClasses.Services;
     using CommunityToolkit.Mvvm.Input;
     using global::Windows.Storage;
     using Microsoft.UI.Xaml.Controls;
-    using SocialApp.Interfaces;
     using SocialApp.Services;
 
     public class CreateMealViewModel : ViewModelBase
@@ -31,9 +32,9 @@
         private int fiber;
         private int sugar;
 
-        public CreateMealViewModel()
+        public CreateMealViewModel(IMealRepository mealRepository, IIngredientRepository ingredientRepository)
         {
-            mealService = new MealService();
+            mealService = new MealService(mealRepository, ingredientRepository);
 
             // Initialize collections
             directions = new ObservableCollection<string>();
@@ -43,9 +44,10 @@
             GoBackCommand = new RelayCommand(OnGoBack);
             AddDirectionCommand = new RelayCommand(OnAddDirection);
             AddIngredientCommand = new RelayCommand(OnAddIngredient);
-            SelectMealTypeCommand = new RelayCommand<string?>(OnSelectMealType); // Fixes SA1101
-            SelectCookingLevelCommand = new RelayCommand<string?>(OnSelectCookingLevel); // Fixes SA1101
+            SelectMealTypeCommand = new RelayCommand<string?>(OnSelectMealType);
+            SelectCookingLevelCommand = new RelayCommand<string?>(OnSelectCookingLevel);
         }
+
 
         public string MealName
         {
@@ -213,13 +215,13 @@
                 meal.Sugar = sugar; // Fixes SA1101
 
                 // Create the meal first
-                int mealId = await mealService.CreateMealAsync(meal); // Fixes SA1101
-                if (mealId > 0)
+                bool mealId = await mealService.CreateMealWithCookingLevelAsync(meal,selectedCookingLevel); // Fixes SA1101
+                if (mealId)
                 {
                     // Then add the meal-ingredient relationships
                     foreach (var ingredient in ingredients) // Fixes SA1101
                     {
-                        await mealService.AddIngredientToMealAsync(mealId, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
+                        await mealService.AddIngredientToMealAsync(meal.Id, ingredient.IngredientId, ingredient.Quantity); // Fixes SA1101
                     }
                     return true;
                 }
