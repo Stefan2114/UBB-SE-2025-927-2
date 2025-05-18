@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Net.Http;
     using System.Windows.Input;
     using AppCommonClasses.Models;
+    using AppCommonClasses.Services;
     using global::Windows.UI;
     using Microsoft.Data.SqlClient;
     using Microsoft.Extensions.Configuration;
@@ -11,6 +13,7 @@
     using Microsoft.UI;
     using Microsoft.UI.Xaml.Media;
     using SocialApp.Pages;
+    using SocialApp.Proxies;
     using SocialApp.Services;
 
     public class AddFoodPageViewModel : ViewModelBase
@@ -86,7 +89,7 @@
 
         public static long UserId { get => userId; set => userId = value; }
 
-        private readonly MacrosService macrosService;
+        private readonly IMacrosService macrosService;
 
         // FOR BACK COMMAND <-
         public AddFoodPageViewModel()
@@ -109,7 +112,7 @@
             long number_userId = userId;
 
             // Initialize MacrosService
-            macrosService = new MacrosService();
+            macrosService = new MacrosServiceProxy(new HttpClient { BaseAddress = new Uri("https://localhost:7106/") });
             // Initialize macros values from database
             TotalProtein = macrosService.GetProteinIntake(number_userId).ToString();
             TotalCarbohydrates = macrosService.GetCarbohydratesIntake(number_userId).ToString();
