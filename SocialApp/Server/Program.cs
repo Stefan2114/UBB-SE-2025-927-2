@@ -22,9 +22,15 @@ builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
+
+
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IMealService, MealService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
