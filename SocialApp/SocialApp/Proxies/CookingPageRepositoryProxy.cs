@@ -18,15 +18,15 @@ namespace SocialApp.Proxies
         public CookingPageRepositoryProxy()
         {
             this.httpClient = new HttpClient();
-            this.httpClient.BaseAddress = new Uri("https://localhost:5281/cooking/");
+            this.httpClient.BaseAddress = new Uri("https://localhost:7106/cooking/");
         }
 
-        public CookingPage GetByUserId(int userId)
+        public CookingPage GetByUserId(long userId)
         {
             return this.httpClient.GetFromJsonAsync<CookingPage>($"user/{userId}").Result;
         }
 
-        public void UpdateUserCookingSkill(int userId, int cookingSkillId)
+        public void UpdateUserCookingSkill(long userId, int cookingSkillId)
         {
             this.httpClient.PutAsync($"user/{userId}/skill/{cookingSkillId}", null).Wait();
         }

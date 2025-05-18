@@ -7,8 +7,8 @@
 
     public class UserRepository : IUserRepository
     {
-        private const string ConnectionString = "Data Source=vm;" +
-            "Initial Catalog=team_babes;" +
+        private const string ConnectionString = "Data Source=DESKTOP-B33HRLE;" +
+            "Initial Catalog=Meal_Planner_Merge;" +
             "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
         private readonly SqlConnection connection;
 

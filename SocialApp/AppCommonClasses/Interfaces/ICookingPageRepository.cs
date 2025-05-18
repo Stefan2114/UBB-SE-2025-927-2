@@ -4,8 +4,8 @@ namespace AppCommonClasses.Interfaces
 {
     public interface ICookingPageRepository
     {
-        CookingPage GetByUserId(int userId);
-        void UpdateUserCookingSkill(int userId, int cookingSkillId);
+        CookingPage GetByUserId(long userId);
+        void UpdateUserCookingSkill(long userId, int cookingSkillId);
         CookingSkill GetCookingSkillByDescription(string description);
     }
 }

@@ -17,13 +17,13 @@ namespace Server.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public ActionResult<CookingPage> GetByUserId(int userId)
+        public ActionResult<CookingPage> GetByUserId(long userId)
         {
             return this.cookingPageRepository.GetByUserId(userId);
         }
 
         [HttpPut("user/{userId}/skill/{cookingSkillId}")]
-        public IActionResult UpdateUserCookingSkill(int userId, int cookingSkillId)
+        public IActionResult UpdateUserCookingSkill(long userId, int cookingSkillId)
         {
             this.cookingPageRepository.UpdateUserCookingSkill(userId, cookingSkillId);
             return Ok();

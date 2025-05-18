@@ -16,6 +16,7 @@ namespace Server.Data
         public DbSet<GroupUser> GroupUsers { get; set; } = default!;
         public DbSet<CookingPage> CookingPages { get; set; } = default!;
         public DbSet<CookingSkill> CookingSkills { get; set; } = default!;
+        public DbSet<UserModel> Users { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
