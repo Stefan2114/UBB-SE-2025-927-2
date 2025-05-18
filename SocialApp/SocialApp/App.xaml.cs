@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Repos;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using SocialApp.Interfaces;
+using SocialApp.Pages;
+using SocialApp.Proxies;
 using SocialApp.Services;
 using SocialApp.ViewModels;
-using System;
 
 namespace SocialApp
 {
@@ -23,6 +28,14 @@ namespace SocialApp
             this.UnhandledException += OnUnhandledException;
             var services = new ServiceCollection();
             services.AddSingleton<AppController>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IPostRepository, PostRepository>();
+            services.AddSingleton<IPostService, PostServiceProxy>();
+            services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
+            services.AddSingleton<IGroceryListService, GroceryListService>();
+            services.AddTransient<GroceryViewModel>();
+            services.AddTransient<GroceryListPage>();
+            services.AddTransient<MainPage>();
             Services = services.BuildServiceProvider();
         }
 

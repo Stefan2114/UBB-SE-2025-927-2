@@ -1,24 +1,20 @@
 ﻿namespace SocialApp.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Threading.Tasks;
-    using AppCommonClasses.Data;
     using AppCommonClasses.Models;
-    using AppCommonClasses.Repos;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
-    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using SocialApp.Interfaces;
-    using SocialApp.Proxies;
-    using SocialApp.Services;
 
     public class GroceryViewModel : ObservableObject
     {
-        private static int userId;
+        private static long userId;
         private readonly IGroceryListService service;
-        public ObservableCollection<SectionModel> sections;
 
-        public static int UserId
+        public static long UserId
         {
             get => userId;
             set => userId = value;
@@ -32,10 +28,19 @@
 
         public string newGroceryIngredientName;
 
+        private ObservableCollection<SectionModel> sections;
+
         public ObservableCollection<SectionModel> Sections
         {
-            get => this.sections;
-            set => this.SetProperty(ref this.sections, value);
+            get => sections;
+            set
+            {
+                if (sections != value)
+                {
+                    sections = value;
+                    OnPropertyChanged(nameof(Sections));
+                }
+            }
         }
 
         public string NewGroceryIngredientName
@@ -46,16 +51,12 @@
 
         public RelayCommand<GroceryIngredient> AddGroceryIngredientCommand { get; }
 
-        public GroceryViewModel()
+        public GroceryViewModel(IGroceryListService groceryListService)
         {
-            var options = new DbContextOptionsBuilder<SocialAppDbContext>()
-    .UseSqlServer("Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;")
-    .Options;
+            UserId = App.Services.GetService<AppController>().CurrentUser.Id;
 
-            var dbContext = new SocialAppDbContext(options);
-            var repo = new GroceryListRepository(dbContext);
+            this.service = groceryListService;
 
-            this.service = new GroceryListService(new GroceryListRepositoryProxy(), repo);
             this.AddGroceryIngredientCommand = new RelayCommand<GroceryIngredient>(this.AddGroceryIngredient);
             this.MostFrequentIngredients = new ObservableCollection<GroceryIngredient>
             {
@@ -69,14 +70,8 @@
                 new GroceryIngredient { Name = "Salt" },
                 new GroceryIngredient { Name = "Pepper" },
             };
-            this.Sections = new ObservableCollection<SectionModel>
-            {
-                new SectionModel { Title = "My List" },
-            };
-            this.sections = new();
-            this.newGroceryIngredientName = "";
-
-            this.LoadUserGroceryList();
+            this.newGroceryIngredientName = string.Empty;
+            _ = this.LoadUserGroceryList();
         }
 
         public async void AddGroceryIngredient(GroceryIngredient? ingredient = null)
@@ -109,6 +104,12 @@
         {
             var ingredientsFromDb = await this.service.GetIngredientsForUser(userId);
 
+            foreach (var item in ingredientsFromDb)
+            {
+                item.PropertyChanged += OnIngredientPropertyChanged;
+            }
+
+
             this.Sections = new ObservableCollection<SectionModel>
             {
                 new SectionModel
@@ -118,7 +119,15 @@
                 },
             };
 
-            this.OnPropertyChanged(nameof(this.Sections));
+            OnPropertyChanged(nameof(Sections));
+        }
+
+        private void OnIngredientPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is GroceryIngredient ingredient && e.PropertyName == nameof(GroceryIngredient.IsChecked))
+            {
+                _ = this.service.UpdateIsChecked(ingredient.Id, ingredient.IngredientId, ingredient.IsChecked);
+            }
         }
     }
 }

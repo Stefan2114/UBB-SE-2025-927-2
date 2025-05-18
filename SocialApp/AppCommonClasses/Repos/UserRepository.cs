@@ -6,7 +6,6 @@ namespace AppCommonClasses.Repos
     using AppCommonClasses.DbRelationshipEntities;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Repository for managing user-related operations in the database.
@@ -63,9 +62,9 @@ namespace AppCommonClasses.Repos
             return dbContext.Users.First(u => u.Id == id);
         }
 
-        public User GetByUsername(string username)
+        public User? GetByUsername(string username)
         {
-            return dbContext.Users.First(u => u.Username == username);
+            return dbContext.Users.FirstOrDefault(u => u.Username == username);
         }
 
         public List<User> GetUserFollowers(long id)
@@ -74,7 +73,6 @@ namespace AppCommonClasses.Repos
             List<User> userFollowers = new List<User>();
             List<UserFollower> followers = dbContext.UserFollowers
                 .Where(uf => uf.UserId == id)
-                .Include(uf => uf.FollowerId)
                 .ToList();
             foreach (UserFollower userFollower in followers)
             {
@@ -93,7 +91,6 @@ namespace AppCommonClasses.Repos
             List<User> userFollowing = new List<User>();
             List<UserFollower> following = dbContext.UserFollowers
                 .Where(uf => uf.FollowerId == id)
-                .Include(uf => uf.UserId)
                 .ToList();
             foreach (UserFollower userFollower in following)
             {
@@ -106,10 +103,16 @@ namespace AppCommonClasses.Repos
             return userFollowing;
         }
 
-        public void Save(User entity)
+        public User Save(User entity)
         {
+            if (dbContext.Users.FirstOrDefault(u => u.Username.Equals(entity.Username)) != null)
+            {
+                throw new Exception("User already exists");
+            }
+
             dbContext.Users.Add(entity);
             dbContext.SaveChanges();
+            return entity;
         }
 
         public void Unfollow(long userId, long whoToUnfollowId)
@@ -130,7 +133,7 @@ namespace AppCommonClasses.Repos
             {
                 user.Username = username;
                 user.Email = email;
-                user.PasswordHash = hashPassword;
+                user.Password = hashPassword;
                 user.Image = image;
                 dbContext.SaveChanges();
             }

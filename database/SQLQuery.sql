@@ -709,6 +709,8 @@ CREATE TABLE [dbo].[Posts](
 	[Tag] INT NULL
 )
 
+select * from Posts
+
 CREATE TABLE [dbo].[Reactions](
 	[UserId] BIGINT NOT NULL REFERENCES [Users]([Id]),
 	[PostId] BIGINT NOT NULL REFERENCES [Posts]([Id]),

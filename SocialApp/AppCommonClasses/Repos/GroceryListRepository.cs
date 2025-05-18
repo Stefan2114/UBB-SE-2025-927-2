@@ -20,6 +20,13 @@
         public async Task<List<GroceryIngredient>> GetIngredientsForUser(long userId)
         {
             var ingredients = await dbContext.GroceryIngredients.Where(i => i.Id == userId).ToListAsync();
+            foreach (var ingredient in ingredients)
+            {
+                var ing = await dbContext.Ingredient.Where(i => i.Id == ingredient.IngredientId).FirstOrDefaultAsync();
+                ingredient.Name = ing != null ? ing.Name : "No name";
+                ingredient.Id = ing != null ? userId : -1;
+            }
+
             return ingredients;
         }
 
@@ -30,7 +37,7 @@
             if (toUpdate != null)
             {
                 toUpdate.IsChecked = isChecked;
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
             }
         }
 
@@ -50,19 +57,15 @@
                 await dbContext.SaveChangesAsync();
             }
 
-            bool exists = dbContext.Ingredient.Any(gl => gl.UserId == userId && gl.Id == result.Id);
 
-            if (!exists)
+            var groceryItem = new GroceryIngredient
             {
-                var groceryItem = new GroceryIngredient
-                {
-                    Id = userId,
-                    IngredientId = result.Id,
-                    IsChecked = false,
-                };
-                dbContext.GroceryIngredients.Add(groceryItem);
-                dbContext.SaveChanges();
-            }
+                Id = userId,
+                IngredientId = result.Id,
+                IsChecked = ingredient.IsChecked,
+            };
+            dbContext.GroceryIngredients.Add(groceryItem);
+            dbContext.SaveChanges();
 
             return ingredient;
         }

@@ -1,16 +1,15 @@
 ﻿namespace SocialApp.Repository
 {
-    using AppCommonClasses.Interfaces;
+    using System.Collections.Generic;
     using AppCommonClasses.Models;
     using Microsoft.Data.SqlClient;
-    using System.Collections.Generic;
 
     public class UserRepository
     {
 
-        private const string ConnectionString = "Data Source=vm;" +
-            "Initial Catalog=MealSocialApp;" +
-            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True"; 
+        private const string ConnectionString = "Data Source=DESKTOP-S99JALT;" +
+            "Initial Catalog=SocialApp" +
+            "Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         private readonly SqlConnection connection;
 
@@ -163,7 +162,7 @@
             {
                 command.Parameters.AddWithValue("@Username", user.Username);
                 command.Parameters.AddWithValue("@Email", user.Email);
-                command.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
+                command.Parameters.AddWithValue("@PasswordHash", user.Password);
                 command.Parameters.AddWithValue("@Image", user.Image);
                 command.ExecuteNonQuery();
             }
@@ -207,7 +206,7 @@
                 Id = reader.GetInt64(reader.GetOrdinal("Id")),
                 Username = reader.GetString(reader.GetOrdinal("Username")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
-                PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
                 Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image"))
             };
         }

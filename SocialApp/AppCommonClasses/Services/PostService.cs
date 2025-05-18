@@ -1,4 +1,4 @@
-﻿namespace SocialApp.Services
+﻿namespace AppCommonClasses.Services
 {
 
     using System;
@@ -6,7 +6,6 @@
     using AppCommonClasses.Models;
     using AppCommonClasses.Enums;
     using AppCommonClasses.Interfaces;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Service for managing posts.
@@ -14,7 +13,7 @@
     public class PostService : IPostService
     {
         private IPostRepository postRepository;
-        private IUserRepository userRepository;
+        private IUserService userService;
         private IGroupRepository groupRepository;
 
         /// <summary>
@@ -23,10 +22,10 @@
         /// <param name="postRepository">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
         /// <param name="groupRepository">The group repository.</param>
-        public PostService(IPostRepository postRepository, IUserRepository userRepository, IGroupRepository groupRepository)
+        public PostService(IPostRepository postRepository, IUserService userRepository, IGroupRepository groupRepository)
         {
             this.postRepository = postRepository;
-            this.userRepository = userRepository;
+            this.userService = userRepository;
             this.groupRepository = groupRepository;
         }
 
@@ -46,7 +45,7 @@
             {
                 throw new Exception("Post title cannot be empty");
             }
-            if (this.userRepository.GetById(userId) == null)
+            if (this.userService.GetById(userId) == null)
             {
                 throw new Exception("User does not exist");
             }
@@ -148,6 +147,11 @@
         public List<Post> GetPostsGroupsFeed(long userId)
         {
             return this.postRepository.GetPostsGroupsFeed(userId);
+        }
+
+        public void SavePost(Post entity)
+        {
+            this.postRepository.SavePost(entity);
         }
     }
 }

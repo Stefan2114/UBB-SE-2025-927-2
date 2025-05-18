@@ -4,11 +4,11 @@
 
 namespace SocialApp.Repository
 {
+    using System;
+    using System.Collections.Generic;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
     using Microsoft.Data.SqlClient;
-    using System;
-    using System.Collections.Generic;
     using Group = AppCommonClasses.Models.Group;
 
 
@@ -17,7 +17,7 @@ namespace SocialApp.Repository
     /// </summary>
     public partial class GroupRepository : IGroupRepository
     {
-        private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string loginString = "Server=DESKTOP-5A6VJDA;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 
@@ -88,7 +88,7 @@ namespace SocialApp.Repository
                     Id = reader.GetInt64(reader.GetOrdinal("Id")),
                     Username = reader.GetString(reader.GetOrdinal("Username")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                    Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
                     Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? string.Empty : reader.GetString(reader.GetOrdinal("Image")),
                 };
                 ans.Add(user);

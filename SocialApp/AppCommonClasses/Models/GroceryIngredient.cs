@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -8,7 +7,6 @@ namespace AppCommonClasses.Models
     [Table("grocery_lists")]
     public class GroceryIngredient : ObservableObject
     {
-        [Key]
         [Column("u_id")]
         [JsonIgnore]
         public long Id { get; set; }

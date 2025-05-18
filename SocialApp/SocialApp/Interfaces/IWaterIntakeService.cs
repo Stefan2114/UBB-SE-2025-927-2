@@ -1,19 +1,19 @@
 ﻿namespace SocialApp.Interfaces
 {
-    internal interface IWaterIntakeService
+    public interface IWaterIntakeService
     {
-        void AddUserIfNotExists(int userId);
+        void AddUserIfNotExists(long userId);
 
-        float GetWaterIntake(int userId);
+        float GetWaterIntake(long userId);
 
-        void RemoveWater300(int userId);
+        void RemoveWater300(long userId);
 
-        void RemoveWater400(int userId);
+        void RemoveWater400(long userId);
 
-        void RemoveWater500(int userId);
+        void RemoveWater500(long userId);
 
-        void RemoveWater750(int userId);
+        void RemoveWater750(long userId);
 
-        void UpdateWaterIntake(int userId, float newIntake);
+        void UpdateWaterIntake(long userId, float newIntake);
     }
 }

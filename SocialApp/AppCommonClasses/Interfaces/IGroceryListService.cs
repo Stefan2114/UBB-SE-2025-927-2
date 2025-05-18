@@ -6,10 +6,10 @@
 
     public interface IGroceryListService
     {
-        Task<List<GroceryIngredient>> GetIngredientsForUser(int userId);
+        Task<List<GroceryIngredient>> GetIngredientsForUser(long userId);
 
-        Task UpdateIsChecked(int userId, int ingredientId, bool isChecked);
+        Task UpdateIsChecked(long userId, int ingredientId, bool isChecked);
 
-        Task<GroceryIngredient> AddIngredientToUser(int userId, GroceryIngredient ingredient, string newGroceryIngredientName, ObservableCollection<SectionModel> section);
+        Task<GroceryIngredient> AddIngredientToUser(long userId, GroceryIngredient ingredient, string newGroceryIngredientName, ObservableCollection<SectionModel> section);
     }
 }

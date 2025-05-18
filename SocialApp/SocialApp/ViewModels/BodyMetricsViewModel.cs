@@ -1,5 +1,6 @@
 ﻿namespace SocialApp.ViewModels
 {
+    using AppCommonClasses.Interfaces;
     using SocialApp.Interfaces;
     using SocialApp.Pages;
     using SocialApp.Proxies;
@@ -24,12 +25,8 @@
 
         public BodyMetricsViewModel()
         {
-            // Create both required dependencies
-            var bodyMetricRepository = new BodyMetricRepositoryProxy();
-            var userService = new UserService(new UserRepositoryProxy());
-
-            // Pass both dependencies to BodyMetricService
-            bodyMetricService = new BodyMetricService(bodyMetricRepository, userService);
+            // Create the service proxy directly
+            bodyMetricService = new BodyMetricServiceProxy();
             SubmitBodyMetricsCommand = new RelayCommand(GoNext);
         }
 
@@ -89,7 +86,47 @@
         {
             try
             {
-                bodyMetricService.UpdateUserBodyMetrics(Username, Weight, Height, TargetWeight);
+                // First, validate inputs
+                if (string.IsNullOrWhiteSpace(Username))
+                {
+                    Debug.WriteLine("Error: Username is required");
+                    return;
+                }
+
+                if (!float.TryParse(Weight, out float weightValue))
+                {
+                    Debug.WriteLine("Error: Invalid weight format");
+                    return;
+                }
+
+                if (!float.TryParse(Height, out float heightValue))
+                {
+                    Debug.WriteLine("Error: Invalid height format");
+                    return;
+                }
+
+                // Parse target weight (can be null)
+                float? targetWeightValue = null;
+                if (!string.IsNullOrWhiteSpace(TargetWeight))
+                {
+                    if (float.TryParse(TargetWeight, out float parsedTarget))
+                    {
+                        targetWeightValue = parsedTarget;
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Error: Invalid target weight format");
+                        return;
+                    }
+                }
+
+                // Now call the service with properly converted values
+                bodyMetricService.UpdateUserBodyMetrics(
+                    Username,
+                    weightValue,
+                    heightValue,
+                    targetWeightValue);
+
                 NavigationService.Instance.NavigateTo(typeof(GoalPage), this);
             }
             catch (Exception ex)
@@ -97,5 +134,7 @@
                 Debug.WriteLine($"Error in GoNext: {ex.Message}");
             }
         }
+
+
     }
 }

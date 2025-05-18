@@ -1,11 +1,10 @@
-namespace SocialApp.Services
+namespace AppCommonClasses.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
-    using SocialApp.Interfaces;
 
     /// <summary>
     /// Provides user-related services.
@@ -49,7 +48,7 @@ namespace SocialApp.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new User() { Username = username, Email = email });
+            this.userRepository.Save(new User() { Username = username, Email = email, Password = password, Image = image });
         }
 
         /// <summary>
@@ -93,6 +92,11 @@ namespace SocialApp.Services
         public List<User> GetAllUsers()
         {
             return this.userRepository.GetAll();
+        }
+
+        public User? GetUserByUsername(string username)
+        {
+            return this.userRepository.GetByUsername(username);
         }
 
         /// <summary>
@@ -146,6 +150,7 @@ namespace SocialApp.Services
             this.userRepository.Follow(userId, whoToFollowId);
         }
 
+
         /// <summary>
         /// Unfollows a user.
         /// </summary>
@@ -177,6 +182,21 @@ namespace SocialApp.Services
         {
             var followingUsers = this.GetUserFollowing(userId);
             return followingUsers.Where(u => u.Username.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public User Save(User entity)
+        {
+            var savedUser = this.userRepository.Save(entity);
+            return savedUser;
+        }
+
+        public long Login(string username, string password)
+        {
+            User? user = this.userRepository.GetByUsername(username);
+            if (user == null)
+                return -2;
+
+            return user.Password.Equals(password) ? user.Id : -1;
         }
     }
 }

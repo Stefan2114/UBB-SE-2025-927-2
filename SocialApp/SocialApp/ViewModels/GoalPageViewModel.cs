@@ -1,11 +1,12 @@
 ﻿namespace SocialApp.ViewModels
 {
-    using CommunityToolkit.Mvvm.Input;
-    using SocialApp.Pages;
-    using SocialApp.Services;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
+    using CommunityToolkit.Mvvm.Input;
+    using SocialApp.Pages;
+    using SocialApp.Proxies;
+    using SocialApp.Services;
 
     internal class GoalPageViewModel
     {
@@ -54,11 +55,10 @@
             NavigationService.Instance.GoBack();
         }
 
-        private GoalPageService goalPageService = new GoalPageService();
+        private GoalPageService goalPageService = new GoalPageService(new GoalRepositoryProxy());
 
         private string username = string.Empty;
 
-       
         public string Username
         {
             get => username;
@@ -71,12 +71,12 @@
 
         public void SetUserInfo(string username)
         {
-            Username = username;
+            this.Username = username;
         }
 
         public void GoNext()
         {
-            goalPageService.AddGoals(Username, SelectedGoal);
+            this.goalPageService.AddGoals(this.Username, this.SelectedGoal);
             NavigationService.Instance.NavigateTo(typeof(ActivityLevelPage), this);
         }
 
