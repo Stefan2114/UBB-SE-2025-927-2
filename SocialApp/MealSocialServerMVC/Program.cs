@@ -5,6 +5,7 @@ using AppCommonClasses.Services;
 using MealSocialServerMVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SocialApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +24,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
-builder.Services.AddScoped<IMealService, MealService>();
+builder.Services.AddScoped<IMealRepository, MealRepository>();
+builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
+
 
 // Add services that controllers depend on
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMealService, MealService>();
+
 
 builder.Services.AddControllersWithViews();
 

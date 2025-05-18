@@ -2,6 +2,7 @@ namespace SocialApp.Pages
 {
     using AppCommonClasses.Models;
     using global::Windows.Storage.Pickers;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Media.Imaging;
@@ -16,7 +17,8 @@ namespace SocialApp.Pages
         public CreateMealPage()
         {
             this.InitializeComponent();
-            this.viewModel = new CreateMealViewModel();
+            
+            this.viewModel = App.Services.GetService<CreateMealViewModel>();
             this.DataContext = this.viewModel;
         }
 

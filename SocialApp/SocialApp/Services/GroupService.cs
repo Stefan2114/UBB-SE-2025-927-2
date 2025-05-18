@@ -11,9 +11,9 @@
     public class GroupService : IGroupService
     {
         private IGroupRepository groupRepository;
-        private IUserService userRepository;
+        private IUserRepository userRepository;
 
-        public GroupService(IGroupRepository groupRepository, IUserService userProxy)
+        public GroupService(IGroupRepository groupRepository, IUserRepository userProxy)
         {
             this.groupRepository = groupRepository;
             this.userRepository = userProxy;

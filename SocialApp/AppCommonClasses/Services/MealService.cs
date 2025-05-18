@@ -47,7 +47,7 @@
 
         public async Task<Ingredient?> RetrieveIngredientByNameAsync(string ingredientName)
         {
-            return await ingredientRepository.GetIngredientByNameAsync(ingredientName);
+            return ingredientRepository.GetIngredientByName(ingredientName);
         }
 
         public async Task<int> CreateMealAsync(Meal mealToCreate)
