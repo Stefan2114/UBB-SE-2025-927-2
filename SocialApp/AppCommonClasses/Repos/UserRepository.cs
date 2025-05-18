@@ -105,6 +105,11 @@ namespace AppCommonClasses.Repos
 
         public User Save(User entity)
         {
+            if (dbContext.Users.FirstOrDefault(u => u.Username.Equals(entity.Username)) != null)
+            {
+                throw new Exception("User already exists");
+            }
+
             dbContext.Users.Add(entity);
             dbContext.SaveChanges();
             return entity;
