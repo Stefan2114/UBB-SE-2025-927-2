@@ -1,6 +1,6 @@
 ﻿using SocialApp.Proxies;
 using AppCommonClasses.Models;
-using System.Linq; // Make sure to import the correct namespace for your models
+using System.Linq; 
 
 namespace SocialApp.Services
 {
@@ -15,35 +15,35 @@ namespace SocialApp.Services
         }
 
         // Get protein intake using the repository proxy
-        public double GetProteinIntake(int userId)
+        public double GetProteinIntake(long userId)
         {
             var macrosList = _macrosRepo.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalProtein ?? 0);
         }
 
         // Get carbohydrates intake using the repository proxy
-        public double GetCarbohydratesIntake(int userId)
+        public double GetCarbohydratesIntake(long userId)
         {
             var macrosList = _macrosRepo.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalCarbohydrates ?? 0);
         }
 
         // Get fat intake using the repository proxy
-        public double GetFatIntake(int userId)
+        public double GetFatIntake(long userId)
         {
             var macrosList = _macrosRepo.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalFat ?? 0);
         }
 
         // Get fiber intake using the repository proxy
-        public double GetFiberIntake(int userId)
+        public double GetFiberIntake(long userId)
         {
             var macrosList = _macrosRepo.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalFiber ?? 0);
         }
 
         // Get sugar intake using the repository proxy
-        public double GetSugarIntake(int userId)
+        public double GetSugarIntake(long userId)
         {
             var macrosList = _macrosRepo.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalSugar ?? 0);

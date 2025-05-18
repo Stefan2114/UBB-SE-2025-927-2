@@ -1,4 +1,4 @@
-﻿using AppCommonClasses.DbRelationshipEntities;
+﻿/*using AppCommonClasses.DbRelationshipEntities;
 using AppCommonClasses.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,4 +28,4 @@ namespace Server.Data
                 .HasConversion<int>();
         }
     }
-}
+}*/
