@@ -39,6 +39,8 @@
 
         public DbSet<Goal> Goals { get; set; } = default!;
 
+        public DbSet<Ingredient> Ingredients { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GroupUser>()

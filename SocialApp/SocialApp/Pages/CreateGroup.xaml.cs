@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
+using AppCommonClasses.Repos;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -9,7 +10,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
-using SocialApp.Repository;
 using SocialApp.Services;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -44,10 +44,12 @@ namespace SocialApp.Pages
         /// </summary>
         private void InitializeServices()
         {
-            var groupRepository = new GroupRepository();
-            var userServiceProxy = new UserServiceProxy();
-            groupService = new GroupService(groupRepository, userServiceProxy);
-            userService = userServiceProxy;
+            var groupRepository = App.Services.GetService<GroupRepository>();
+
+            var userRepository = App.Services.GetService<UserRepository>();
+
+            groupService = new GroupService(groupRepository, userRepository);
+            userService = new UserServiceProxy();
             controller = App.Services.GetService<AppController>();
         }
 

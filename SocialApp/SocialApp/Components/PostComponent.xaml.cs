@@ -13,6 +13,8 @@ using Windows.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 using SocialApp.Proxies;
+using AppCommonClasses.Repos;
+using SocialApp.Interfaces;
 
 namespace SocialApp.Components
 {
@@ -27,8 +29,8 @@ namespace SocialApp.Components
         private PostTag tag;
         private AppController AppController;
 
-        private ReactionService reactionService;
-        private CommentService commentService;
+        private IReactionService reactionService;
+        private ICommentService commentService;
 
         public DateTime PostCreationTime { get; set; }
 
@@ -61,7 +63,7 @@ namespace SocialApp.Components
             this.InitializeComponent();
             this.DataContext = this;
             this.reactionService = new ReactionService(new ReactionRepositoryProxy());
-            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostServiceProxy(), new UserServiceProxy());
+            this.commentService = App.Services.GetService<ICommentService>();
 
             this.AppController = App.Services.GetService<AppController>();
         }
@@ -80,7 +82,7 @@ namespace SocialApp.Components
             this.tag = tag;
 
             this.reactionService = new ReactionService(new ReactionRepositoryProxy());
-            this.commentService = new CommentService(new CommentRepositoryProxy(), new PostServiceProxy(), new UserServiceProxy());
+            this.commentService = App.Services.GetService<ICommentService>();
 
             this.AppController = App.Services.GetService<AppController>();
 
