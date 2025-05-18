@@ -27,10 +27,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
+builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
+    
 
 // Add services that controllers depend on
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBodyMetricService, BodyMetricService>();
+builder.Services.AddScoped<ICalorieService, CalorieService>();
+
 
 builder.Services.AddControllersWithViews();
 
