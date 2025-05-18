@@ -212,6 +212,7 @@ CREATE TABLE serving_units (
     unit_name VARCHAR(50) PRIMARY KEY,  -- Unique key for each unit, 'unit_name' as the primary key
 );
 
+select * from users
 CREATE TABLE daily_meals (
     dm_id INT PRIMARY KEY IDENTITY(1,1),  -- Unique entry for each meal logged
     u_id BIGINT NULL,  -- The user who ate the meal, now optional (can be NULL)
@@ -853,6 +854,7 @@ INSERT INTO [dbo].[Posts](Id,Title,Content,CreatedDate,UserId,Visibility,GroupId
 
 SET IDENTITY_INSERT [dbo].[Posts] OFF
 
+select * from Groups
 -- reactions
 
 INSERT INTO [dbo].[Reactions] ([UserId], [PostId], [ReactionType])  
