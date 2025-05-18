@@ -5,6 +5,7 @@ namespace SocialApp.Pages
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using Services;
     using SocialApp.Proxies;
 
     public sealed partial class UserPage : Page
@@ -15,7 +16,7 @@ namespace SocialApp.Pages
 
         private readonly IUserService userService;
 
-        private Services.UserPageService userPageService = new Services.UserPageService();
+        private UserPageService userPageService = new UserPageService();
 
         public UserPage()
         {

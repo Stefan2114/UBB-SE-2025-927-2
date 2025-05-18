@@ -17,7 +17,11 @@ builder.Services.AddDbContext<SocialAppDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+    })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add repositories that services inside controllers depend on
@@ -26,12 +30,16 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 builder.Services.AddScoped<IMealRepository, MealRepository>();
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
-
+builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
+builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
+    
 
 // Add services that controllers depend on
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMealService, MealService>();
+builder.Services.AddScoped<IBodyMetricService, BodyMetricService>();
+builder.Services.AddScoped<ICalorieService, CalorieService>();
 
 
 builder.Services.AddControllersWithViews();

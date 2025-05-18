@@ -48,7 +48,7 @@ namespace AppCommonClasses.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new User() { Username = username, Email = email });
+            this.userRepository.Save(new User() { Username = username, Email = email, Password = password, Image = image });
         }
 
         /// <summary>
@@ -193,8 +193,10 @@ namespace AppCommonClasses.Services
         public long Login(string username, string password)
         {
             User? user = this.userRepository.GetByUsername(username);
+            if (user == null)
+                return -2;
 
-            return (user != null && user.Password.Equals(password)) ? user.Id : -1;
+            return user.Password.Equals(password) ? user.Id : -1;
         }
     }
 }

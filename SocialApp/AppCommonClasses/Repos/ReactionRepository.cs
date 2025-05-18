@@ -27,10 +27,12 @@ namespace AppCommonClasses.Repos
         /// <param name="postId">The ID of the post.</param>
         public void DeleteByUserAndPost(long userId, long postId)
         {
-            var reaction = dbContext.Reactions.Find(userId, postId);
-            if (reaction != null)
+            var reactionDeleted = (from reaction in dbContext.Reactions
+                            where reaction.PostId == postId && reaction.UserId == userId
+                            select reaction).FirstOrDefault();
+            if (reactionDeleted != null)
             {
-                dbContext.Remove(reaction);
+                dbContext.Remove(reactionDeleted);
                 dbContext.SaveChanges();
             }
         }
@@ -90,13 +92,12 @@ namespace AppCommonClasses.Repos
         /// <param name="type">The new reaction type.</param>
         public void UpdateByUserAndPost(long userId, long postId, ReactionType type)
         {
-            var reactionUpdated = from reaction in dbContext.Reactions
-                                  where reaction.PostId == postId && reaction.UserId == userId
-                                  select reaction;
-            if (reactionUpdated != null)
+            var reaction = dbContext.Reactions
+                .FirstOrDefault(r => r.PostId == postId && r.UserId == userId);
+
+            if (reaction != null)
             {
-                var updateReaction = (Reaction)reactionUpdated;
-                updateReaction.Type = type;
+                reaction.Type = type;
                 dbContext.SaveChanges();
             }
         }
