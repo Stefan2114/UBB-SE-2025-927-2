@@ -1,8 +1,9 @@
-﻿using AppCommonClasses.Interfaces;
+﻿using AppCommonClasses.Data;
+using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
-using Server.Data;
 
-namespace Server.Repos
+
+namespace AppCommonClasses.Repos
 {
     public class MacrosRepository : IMacrosRepository
     {
