@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SocialApp.Proxies;
 using AppCommonClasses.Interfaces;
 using SocialApp.Interfaces;
+using Server.Proxies;
 
 namespace SocialApp.Pages
 {
@@ -45,8 +46,7 @@ namespace SocialApp.Pages
         {
             userService = new UserServiceProxy();
             groupRepository = new GroupRepository();
-            var userRepository = App.Services.GetService<IUserRepository>();
-            groupService = new GroupService(groupRepository, userRepository);
+            groupService = new GroupServiceProxy();
             postService = new PostServiceProxy();
             group = groupService.GetGroupById(GroupId);
 

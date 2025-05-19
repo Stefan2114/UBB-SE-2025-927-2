@@ -45,6 +45,7 @@ builder.Services.AddScoped<IWaterIntakeService, WaterService>();
 
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<MealSocialServerMVC.Services.GroupApiService>();
 
 var app = builder.Build();
 

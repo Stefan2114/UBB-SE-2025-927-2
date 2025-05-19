@@ -1,0 +1,34 @@
+@model List<MealSocialServerMVC.Models.Group>
+
+@{
+    ViewData["Title"] = "Groups";
+}
+
+<h2>Groups</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Group</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>AdminId</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var group in Model)
+    {
+        <tr>
+            <td>@group.Name</td>
+            <td>@group.Description</td>
+            <td>@group.AdminId</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@group.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@group.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table> 

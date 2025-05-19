@@ -18,6 +18,7 @@ using System.Linq;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Group = AppCommonClasses.Models.Group;
+using Server.Proxies;
 
 namespace SocialApp.Pages
 {
@@ -57,11 +58,7 @@ namespace SocialApp.Pages
             this.controller = App.Services.GetService<AppController>();
             var postService = App.Services.GetService<IPostService>();
             this.postViewModel = new PostViewModel(postService);
-            //this.groupService = App.Services.GetService<GroupService>();
-            // nu exista GroupRepoProxy, va trebui facut direct un GroupServiceProxxy
-            var userRepository = App.Services.GetService<UserRepository>();
-
-            this.groupService = new GroupService(new Repository.GroupRepository(), userRepository);
+            this.groupService = new GroupServiceProxy();
         }
 
         private void LoadUserGroups()

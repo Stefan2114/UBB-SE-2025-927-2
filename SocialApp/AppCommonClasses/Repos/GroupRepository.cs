@@ -120,6 +120,12 @@ namespace AppCommonClasses.Repos
             var group = dbContext.Groups.Find(id);
             if (group != null)
             {
+                // First delete related records in GroupUsers
+                var groupUsers = dbContext.GroupUsers.Where(gu => gu.GroupId == id);
+                dbContext.GroupUsers.RemoveRange(groupUsers);
+                dbContext.SaveChanges();
+
+                // Then delete the group
                 dbContext.Groups.Remove(group);
                 dbContext.SaveChanges();
             }
