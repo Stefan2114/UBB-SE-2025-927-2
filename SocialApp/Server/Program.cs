@@ -3,6 +3,8 @@ using AppCommonClasses.Interfaces;
 using AppCommonClasses.Repos;
 using AppCommonClasses.Services;
 using Microsoft.EntityFrameworkCore;
+using Server.Interfaces;
+using SocialApp.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SocialAppDbContext>(options =>
@@ -24,16 +26,16 @@ builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 builder.Services.AddScoped<IMealRepository, MealRepository>();
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 
-
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IMealService, MealService>();
+builder.Services.AddScoped<IMacrosService, MacrosService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IMealService,MealService>();   
+builder.Services.AddScoped<IMealService,MealService>();
 
 var app = builder.Build();
 

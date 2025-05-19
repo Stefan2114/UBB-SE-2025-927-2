@@ -31,7 +31,8 @@ builder.Services.AddScoped<IMealRepository, MealRepository>();
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
-    
+builder.Services.AddScoped<IMacrosRepository, MacrosRepository>();
+
 
 // Add services that controllers depend on
 builder.Services.AddScoped<IPostService, PostService>();
