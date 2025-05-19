@@ -12,7 +12,6 @@ namespace SocialApp.ViewModels
     using Microsoft.Extensions.DependencyInjection;
     using SocialApp.Interfaces;
     using SocialApp.Pages;
-    using SocialApp.Proxies;
     using SocialApp.Queries;
     using SocialApp.Services;
 
@@ -418,7 +417,8 @@ namespace SocialApp.ViewModels
 
         private void GoDisplayMeals()
         {
-            NavigationService.Instance.NavigateTo(typeof(MealListPage));
+            // NavigationService.Instance.NavigateTo(typeof(MealListPage));
+            NavigationService.Instance.NavigateTo<MealListPage>();
         }
 
         private void GoCreateMeal()

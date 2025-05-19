@@ -6,10 +6,6 @@
     x:Name="MealListRoot"
     Background="#FCE8DC">
 
-    <Page.DataContext>
-        <vm:MealListViewModel/>
-    </Page.DataContext>
-
     <Grid Padding="30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
