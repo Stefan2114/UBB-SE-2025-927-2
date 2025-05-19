@@ -1,10 +1,4 @@
-﻿using AppCommonClasses.Models;
-using AppCommonClasses.Services;
-using CommunityToolkit.Mvvm.Input;
-using SocialApp.Pages;
-using SocialApp.Queries;
-using SocialApp.Services;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,14 +6,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
+using CommunityToolkit.Mvvm.Input;
+using SocialApp.Pages;
+using SocialApp.Queries;
+using SocialApp.Services;
 
 namespace SocialApp.ViewModels
 {
     public class MealListViewModel : ViewModelBase
     {
-        private readonly NavigationService _navigationService;
         private Meal _selectedMeal;
-        private MealService _mealService;
+        private IMealService _mealService;
         public ObservableCollection<Meal> AllMeals { get; }
         public ObservableCollection<Meal> BreakfastMeals { get; private set; }
         public ObservableCollection<Meal> LunchMeals { get; private set; }
@@ -45,7 +44,7 @@ namespace SocialApp.ViewModels
         }
 
         // Parameterless constructor for XAML compatibility
-        public MealListViewModel()
+        public MealListViewModel(IMealService mealService)
         {
             AllMeals = new ObservableCollection<Meal>();
             BreakfastMeals = new ObservableCollection<Meal>();
@@ -54,9 +53,58 @@ namespace SocialApp.ViewModels
             SnackMeals = new ObservableCollection<Meal>();
             RecentMeals = new ObservableCollection<string>();
             FavoriteMeals = new ObservableCollection<string>();
+
+            _mealService = mealService;
+            Debug.WriteLine("Initializing MealListViewModel...");
+
+            // Initialize commands
+            BackCommand = new RelayCommand(NavigateBack);
+            SelectMealCommand = new RelayCommand<Meal>(OnMealClicked);
+
+            // Test database connection
+            TestDatabaseConnection();
+
+            // Load meals from database
+            LoadMealsFromDatabase();
+
+            // Initialize category-specific collections
+            UpdateCategoryCollections();
+
+            // Mock Recent Meals
+            RecentMeals = new ObservableCollection<string>
+            {
+                "Grilled Chicken Salad (350 kcal)",
+                "Vegetable Stir-Fry with Tofu (400 kcal)",
+                "Lentil Soup (250 kcal)",
+                "Veggie Omelette (300 kcal)",
+                "Chickpea and Spinach Curry (368 kcal)",
+                "Turkey and Avocado Wrap (421 kcal)",
+                "Baked Cod with Asparagus (334 kcal)",
+                "Butternut Squash Soup (224 kcal)"
+            };
+
+            // Mock Favorite Meals
+            FavoriteMeals = new ObservableCollection<string>
+            {
+                "Cabbage and Carrot Slaw (128 kcal)",
+                "Eggplant Parmesan (Baked) (356 kcal)",
+                "Mango and Black Bean Salad (223 kcal)",
+                "Moroccan Chickpea Stew (311 kcal)",
+                "Roasted Cauliflower Tacos (358 kcal)",
+                "Vegetable Paella (410 kcal)",
+                "Grilled Pineapple Chicken (382 kcal)",
+                "Stuffed Zucchini Boats (270 kcal)"
+            };
+
+            Debug.WriteLine($"MealListViewModel initialized with {AllMeals.Count} total meals");
+            Debug.WriteLine($"Breakfast meals: {BreakfastMeals.Count}");
+            Debug.WriteLine($"Lunch meals: {LunchMeals.Count}");
+            Debug.WriteLine($"Dinner meals: {DinnerMeals.Count}");
+            Debug.WriteLine($"Snack meals: {SnackMeals.Count}");
         }
 
         // Constructor with MealService dependency
+        /*
         public MealListViewModel(MealService mealService) : this()
         {
             _mealService = mealService;
@@ -108,6 +156,7 @@ namespace SocialApp.ViewModels
             Debug.WriteLine($"Dinner meals: {DinnerMeals.Count}");
             Debug.WriteLine($"Snack meals: {SnackMeals.Count}");
         }
+        */
 
         private void OnMealClicked(Meal meal)
         {
@@ -247,12 +296,12 @@ namespace SocialApp.ViewModels
             Debug.WriteLine($"Navigating to MealDisplayPage with meal: {SelectedMeal.Name}");
             Debug.WriteLine($"Meal details - Calories: {SelectedMeal.Calories}, Protein: {SelectedMeal.Protein}, Carbs: {SelectedMeal.Carbohydrates}, Fat: {SelectedMeal.Fat}");
 
-            _navigationService.NavigateTo(typeof(MealDisplayPage), mealViewModel);
+            NavigationService.Instance.NavigateTo(typeof(MealDisplayPage), mealViewModel);
         }
 
         public void NavigateBack()
         {
-            _navigationService.GoBack();
+            NavigationService.Instance.GoBack();
         }
     }
 }

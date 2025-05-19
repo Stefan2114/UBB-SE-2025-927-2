@@ -5,7 +5,6 @@ using AppCommonClasses.Services;
 using MealSocialServerMVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SocialApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
