@@ -50,52 +50,25 @@ namespace SocialApp.Components
 
         private void GroupsClick(object sender, RoutedEventArgs e)
         {
-            if (IsLoggedIn())
-            {
-                HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
-                CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                frame.Navigate(typeof(GroupsScreen));
 
-            }
-            else
-            {
-                HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
-                frame.Navigate(typeof(LoginRegisterPage));
-            }
+            HomeButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
+            GroupsButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Blue);
+            CreatePostButton.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White);
+            frame.Navigate(typeof(GroupsScreen));
+
         }
 
         private void UserClick(object sender, RoutedEventArgs e)
         {
-            if (IsLoggedIn())
-            {
-                frame.Navigate(typeof(UserPage));
-            }
-            else
-            {
-                frame.Navigate(typeof(LoginRegisterPage));
-            }
+            frame.Navigate(typeof(UserPage));
+
         }
 
         private void CreatePostButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsLoggedIn())
-            {
-                frame.Navigate(typeof(CreatePost));
-            }
-            else
-            {
-                frame.Navigate(typeof(LoginRegisterPage));
-            }
+            frame.Navigate(typeof(CreatePost));
         }
 
-        private bool IsLoggedIn()
-        {
-            var controller = App.Services.GetService<AppController>();
-            return controller.CurrentUser != null;
-        }
 
         public void SetHome()
         {

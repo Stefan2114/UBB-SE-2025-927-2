@@ -6,18 +6,19 @@
     using SocialApp.Services;
     using AppCommonClasses.Models;
     using AppCommonClasses.Interfaces;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class GroupServiceTests
     {
         private readonly IGroupRepository groupRepository;
         private readonly IUserRepository userRepository;
-        private readonly GroupService service;
+        private readonly IGroupService service;
 
         public GroupServiceTests()
         {
             this.groupRepository = Substitute.For<IGroupRepository>();
             this.userRepository = Substitute.For<IUserRepository>();
-            this.service = new GroupService(this.groupRepository, this.userRepository);
+            this.service = App.Services.GetService<IGroupService>();
         }
 
         private Group CreateTestGroup(long id = 1, long adminId = 1)
@@ -57,7 +58,7 @@
             this.groupRepository.GetAllGroups().Returns(expectedGroups);
 
             // Act
-            var result = this.service.GetAll();
+            var result = this.service.GetAllGroups();
 
             // Assert
             Assert.That(result, Is.EqualTo(expectedGroups));

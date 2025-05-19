@@ -20,12 +20,6 @@ namespace SocialApp
 
         public AppController() { }
 
-        public bool EmailExists(string email)
-        {
-            UserRepository userRepository = new UserRepository();//ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
-            return userRepository.GetByEmail(email) != null;
-        }
-
         public bool Login(string email, string password)
         {
             UserServiceProxy userServiceProxy = new UserServiceProxy();
