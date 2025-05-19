@@ -2,6 +2,6 @@
 {
     public interface IGoalPageRepository
     {
-        void AddGoals(string username, string goalDescription);
+        void AddGoals(string userName, string g_description);
     }
 }

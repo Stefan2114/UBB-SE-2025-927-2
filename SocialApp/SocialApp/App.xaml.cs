@@ -30,23 +30,24 @@ namespace SocialApp
             services.AddSingleton<AppController>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPostRepository, PostRepository>();
-            services.AddSingleton<ICommentService, CommentServiceProxy>();
+            services.AddSingleton<IMealRepository, MealRepository>();
+            services.AddSingleton<IIngredientRepository, IngredientRepository>();
+            services.AddSingleton<IIngredientRepository, IngredientRepository>();
+            services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
 
+            services.AddHttpClient<MealServiceProxy>();
             services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();
             services.AddSingleton<ICommentService, CommentServiceProxy>();
-
-            services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
-            services.AddSingleton<ICommentRepository, CommentRepository>();
             services.AddSingleton<ICommentService, CommentServiceProxy>();
             services.AddSingleton<IGroceryListService, GroceryListService>();
-            services.AddSingleton<IIngredientRepository, IngredientRepository>();
             services.AddSingleton<IMealService, MealServiceProxy>();
             services.AddSingleton<CreateMealViewModel>();
-
             services.AddTransient<GroceryViewModel>();
             services.AddTransient<GroceryListPage>();
             services.AddTransient<MainPage>();
+            services.AddTransient<MealListViewModel>();
+            services.AddTransient<MealListPage>();
             Services = services.BuildServiceProvider();
         }
 

@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Water Intake Tracker";
+}
+
+<div class="water-tracker-container">
+    <h2>Water Intake</h2>
+
+    <!-- Water level visualization -->
+    <div class="water-bottle">
+        <div class="water-level" style="height: @(ViewBag.CurrentIntake * 100 / 3)%;">
+            <span class="water-amount">@(ViewBag.CurrentIntake ?? 0)L</span>
+        </div>
+    </div>
+
+    <div class="water-goal">
+        <span>0</span>
+        <span>2</span>
+    </div>
+
+    <!-- Quick add buttons -->
+    <div class="water-actions">
+        <!-- Add Water Buttons -->
+        <div class="add-buttons">
+            <form asp-action="AddWater" method="post">
+                <button type="submit" name="amount" value="0.3" class="btn btn-water">+0.3L</button>
+                <button type="submit" name="amount" value="0.4" class="btn btn-water">+0.4L</button>
+                <button type="submit" name="amount" value="0.5" class="btn btn-water">+0.5L</button>
+                <button type="submit" name="amount" value="0.75" class="btn btn-water">+0.75L</button>
+            </form>
+        </div>
+
+        <!-- Remove Water Buttons -->
+        <div class="remove-buttons">
+            <form asp-action="RemoveWater" method="post">
+                <button type="submit" name="amount" value="0.3" class="btn btn-water-remove">-0.3L</button>
+                <button type="submit" name="amount" value="0.4" class="btn btn-water-remove">-0.4L</button>
+                <button type="submit" name="amount" value="0.5" class="btn btn-water-remove">-0.5L</button>
+                <button type="submit" name="amount" value="0.75" class="btn btn-water-remove">-0.75L</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .water-tracker-container {
+        max-width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .water-bottle {
+        width: 150px;
+        height: 300px;
+        margin: 20px auto;
+        border: 3px solid #3498db;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        background-color: #f5f9fc;
+    }
+
+    .water-level {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #3498db;
+        transition: height 0.5s ease;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .water-amount {
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    }
+
+    .water-goal {
+        display: flex;
+        justify-content: space-between;
+        width: 150px;
+        margin: 0 auto 20px;
+    }
+
+    .btn-water {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn-water:hover {
+            background-color: #2980b9;
+        }
+
+    .btn-water-remove {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn-water-remove:hover {
+            background-color: #c0392b;
+        }
+
+    .add-buttons, .remove-buttons {
+        margin-bottom: 15px;
+    }
+</style>
