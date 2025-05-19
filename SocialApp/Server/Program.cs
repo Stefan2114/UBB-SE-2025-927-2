@@ -28,9 +28,13 @@ builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
+<<<<<<< HEAD
 builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IMacrosService, MacrosService>();
 
+=======
+builder.Services.AddScoped<ICommentService, CommentService>();
+>>>>>>> 4d8fd6b (dep inj)
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
