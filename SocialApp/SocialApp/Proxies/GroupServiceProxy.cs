@@ -1,8 +1,14 @@
 using System.Net.Http.Json;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 
-namespace Server.Proxies
+
+namespace SocialApp.Proxies
 {
     public class GroupServiceProxy : IGroupService
     {

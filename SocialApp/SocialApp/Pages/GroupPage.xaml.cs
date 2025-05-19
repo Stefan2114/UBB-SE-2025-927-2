@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SocialApp.Proxies;
 using AppCommonClasses.Interfaces;
 using SocialApp.Interfaces;
-using Server.Proxies;
+
 
 namespace SocialApp.Pages
 {
@@ -45,9 +45,9 @@ namespace SocialApp.Pages
         private void DisplayPage(object sender, RoutedEventArgs e)
         {
             userService = App.Services.GetService<IUserService>();
-
             groupService = App.Services.GetService<IGroupService>();
             postService = App.Services.GetService<IPostService>();
+
             group = groupService.GetGroupById(GroupId);
 
             SetVisibilities();

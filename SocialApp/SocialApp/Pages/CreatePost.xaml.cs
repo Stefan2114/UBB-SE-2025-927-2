@@ -18,7 +18,7 @@ using System.Linq;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Group = AppCommonClasses.Models.Group;
-using Server.Proxies;
+
 
 namespace SocialApp.Pages
 {

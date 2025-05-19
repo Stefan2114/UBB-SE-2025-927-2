@@ -29,7 +29,7 @@ namespace SocialApp.Components
 
         private IPostService postService;
 
-        private IGroupRepository groupRepository;
+        private IGroupService groupServiceProxy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Follower"/> class.
@@ -43,7 +43,7 @@ namespace SocialApp.Components
             this.InitializeComponent();
 
             userServiceProxy = new UserServiceProxy();
-            groupRepository = new GroupRepository(); //ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
+            groupServiceProxy = new GroupServiceProxy(); //ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
             postService = App.Services.GetService<IPostService>();
 
             this.user = user;
