@@ -18,7 +18,10 @@ namespace AppCommonClasses.Services
             var macrosList = _macrosRepository.GetMacrosByUserId(userId);
             return macrosList.Sum(m => m.TotalProtein ?? 0);
         }
-
+        public List<Macros> GetMacrosListByUserId(long userId)
+        {
+            return _macrosRepository.GetMacrosByUserId(userId);
+        }
         public double GetCarbohydratesIntake(long userId)
         {
             var macrosList = _macrosRepository.GetMacrosByUserId(userId);
