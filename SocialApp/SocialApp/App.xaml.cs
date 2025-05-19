@@ -35,6 +35,8 @@ namespace SocialApp
             services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();
             services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
+            services.AddSingleton<ICommentRepository, CommentRepository>();
+            services.AddSingleton<ICommentService, CommentServiceProxy>();
             services.AddSingleton<IGroceryListService, GroceryListService>();
             services.AddSingleton<IIngredientRepository, IngredientRepository>();
             services.AddSingleton<IMealService, MealServiceProxy>();
