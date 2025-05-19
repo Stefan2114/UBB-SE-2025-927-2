@@ -4,6 +4,8 @@
 
     public class ReactionDTO
     {
-        required public ReactionType Type { get; set; }
+        public long UserId { get; set; }
+        public long PostId { get; set; }
+        public ReactionType Type { get; set; }
     }
 }

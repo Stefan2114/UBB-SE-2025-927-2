@@ -1,140 +1,139 @@
-﻿namespace SocialApp.Repository
-{
-    using System.Collections.Generic;
-    using AppCommonClasses.Enums;
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
-    using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using AppCommonClasses.Enums;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 
+namespace SocialApp.Repository
+{
     public class ReactionRepository : IReactionRepository
     {
+        private readonly IDataLink dataLink;
 
+        public ReactionRepository(IDataLink dataLink)
+        {
+            this.dataLink = dataLink;
+        }
 
-        private string loginString = "Server=DESKTOP-M2TF6Q6\\SQLEXPRESS;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
-
-        private SqlConnection connection;
-
+        [Obsolete]
         public ReactionRepository()
         {
-            this.connection = new SqlConnection(this.loginString);
+            // this.dataLink = new DataLink();
         }
 
-        public List<Reaction> GetAllReactions()
+        public async Task<List<Reaction>> GetAllReactionsAsync()
         {
-            this.connection.Open();
-            List<Reaction> reactions = [];
+            string query = "SELECT * FROM Reactions";
+            var dataTable = this.dataLink.ExecuteSqlQuery(query, null);
 
-            SqlCommand selectCommand = new("SELECT * FROM Reactions", this.connection);
-            SqlDataReader reader = selectCommand.ExecuteReader();
-            while (reader.Read())
+            var reactions = new List<Reaction>();
+            foreach (DataRow row in dataTable.Rows)
             {
-                Reaction reaction = new()
+                reactions.Add(new Reaction
                 {
-                    UserId = reader.GetInt64(reader.GetOrdinal("UserId")),
-                    PostId = reader.GetInt64(reader.GetOrdinal("PostId")),
-                    Type = (ReactionType)reader.GetInt32(reader.GetOrdinal("Type")),
-                };
-                reactions.Add(reaction);
+                    UserId = Convert.ToInt64(row["UserId"]),
+                    PostId = Convert.ToInt64(row["PostId"]),
+                    Type = (ReactionType)Convert.ToInt32(row["ReactionType"])
+                });
             }
 
-            reader.Close();
-            this.connection.Close();
-            return reactions;
+            return await Task.FromResult(reactions);
         }
 
-        public List<Reaction> GetReactionsByPost(long postId)
+        public async Task<List<Reaction>> GetReactionsByPostAsync(long postId)
         {
-            this.connection.Open();
-
-            List<Reaction> reactions = [];
-            SqlCommand selectCommand = new(
-                "SELECT * FROM Reactions WHERE PostId = @PostId",
-                this.connection);
-            selectCommand.Parameters.AddWithValue("@PostId", postId);
-            SqlDataReader reader = selectCommand.ExecuteReader();
-            while (reader.Read())
+            string query = "SELECT * FROM Reactions WHERE PostId = @PostId";
+            var parameters = new SqlParameter[]
             {
-                Reaction reaction = new()
+                new("@PostId", postId)
+            };
+
+            var dataTable = this.dataLink.ExecuteSqlQuery(query, parameters);
+
+            var reactions = new List<Reaction>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                reactions.Add(new Reaction
                 {
-                    UserId = reader.IsDBNull(reader.GetOrdinal("UserId")) ? 0 : reader.GetInt64(reader.GetOrdinal("UserId")),
-                    PostId = reader.IsDBNull(reader.GetOrdinal("PostId")) ? 0 : reader.GetInt64(reader.GetOrdinal("PostId")),
-                    Type = reader.IsDBNull(reader.GetOrdinal("ReactionType")) ? ReactionType.Like : (ReactionType)reader.GetInt32(reader.GetOrdinal("ReactionType")),
-                };
-                reactions.Add(reaction);
+                    UserId = Convert.ToInt64(row["UserId"]),
+                    PostId = Convert.ToInt64(row["PostId"]),
+                    Type = (ReactionType)Convert.ToInt32(row["ReactionType"])
+                });
             }
 
-            reader.Close();
-            this.connection.Close();
-            return reactions;
+            return await Task.FromResult(reactions);
         }
 
-        public Reaction? GetReactionByUserAndPost(long userId, long postId)
+        public async Task<Reaction?> GetReactionByUserAndPostAsync(long userId, long postId)
         {
-            this.connection.Open();
-            Reaction? reaction = null;
-
-            SqlCommand selectCommand = new("SELECT * FROM Reactions WHERE UserId = @UserId AND PostId = @PostId", this.connection);
-            selectCommand.Parameters.AddWithValue("@UserId", userId);
-            selectCommand.Parameters.AddWithValue("@PostId", postId);
-
-            SqlDataReader reader = selectCommand.ExecuteReader();
-            if (reader.Read())
+            string query = "SELECT * FROM Reactions WHERE UserId = @UserId AND PostId = @PostId";
+            var parameters = new SqlParameter[]
             {
-                reaction = new Reaction
-                {
-                    UserId = reader.GetInt64(reader.GetOrdinal("UserId")),
-                    PostId = reader.GetInt64(reader.GetOrdinal("PostId")),
-                    Type = (ReactionType)reader.GetInt32(reader.GetOrdinal("ReactionType")),
-                };
-            }
+                new("@UserId", userId),
+                new("@PostId", postId)
+            };
 
-            reader.Close();
-            this.connection.Close();
-            return reaction;
+            var table = this.dataLink.ExecuteSqlQuery(query, parameters);
+
+            if (table.Rows.Count == 0)
+                return null;
+
+            var row = table.Rows[0];
+            var reaction = new Reaction
+            {
+                UserId = Convert.ToInt64(row["UserId"]),
+                PostId = Convert.ToInt64(row["PostId"]),
+                Type = (ReactionType)Convert.ToInt32(row["ReactionType"])
+            };
+
+            return await Task.FromResult(reaction);
         }
 
-        public void Save(Reaction entity)
+        public async Task SaveAsync(Reaction reaction)
         {
-            this.connection.Open();
+            string query = @"INSERT INTO Reactions (UserId, PostId, ReactionType) 
+                             VALUES (@UserId, @PostId, @ReactionType)";
+            var parameters = new SqlParameter[]
+            {
+                new("@UserId", reaction.UserId),
+                new("@PostId", reaction.PostId),
+                new("@ReactionType", (int)reaction.Type)
+            };
 
-            SqlCommand insertCommand = new(
-                "INSERT INTO Reactions (UserId, PostId, ReactionType) VALUES (@UserId, @PostId, @Type)",
-                this.connection);
-            insertCommand.Parameters.AddWithValue("@UserId", entity.UserId);
-            insertCommand.Parameters.AddWithValue("@PostId", entity.PostId);
-            insertCommand.Parameters.AddWithValue("@Type", (int)entity.Type);
-
-            insertCommand.ExecuteNonQuery();
-
-            this.connection.Close();
+            this.dataLink.ExecuteNonQuery(query, parameters);
+            await Task.CompletedTask;
         }
 
-        public void UpdateByUserAndPost(long userId, long postId, ReactionType type)
+        public async Task UpdateByUserAndPostAsync(long userId, long postId, ReactionType type)
         {
-            this.connection.Open();
+            string query = @"UPDATE Reactions 
+                             SET ReactionType = @Type 
+                             WHERE UserId = @UserId AND PostId = @PostId";
+            var parameters = new SqlParameter[]
+            {
+                new("@UserId", userId),
+                new("@PostId", postId),
+                new("@Type", (int)type)
+            };
 
-            SqlCommand updateCommand = new(
-                "UPDATE Reactions SET ReactionType = @Type WHERE UserId = @UserId AND PostId = @PostId",
-                this.connection);
-
-            updateCommand.Parameters.AddWithValue("@UserId", userId);
-            updateCommand.Parameters.AddWithValue("@PostId", postId);
-            updateCommand.Parameters.AddWithValue("@Type", (int)type);
-            updateCommand.ExecuteNonQuery();
-
-            this.connection.Close();
+            this.dataLink.ExecuteNonQuery(query, parameters);
+            await Task.CompletedTask;
         }
 
-        public void DeleteByUserAndPost(long userId, long postId)
+        public async Task DeleteByUserAndPostAsync(long userId, long postId)
         {
-            this.connection.Open();
+            string query = "DELETE FROM Reactions WHERE UserId = @UserId AND PostId = @PostId";
+            var parameters = new SqlParameter[]
+            {
+                new("@UserId", userId),
+                new("@PostId", postId)
+            };
 
-            SqlCommand deleteCommand = new SqlCommand("DELETE FROM Reactions WHERE UserId = @UserId AND PostId = @PostId", this.connection);
-            deleteCommand.Parameters.AddWithValue("@UserId", userId);
-            deleteCommand.Parameters.AddWithValue("@PostId", postId);
-            deleteCommand.ExecuteNonQuery();
-
-            this.connection.Close();
+            this.dataLink.ExecuteNonQuery(query, parameters);
+            await Task.CompletedTask;
         }
     }
 }
