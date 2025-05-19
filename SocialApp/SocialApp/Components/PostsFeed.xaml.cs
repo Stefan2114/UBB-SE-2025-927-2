@@ -29,7 +29,7 @@ namespace SocialApp.Components
 
             var userServiceProxy = new UserServiceProxy();
             var postRepository = new PostServiceProxy();
-            var groupRepository = new GroupRepository();
+            var groupRepository = new GroupRepository();//ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
             var postService = new PostServiceProxy();
             this.postViewModel = new PostViewModel(postService);
 

@@ -43,8 +43,8 @@ namespace SocialApp.Components
             this.InitializeComponent();
 
             userServiceProxy = new UserServiceProxy();
-            groupRepository = new GroupRepository();
-            postService = new PostServiceProxy();
+            groupRepository = new GroupRepository(); //ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
+            postService = App.Services.GetService<IPostService>();
 
             this.user = user;
             this.controller = App.Services.GetService<AppController>();

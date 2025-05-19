@@ -22,7 +22,7 @@ namespace SocialApp
 
         public bool EmailExists(string email)
         {
-            UserRepository userRepository = new UserRepository();
+            UserRepository userRepository = new UserRepository();//ar trebui sa fie Service si cu dependency injection nu cu new trebuie schimbat
             return userRepository.GetByEmail(email) != null;
         }
 

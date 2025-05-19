@@ -44,10 +44,10 @@ namespace SocialApp.Pages
 
         private void DisplayPage(object sender, RoutedEventArgs e)
         {
-            userService = new UserServiceProxy();
-            groupRepository = new GroupRepository();
-            groupService = new GroupServiceProxy();
-            postService = new PostServiceProxy();
+            userService = App.Services.GetService<IUserService>();
+
+            groupService = App.Services.GetService<IGroupService>();
+            postService = App.Services.GetService<IPostService>();
             group = groupService.GetGroupById(GroupId);
 
             SetVisibilities();
