@@ -30,7 +30,7 @@ namespace SocialApp
             services.AddSingleton<AppController>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPostRepository, PostRepository>();
-            services.AddSingleton<ICommentService, CommentService>();
+            services.AddSingleton<ICommentService, CommentServiceProxy>();
 
             services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();

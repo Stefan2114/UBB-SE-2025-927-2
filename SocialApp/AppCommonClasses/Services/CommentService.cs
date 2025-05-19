@@ -17,8 +17,8 @@ namespace AppCommonClasses.Services
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository commentRepository;
-        private readonly IPostService postService;
-        private readonly IUserService userServiceProxy;
+        private readonly IPostRepository postService;
+        private readonly IUserRepository userServiceProxy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommentService"/> class.
@@ -26,7 +26,7 @@ namespace AppCommonClasses.Services
         /// <param name="cr">The comment repository.</param>
         /// <param name="pr">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public CommentService(ICommentRepository cr, IPostService ps, IUserService userRepository)
+        public CommentService(ICommentRepository cr, IPostRepository ps, IUserRepository userRepository)
         {
             this.commentRepository = cr;
             this.postService = ps;    // Added null checks
