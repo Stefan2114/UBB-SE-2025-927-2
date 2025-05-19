@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SocialApp.Proxies;
@@ -19,6 +20,12 @@ namespace SocialApp
         public User? CurrentUser { get; set; }
 
         public AppController() { }
+
+        public bool EmailExists(string email)
+        {
+            UserServiceProxy userService = new UserServiceProxy();
+            return userService.GetByEmail(email) != null;
+        }
 
         public bool Login(string email, string password)
         {

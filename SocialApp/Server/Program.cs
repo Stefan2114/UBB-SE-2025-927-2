@@ -4,8 +4,6 @@ using AppCommonClasses.Repos;
 using AppCommonClasses.Services;
 using Microsoft.EntityFrameworkCore;
 using Server.Interfaces;
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SocialAppDbContext>(options =>

@@ -1,8 +1,7 @@
-using AppCommonClasses.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using MealSocialServerMVC.Models;
-using System;
 using System.Diagnostics;
+using AppCommonClasses.Interfaces;
+using MealSocialServerMVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealSocialServerMVC.Controllers
 {
@@ -20,8 +19,11 @@ namespace MealSocialServerMVC.Controllers
 
         [Route("update")]
         [HttpGet]
-        public IActionResult Update(string username)
+        public IActionResult Update()
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
+            string username = userService.GetById(userId).Username;
             if (string.IsNullOrEmpty(username))
             {
                 return RedirectToAction("Index", "Home");
@@ -63,7 +65,8 @@ namespace MealSocialServerMVC.Controllers
                 ViewBag.Message = "Body metrics updated successfully!";
 
                 // After successful update, redirect to the goals page
-                return RedirectToAction("Update", new { username = model.Username });
+                // return RedirectToAction("Update", new { username = model.Username });
+                return RedirectToAction("Dashboard", "Dashboard");
             }
             catch (Exception ex)
             {
