@@ -43,8 +43,10 @@ builder.Services.AddScoped<IBodyMetricService, BodyMetricService>();
 builder.Services.AddScoped<ICalorieService, CalorieService>();
 builder.Services.AddSession();
 builder.Services.AddScoped<IWaterIntakeService, WaterService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
 
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

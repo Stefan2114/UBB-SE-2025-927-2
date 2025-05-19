@@ -14,6 +14,7 @@ using SocialApp.Services;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -44,11 +45,8 @@ namespace SocialApp.Pages
         /// </summary>
         private void InitializeServices()
         {
-            var groupRepository = App.Services.GetService<GroupRepository>();
 
-            var userRepository = App.Services.GetService<UserRepository>();
-
-            groupService = new GroupService(groupRepository, userRepository);
+            groupService = new GroupServiceProxy();
             userService = new UserServiceProxy();
             controller = App.Services.GetService<AppController>();
         }

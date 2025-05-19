@@ -13,15 +13,17 @@ namespace SocialApp.Proxies
     {
         private readonly HttpClient _httpClient;
 
+
         public MacrosServiceProxy(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            this._httpClient.BaseAddress = new Uri("https://localhost:7106/macros/");
         }
 
         // Helper to get all macros for a user, with status code check
         private List<Macros> GetMacrosListByUserId(long userId)
         {
-            var response = _httpClient.GetAsync("macros/user/" + userId).GetAwaiter().GetResult();
+            var response = _httpClient.GetAsync("user/" + userId).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
                 var macrosList = response.Content.ReadFromJsonAsync<List<Macros>>().GetAwaiter().GetResult();
