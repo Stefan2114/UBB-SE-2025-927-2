@@ -10,8 +10,8 @@ using SocialApp.Pages;
 using Windows.Networking.Sockets;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using SocialApp.Proxies;
-using AppCommonClasses.Repos; // For GroupPage
+using SocialApp.Proxies; // For GroupPage
+using Server.Proxies;
 
 namespace SocialApp.Components
 {

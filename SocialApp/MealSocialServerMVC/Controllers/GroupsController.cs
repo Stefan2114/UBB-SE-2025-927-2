@@ -1,74 +1,85 @@
 using Microsoft.AspNetCore.Mvc;
 using MealSocialServerMVC.Models;
-using MealSocialServerMVC.Services;
+using AppCommonClasses.Services;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Repos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AppCommonClasses.Data;
+using Microsoft.EntityFrameworkCore;
+using AppCommonClasses.Models;
+using CommonGroup = AppCommonClasses.Models.Group;
 
 namespace MealSocialServerMVC.Controllers
 {
+    [Route("groups")]
     public class GroupsController : Controller
     {
-        private readonly GroupApiService _groupApiService;
+        private readonly IGroupService _groupService;
 
-        public GroupsController(GroupApiService groupApiService)
+        public GroupsController(IGroupService groupService)
         {
-            _groupApiService = groupApiService;
+            _groupService = groupService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet("")]
+        public IActionResult Index()
         {
-            var groups = await _groupApiService.GetAllGroupsAsync();
+            var groups = _groupService.GetAllGroups();
             return View(groups);
         }
 
+        [HttpGet("create")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Group group)
+        public IActionResult Create(CommonGroup group)
         {
             if (ModelState.IsValid)
             {
-                await _groupApiService.CreateGroupAsync(group);
+                _groupService.AddGroup(group.Name, group.Description, group.Image, group.AdminId);
                 return RedirectToAction(nameof(Index));
             }
             return View(group);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet("edit/{id}")]
+        public IActionResult Edit(int id)
         {
-            var group = await _groupApiService.GetGroupByIdAsync(id);
+            var group = _groupService.GetGroupById(id);
             if (group == null) return NotFound();
             return View(group);
         }
 
-        [HttpPost]
+        [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Group group)
+        public IActionResult Edit(CommonGroup group)
         {
             if (ModelState.IsValid)
             {
-                await _groupApiService.UpdateGroupAsync(group);
+                _groupService.UpdateGroup(group.Id, group.Name, group.Description, group.Image, group.AdminId);
                 return RedirectToAction(nameof(Index));
             }
             return View(group);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet("delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            var group = await _groupApiService.GetGroupByIdAsync(id);
+            var group = _groupService.GetGroupById(id);
             if (group == null) return NotFound();
             return View(group);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("delete/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            await _groupApiService.DeleteGroupAsync(id);
+            _groupService.DeleteGroup(id);
             return RedirectToAction(nameof(Index));
         }
     }

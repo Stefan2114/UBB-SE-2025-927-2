@@ -42,10 +42,11 @@ builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IBodyMetricService, BodyMetricService>();
 builder.Services.AddScoped<ICalorieService, CalorieService>();
 builder.Services.AddScoped<IWaterIntakeService, WaterService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
 
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<MealSocialServerMVC.Services.GroupApiService>();
+
 
 var app = builder.Build();
 
