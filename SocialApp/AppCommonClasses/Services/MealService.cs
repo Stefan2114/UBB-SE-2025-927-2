@@ -1,12 +1,11 @@
 ﻿namespace AppCommonClasses.Services
 {
-    using AppCommonClasses.Models;
-    using AppCommonClasses.Interfaces;
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Models;
 
     public class MealService : IMealService
     {
@@ -88,7 +87,7 @@
                 "dinner" => 3,
                 "snack" => 4,
                 "dessert" => 5,
-                _ => 0 
+                _ => 0
             };
         }
 
@@ -102,7 +101,7 @@
                 "medium" => 2,
                 "advanced" => 3,
                 "hard" => 3,
-                _ => 0 
+                _ => 0
             };
         }
 

@@ -28,9 +28,12 @@ namespace SocialApp
             this.UnhandledException += OnUnhandledException;
             var services = new ServiceCollection();
             services.AddSingleton<AppController>();
+            services.AddHttpClient<MealServiceProxy>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPostRepository, PostRepository>();
             services.AddSingleton<ICommentService, CommentService>();
+            services.AddSingleton<IMealRepository, MealRepository>();
+            services.AddSingleton<IIngredientRepository, IngredientRepository>();
 
             services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();
@@ -43,6 +46,8 @@ namespace SocialApp
             services.AddTransient<GroceryViewModel>();
             services.AddTransient<GroceryListPage>();
             services.AddTransient<MainPage>();
+            services.AddTransient<MealListViewModel>();
+            services.AddTransient<MealListPage>();
             Services = services.BuildServiceProvider();
         }
 

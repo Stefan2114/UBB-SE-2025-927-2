@@ -1,12 +1,8 @@
 ﻿using System.Data.SqlClient;
-using System.Threading.Tasks;
-    using System.Collections.Generic;
-    using System.Linq;
-    using AppCommonClasses.Data;
-    using AppCommonClasses.Interfaces;
-    using AppCommonClasses.Models;
+using AppCommonClasses.Interfaces;
+using AppCommonClasses.Models;
 
-namespace SocialApp.Repository
+namespace AppCommonClasses.Repos
 {
     /// <summary>
     /// Repository for meal data access.
@@ -24,15 +20,15 @@ namespace SocialApp.Repository
             this.dataLink = dataLink;
         }
 
-        [System.Obsolete]
+        [Obsolete]
         public MealRepository()
         {
-           // this.dataLink = new DataLink();
+            // this.dataLink = new DataLink();
         }
 
-        [System.Obsolete]
+        [Obsolete]
         public async Task<int> CreateMealAsync(Meal meal, int cookingSkillId, int mealTypeId)
-            {
+        {
             string query = @"INSERT INTO meals (m_name, recipe, cs_id, mt_id, preparation_time, servings, protein, calories, carbohydrates, fat, fiber, sugar, photo_link) 
                                VALUES (@m_name, @recipe, @cs_id, @mt_id, @preparation_time, @servings, @protein, @calories, @carbohydrates, @fat, @fiber, @sugar, @photo_link); 
                                SELECT SCOPE_IDENTITY();";
@@ -54,10 +50,10 @@ namespace SocialApp.Repository
                 new ("@photo_link", meal.PhotoLink ?? "default.jpg"),
             };
 
-            return await Task.FromResult(this.dataLink.ExecuteScalar<int>(query, parameters, false));
+            return await Task.FromResult(dataLink.ExecuteScalar<int>(query, parameters, false));
         }
 
-        [System.Obsolete]
+        [Obsolete]
         public async Task<int> AddMealIngredientAsync(int mealId, int ingredientId, float quantity)
         {
             var parameters = new SqlParameter[]
@@ -67,7 +63,7 @@ namespace SocialApp.Repository
                 new ("@quantity", quantity),
             };
 
-            int result = this.dataLink.ExecuteNonQuery("InsertMealIngredient", parameters);
+            int result = dataLink.ExecuteNonQuery("InsertMealIngredient", parameters);
             return await Task.FromResult(result);
         }
 
@@ -78,23 +74,23 @@ namespace SocialApp.Repository
         public async Task<List<Meal>> GetAllMealsAsync()
         {
             string query = "SELECT * FROM meals";
-            var dataTable = this.dataLink.ExecuteSqlQuery(query, null);
+            var dataTable = dataLink.ExecuteSqlQuery(query, null);
 
             var meals = new List<Meal>();
             foreach (System.Data.DataRow row in dataTable.Rows)
             {
                 meals.Add(new Meal
-        {
+                {
                     Name = row["m_name"]?.ToString(),
                     Recipe = row["recipe"]?.ToString(),
-                    PreparationTime = row["preparation_time"] != System.DBNull.Value ? Convert.ToInt32(row["preparation_time"]) : 0,
-                    Servings = row["servings"] != System.DBNull.Value ? Convert.ToInt32(row["servings"]) : 0,
-                    Protein = row["protein"] != System.DBNull.Value ? Convert.ToInt32(row["protein"]) : 0,
-                    Calories = row["calories"] != System.DBNull.Value ? Convert.ToInt32(row["calories"]) : 0,
-                    Carbohydrates = row["carbohydrates"] != System.DBNull.Value ? Convert.ToInt32(row["carbohydrates"]) : 0,
-                    Fat = row["fat"] != System.DBNull.Value ? Convert.ToInt32(row["fat"]) : 0,
-                    Fiber = row["fiber"] != System.DBNull.Value ? Convert.ToInt32(row["fiber"]) : 0,
-                    Sugar = row["sugar"] != System.DBNull.Value ? Convert.ToInt32(row["sugar"]) : 0,
+                    PreparationTime = row["preparation_time"] != DBNull.Value ? Convert.ToInt32(row["preparation_time"]) : 0,
+                    Servings = row["servings"] != DBNull.Value ? Convert.ToInt32(row["servings"]) : 0,
+                    Protein = row["protein"] != DBNull.Value ? Convert.ToInt32(row["protein"]) : 0,
+                    Calories = row["calories"] != DBNull.Value ? Convert.ToInt32(row["calories"]) : 0,
+                    Carbohydrates = row["carbohydrates"] != DBNull.Value ? Convert.ToInt32(row["carbohydrates"]) : 0,
+                    Fat = row["fat"] != DBNull.Value ? Convert.ToInt32(row["fat"]) : 0,
+                    Fiber = row["fiber"] != DBNull.Value ? Convert.ToInt32(row["fiber"]) : 0,
+                    Sugar = row["sugar"] != DBNull.Value ? Convert.ToInt32(row["sugar"]) : 0,
                     PhotoLink = row["photo_link"]?.ToString()
                 });
             }
