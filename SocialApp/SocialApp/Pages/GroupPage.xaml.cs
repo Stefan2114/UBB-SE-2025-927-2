@@ -21,7 +21,6 @@ namespace SocialApp.Pages
         private const Visibility visible = Visibility.Visible;
         private IUserService userService;
         private IPostService postService;
-        private IGroupRepository groupRepository;
         private IGroupService groupService;
         private long GroupId;
         private AppCommonClasses.Models.Group group;
@@ -64,7 +63,7 @@ namespace SocialApp.Pages
         {
             var controller = App.Services.GetService<AppController>();
             if (controller.CurrentUser == null) return false;
-            return groupRepository.GetGroupById(GroupId).AdminId == controller.CurrentUser.Id;
+            return groupService.GetGroupById(GroupId).AdminId == controller.CurrentUser.Id;
         }
 
         private async void SetContent()
