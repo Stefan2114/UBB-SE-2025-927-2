@@ -4,8 +4,10 @@ namespace SocialApp.ViewModels
     using System.ComponentModel;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Net.Http;
     using System.Windows.Input;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Services;
     using MealSocialServerMVC.Proxies;
     using Microsoft.Extensions.DependencyInjection;
     using SocialApp.Interfaces;
@@ -256,7 +258,7 @@ namespace SocialApp.ViewModels
         private readonly IWaterIntakeService waterService;
         private readonly ICalorieService calorieService;
         private readonly ICalorieRepository calorieRepository;
-        private readonly MacrosService macrosService;
+        private readonly IMacrosService macrosService;
 
         public static long UserId { get; set; }
 
@@ -275,7 +277,7 @@ namespace SocialApp.ViewModels
             calorieService = new CalorieServiceProxy();
 
             // Initialize MacrosService
-            macrosService = new MacrosService();
+            macrosService = new MacrosServiceProxy(new HttpClient { BaseAddress = new Uri("https://localhost:7106/") });
 
             System.Diagnostics.Debug.WriteLine("Getting water intake...");
 

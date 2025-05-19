@@ -1,4 +1,4 @@
-﻿namespace SocialApp.Proxies
+﻿/*namespace SocialApp.Proxies
 {
     using AppCommonClasses.Interfaces;
     using AppCommonClasses.Models;
@@ -48,4 +48,4 @@
             this.httpClient.PutAsJsonAsync($"{id}", updatedMacros).Wait();
         }
     }
-}
+}*/
