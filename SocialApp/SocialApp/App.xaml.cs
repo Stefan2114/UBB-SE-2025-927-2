@@ -1,17 +1,18 @@
-﻿using System;
-using AppCommonClasses.Interfaces;
-using AppCommonClasses.Repos;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using SocialApp.Interfaces;
-using SocialApp.Pages;
-using SocialApp.Proxies;
-using SocialApp.Services;
-using SocialApp.ViewModels;
-
-namespace SocialApp
+﻿namespace SocialApp
 {
+    using System;
+    using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Repos;
+    using AppCommonClasses.Services;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using SocialApp.Interfaces;
+    using SocialApp.Pages;
+    using SocialApp.Proxies;
+    using SocialApp.Services;
+    using SocialApp.ViewModels;
+
     public partial class App : Application
     {
         public Window Window { get; set; }
@@ -34,7 +35,7 @@ namespace SocialApp
 
             services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();
-            services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
+            services.AddSingleton<IGroceryListService, GroceryListServiceProxy>();
             services.AddSingleton<IGroceryListService, GroceryListService>();
             services.AddSingleton<IIngredientRepository, IngredientRepository>();
             services.AddSingleton<IMealService, MealServiceProxy>();

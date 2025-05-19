@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AppCommonClasses.Models;
 
 namespace MealSocialServerMVC.Data
 {
@@ -9,5 +10,6 @@ namespace MealSocialServerMVC.Data
             : base(options)
         {
         }
+        public DbSet<AppCommonClasses.Models.GroceryIngredient> GroceryIngredient { get; set; } = default!;
     }
 }
