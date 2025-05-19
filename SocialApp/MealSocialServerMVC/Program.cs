@@ -32,6 +32,7 @@ builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IMacrosRepository, MacrosRepository>();
+builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
 
 
 // Add services that controllers depend on
@@ -41,6 +42,7 @@ builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IBodyMetricService, BodyMetricService>();
 builder.Services.AddScoped<ICalorieService, CalorieService>();
 builder.Services.AddSession();
+builder.Services.AddScoped<IWaterIntakeService, WaterService>();
 
 builder.Services.AddControllersWithViews();
 

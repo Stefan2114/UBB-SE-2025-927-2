@@ -8,5 +8,6 @@ namespace SocialApp.ViewModels
 {
     internal class CommentViewModel
     {
+
     }
 }

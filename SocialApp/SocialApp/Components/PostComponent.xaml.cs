@@ -15,6 +15,7 @@ using System.Text.Json.Serialization;
 using SocialApp.Proxies;
 using AppCommonClasses.Repos;
 using SocialApp.Interfaces;
+using AppCommonClasses.Interfaces;
 
 namespace SocialApp.Components
 {
