@@ -22,7 +22,7 @@ namespace AppCommonClasses.Interfaces
 
         void UnfollowUserById(long userId, long whoToUnfollowId);
 
-        void AddUser(string username, string email, string password, string image);
+        long AddUser(string username, string email, string password, string image);
 
         void DeleteUser(long id);
 

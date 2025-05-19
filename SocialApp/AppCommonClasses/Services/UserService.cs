@@ -31,7 +31,7 @@ namespace AppCommonClasses.Services
         /// <param name="password">The password.</param>
         /// <param name="image">The image.</param>
         /// <exception cref="Exception">Thrown when validation fails.</exception>
-        public void AddUser(string username, string email, string password, string image)
+        public long AddUser(string username, string email, string password, string image)
         {
             if (username == null || username.Length == 0)
             {
@@ -48,7 +48,7 @@ namespace AppCommonClasses.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            this.userRepository.Save(new User() { Username = username, Email = email, Password = password, Image = image });
+            return this.userRepository.Save(new User() { Username = username, Email = email, Password = password, Image = image }).Id;
         }
 
         /// <summary>

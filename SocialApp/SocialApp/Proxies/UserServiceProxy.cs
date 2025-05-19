@@ -23,7 +23,7 @@
             this.httpClient.BaseAddress = new Uri("https://localhost:7106/users/");
         }
 
-        public void AddUser(string username, string email, string password, string image)
+        public long AddUser(string username, string email, string password, string image)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -53,6 +53,7 @@
             {
                 Debug.WriteLine($"Failed to add user. Status: {response.StatusCode}");
             }
+            return -1;
         }
 
         public void DeleteUser(long id)

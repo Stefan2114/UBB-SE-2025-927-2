@@ -21,11 +21,13 @@ namespace MealSocialServerMVC.Controllers
         {
             try
             {
-                this._userService.AddUser(user.Username, " ", user.Password, "");
+                long result = this._userService.AddUser(user.Username, " ", user.Password, "");
 
+                HttpContext.Session.SetString("UserId", result.ToString());
                 // at this point, the register is successful
                 // here you redirect to Body Metrics page (for registering new user)
-                return RedirectToAction("Index", "Home");
+
+                return RedirectToAction("Update", "UpdateBodyMetric");
             }
             catch (Exception ex)
             {
@@ -53,9 +55,10 @@ namespace MealSocialServerMVC.Controllers
                     throw new Exception("Password is incorrect");
                 }
 
+                HttpContext.Session.SetString("UserId", result.ToString());
                 // at this point, the register is successful
                 // here you redirect to Main page (Dashboard)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Dashboard", "Dashboard");
 
             }
             catch (Exception ex)

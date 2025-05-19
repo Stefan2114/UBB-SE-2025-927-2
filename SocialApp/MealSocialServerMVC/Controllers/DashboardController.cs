@@ -1,8 +1,7 @@
-using AppCommonClasses.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using MealSocialServerMVC.Models;
-using System;
 using System.Diagnostics;
+using AppCommonClasses.Interfaces;
+using MealSocialServerMVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealSocialServerMVC.Controllers
 {
@@ -23,8 +22,14 @@ namespace MealSocialServerMVC.Controllers
         {
             try
             {
+                var userIdString = HttpContext.Session.GetString("UserId");
+                long userId = long.Parse(userIdString);
+
+                /*
                 // Get user by username
                 var user = _userService.GetUserByUsername(username);
+                */
+                var user = _userService.GetById(userId);
                 if (user == null)
                 {
                     ViewBag.ErrorMessage = $"User '{username}' not found. Using default values.";
