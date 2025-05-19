@@ -9,6 +9,7 @@ namespace SocialApp.Tests
     using AppCommonClasses.Models;
     using SocialApp.Services;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Services;
 
 
     /// <summary>

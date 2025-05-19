@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
 using SocialApp.Interfaces;
-using SocialApp.Repository;
 
 
-namespace SocialApp.Services
+namespace AppCommonClasses.Services
 {
 
     /// <summary>
@@ -27,10 +26,10 @@ namespace SocialApp.Services
         /// <param name="cr">The comment repository.</param>
         /// <param name="pr">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public CommentService(ICommentRepository cr, IPostRepository pr, IUserRepository userRepository)
+        public CommentService(ICommentRepository cr, IPostRepository ps, IUserRepository userRepository)
         {
             this.commentRepository = cr;
-            this.postService = pr;    // Added null checks
+            this.postService = ps;    // Added null checks
             this.userServiceProxy = userRepository; // Added null checks
         }
 
