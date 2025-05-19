@@ -9,56 +9,82 @@
     [Route("calories")]
     public class CalorieController : ControllerBase, ICalorieController
     {
-        private readonly ICalorieRepository calorieRepository;
+        private readonly ICalorieService _calorieService;
 
-        public CalorieController(ICalorieRepository calorieRepository)
+        public CalorieController(ICalorieService calorieService)
         {
-            this.calorieRepository = calorieRepository;
+            this._calorieService = calorieService;
         }
 
-        // Assuming the repository returns a Calorie object for the user
         [HttpGet("goal/{userId}")]
         public ActionResult<double> GetGoal(long userId)
         {
-            var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
-            if (calorie == null)
+            try
             {
-                return this.NotFound();  // If no calorie data found for the user
+                double goal = _calorieService.GetGoal(userId);
+                return goal;
             }
-            return calorie.DailyIntake;  // Return the daily calorie goal
+            catch (Exception ex)
+            {
+                return NotFound($"Error retrieving calorie goal: {ex.Message}");
+            }
         }
 
         [HttpGet("food/{userId}")]
         public ActionResult<double> GetFood(long userId)
         {
-            var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
-            if (calorie == null)
+            try
             {
-                return this.NotFound();
+                double food = _calorieService.GetFood(userId);
+                return food;
             }
-            return calorie.CaloriesConsumed;  // Return the calories consumed
+            catch (Exception ex)
+            {
+                return NotFound($"Error retrieving food calories: {ex.Message}");
+            }
         }
 
         [HttpGet("exercise/{userId}")]
         public ActionResult<double> GetExercise(long userId)
         {
-            var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
-            if (calorie == null)
+            try
             {
-                return this.NotFound();
+                double exercise = _calorieService.GetExercise(userId);
+                return exercise;
             }
-            return calorie.CaloriesBurned;  // Return the calories burned
+            catch (Exception ex)
+            {
+                return NotFound($"Error retrieving exercise calories: {ex.Message}");
+            }
         }
 
         [HttpGet("{userId}")]
         public ActionResult<Calorie> GetCalorie(long userId)
         {
-            var calorie = this.calorieRepository.GetCaloriesByUserId(userId);
-            if (calorie == null)
+            try
             {
-                return this.NotFound();
+                // For getting the full Calorie object, we still need to use the repository
+                // Ideally, we would add a GetCalorie method to the ICalorieService interface
+                var goal = _calorieService.GetGoal(userId);
+                var food = _calorieService.GetFood(userId);
+                var exercise = _calorieService.GetExercise(userId);
+
+                // Create a new Calorie object with the retrieved values
+                var calorie = new Calorie
+                {
+                    U_Id = userId,
+                    DailyIntake = goal,
+                    CaloriesConsumed = food,
+                    CaloriesBurned = exercise,
+                    Today = DateTime.Now
+                };
+
+                return calorie;
             }
-            return calorie;  // Return the calories burned
+            catch (Exception ex)
+            {
+                return NotFound($"Error retrieving calorie data: {ex.Message}");
+            }
         }
     }
 }

@@ -1,0 +1,35 @@
+@model List<AppCommonClasses.Models.Meal>
+
+@{
+    ViewData["Title"] = "Meals";
+}
+
+<h2>Meals</h2>
+<a asp-action="Create" class="btn btn-primary">Create New Meal</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbs</th>
+            <th>Fat</th>
+            <th>Servings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var meal in Model)
+        {
+            <tr>
+                <td>@meal.Name</td>
+                <td>@meal.Category</td>
+                <td>@meal.Calories</td>
+                <td>@meal.Protein</td>
+                <td>@meal.Carbohydrates</td>
+                <td>@meal.Fat</td>
+                <td>@meal.Servings</td>
+            </tr>
+        }
+    </tbody>
+</table>

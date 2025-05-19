@@ -18,7 +18,6 @@ namespace SocialApp.Pages
     {
         private const Visibility collapsed = Visibility.Collapsed;
         private const Visibility visible = Visibility.Visible;
-        private IUserService userServiceProxy;
         private IUserService userService;
         private IPostService postService;
         private IGroupRepository groupRepository;
@@ -44,9 +43,10 @@ namespace SocialApp.Pages
 
         private void DisplayPage(object sender, RoutedEventArgs e)
         {
-            userServiceProxy = new UserServiceProxy();
+            userService = new UserServiceProxy();
             groupRepository = new GroupRepository();
-            groupService = new GroupService(groupRepository, userServiceProxy);
+            var userRepository = App.Services.GetService<IUserRepository>();
+            groupService = new GroupService(groupRepository, userRepository);
             postService = new PostServiceProxy();
             group = groupService.GetGroupById(GroupId);
 

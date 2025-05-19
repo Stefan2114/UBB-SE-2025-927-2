@@ -13,7 +13,7 @@
     public class PostService : IPostService
     {
         private IPostRepository postRepository;
-        private IUserService userService;
+        private IUserRepository userService;
         private IGroupRepository groupRepository;
 
         /// <summary>
@@ -22,7 +22,7 @@
         /// <param name="postRepository">The post repository.</param>
         /// <param name="userRepository">The user repository.</param>
         /// <param name="groupRepository">The group repository.</param>
-        public PostService(IPostRepository postRepository, IUserService userRepository, IGroupRepository groupRepository)
+        public PostService(IPostRepository postRepository, IUserRepository userRepository, IGroupRepository groupRepository)
         {
             this.postRepository = postRepository;
             this.userService = userRepository;

@@ -5,12 +5,12 @@ using Microsoft.UI;
 using System.Collections.Generic;
 using AppCommonClasses.Models;
 using SocialApp.Services;
-using SocialApp.Repository;
 using SocialApp.Pages;
 using Windows.Networking.Sockets;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using SocialApp.Proxies; // For GroupPage
+using SocialApp.Proxies;
+using AppCommonClasses.Repos; // For GroupPage
 
 namespace SocialApp.Components
 {
@@ -30,8 +30,8 @@ namespace SocialApp.Components
         public GroupsDrawer()
         {
             this.InitializeComponent();
-            var groupRepository = new GroupRepository();
-            var userRepository = new UserServiceProxy();
+            var groupRepository = App.Services.GetService<GroupRepository>();
+            var userRepository = App.Services.GetService<UserRepository>();
             controller = App.Services.GetService<AppController>();
             groupService = new GroupService(groupRepository, userRepository);
             CreateGroupButton.Click += CreateGroup_Click; // Handle click event

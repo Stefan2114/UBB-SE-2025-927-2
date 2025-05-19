@@ -39,6 +39,10 @@
 
         public DbSet<Goal> Goals { get; set; } = default!;
 
+        public DbSet<Ingredient> Ingredients { get; set; } = default!;
+
+        public DbSet<Macros> Macros { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GroupUser>()
@@ -50,6 +54,8 @@
             modelBuilder.Entity<GroceryIngredient>()
             .HasKey(groceryIngredient => new { groceryIngredient.Id, groceryIngredient.IngredientId });
 
+            modelBuilder.Entity<Macros>()
+                .HasKey(m => new { m.DailyMealId});
             modelBuilder.Entity<Ingredient>().HasKey(ingredient => new { ingredient.Id });
 
             modelBuilder.Entity<Post>()

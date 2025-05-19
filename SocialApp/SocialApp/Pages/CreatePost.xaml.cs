@@ -9,7 +9,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using SocialApp.Interfaces;
 using SocialApp.Proxies;
-using SocialApp.Repository;
 using SocialApp.Services;
 using SocialApp.ViewModels;
 using System;
@@ -60,7 +59,9 @@ namespace SocialApp.Pages
             this.postViewModel = new PostViewModel(postService);
             //this.groupService = App.Services.GetService<GroupService>();
             // nu exista GroupRepoProxy, va trebui facut direct un GroupServiceProxxy
-            this.groupService = new GroupService(new Repository.GroupRepository(), new UserServiceProxy());
+            var userRepository = App.Services.GetService<UserRepository>();
+
+            this.groupService = new GroupService(new Repository.GroupRepository(), userRepository);
         }
 
         private void LoadUserGroups()

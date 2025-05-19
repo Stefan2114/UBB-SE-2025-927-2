@@ -30,9 +30,16 @@ namespace SocialApp
             services.AddSingleton<AppController>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IPostRepository, PostRepository>();
+            services.AddSingleton<ICommentService, CommentService>();
+
+            services.AddSingleton<IUserService, UserServiceProxy>();
             services.AddSingleton<IPostService, PostServiceProxy>();
             services.AddSingleton<IGroceryListRepository, GroceryListRepositoryProxy>();
             services.AddSingleton<IGroceryListService, GroceryListService>();
+            services.AddSingleton<IIngredientRepository, IngredientRepository>();
+            services.AddSingleton<IMealService, MealServiceProxy>();
+            services.AddSingleton<CreateMealViewModel>();
+
             services.AddTransient<GroceryViewModel>();
             services.AddTransient<GroceryListPage>();
             services.AddTransient<MainPage>();
@@ -70,10 +77,6 @@ namespace SocialApp
                 {
                     rootFrame.Navigate(typeof(SocialApp.Pages.WelcomePage));
                 }
-
-                // Initialize the shared ViewModel with the required MealService instance  
-                var mealService = new MealService(); // Ensure MealService is properly instantiated  
-                MealListViewModel = new MealListViewModel();
 
                 Window.Activate();
             }

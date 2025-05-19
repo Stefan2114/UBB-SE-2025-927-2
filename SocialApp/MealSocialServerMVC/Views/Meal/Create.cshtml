@@ -1,0 +1,52 @@
+@model AppCommonClasses.Models.Meal
+
+@{
+    ViewData["Title"] = "Create Meal";
+}
+
+<h2>Create Meal</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category"></label>
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Calories"></label>
+        <input asp-for="Calories" class="form-control" />
+        <span asp-validation-for="Calories" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Protein"></label>
+        <input asp-for="Protein" class="form-control" />
+        <span asp-validation-for="Protein" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Carbohydrates"></label>
+        <input asp-for="Carbohydrates" class="form-control" />
+        <span asp-validation-for="Carbohydrates" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Fat"></label>
+        <input asp-for="Fat" class="form-control" />
+        <span asp-validation-for="Fat" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Servings"></label>
+        <input asp-for="Servings" class="form-control" />
+        <span asp-validation-for="Servings" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe"></label>
+        <textarea asp-for="Recipe" class="form-control"></textarea>
+        <span asp-validation-for="Recipe" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

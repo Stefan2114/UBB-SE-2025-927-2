@@ -10,10 +10,13 @@
 
     public class ReactionService(IReactionRepository reactionRepository) : IReactionService
     {
+
         public Reaction AddReaction(long userId, long postId, ReactionType type)
         {
             if (reactionRepository.GetReactionByUserAndPost(userId, postId) != null)
             {
+                if (reactionRepository.GetReactionByUserAndPost(userId, postId).Type == type)
+                    reactionRepository.DeleteByUserAndPost(userId, postId);
                 reactionRepository.UpdateByUserAndPost(userId, postId, type);
                 return reactionRepository.GetReactionByUserAndPost(userId, postId);
             }

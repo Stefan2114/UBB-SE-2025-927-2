@@ -11,6 +11,7 @@
     using AppCommonClasses.Enums;
     using SocialApp.Services;
     using AppCommonClasses.Interfaces;
+    using AppCommonClasses.Services;
 
     /// <summary>
     /// Contains unit tests for the UserService class.
@@ -108,7 +109,7 @@
             var userService = new UserService(userRepository);
             long userId = 1;
 
-            User user = new User { Id = userId, Email = "asdsad@gmail.com", Image = "lalal", PasswordHash = "asdasd", Username = "George" };
+            User user = new User { Id = userId, Email = "asdsad@gmail.com", Image = "lalal", Password = "asdasd", Username = "George" };
             
             //userRepository.GetById(userId).Returns(user);
 
@@ -160,7 +161,7 @@
                 Id = userId,
                 Username = username,
                 Email = email,
-                PasswordHash = password,
+                Password = password,
                 Image = image
             };
 

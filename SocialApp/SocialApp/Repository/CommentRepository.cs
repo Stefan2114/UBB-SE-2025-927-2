@@ -7,7 +7,7 @@ namespace SocialApp.Repository
 {
     public class CommentRepository : ICommentRepository
     {
-        private string loginString = "Server=DESKTOP-S99JALT;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string loginString = "Server=DESKTOP-M2TF6Q6\\SQLEXPRESS;Database=SocialApp;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private SqlConnection connection;
 

@@ -1,4 +1,6 @@
+using AppCommonClasses.Interfaces;
 using Microsoft.UI.Xaml.Controls;
+using SocialApp.Proxies;
 using SocialApp.Services;
 using SocialApp.ViewModels;
 
@@ -9,7 +11,8 @@ namespace SocialApp.Pages
         public MealListPage()
         {
             this.InitializeComponent();
-            this.DataContext = new MealListViewModel(new MealService());
+
+            this.DataContext = new MealListViewModel();
         }
     }
 }
