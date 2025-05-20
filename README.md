@@ -210,26 +210,10 @@ Assert.NotNull(result);
 - nu dati merge la codul voastru pana nu a fost verificat de cineva
 - nu dati force push la cod. Dati mesaj pe grup poate se rezolva intre timp
 
-
 # Git Contribution Report
-Generated on: 2025-05-06 07:29:40
+Generated on: 2025-05-20 11:12:30
 Repository: UBB-SE-2025-927-2
-Date Range: From: 2025-04-23, To: 2025-05-05
-## Summary
-| Contributor | Commits | Lines Changed | Files Changed | Branches | Diagrams | Non-Negligible Work |
-| --- | --- | --- | --- | --- | --- | --- |
-| Mihai Țălu | 40 | 10561 | 127 | 7 | 0 | ✅ |
-| Toma Stefan | 12 | 0 | 0 | 0 | 0 | ✅ |
-| Stefan2114 | 6 | 1677 | 55 | 11 | 0 | ✅ |
-| Andrei Ungureanu | 5 | 1188 | 25 | 4 | 0 | ✅ |
-| MihaiTopi | 5 | 369 | 17 | 6 | 0 | ✅ |
-| PaulSchiop | 4 | 1190 | 15 | 6 | 0 | ✅ |
-| Mihnea | 3 | 1129 | 16 | 6 | 0 | ✅ |
-| MihneaVoda | 2 | 0 | 0 | 0 | 0 | ❌ |
-| Alexandru Țigănașu | 1 | 296 | 15 | 6 | 0 | ✅ |
-| MariaDariaTompea | 1 | 340 | 9 | 5 | 0 | ✅ |
-| Topor Mihai | 1 | 0 | 0 | 0 | 0 | ❌ |
-| Valasa-Andrei | 1 | 454 | 8 | 4 | 0 | ✅ |
+Date Range: From: 2025-04-01, To: 2025-05-20
 
 ## Visualizations
 ### Commits per Contributor
@@ -245,396 +229,143 @@ Date Range: From: 2025-04-23, To: 2025-05-05
 ### Mihai Țălu
 ### talumihai@gmail.com
 #### Commit Statistics
-- Total Commits: 40
-- First Commit: 2025-04-29
-- Last Commit: 2025-05-02
-- Active Days: 3
-- Contribution Timespan: 4 days
-- Average Commits Per Active Day: 10.00
+- Total Commits: 54
 
 #### Code Changes
-- Lines Added: 10181
-- Lines Deleted: 380
-- Total Lines Changed: 10561
-
-#### Branches Used
-- Bogdi
-- Maria
-- Valasa
-- main
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 127
-- File Types:
-  - .cs: 105
-  - .xaml: 16
-  - .sql: 6
+- Lines Added: 94005
+- Lines Deleted: 6893
+- Total Lines Changed: 102938
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 40 commits (threshold: 5)
-  - Changed 10561 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
-
----
-### Toma Stefan
-### 147135917+stefan2114@users.noreply.github.com
-#### Commit Statistics
-- Total Commits: 12
-- Active Days: 1
-- Average Commits Per Active Day: 12.00
-
-#### Code Changes
-- Lines Added: 0
-- Lines Deleted: 0
-- Total Lines Changed: 0
-
-#### Files Changed
-- Total Files: 0
-
-#### Contribution Assessment
-- **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 12 commits (threshold: 5)
 
 ---
 ### Stefan2114
 ### stefan.toma021@gmail.com
 #### Commit Statistics
-- Total Commits: 6
-- First Commit: 2025-04-25
-- Last Commit: 2025-04-29
-- Active Days: 4
-- Contribution Timespan: 5 days
-- Average Commits Per Active Day: 1.20
+- Total Commits: 41
 
 #### Code Changes
-- Lines Added: 939
-- Lines Deleted: 738
-- Total Lines Changed: 1677
-
-#### Branches Used
-- Bogdi
-- Maria
-- Valasa
-- creating-PostViewModel
-- entity-framework-post
-- main
-- seminar4
-- server-repo-post
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 55
-- File Types:
-  - .cs: 66
-  - .csproj: 4
-  - .sql: 4
-  - .json: 2
+- Lines Added: 33275
+- Lines Deleted: 5638
+- Total Lines Changed: 39173
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 6 commits (threshold: 5)
-  - Changed 1677 lines of code (threshold: 100)
-  - Active on 4 days (threshold: 3)
 
 ---
 ### Andrei Ungureanu
 ### andreiungureanu2014@yahoo.ro
 #### Commit Statistics
-- Total Commits: 5
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-03
-- Active Days: 3
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 5.00
+- Total Commits: 17
 
 #### Code Changes
-- Lines Added: 972
-- Lines Deleted: 216
-- Total Lines Changed: 1188
-
-#### Branches Used
-- Valasa
-- main
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 25
-- File Types:
-  - .cs: 19
-  - .cshtml: 6
-  - .sql: 3
-  - .json: 2
-  - .csproj: 1
+- Lines Added: 2201
+- Lines Deleted: 1327
+- Total Lines Changed: 3528
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 5 commits (threshold: 5)
-  - Changed 1188 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
-
----
-### MihaiTopi
-### mihai.topor@outlook.com
-#### Commit Statistics
-- Total Commits: 5
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-04
-- Active Days: 3
-- Contribution Timespan: 2 days
-- Average Commits Per Active Day: 2.50
-
-#### Code Changes
-- Lines Added: 272
-- Lines Deleted: 97
-- Total Lines Changed: 369
-
-#### Branches Used
-- Bogdi
-- Valasa
-- main
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 17
-- File Types:
-  - .cs: 28
-  - .json: 4
-
-#### Contribution Assessment
-- **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 5 commits (threshold: 5)
-  - Changed 369 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
 
 ---
 ### PaulSchiop
 ### schioppaul@gmail.com
 #### Commit Statistics
-- Total Commits: 4
-- First Commit: 2025-05-04
-- Last Commit: 2025-05-04
-- Active Days: 3
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 4.00
+- Total Commits: 8
 
 #### Code Changes
-- Lines Added: 1180
-- Lines Deleted: 10
-- Total Lines Changed: 1190
-
-#### Branches Used
-- Bogdi
-- Valasa
-- main
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 15
-- File Types:
-  - .cs: 12
-  - .json: 2
-  - .sql: 1
-  - .csproj: 1
+- Lines Added: 2105
+- Lines Deleted: 151
+- Total Lines Changed: 2256
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 1190 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
 
 ---
 ### Mihnea
 ### mihnea.voda@stud.ubbcluj.ro
 #### Commit Statistics
-- Total Commits: 3
-- First Commit: 2025-05-04
-- Last Commit: 2025-05-05
-- Active Days: 3
-- Contribution Timespan: 2 days
-- Average Commits Per Active Day: 1.50
+- Total Commits: 6
 
 #### Code Changes
-- Lines Added: 686
-- Lines Deleted: 443
-- Total Lines Changed: 1129
-
-#### Branches Used
-- Bogdi
-- Valasa
-- main
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 16
-- File Types:
-  - .cs: 32
-  - .json: 6
-
+- Lines Added: 1512
+- Lines Deleted: 902
+- Total Lines Changed: 2414
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 1129 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
-
----
-### MihneaVoda
-### 147316786+desixtt@users.noreply.github.com
-#### Commit Statistics
-- Total Commits: 2
-- Active Days: 1
-- Average Commits Per Active Day: 2.00
-
-#### Code Changes
-- Lines Added: 0
-- Lines Deleted: 0
-- Total Lines Changed: 0
-
-#### Files Changed
-- Total Files: 0
-
-#### Contribution Assessment
-- **Non-Negligible Work**: No
-- Reasoning:
-  - Did not meet minimum thresholds for non-negligible work
 
 ---
 ### Alexandru Țigănașu
 ### alexandru.tiganasu@stud.ubbcluj.ro
 #### Commit Statistics
-- Total Commits: 1
-- First Commit: 2025-05-02
-- Last Commit: 2025-05-02
-- Active Days: 1
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 1.00
+- Total Commits: 4
 
 #### Code Changes
-- Lines Added: 243
-- Lines Deleted: 53
-- Total Lines Changed: 296
-
-#### Branches Used
-- Bogdi
-- Valasa
-- main
-- stef3
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 15
-- File Types:
-  - .cs: 15
+- Lines Added: 999
+- Lines Deleted: 264
+- Total Lines Changed: 1263
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 296 lines of code (threshold: 100)
+- 
+---
+### BogdanSchiop5
+### schiopbogdan2004@gmail.com
+#### Commit Statistics
+- Total Commits: 5
+
+#### Code Changes
+- Lines Added: 630
+- Lines Deleted: 55
+- Total Lines Changed: 685
+
+#### Contribution Assessment
+- **Non-Negligible Work**: Yes
+
+---
+### PatrickSzm
+### patrickszmuck@yahoo.com
+#### Commit Statistics
+- Total Commits: 4
+
+#### Code Changes
+- Lines Added: 1174
+- Lines Deleted: 251
+- Total Lines Changed: 1325
+
+#### Contribution Assessment
+- **Non-Negligible Work**: Yes
 
 ---
 ### MariaDariaTompea
 ### mariatompea@gmail.com
 #### Commit Statistics
-- Total Commits: 1
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-03
-- Active Days: 1
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 1.00
+- Total Commits: 2
 
 #### Code Changes
-- Lines Added: 337
-- Lines Deleted: 3
-- Total Lines Changed: 340
+- Lines Added: 707
+- Lines Deleted: 34
+- Total Lines Changed: 741
 
-#### Branches Used
-- Maria
-- Valasa
-- main
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 9
-- File Types:
-  - .cs: 7
-  - .json: 2
+#### Code Review Participation: 2 reviews
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 340 lines of code (threshold: 100)
 
 ---
-### Topor Mihai
-### 147518933+mihaitopi@users.noreply.github.com
+### donFelippe
+### filip.rus@yahoo.com
 #### Commit Statistics
 - Total Commits: 1
-- Active Days: 1
-- Average Commits Per Active Day: 1.00
+
 
 #### Code Changes
-- Lines Added: 0
+- Lines Added: 108
 - Lines Deleted: 0
-- Total Lines Changed: 0
+- Total Lines Changed: 108
 
-#### Files Changed
-- Total Files: 0
-
-#### Contribution Assessment
-- **Non-Negligible Work**: No
-- Reasoning:
-  - Did not meet minimum thresholds for non-negligible work
-
----
-### Valasa-Andrei
-### andreivalasa7@gmail.com
-#### Commit Statistics
-- Total Commits: 1
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-03
-- Active Days: 1
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 1.00
-
-#### Code Changes
-- Lines Added: 310
-- Lines Deleted: 144
-- Total Lines Changed: 454
-
-#### Branches Used
-- Valasa
-- main
-- stef4
-- stef5
-
-#### Files Changed
-- Total Files: 8
-- File Types:
-  - .cs: 8
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 454 lines of code (threshold: 100)
 
 ---
-
