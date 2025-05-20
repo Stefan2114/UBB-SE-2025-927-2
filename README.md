@@ -229,359 +229,143 @@ Date Range: From: 2025-04-01, To: 2025-05-20
 ### Mihai Țălu
 ### talumihai@gmail.com
 #### Commit Statistics
-- Total Commits: 88
-- First Commit: 2025-04-29
-- Last Commit: 2025-05-20
-- Active Days: 6
-- Contribution Timespan: 22 days
-- Average Commits Per Active Day: 4.00
+- Total Commits: 54
 
 #### Code Changes
-- Lines Added: 10181
-- Lines Deleted: 380
-- Total Lines Changed: 10561
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 127
-- File Types:
-  - .cs: 105
-  - .xaml: 16
-  - .sql: 6
+- Lines Added: 94005
+- Lines Deleted: 6893
+- Total Lines Changed: 102938
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 88 commits (threshold: 5)
-  - Changed 10561 lines of code (threshold: 100)
-  - Active on 6 days (threshold: 3)
 
 ---
 ### Stefan2114
 ### stefan.toma021@gmail.com
 #### Commit Statistics
-- Total Commits: 71
-- First Commit: 2025-04-23
-- Last Commit: 2025-05-19
-- Active Days: 9
-- Contribution Timespan: 27 days
-- Average Commits Per Active Day: 2.63
+- Total Commits: 41
 
 #### Code Changes
-- Lines Added: 91892
-- Lines Deleted: 4542
-- Total Lines Changed: 96434
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 229
-- File Types:
-  - .cs: 319
-  - .json: 32
-  - .cshtml: 20
-  - .xaml: 19
-  - .csproj: 13
-
-#### Diagrams Created/Modified: 9
-
-#### Code Review Participation: 2 reviews
+- Lines Added: 33275
+- Lines Deleted: 5638
+- Total Lines Changed: 39173
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 71 commits (threshold: 5)
-  - Changed 96434 lines of code (threshold: 100)
-  - Active on 9 days (threshold: 3)
 
 ---
 ### Andrei Ungureanu
 ### andreiungureanu2014@yahoo.ro
 #### Commit Statistics
-- Total Commits: 32
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-19
-- Active Days: 8
-- Contribution Timespan: 17 days
-- Average Commits Per Active Day: 1.88
+- Total Commits: 17
 
 #### Code Changes
-- Lines Added: 1706
-- Lines Deleted: 832
-- Total Lines Changed: 2538
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 69
-- File Types:
-  - .cs: 70
-  - .json: 13
-  - .cshtml: 8
-  - .sql: 4
-  - .csproj: 3
+- Lines Added: 2201
+- Lines Deleted: 1327
+- Total Lines Changed: 3528
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 32 commits (threshold: 5)
-  - Changed 2538 lines of code (threshold: 100)
-  - Active on 8 days (threshold: 3)
 
 ---
 ### PaulSchiop
 ### schioppaul@gmail.com
 #### Commit Statistics
-- Total Commits: 10
-- First Commit: 2025-05-04
-- Last Commit: 2025-05-19
-- Active Days: 4
-- Contribution Timespan: 16 days
-- Average Commits Per Active Day: 0.62
+- Total Commits: 8
 
 #### Code Changes
-- Lines Added: 2104
-- Lines Deleted: 150
-- Total Lines Changed: 2254
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 37
-- File Types:
-  - .cs: 44
-  - .json: 6
-  - .cshtml: 5
-  - .csproj: 2
-  - .sql: 1
+- Lines Added: 2105
+- Lines Deleted: 151
+- Total Lines Changed: 2256
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 10 commits (threshold: 5)
-  - Changed 2254 lines of code (threshold: 100)
-  - Active on 4 days (threshold: 3)
 
 ---
 ### Mihnea
 ### mihnea.voda@stud.ubbcluj.ro
 #### Commit Statistics
-- Total Commits: 7
-- First Commit: 2025-05-04
-- Last Commit: 2025-05-17
-- Active Days: 3
-- Contribution Timespan: 14 days
-- Average Commits Per Active Day: 0.50
+- Total Commits: 6
 
 #### Code Changes
-- Lines Added: 1511
-- Lines Deleted: 901
-- Total Lines Changed: 2412
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 40
-- File Types:
-  - .cs: 56
-  - .json: 6
-  - .cshtml: 4
-  - .csproj: 3
-
+- Lines Added: 1512
+- Lines Deleted: 902
+- Total Lines Changed: 2414
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 7 commits (threshold: 5)
-  - Changed 2412 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
 
 ---
 ### Alexandru Țigănașu
 ### alexandru.tiganasu@stud.ubbcluj.ro
 #### Commit Statistics
-- Total Commits: 6
-- First Commit: 2025-05-02
-- Last Commit: 2025-05-18
-- Active Days: 3
-- Contribution Timespan: 17 days
-- Average Commits Per Active Day: 0.35
+- Total Commits: 4
 
 #### Code Changes
 - Lines Added: 999
 - Lines Deleted: 264
 - Total Lines Changed: 1263
 
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 36
-- File Types:
-  - .cs: 37
-  - .json: 4
-  - .cshtml: 2
-
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 6 commits (threshold: 5)
-  - Changed 1263 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
-
+- 
 ---
 ### BogdanSchiop5
 ### schiopbogdan2004@gmail.com
 #### Commit Statistics
 - Total Commits: 5
-- First Commit: 2025-05-05
-- Last Commit: 2025-05-05
-- Active Days: 1
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 5.00
 
 #### Code Changes
 - Lines Added: 630
 - Lines Deleted: 55
 - Total Lines Changed: 685
 
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 25
-- File Types:
-  - .cs: 30
-  - .json: 2
-
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 5 commits (threshold: 5)
-  - Changed 685 lines of code (threshold: 100)
 
 ---
 ### PatrickSzm
 ### patrickszmuck@yahoo.com
 #### Commit Statistics
-- Total Commits: 5
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-19
-- Active Days: 3
-- Contribution Timespan: 17 days
-- Average Commits Per Active Day: 0.29
+- Total Commits: 4
 
 #### Code Changes
-- Lines Added: 1113
-- Lines Deleted: 190
-- Total Lines Changed: 1303
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 32
-- File Types:
-  - .cs: 47
-  - .json: 5
-  - .sql: 2
-  - .cshtml: 1
-  - .csproj: 1
+- Lines Added: 1174
+- Lines Deleted: 251
+- Total Lines Changed: 1325
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Made 5 commits (threshold: 5)
-  - Changed 1303 lines of code (threshold: 100)
-  - Active on 3 days (threshold: 3)
 
 ---
 ### MariaDariaTompea
 ### mariatompea@gmail.com
 #### Commit Statistics
 - Total Commits: 2
-- First Commit: 2025-05-03
-- Last Commit: 2025-05-17
-- Active Days: 2
-- Contribution Timespan: 15 days
-- Average Commits Per Active Day: 0.13
 
 #### Code Changes
-- Lines Added: 692
-- Lines Deleted: 19
-- Total Lines Changed: 711
-
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 16
-- File Types:
-  - .cs: 13
-  - .json: 2
-  - .csproj: 1
-  - .cshtml: 1
+- Lines Added: 707
+- Lines Deleted: 34
+- Total Lines Changed: 741
 
 #### Code Review Participation: 2 reviews
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 711 lines of code (threshold: 100)
-
----
-### MihneaVoda
-### 147316786+desixtt@users.noreply.github.com
-#### Commit Statistics
-- Total Commits: 2
-- Active Days: 1
-- Average Commits Per Active Day: 2.00
-
-#### Code Changes
-- Lines Added: 0
-- Lines Deleted: 0
-- Total Lines Changed: 0
-
-#### Files Changed
-- Total Files: 0
-
-#### Contribution Assessment
-- **Non-Negligible Work**: No
-- Reasoning:
-  - Did not meet minimum thresholds for non-negligible work
 
 ---
 ### donFelippe
 ### filip.rus@yahoo.com
 #### Commit Statistics
 - Total Commits: 1
-- First Commit: 2025-05-05
-- Last Commit: 2025-05-05
-- Active Days: 1
-- Contribution Timespan: 1 days
-- Average Commits Per Active Day: 1.00
+
 
 #### Code Changes
 - Lines Added: 108
 - Lines Deleted: 0
 - Total Lines Changed: 108
 
-#### Branches Used
-- main
-
-#### Files Changed
-- Total Files: 4
-- File Types:
-  - .cs: 4
 
 #### Contribution Assessment
 - **Non-Negligible Work**: Yes
-- Reasoning:
-  - Changed 108 lines of code (threshold: 100)
 
 ---
