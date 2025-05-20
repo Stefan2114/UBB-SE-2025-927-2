@@ -214,20 +214,6 @@ Assert.NotNull(result);
 Generated on: 2025-05-20 11:12:30
 Repository: UBB-SE-2025-927-2
 Date Range: From: 2025-04-01, To: 2025-05-20
-## Summary
-| Contributor | Commits | Lines Changed | Files Changed | Branches | Diagrams | Non-Negligible Work |
-| --- | --- | --- | --- | --- | --- | --- |
-| Mihai Țălu | 88 | 10561 | 127 | 1 | 0 | ✅ |
-| Stefan2114 | 71 | 96434 | 229 | 1 | 9 | ✅ |
-| Andrei Ungureanu | 32 | 2538 | 69 | 1 | 0 | ✅ |
-| PaulSchiop | 10 | 2254 | 37 | 1 | 0 | ✅ |
-| Mihnea | 7 | 2412 | 40 | 1 | 0 | ✅ |
-| Alexandru Țigănașu | 6 | 1263 | 36 | 1 | 0 | ✅ |
-| BogdanSchiop5 | 5 | 685 | 25 | 1 | 0 | ✅ |
-| PatrickSzm | 5 | 1303 | 32 | 1 | 0 | ✅ |
-| MariaDariaTompea | 2 | 711 | 16 | 1 | 0 | ✅ |
-| MihneaVoda | 2 | 0 | 0 | 0 | 0 | ❌ |
-| donFelippe | 1 | 108 | 4 | 1 | 0 | ✅ |
 
 ## Visualizations
 ### Commits per Contributor
