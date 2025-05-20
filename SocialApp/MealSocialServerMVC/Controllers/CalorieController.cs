@@ -1,11 +1,12 @@
-using AppCommonClasses.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using MealSocialServerMVC.Models;
-using System;
 using System.Diagnostics;
+using AppCommonClasses.Interfaces;
+using MealSocialServerMVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealSocialServerMVC.Controllers
 {
+    [ApiController]
+    [Route("calories")]
     public class CalorieController : Controller
     {
         private readonly ICalorieService _calorieService;
@@ -17,9 +18,12 @@ namespace MealSocialServerMVC.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult Dashboard(string username = "demo")
+        [HttpGet("dashboard")]
+        public IActionResult Dashboard()
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
+            string username = _userService.GetById(userId).Username;
             try
             {
                 var user = _userService.GetUserByUsername(username);
@@ -57,9 +61,12 @@ namespace MealSocialServerMVC.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult Widget(string username)
+        [HttpGet("widget")]
+        public IActionResult Widget()
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
+            string username = _userService.GetById(userId).Username;
             if (string.IsNullOrEmpty(username))
             {
                 return PartialView("_CalorieWidget", new CaloriesViewModel());

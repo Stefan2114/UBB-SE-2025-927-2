@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AppCommonClasses.Data;
-using AppCommonClasses.Models;
+﻿using System.Diagnostics;
 using AppCommonClasses.Interfaces;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealSocialServerMVC.Controllers
 {
@@ -26,10 +18,11 @@ namespace MealSocialServerMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            waterIntakeService.AddUserIfNotExists(1);
-            var intake = waterIntakeService.GetWaterIntake(1);
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
+            waterIntakeService.AddUserIfNotExists(userId);
+            var intake = waterIntakeService.GetWaterIntake(userId);
             ViewBag.CurrentIntake = intake;
-            Debug.WriteLine($"Water intake for user 1: {intake}");
             return View();
         }
 
@@ -37,10 +30,13 @@ namespace MealSocialServerMVC.Controllers
         [Route("waters/AddWater")]
         public IActionResult AddWater(float amount)
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
+
             Debug.WriteLine("lalalalalala adding*******************");
-            waterIntakeService.AddUserIfNotExists(1);
-            var intake = waterIntakeService.GetWaterIntake(1);
-            waterIntakeService.UpdateWaterIntake(1, intake + amount);
+            waterIntakeService.AddUserIfNotExists(userId);
+            var intake = waterIntakeService.GetWaterIntake(userId);
+            waterIntakeService.UpdateWaterIntake(userId, intake + amount);
             return RedirectToAction("Index");
         }
 
@@ -49,20 +45,22 @@ namespace MealSocialServerMVC.Controllers
         [Route("water/RemoveWater")]
         public IActionResult RemoveWater(float amount)
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
             Debug.WriteLine("lalalalalala deleting*******************");
             switch (amount)
             {
                 case 0.3f:
-                    waterIntakeService.RemoveWater300(1);
+                    waterIntakeService.RemoveWater300(userId);
                     break;
                 case 0.4f:
-                    waterIntakeService.RemoveWater400(1);
+                    waterIntakeService.RemoveWater400(userId);
                     break;
                 case 0.5f:
-                    waterIntakeService.RemoveWater500(1);
+                    waterIntakeService.RemoveWater500(userId);
                     break;
                 case 0.75f:
-                    waterIntakeService.RemoveWater750(1);
+                    waterIntakeService.RemoveWater750(userId);
                     break;
             }
 

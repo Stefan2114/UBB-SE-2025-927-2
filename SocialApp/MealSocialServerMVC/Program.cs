@@ -5,6 +5,7 @@ using AppCommonClasses.Services;
 using MealSocialServerMVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SocialApp.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
 // Add repositories that services inside controllers depend on
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -33,6 +35,7 @@ builder.Services.AddScoped<IBodyMetricRepository, BodyMetricRepository>();
 builder.Services.AddScoped<ICalorieRepository, CalorieRepository>();
 builder.Services.AddScoped<IMacrosRepository, MacrosRepository>();
 builder.Services.AddScoped<IWaterIntakeRepository, WaterIntakeRepository>();
+builder.Services.AddScoped<IDataLink, DataLink>();
 
 
 // Add services that controllers depend on

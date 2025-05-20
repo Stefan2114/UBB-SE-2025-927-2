@@ -1,7 +1,6 @@
 ﻿using AppCommonClasses.Models;
 using MealSocialServerMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
 
 namespace MealSocialServerMVC.Controllers
 {
@@ -28,13 +27,15 @@ namespace MealSocialServerMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCommentViewModel model)
         {
+            var userIdString = HttpContext.Session.GetString("UserId");
+            long userId = long.Parse(userIdString);
             if (!ModelState.IsValid)
                 return View(model);
 
             Comment newComment = new Comment
             {
                 Content = model.Content,
-                UserId = 1, // Hardcoded for demo; replace with actual user id retrieval
+                UserId = userId,
                 PostId = model.PostId,
                 CreatedDate = DateTime.UtcNow
             };

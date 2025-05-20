@@ -1,4 +1,4 @@
-@model MealSocialServerMVC.Models.CaloriesViewModel
+﻿@model MealSocialServerMVC.Models.CaloriesViewModel
 @{
     ViewData["Title"] = "Calorie Dashboard";
 }
@@ -65,6 +65,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- 🚀 Navigation Buttons -->
+                    <div class="text-center mt-4">
+                        <a asp-controller="Water" asp-action="Index" class="btn btn-outline-primary mx-2">Water Intake</a>
+                        <a asp-controller="Macros" asp-action="Index" class="btn btn-outline-success mx-2">Macros</a>
+                        <a asp-controller="Posts" asp-action="Index" class="btn btn-outline-info mx-2">Social Media</a>
                     </div>
                 </div>
             </div>

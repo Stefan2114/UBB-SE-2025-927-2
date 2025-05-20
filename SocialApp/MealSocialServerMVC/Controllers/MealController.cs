@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppCommonClasses.Interfaces;
 using AppCommonClasses.Models;
-using AppCommonClasses.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MealSocialServerMVC.Controllers
 {
+    [ApiController]
+    [Route("meals")]
     public class MealController : Controller
     {
         private readonly IMealService mealService;
@@ -14,14 +16,14 @@ namespace MealSocialServerMVC.Controllers
         }
 
         // GET: /Meal/Create
+        [HttpGet("create")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: /Meal/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost("create")]
         public async Task<IActionResult> Create(Meal model)
         {
             if (ModelState.IsValid)
@@ -37,6 +39,7 @@ namespace MealSocialServerMVC.Controllers
         }
 
         // GET: /Meal/Index
+        [HttpGet("index")]
         public async Task<IActionResult> Index()
         {
             var meals = await mealService.RetrieveAllMealsAsync();

@@ -2,9 +2,6 @@
 using AppCommonClasses.Models;
 using MealSocialServerMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 
 // localhost/posts/create
 namespace MealSocialServerMVC.Controllers
@@ -38,7 +35,7 @@ namespace MealSocialServerMVC.Controllers
                 Content = model.Content,
                 Visibility = model.Visibility,
                 Tag = model.Tag,
-                UserId = 1,    // hardcoded
+                UserId = 1,      // hardcoded
                 GroupId = 0,    // hardcoded
                 CreatedDate = DateTime.UtcNow
             };
