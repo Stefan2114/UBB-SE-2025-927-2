@@ -5,6 +5,7 @@ namespace AppCommonClasses.Services
 {
     public interface IMacrosService
     {
+        List<Macros> GetMacrosListByUserId(long userId);
         double GetProteinIntake(long userId);
         double GetCarbohydratesIntake(long userId);
         double GetFatIntake(long userId);

@@ -21,7 +21,7 @@ namespace SocialApp.Proxies
         }
 
         // Helper to get all macros for a user, with status code check
-        private List<Macros> GetMacrosListByUserId(long userId)
+        public List<Macros> GetMacrosListByUserId(long userId)
         {
             var response = _httpClient.GetAsync("user/" + userId).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
