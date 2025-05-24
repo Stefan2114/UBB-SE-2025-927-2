@@ -37,7 +37,6 @@
 
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
-        public DbSet<Goal> Goals { get; set; } = default!;
 
         public DbSet<Ingredient> Ingredients { get; set; } = default!;
 
