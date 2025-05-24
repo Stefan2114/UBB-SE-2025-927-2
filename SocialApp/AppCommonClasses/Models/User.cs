@@ -23,6 +23,10 @@ namespace AppCommonClasses.Models
         public string? Image { get; set; }
 
         [Required]
+        [Column("gender")]
+        public string Gender { get; set; }
+
+        [Required]
         [Column("height")]
         [Range(1, double.MaxValue, ErrorMessage = "Height must be a positive number.")]
         public double Height { get; set; }
@@ -35,6 +39,10 @@ namespace AppCommonClasses.Models
         [Required]
         [Column("goal")]
         public string Goal { get; set; }
+
+        [Required]
+        [Column("activity_level")]
+        public string ActivityLevel { get; set; }
 
     }
 }

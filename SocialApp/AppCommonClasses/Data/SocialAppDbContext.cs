@@ -56,7 +56,11 @@
                 {
                     tableBuilder.HasCheckConstraint("CK_User_Height_Positive", "[height] > 0");
                     tableBuilder.HasCheckConstraint("CK_User_Weight_Positive", "[weight] > 0");
-                    tableBuilder.HasCheckConstraint("CK_User_Goal_Valid", "[goal] IN ('lose weight', 'mentain', 'gain muscles')");
+                    tableBuilder.HasCheckConstraint("CK_User_Goal_Valid", "[goal] IN ('lose weight', 'maintain', 'gain muscle')");
+                    tableBuilder.HasCheckConstraint("CK_User_Gender_Valid", "[gender] IN ('male', 'female')");
+                    tableBuilder.HasCheckConstraint("CK_User_Activity_Valid", "[activity_level] IN ('sedentarty', 'light', 'moderate', 'high', 'extra')");
+
+
                 });
 
                 entity.HasIndex(user => user.Username).IsUnique();

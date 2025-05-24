@@ -6,27 +6,28 @@
     using System.ComponentModel;
     using System.Windows.Input;
 
-    public class YoureAllSetViewModel
+    public class YoureAllSetViewModel : INotifyPropertyChanged
     {
         public ICommand NextCommand { get; }
 
-        private readonly YoureAllSetModel model;
+        private string username;
 
         public YoureAllSetViewModel()
         {
             NextCommand = new RelayCommand(GoNext);
-            model = new YoureAllSetModel();
+            username = string.Empty; // Initialize with an empty string  
         }
-
-
 
         public string Username
         {
-            get => model.Username;
+            get => username;
             set
             {
-                model.Username = value;
-                OnPropertyChanged(nameof(model.Username));
+                if (username != value)
+                {
+                    username = value;
+                    OnPropertyChanged(nameof(Username));
+                }
             }
         }
 
