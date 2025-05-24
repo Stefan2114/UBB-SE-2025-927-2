@@ -43,25 +43,13 @@
             mainFrame?.Navigate(type, bodyMetricsViewModel);
         }
 
-        internal void NavigateTo(Type type, GoalPageViewModel goalPageViewModel)
-        {
-            mainFrame?.Navigate(type, goalPageViewModel);
-        }
-
-        internal void NavigateTo(Type type, ActivityLevelViewModel activityLevelViewModel)
-        {
-            mainFrame?.Navigate(type, activityLevelViewModel);
-        }
+        
 
         internal void NavigateTo(Type type, GroceryViewModel groceryViewModel)
         {
             mainFrame?.Navigate(type, groceryViewModel);
         }
 
-        internal void NavigateTo(Type type, CookingLevelViewModel cookingLevelViewModel)
-        {
-            // throw new NotImplementedException();
-            mainFrame?.Navigate(type, cookingLevelViewModel);
-        }
+        
     }
 }

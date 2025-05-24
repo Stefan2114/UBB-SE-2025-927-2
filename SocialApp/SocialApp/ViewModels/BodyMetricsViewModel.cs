@@ -127,7 +127,7 @@
                     heightValue,
                     targetWeightValue);
 
-                NavigationService.Instance.NavigateTo(typeof(GoalPage), this);
+                NavigationService.Instance.NavigateTo(typeof(YoureAllSetPage), this);
             }
             catch (Exception ex)
             {
