@@ -35,7 +35,7 @@ namespace SocialApp.Tests
             PostVisibility postVisibility = PostVisibility.Public;
             PostTag postTag = PostTag.Food;
 
-            User user = new User { Id = userId, Username = "username", Email = "email", Password = "passwordHash", Image = "image" };
+            User user = new User { Id = userId, Username = "username", Password = "passwordHash", Image = "image" };
             Group group = new Group { Id = groupId, Name = "groupName", Image = "groupImage", Description = "description", AdminId = 1 };
             Post post = new Post { Title = title, Content = content, UserId = userId, GroupId = groupId, Visibility = postVisibility, Tag = postTag, CreatedDate = DateTime.Now };
 
@@ -122,7 +122,7 @@ namespace SocialApp.Tests
             PostVisibility postVisibility = PostVisibility.Public;
             PostTag postTag = PostTag.Food;
 
-            User user = new User { Id = userId, Username = "username", Email = "email", Password = "passwordHash", Image = "image" };
+            User user = new User { Id = userId, Username = "username", Password = "passwordHash", Image = "image" };
 
             userRepository.GetById(userId).Returns(user); // Simulate user found
             groupRepository.GetGroupById(userId).Returns((Group)null); // Simulate group not found

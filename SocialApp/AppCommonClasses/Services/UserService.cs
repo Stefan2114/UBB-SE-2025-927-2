@@ -48,7 +48,7 @@ namespace AppCommonClasses.Services
                 throw new Exception("Password cannot be empty");
             }
 
-            return this.userRepository.Save(new User() { Username = username, Email = email, Password = password, Image = image }).Id;
+            return this.userRepository.Save(new User() { Username = username, Password = password }).Id;
         }
 
         /// <summary>

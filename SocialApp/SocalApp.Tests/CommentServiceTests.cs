@@ -34,7 +34,7 @@ namespace SocialApp.Tests
             long userId = 1;
             long postId = 2;
 
-            var user = new User { Id = userId, Username = "TestUser",Email="TestEmail@test.com", Password = "TestPassword", Image = "TestImage" };
+            var user = new User { Id = userId, Username = "TestUser", Password = "TestPassword", Image = "TestImage" };
             var post = new Post { Id = postId, Title = "TestPost", Content = "TestContent", CreatedDate = DateTime.Now, UserId = userId, GroupId = 1, Visibility = AppCommonClasses.Enums.PostVisibility.Public, Tag = AppCommonClasses.Enums.PostTag.Misc };
 
             //userRepository.GetById(userId).Returns(user);
@@ -115,7 +115,7 @@ namespace SocialApp.Tests
             long userId = 1;
             long invalidPostId = 999;
 
-            var user = new User { Id = userId, Username = "TestUser", Email = "testemail", Password = "TestPassword", Image = "TestImage" };
+            var user = new User { Id = userId, Username = "TestUser", Password = "TestPassword", Image = "TestImage" };
 
 
             //userRepository.GetById(userId).Returns(user);

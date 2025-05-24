@@ -52,10 +52,6 @@ namespace AppCommonClasses.Repos
             return dbContext.Users.ToList();
         }
 
-        public User GetByEmail(string email)
-        {
-            return dbContext.Users.First(u => u.Email == email);
-        }
 
         public User GetById(long id)
         {
@@ -132,9 +128,7 @@ namespace AppCommonClasses.Repos
             if (user != null)
             {
                 user.Username = username;
-                user.Email = email;
                 user.Password = hashPassword;
-                user.Image = image;
                 dbContext.SaveChanges();
             }
         }

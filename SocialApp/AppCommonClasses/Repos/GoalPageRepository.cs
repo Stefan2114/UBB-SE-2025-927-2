@@ -31,7 +31,6 @@ namespace AppCommonClasses.Repos
         {
             Goal goal = this.dbContext.Goals.First(goal => goal.Description == goalDescription);
             User user = this.dbContext.Users.First(user => user.Username == username);
-            user.GoalId = goal.GoalId;
             this.dbContext.SaveChanges();
         }
     }
