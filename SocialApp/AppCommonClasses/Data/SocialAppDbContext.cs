@@ -10,7 +10,7 @@
             : base(options)
         {
         }
-
+        // not used anymore. Use the field waterconsumed from the user 
         public DbSet<Water> WaterTrackers { get; set; } = default!;
 
         public DbSet<Post> Posts { get; set; } = default!;
@@ -56,6 +56,7 @@
                 {
                     tableBuilder.HasCheckConstraint("CK_User_Height_Positive", "[height] > 0");
                     tableBuilder.HasCheckConstraint("CK_User_Weight_Positive", "[weight] > 0");
+                    tableBuilder.HasCheckConstraint("CK_User_Water_Consumed_Positive", "[water_consumed] >= 0");
                     tableBuilder.HasCheckConstraint("CK_User_Goal_Valid", "[goal] IN ('lose weight', 'maintain', 'gain muscle')");
                     tableBuilder.HasCheckConstraint("CK_User_Gender_Valid", "[gender] IN ('male', 'female')");
                     tableBuilder.HasCheckConstraint("CK_User_Activity_Valid", "[activity_level] IN ('sedentarty', 'light', 'moderate', 'high', 'extra')");

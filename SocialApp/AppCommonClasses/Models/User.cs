@@ -28,13 +28,13 @@ namespace AppCommonClasses.Models
 
         [Required]
         [Column("height")]
-        [Range(1, double.MaxValue, ErrorMessage = "Height must be a positive number.")]
-        public double Height { get; set; }
+        [Range(1, 500, ErrorMessage = "Height must be a positive number and lower than 500.")]
+        public int Height { get; set; }
 
         [Required]
         [Column("weight")]
-        [Range(1, double.MaxValue, ErrorMessage = "Weight must be a positive number.")]
-        public double Weight { get; set; }
+        [Range(typeof(decimal), "1", "500" ,ErrorMessage = "Weight must be a positive number and lower than 500.")]
+        public decimal Weight { get; set; }
 
         [Required]
         [Column("goal")]
@@ -43,6 +43,11 @@ namespace AppCommonClasses.Models
         [Required]
         [Column("activity_level")]
         public string ActivityLevel { get; set; }
+
+        [Required]
+        [Column("water_consumed")]
+        [Range(typeof(decimal), "0", "100", ErrorMessage = "Water consumed must be a positive number and lower than 100.")]
+        public decimal WaterConsumed { get; set; }
 
     }
 }
