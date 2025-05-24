@@ -37,7 +37,6 @@
 
         public DbSet<MealIngredient> MealIngredients { get; set; } = default!;
 
-        public DbSet<Goal> Goals { get; set; } = default!;
 
         public DbSet<Ingredient> Ingredients { get; set; } = default!;
 
@@ -50,6 +49,19 @@
 
             modelBuilder.Entity<UserFollower>()
                 .HasKey(userFollower => new { userFollower.UserId, userFollower.FollowerId });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("Users", tableBuilder =>
+                {
+                    tableBuilder.HasCheckConstraint("CK_User_Height_Positive", "[height] > 0");
+                    tableBuilder.HasCheckConstraint("CK_User_Weight_Positive", "[weight] > 0");
+                    tableBuilder.HasCheckConstraint("CK_User_Goal_Valid", "[goal] IN ('lose weight', 'mentain', 'gain muscles')");
+                });
+
+                entity.HasIndex(user => user.Username).IsUnique();
+            });
+               
 
             modelBuilder.Entity<GroceryIngredient>()
             .HasKey(groceryIngredient => new { groceryIngredient.Id, groceryIngredient.IngredientId });

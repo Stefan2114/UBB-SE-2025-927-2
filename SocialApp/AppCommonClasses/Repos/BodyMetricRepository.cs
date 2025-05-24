@@ -19,7 +19,6 @@ namespace AppCommonClasses.Repos
             {
                 user.Weight = weight;
                 user.Height = height;
-                user.TargetWeight = TargetWeight;
                 dbContext.SaveChanges();
             }
         }

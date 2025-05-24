@@ -25,14 +25,6 @@ namespace SocialApp.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (e.Parameter is DietaryPreferencesViewModel dpViewModel)
-            {
-                this.youreAllSetViewModel.SetUserInfo(dpViewModel.Username);
-            }
-        }
+        
     }
 }

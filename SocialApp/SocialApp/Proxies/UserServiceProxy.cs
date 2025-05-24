@@ -153,7 +153,6 @@
 
         public User Save(User entity)
         {
-            entity.Email = string.Empty;
             var response = this.httpClient.PostAsJsonAsync(string.Empty, entity).Result;
             if (response.IsSuccessStatusCode)
             {

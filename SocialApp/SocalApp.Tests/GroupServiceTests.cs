@@ -39,7 +39,6 @@
             {
                 Id = id,
                 Username = $"user{id}",
-                Email = $"user{id}@example.com",
                 Password = $"hash{id}",
                 Image = $"avatar{id}.jpg"
             };
